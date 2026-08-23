@@ -1,0 +1,496 @@
+%PDF-1.4
+%0000
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 4 /Kids [5 0 R 7 0 R 9 0 R 11 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2326 >>
+stream
+BT
+/F1 9 Tf
+48 790 Td
+12 TL
+(BH-Kernhypothese - Erdmodul V1.0) Tj
+T*
+(Autor: Daniel Marcel Schlicksupp) Tj
+T*
+(Geburtsdatum: 13.06.1988) Tj
+T*
+(Region: Rheinland-Pfalz) Tj
+T*
+(Land: Deutschland) Tj
+T*
+(Version: Erdmodul V1.0) Tj
+T*
+(Veroeffentlichungsdatum: 23.08.2026) Tj
+T*
+() Tj
+T*
+(STATUS) Tj
+T*
+(Theorie- und Forschungsentwurf zur Pruefung einer zentralen kompakten) Tj
+T*
+(Schwarzloch-Komponente im Erdinneren. Eine experimentelle Bestaetigung wird) Tj
+T*
+(nicht behauptet.) Tj
+T*
+() Tj
+T*
+(1. FORSCHUNGSFRAGE) Tj
+T*
+(Das Erdmodul untersucht die Hypothese, dass im Zentrum der Erde eine kompakte,) Tj
+T*
+(schwarzlochartige Zentralmasse existieren koennte. Die starke Variante, nach) Tj
+T*
+(der ein Zentral-BH den ueberwiegenden Teil der Erdmasse oder Erdgravitation) Tj
+T*
+(traegt, wird in V1.0 verworfen. Geprueft bleibt eine deutlich kleinere) Tj
+T*
+(Zentralmasse als separate Hypothese.) Tj
+T*
+() Tj
+T*
+(2. NULLMODELL UND MASSENBUCHHALTUNG) Tj
+T*
+(Als geophysikalisches Nullmodell dient PREM \(Preliminary Reference Earth Model\).) Tj
+T*
+(Die Zentralmasse wird nicht zusaetzlich zur gemessenen Erdmasse addiert, sondern) Tj
+T*
+(ersetzt im Modell genau die normale PREM-Masse innerhalb eines Ersatzradius:) Tj
+T*
+() Tj
+T*
+(M_PREM\(<r_rep\) = M_c) Tj
+T*
+() Tj
+T*
+(Ausserhalb dieser Region bleibt die eingeschlossene Gesamtmasse unveraendert:) Tj
+T*
+() Tj
+T*
+(M'\(<r\) = M_PREM\(<r\), r >= r_rep) Tj
+T*
+(g'\(r\) = g_PREM\(r\)) Tj
+T*
+() Tj
+T*
+(Ein kleines Zentralobjekt waere daher nicht allein durch eine Messung der) Tj
+T*
+(Oberflaechengravitation nachweisbar.) Tj
+T*
+() Tj
+T*
+(3. REFERENZWERTE) Tj
+T*
+(R_IC approx 1221.5 km) Tj
+T*
+(rho_c approx 1.31e4 kg/m^3) Tj
+T*
+(v_P approx 11.26 km/s) Tj
+T*
+(M_IC approx 9.8433e22 kg) Tj
+T*
+() Tj
+T*
+(4. DREI UNTERSCHIEDLICHE RADIEN) Tj
+T*
+(Schwarzschildradius:) Tj
+T*
+(r_s = 2 G M_c / c^2) Tj
+T*
+() Tj
+T*
+(Bondi-/Einflussradius in der hier verwendeten Konvention:) Tj
+T*
+(r_B = G M_c / c_s^2) Tj
+T*
+() Tj
+T*
+(Struktureller Ersatzradius:) Tj
+T*
+(M_PREM\(<r_rep\) = M_c) Tj
+T*
+() Tj
+T*
+(Beispiel fuer M_c = 1e20 kg:) Tj
+T*
+(r_s approx 1.49e-7 m) Tj
+T*
+(r_B approx 52.6 m) Tj
+T*
+(r_rep approx 122 km) Tj
+T*
+() Tj
+T*
+(Der Ereignishorizont kann mikroskopisch sein, waehrend die zugehoerige) Tj
+T*
+(Massenumverteilung makroskopische geophysikalische Groessenordnungen erreicht.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2482 >>
+stream
+BT
+/F1 9 Tf
+48 790 Td
+12 TL
+() Tj
+T*
+(5. ERSATZRADIUS NACH ZENTRALMASSE) Tj
+T*
+(Nahe dem Erdzentrum gilt naeherungsweise:) Tj
+T*
+(r_rep approx [3 M_c / \(4 pi rho_c\)]^\(1/3\)) Tj
+T*
+() Tj
+T*
+(Referenzwerte:) Tj
+T*
+(1e10 kg -> 56.7 m) Tj
+T*
+(1e12 kg -> 263 m) Tj
+T*
+(1e14 kg -> 1.22 km) Tj
+T*
+(1e16 kg -> 5.67 km) Tj
+T*
+(1e18 kg -> 26.3 km) Tj
+T*
+(1e20 kg -> 122 km) Tj
+T*
+(1e21 kg -> 263 km) Tj
+T*
+(1e22 kg -> 568 km) Tj
+T*
+() Tj
+T*
+(6. TRAEGHEITSMOMENT) Tj
+T*
+(Ein idealisierter Punkt-BH traegt bezueglich der Erdrotation praktisch kein) Tj
+T*
+(internes Traegheitsmoment bei, waehrend die ersetzte verteilte Materie eines) Tj
+T*
+(besitzt. Im einfachen Ersatzmodell gilt:) Tj
+T*
+() Tj
+T*
+(Delta C = -\(8 pi / 3\) Integral[0,r_rep] rho\(r\) r^4 dr) Tj
+T*
+() Tj
+T*
+(Beispielwerte aus dem V1.0-Sensitivitaetsmodell:) Tj
+T*
+(M_c = 1e20 kg -> Delta C / C approx -7.45e-9) Tj
+T*
+(M_c = 1e22 kg -> Groessenordnung approx -16 ppm) Tj
+T*
+() Tj
+T*
+(7. SEISMOLOGIE) Tj
+T*
+(PREM ist aus seismischen Laufzeiten, Normalmoden und globalen Erdparametern) Tj
+T*
+(aufgebaut. Grosse Ersatzregionen koennen deshalb nicht beliebig im Zentrum) Tj
+T*
+(verborgen werden. Ein Objekt mit M_c approx 1e20 kg wuerde im Ersatzmodell eine) Tj
+T*
+(zentrale Strukturregion von ungefaehr 122 km erfordern. Dagegen entspricht) Tj
+T*
+(M_c approx 1e12 kg nur einer Ersatzregion von ungefaehr 263 m.) Tj
+T*
+() Tj
+T*
+(Qualitatives V1.0-Ergebnis:) Tj
+T*
+(grosse M_c -> Seismologie stark restriktiv) Tj
+T*
+(kleine M_c -> globale Seismologie zunehmend schwach) Tj
+T*
+() Tj
+T*
+(Eine praezise statistische Obergrenze erfordert einen vollstaendigen) Tj
+T*
+(Normalmoden- bzw. Laufzeit-Likelihood-Fit und wird in V1.0 nicht vorgetaeuscht.) Tj
+T*
+() Tj
+T*
+(8. AKKRETIONSBENCHMARK) Tj
+T*
+(Als Referenzbenchmark wird klassische Bondi-Akkretion verwendet:) Tj
+T*
+(dM/dt = 4 pi lambda G^2 rho_c M^2 / c_s^3) Tj
+T*
+() Tj
+T*
+(Mit lambda = 1/4 und den verwendeten zentralen Referenzwerten ergibt sich:) Tj
+T*
+(dM/dt approx 1.28e-28 M^2 kg/s) Tj
+T*
+() Tj
+T*
+(Charakteristische Bondi-Zeit:) Tj
+T*
+(t_B = M/\(dM/dt\) = 1/\(k M\)) Tj
+T*
+() Tj
+T*
+(Referenzwerte:) Tj
+T*
+(1e10 kg -> r_B 5.3 nm -> t_B 24.7 Mrd. Jahre) Tj
+T*
+(1e12 kg -> r_B 0.53 micrometer -> t_B 247 Mio. Jahre) Tj
+T*
+(1e14 kg -> r_B 52.6 micrometer -> t_B 2.47 Mio. Jahre) Tj
+T*
+(1e16 kg -> r_B 5.3 mm -> t_B 24,700 Jahre) Tj
+T*
+(1e18 kg -> r_B 0.53 m -> t_B 247 Jahre) Tj
+T*
+(1e20 kg -> r_B 52.6 m -> t_B 2.47 Jahre) Tj
+T*
+(1e22 kg -> r_B 5.26 km -> t_B ca. 9 Tage) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 2669 >>
+stream
+BT
+/F1 9 Tf
+48 790 Td
+12 TL
+() Tj
+T*
+(Diese Werte sind modellabhaengige Benchmarks. Der reale Erdinnenraum ist kein) Tj
+T*
+(ideales Bondi-Gas; Festkoerperphysik, Mehrphasenstruktur, Viskositaet,) Tj
+T*
+(Waermeleitung und mikroskopischer Transport koennen relevant sein.) Tj
+T*
+() Tj
+T*
+(9. KONTINUUMSGRENZE) Tj
+T*
+(Aus der zentralen Eisendichte ergibt sich grob ein atomarer Abstand:) Tj
+T*
+(d approx 1.9e-10 m) Tj
+T*
+() Tj
+T*
+(Setzt man als grobe Trennung r_B approx d, erhaelt man:) Tj
+T*
+(M_continuum approx 3.6e8 kg) Tj
+T*
+() Tj
+T*
+(Fuer deutlich kleinere Massen wird eine klassische hydrodynamische) Tj
+T*
+(Bondi-Beschreibung zunehmend selbst inkonsistent. Dort waere eine ballistische,) Tj
+T*
+(atomare bzw. quantenmechanische Mikroakkretionstheorie erforderlich.) Tj
+T*
+() Tj
+T*
+(10. LANGZEITENTWICKLUNG) Tj
+T*
+(Das Erdalter betraegt ungefaehr 4.54 Milliarden Jahre. Im einfachen) Tj
+T*
+(Bondi-Benchmark liegt die Massenskala, bei der t_B ungefaehr dem Erdalter) Tj
+T*
+(entspricht, bei:) Tj
+T*
+() Tj
+T*
+(M_* approx 5.4e10 kg) Tj
+T*
+() Tj
+T*
+(Diese Zahl ist keine experimentelle harte Obergrenze. Sie ist nur die) Tj
+T*
+(charakteristische Langzeit-/Runaway-Skala dieses speziellen) Tj
+T*
+(Akkretionsbenchmarks.) Tj
+T*
+() Tj
+T*
+(11. WAERMEHAUSHALT) Tj
+T*
+(Der gesamte terrestrische Oberflaechenwaermefluss liegt in der Groessenordnung) Tj
+T*
+(von etwa 47 TW. Wird ein Anteil eta der akkretierten Ruheenergie im Erdinneren) Tj
+T*
+(als Waerme deponiert,) Tj
+T*
+() Tj
+T*
+(L_BH = eta \(dM/dt\) c^2) Tj
+T*
+() Tj
+T*
+(entsteht ein zusaetzlicher Constraint. Seine Staerke haengt jedoch direkt von) Tj
+T*
+(der unbekannten Energie- und Transporteffizienz eta ab. Deshalb wird daraus) Tj
+T*
+(keine modellunabhaengige harte Massengrenze abgeleitet.) Tj
+T*
+() Tj
+T*
+(12. ENTSTEHUNGSPROBLEM) Tj
+T*
+(Normales Erdkernmaterial ist unter Standard-GR nicht annaehhernd kompakt genug,) Tj
+T*
+(um spontan zu einem Schwarzen Loch der betrachteten Masse zu kollabieren.) Tj
+T*
+() Tj
+T*
+(Fuer M_c = 1e20 kg gilt ungefaehr:) Tj
+T*
+(r_rep approx 122 km) Tj
+T*
+(r_s approx 1.5e-7 m) Tj
+T*
+() Tj
+T*
+(Ein Zentralobjekt muesste daher beispielsweise primordial gewesen, spaeter) Tj
+T*
+(eingefangen worden oder durch einen bisher unbekannten Bildungsmechanismus) Tj
+T*
+(entstanden sein.) Tj
+T*
+() Tj
+T*
+(13. STARKE UND SCHWACHE VERSION) Tj
+T*
+(Verworfen bzw. stark disfavored in V1.0:) Tj
+T*
+(M_c ~ M_Earth als Erklaerung des ueberwiegenden Anteils der Erdmasse bzw.) Tj
+T*
+(Erdgravitation. Eine solche Zentralisierung waere mit der beobachteten) Tj
+T*
+(Massenverteilung, Seismologie und dem Traegheitsmoment der Erde nicht) Tj
+T*
+(vereinbar.) Tj
+T*
+() Tj
+T*
+(Offen als separate Hypothese:) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 1870 >>
+stream
+BT
+/F1 9 Tf
+48 790 Td
+12 TL
+(Eine wesentlich kleinere zentrale kompakte Masse ist durch die vorherige) Tj
+T*
+(Aussage nicht automatisch ausgeschlossen. Fuer kleine Massen verschiebt sich) Tj
+T*
+(der zentrale theoretische Engpass von der aeusseren Gravitation zu Formation) Tj
+T*
+(und Mikroakkretion.) Tj
+T*
+() Tj
+T*
+(14. FALSIFIKATIONSBEDINGUNGEN) Tj
+T*
+(Eine konkrete Erd-BH-Version muss mit demselben festen Parametersatz) Tj
+T*
+(gleichzeitig bestehen gegen:) Tj
+T*
+(1. Erdmasse und Radius) Tj
+T*
+(2. normiertes Traegheitsmoment) Tj
+T*
+(3. PREM-Seismologie und Normalmoden) Tj
+T*
+(4. terrestrischen Waermehaushalt) Tj
+T*
+(5. geologisches Alter und Langzeitstabilitaet) Tj
+T*
+(6. eine physikalisch konsistente Entstehungs- und Akkretionsgeschichte) Tj
+T*
+() Tj
+T*
+(Ad-hoc-Cavities oder nachtraeglich eingefuehrte freie Parameter duerfen nicht) Tj
+T*
+(fuer jeden einzelnen Test unabhaengig angepasst werden.) Tj
+T*
+() Tj
+T*
+(15. ABSCHLUSS V1.0) Tj
+T*
+(Ein dominanter Zentral-BH als Quelle der Erdmasse bzw. Erdgravitation ist mit) Tj
+T*
+(der bekannten Erdstruktur nicht vereinbar. Ein wesentlich kleineres zentrales) Tj
+T*
+(kompaktes Objekt ist eine andere, derzeit nicht bestaetigte Hypothese. Deren) Tj
+T*
+(entscheidende offene Physik liegt insbesondere bei Entstehung, Mikroakkretion) Tj
+T*
+(und einem vollstaendig selbstkonsistenten Materiemodell des innersten Kerns.) Tj
+T*
+() Tj
+T*
+(PRIMAERREFERENZ) Tj
+T*
+(A. M. Dziewonski & D. L. Anderson \(1981\), Preliminary Reference Earth Model,) Tj
+T*
+(Physics of the Earth and Planetary Interiors 25, 297-356.) Tj
+T*
+(DOI: 10.1016/0031-9201\(81\)90046-7.) Tj
+T*
+() Tj
+T*
+(ZITIERFORM) Tj
+T*
+(Daniel Marcel Schlicksupp \(2026\), BH-Kernhypothese - Erdmodul V1.0,) Tj
+T*
+(Theorie- und Forschungsentwurf, Rheinland-Pfalz, Deutschland.) Tj
+T*
+() Tj
+T*
+(Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000140 00000 n 
+0000000210 00000 n 
+0000002587 00000 n 
+0000002713 00000 n 
+0000005246 00000 n 
+0000005372 00000 n 
+0000008092 00000 n 
+0000008218 00000 n 
+0000010140 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+10268
+%%EOF
