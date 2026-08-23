@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use or discuss this research draft, please cite it as below."
+title: "BH-Kernhypothese - Erdmodul V1.0"
+type: report
+authors:
+  - family-names: "Schlicksupp"
+    given-names: "Daniel Marcel"
+    affiliation: "Independent researcher, Rheinland-Pfalz, Deutschland"
+version: "1.0"
+date-released: "2026-08-23"
+abstract: >-
+  Theorie- und Forschungsentwurf zur Prüfung einer zentralen kompakten
+  Schwarzloch-Komponente im Erdinneren gegen PREM, Seismologie,
+  Trägheitsmoment, Akkretionsentwicklung und Wärmehaushalt.
