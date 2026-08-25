@@ -4,8 +4,8 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
-**Aktueller Theorie-Textstand:** Erdmodul V1.4  
-**Aktueller Forschungsstand:** Stage 3.68  
+**Aktueller Theorie-Textstand:** Erdmodul V1.5  
+**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.69/3.70 definiert, nicht durchgefuehrt  
 **Stand:** 25.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
@@ -70,7 +70,7 @@ M_PREM(<r_rep) = M_BH.
 Fuer den kleinen smooth H0-Zweig liefern die bisher ausgefuehrten reduzierten Tests keinen robusten Ausschluss durch
 
 - Gesamtmasse / `GM`,
-- Traegheitsmoment und Rotation,
+- Trägheitsmoment und Rotation,
 - smooth PREM-Massenbuchhaltung,
 - reduzierte Hydrostatik,
 - vereinfachte Seismik/Normalmoden,
@@ -100,8 +100,8 @@ Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
 | starke Zentralmassenvariante | FAIL | FAIL |
 | kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
 | Super-K / Hawking-Neutrinos | **FAIL im Projekt-Reinterpretationstest** | nicht anwendbar |
-| Akkretion / Waerme | gekoppelte H+-Probleme | exakte Rate OPEN; kein robuster Ausschluss im kleinen Branch |
-| spaetere Earth-Capture-Formation | FAIL | FAIL |
+| Akkretion / Wärme | gekoppelte H+-Probleme | exakte Rate OPEN; kein robuster Ausschluss im kleinen Branch |
+| spätere Earth-Capture-Formation | FAIL | FAIL |
 | Standard-Formation/Delivery | stark negativ | stark negativ |
 | direkte Detektion | keine | keine |
 | positive eindeutige Signatur | keine | keine |
@@ -116,17 +116,21 @@ H0 Formation: stark negativ / kein Standardweg gefunden.
 Empirischer Nachweis: keiner.
 ```
 
-## Was real noch fehlt
+## Verbleibende Validierungsprotokolle
 
-Zwei Endstufen liegen ausserhalb der abgeschlossenen Desk-Study-Testserie:
+Die zwei Endstufen sind in V1.5 formal definiert, aber **nicht durchgefuehrt**:
 
-1. High-Fidelity-Multiphysik/HPC fuer die Near Zone plus 3-D-Full-Wave-Seismik.
-2. Dedizierter experimenteller bzw. Real-Data-Test auf eine eindeutige H0-Signatur.
+1. **Stage 3.69 – High-Fidelity Multiphysics:** verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/GR-Capture-Architektur; erster realistischer Meilenstein ist ein reproduzierbarer 1-D/2-D-Prototyp.
+2. **Stage 3.70 – Experimental H0 Falsification:** dedizierter Real-Data-/Likelihood-Test einer erst aus Stage 3.69 abgeleiteten Signatur.
+
+Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
 
 ## Dateien
 
-- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - vollstaendige Endmatrix und Schlussfolgerung.
-- [`PUBLIC_UPDATE_V1_4.md`](PUBLIC_UPDATE_V1_4.md) - kurze oeffentliche Zusammenfassung.
+- [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) - Stage 3.69/3.70, definiert aber nicht durchgefuehrt.
+- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - Endmatrix der tatsaechlich bearbeiteten Stages bis 3.68.
+- [`PUBLIC_UPDATE_V1_5.md`](PUBLIC_UPDATE_V1_5.md) - Definition der verbleibenden Endtests.
+- [`PUBLIC_UPDATE_V1_4.md`](PUBLIC_UPDATE_V1_4.md) - Abschlusszusammenfassung Stage 3.68.
 - [`THEORIE.md`](THEORIE.md) - aktueller Theorierahmen.
 - [`TEST_STATUS.md`](TEST_STATUS.md) - Test- und Falsifikationsmatrix.
 - [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) - numerischer Status und Aussagegrenzen.
@@ -146,4 +150,4 @@ Zwei Endstufen liegen ausserhalb der abgeschlossenen Desk-Study-Testserie:
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.4*, theoretischer Forschungsentwurf, Abschlussstand Stage 3.68, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Stages 1-3.68 bearbeitet und dokumentiert, Stage 3.69/3.70 als Validierungsprotokolle definiert und nicht durchgefuehrt, Rheinland-Pfalz, Deutschland.
