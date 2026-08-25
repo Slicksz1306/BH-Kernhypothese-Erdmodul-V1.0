@@ -1,43 +1,40 @@
 cff-version: 1.2.0
 message: "If you use or discuss the current repository text, please cite it as below. The archived V1.0 PDF remains the original publication record from 2026-08-23."
-title: "SL/BH-Kernhypothese Erdmodul V1.3"
+title: "SL/BH-Kernhypothese Erdmodul V1.4"
 type: report
 authors:
   - family-names: "Schlicksupp"
     given-names: "Daniel Marcel"
     affiliation: "Independent researcher, Rheinland-Pfalz, Deutschland"
-version: "1.3"
+version: "1.4"
 date-released: "2026-08-25"
 abstract: >-
-  Theorie- und Forschungsentwurf eines kleinen redistributiven zentralen
-  Schwarzloch-Modells fuer die Erde. Der aktuelle Repository-Stand umfasst
-  einen relativistischen Skalar-Tensor-Minimalrahmen, BH-/Horizon-konsistente
-  Randbedingungen, Layered-PREM-Earth-Matching, geophysikalische und
-  seismologische Sensitivitaeten sowie einen gestuften Akkretions-,
-  Hochdruck-EOS-, Rheologie- und Langzeit-Audit bis Stage 3.15. Fuer den
-  Referenzzweig M_SL=1e16 kg sind r_c=500 km und r_c=300 km voll gekoppelt
-  numerisch validiert, der 300-km-Punkt cross-solver-validiert. Der
-  relativistische Michel-Test belastet den 1e16-kg-Zweig stark. Stage 3.15
-  korrigiert jedoch die fruehere getrennte Hawking/Michel-Schnittmengenlogik:
-  in einer reduzierten simultanen Massenentwicklung dM/dt=k M^2-A/M^2
-  erscheint fuer den getesteten Y_e-Bereich ein instabiles Kompensationsband
-  bei etwa 1.28e11 bis 2.28e11 kg. Dieses niedrige Massenband ist weder durch
-  den bisherigen Coulomb-Plastizitaets-Ratenbereich noch durch das aktuelle
-  sub-km Earth Matching validiert. Numerische Validierung bezeichnet
-  ausschliesslich Solver- und Konvergenzkriterien und keinen experimentellen
-  Nachweis eines Schwarzen Lochs im Erdzentrum.
+  Theoretischer Forschungsentwurf eines kleinen zentralen Schwarzloch-Modells
+  fuer die Erde mit glatter redistributiver PREM-Massenbuchhaltung. Der
+  Abschlussstand Stage 3.68 trennt strikt H+ (Standard-Hawking-Strahlung) und
+  H0 (nichtstandardmaessige Gegenhypothese P_Hawking=0). Der H+-Zweig wird im
+  Projekt durch eine Reinterpretation publizierter spektrumsunabhaengiger
+  Super-Kamiokande anti-nu_e-Grenzen gegen ein konservatives Greybody-
+  Primaerneutrinomodell als FAIL eingestuft. Der kleine smooth-compensated H0-
+  Zweig wird durch die bisher ausgefuehrten reduzierten Erdstruktur-, Seismik-,
+  Waerme- und Akkretionsstresstests nicht ausgeschlossen, besitzt aber keine
+  positive Detektion. H0 ist kein Standard-GR/QFT-Zweig und benoetigt eine
+  fundamentale Begruendung fuer das Ausbleiben der Hawking-Strahlung. Die
+  getesteten Standard-Formation-/Delivery-Pfade, einschliesslich spaetem
+  Earth-Capture, Proto-Earth-/Planetesimal-Capture und normaler Halo-to-disk-
+  Einbettung, sind stark negativ. Der Forschungsstand ist weder ein
+  experimenteller Nachweis eines Erdzentrum-BH noch eine etablierte Theorie.
 keywords:
   - black hole
   - Earth interior
   - PREM
-  - scalar-tensor gravity
-  - TOV
   - geophysics
-  - numerical relativity
   - Michel accretion
   - Hawking radiation
-  - mass evolution
-  - high-pressure equation of state
-  - Coulomb crystal
+  - greybody factors
+  - neutrinos
+  - Super-Kamiokande
+  - primordial black hole
+  - formation
   - seismic observables
   - scientific hypothesis
