@@ -1,4 +1,4 @@
-# BH-/SL-Kernhypothese – Erdmodul V1.2
+# SL/BH-Kernhypothese Erdmodul V1.2
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
@@ -393,4 +393,4 @@ A. M. Dziewonski & D. L. Anderson (1981), *Preliminary Reference Earth Model*, P
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *BH-/SL-Kernhypothese – Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
