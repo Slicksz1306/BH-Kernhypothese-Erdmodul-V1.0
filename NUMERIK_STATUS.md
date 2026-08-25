@@ -1,26 +1,17 @@
-# Numerischer Status – SL-TOV / Earth Matching
+# Numerischer und physikalischer Status – SL-TOV / Earth Matching / Akkretion
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 25.08.2026  
-**Aktuelle Stufe:** Stage 1.7
+**Theorie-Textstand:** V1.3  
+**Aktuelle Stufe:** Stage 3.14
 
 ## 1. Bedeutung von „validiert“
 
-In diesem Dokument bedeutet **numerisch validiert** ausschließlich:
+**Numerisch validiert** bedeutet ausschließlich, dass der konkret angegebene Solver- oder Konvergenztest innerhalb der implementierten Gleichungen, Randbedingungen, EOS/Closure und Toleranzen bestanden wurde.
 
-- der definierte Solver erfüllt die festgelegten Randbedingungen,
-- die Lösung erfüllt die jeweiligen Residual-/Regularitätskriterien,
-- die für die jeweilige Stage vorgesehenen Konvergenz- oder Cross-Solver-Checks sind bestanden.
+Es bedeutet nicht „experimentell bestätigt“ und nicht „Schwarzes Loch im Erdzentrum nachgewiesen“.
 
-Es bedeutet **nicht**:
-
-- experimentell bestätigt,
-- geophysikalisch direkt beobachtet,
-- oder als Fundamentaltheorie bewiesen.
-
-Die Validierung ist immer relativ zur konkret implementierten Gleichung, Closure, Diskretisierung, Parameterwahl und Teststufe zu lesen.
-
-## 2. Modellkern
+## 2. Feldgleichungs-/Earth-Matching-Kern
 
 Der sphärische Minimalstack verwendet im Jordan Frame
 
@@ -29,294 +20,217 @@ F(chi) = F0 + xi chi^2
 V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4
 ```
 
-mit
-
-```text
-y = [m, nu, p, chi, psi]
-psi = dchi/dr.
-```
+mit gekoppelten Gleichungen für Metrik, Masse, Druck und Skalarfeld.
 
 Der GR-Grenzfall
 
 ```text
 xi -> 0
 chi -> 0
-psi -> 0
+dchi/dr -> 0
 ```
 
-muss auf die gewöhnliche GR-TOV-Struktur zurückfallen.
+muss die gewöhnliche GR-TOV-Struktur reproduzieren.
 
-Die Außenintegration beginnt bei
+Das zentrale SL wird nicht als reguläres Zentrum behandelt. Die numerische Außenlösung beginnt an einem Matching-Radius `r_a > r_h`.
 
-```text
-r_a > r_h
-r_h = 2 G M_SL / c^2.
-```
-
-Die unmittelbare BH-Nahzone wird nicht als gewöhnliche TOV-Flüssigkeit durch den Horizont extrapoliert.
-
-## 3. Referenzzweig
-
-Der am weitesten untersuchte aktuelle Zweig verwendet
-
-```text
-M_SL   = 1e16 kg
-q(r_a) = 1e-14.
-```
-
-Dieser Parametersatz wird für die Stage-1.5D-, Stage-1.6- und Stage-1.7-Vergleiche beibehalten, damit die Teststufen nicht durch jeweils neue Fitparameter vermischt werden.
-
-## 4. Stufen dürfen nicht vermischt werden
-
-Die einzelnen Stages testen unterschiedliche Ebenen:
-
-- **Stage 1.2:** nichttrivialer Skalar-BVP / Continuation,
-- **Stage 1.3B/C:** frühe voll gekoppelte Earth-Matching-Läufe,
-- **Stage 1.5D:** verbesserte BH-konsistente Randwertfortsetzung,
-- **Stage 1.6:** Layered-PREM-EOS und Cross-Solver-Validierung,
-- **Stage 1.7:** Ableitung beobachtungsnaher Erdobservablen.
-
-Ein Punkt kann daher in einer niedrigeren Stufe numerisch existieren, ohne bereits als vollständige Earth-Matching-Lösung einer höheren Stufe validiert zu sein.
-
-## 5. Historischer Stand Stage 1.3B
-
-Für `r_c = 1000 km` wurden voll gekoppelte differentielle Läufe für
-
-```text
-M_SL = 1e12, 1e16, 1e18 kg
-q0   = 1e-14, 1e-13, 3e-13
-```
-
-unter den damaligen Kriterien validiert.
-
-Beispiel des später fortgesetzten Referenzzweigs:
-
-```text
-M_SL        = 1e16 kg
-r_c         = 1000 km
-q0          = 1e-14
-Robin_norm  = 1.2014e-08
-q_max       = 9.9404e-15
-deltaR/R_E  = 4.7166e-05
-deltaM/M_E  = 3.9143e-05
-validated   = true
-```
-
-## 6. Historischer Stand Stage 1.3C
-
-Die damalige Precision-Single-Shooting-Fortsetzung ergab:
-
-| `r_c` | Status | `Robin_norm` | `deltaR/R_E` | `deltaM/M_E` |
-|---:|---|---:|---:|---:|
-| 1000 km | validiert | `1.20e-08` | `4.72e-05` | `3.91e-05` |
-| 750 km | validiert | `6.55e-11` | `4.74e-05` | `3.93e-05` |
-| 500 km | validiert | `-8.29e-07` | `4.77e-05` | `3.95e-05` |
-| 300 km | nicht validiert | `-1.76e-04` | `4.76e-05` | `3.95e-05` |
-| 200 km | nicht validiert | `3.44e-01` | `4.80e-05` | `4.02e-05` |
-| 150 km | nicht validiert | `9.06e+02` | `1.88e-04` | `1.02e-01` |
-| 120 km | nicht validiert | `-2.84e+03` | `1.66e-04` | `3.60e-01` |
-| 100 km | nicht validiert | `4.996e+03` | `2.89e-04` | `5.17e-01` |
-
-Ein 70-Punkt-Collocation-Lauf bei 100 km erreichte zwar
-
-```text
-max_abs_residual ~ 1.20e-06
-deltaR/R_E       ~ -1.85e-04
-deltaM/M_E       ~  6.61e-05
-```
-
-aber keine ausreichende Mesh-Konvergenz. Deshalb blieb 100 km Kandidat und wurde nicht promoted.
-
-Dieser alte Stand setzte die voll gekoppelte Frontier bei 500 km. Die späteren Stages verschieben diese **numerische** Frontier.
-
-## 7. Stage 1.5D – BH-konsistente Fortsetzung
-
-Mit verbesserter BH-konsistenter Randwertbehandlung wurde der Referenzzweig weitergeführt.
-
-| `r_c` | Status Stage 1.5D |
-|---:|---|
-| 500 km | validiert |
-| 300 km | validiert |
-| 275 km | Kandidat |
-| 250–100 km | offen |
-
-Für `r_c = 300 km` gilt ungefähr
-
-```text
-xi / xi_crit,BH ≈ 1.000142
-q_max            ≈ 1e-14.
-```
-
-Die differentielle Massenabweichung des SL-Zweigs gegenüber dem jeweiligen GR-Lauf beträgt ungefähr
-
-```text
-Delta M_SL / M_GR ≈ -(8–9)e-6.
-```
-
-Die ältere GR/PREM-Barotrop-Closure hatte dagegen eine systematische Baselineabweichung von ungefähr
-
-```text
-~ 6.94e-5.
-```
-
-Damit war die Closure-Ungenauigkeit größer als das zu untersuchende differentielle SL-Signal. Das motivierte Stage 1.6.
-
-## 8. Stage 1.6 – Layered-PREM-EOS
-
-Stage 1.6 verwendet eine deutlich präzisere geschichtete PREM-nahe Earth-Closure.
-
-### 8.1 GR-Baseline
-
-Die reproduzierte GR-Baseline liegt ungefähr bei
-
-```text
-Delta R/R ≈ 4.17e-9
-Delta M/M ≈ 4.44e-8.
-```
-
-Konservativ liegt die numerische Baseline damit auf dem Niveau `~1e-7` oder besser.
-
-### 8.2 Voll gekoppelte SL-Läufe
-
-| `r_c` | `Delta M/M` gegenüber GR | Status Stage 1.6 |
-|---:|---:|---|
-| 500 km | `≈ -9.2e-6` | validiert |
-| 300 km | `≈ -8.65e-6` | validiert |
-| 250 km | — | Kandidat |
-| 200 km | — | offen |
-
-Der **kleinste derzeit cross-solver-validierte voll gekoppelte Punkt ist `r_c = 300 km`**.
-
-Die 300-km-Grenze ist eine Solver-/Validierungsfrontier des aktuellen Referenzzweigs, keine physikalische Ausschlussgrenze für kleinere Reichweiten.
-
-## 9. Stage 1.7 – abgeleitete Erdobservablen
-
-Auf den cross-solver-validierten 500- und 300-km-Punkten wurden beobachtungsnähere Größen berechnet.
-
-### 9.1 Relative Gravitation
-
-| `r_c` | `max |Delta g/g|`, `r >= 100 km` | zentrale Größenordnung ab `r >= 10 km` |
-|---:|---:|---:|
-| 500 km | `≈ 1.8e-4` | `≈ 1.5e-3` |
-| 300 km | `≈ 2.1e-4` | `≈ 1.6e-3` |
-
-### 9.2 P-Wellen-Geschwindigkeit
-
-Für beide Referenzpunkte liegt
-
-```text
-|Delta V_P/V_P| ~ 3e-6.
-```
-
-### 9.3 ICB-/CMB-Lage
-
-| `r_c` | `Delta r_ICB` | `Delta r_CMB` |
-|---:|---:|---:|
-| 500 km | `-43.8 m` | `-35.0 m` |
-| 300 km | `-61.1 m` | `-33.9 m` |
-
-### 9.4 P-Wellen-Laufzeit
-
-| `r_c` | `Delta T_P` |
-|---:|---:|
-| 500 km | `+0.0119 s` |
-| 300 km | `+0.0088 s` |
-
-### 9.5 Materie-Trägheitsmoment
-
-Die differentielle Änderung liegt in der Größenordnung
-
-```text
-Delta I/I ~ -(7–8)e-6.
-```
-
-Die Stage-1.7-Werte sind Modellvorhersagen der angegebenen numerischen Lösungen und keine bereits beobachteten terrestrischen Anomalien.
-
-## 10. Amplitudenscan bei `r_c = 300 km`
-
-Die Sensitivität auf größere Randamplituden wurde zusätzlich untersucht:
-
-| `q(r_a)` | `Delta r_ICB` | `Delta r_CMB` | `Delta T_P` |
-|---:|---:|---:|---:|
-| `1e-14` | `≈ -61 m` | `≈ -34 m` | `+0.0088 s` |
-| `1e-13` | `≈ -604 m` | `≈ -339 m` | `≈ +0.095 s` |
-| `3e-13` | `≈ -1.77 km` | `≈ -1.02 km` | nicht als konservativer Referenzwert promoted |
-
-Diese Punkte bilden einen Sensitivitätsscan. Größere `q`-Werte werden nicht allein aufgrund dieses Scans als physikalisch zulässige Erdparameter promoted.
-
-## 11. Aktuelle Statusmatrix
-
-Für den Referenzzweig
+## 3. Earth-Matching Referenzzweig
 
 ```text
 M_SL   = 1e16 kg
 q(r_a) = 1e-14
 ```
 
-ergibt sich derzeit:
-
-| Bereich | aktueller konservativer Status |
-|---|---|
-| `r_c = 500 km` | voll gekoppelt validiert |
-| `r_c = 300 km` | voll gekoppelt + cross-solver-validiert; Stage-1.7-Observablen berechnet |
-| `r_c = 250–275 km` | Kandidatenbereich; Status hängt von Stage/Solver ab |
-| `r_c <= 200–250 km` | numerisch offen |
-
-Die verschiedenen Stage-Grenzen werden bewusst getrennt dokumentiert. Es wird keine künstlich schärfere physikalische Grenze aus unterschiedlichen Solverstufen zusammengesetzt.
-
-## 12. Promotionsregeln für Short-Range-Lösungen
-
-Eine Short-Range-Lösung wird erst als validiert markiert, wenn mindestens erfüllt sind:
-
-1. reguläre Solver-/Optimizer-Konvergenz,
-2. Rand- und Gleichungsresiduen unter den festgelegten Toleranzen,
-3. Mesh-Konvergenz,
-4. Stabilität gegenüber Continuation-Richtung,
-5. Übereinstimmung unabhängiger Solver im Überlappungsbereich,
-6. endliche und reproduzierbare Radius-/ADM-Masse,
-7. Erhalt des vorgesehenen nichttrivialen fundamentalen Zweigs,
-8. konsistente Earth-Closure-Baseline.
-
-## 13. Offene numerische Arbeit
-
-Für kürzere Reichweiten bleiben insbesondere:
-
-- steifer Boundary-Value-Solver,
-- analytische/sparse Jacobians,
-- Multiple Shooting,
-- adaptive Mesh-Verfeinerung,
-- Pseudo-Arclength-Continuation,
-- Vorwärts-/Rückwärts-Continuation,
-- unabhängige Solver-Crosschecks,
-- fundamentale Fe/Ni-Hochdruck-EOS,
-- vollständiger Seismologie-/Normalmoden-Likelihood-Fit.
-
-## 14. Reproduzierbarkeitsprinzip
-
-Jedes veröffentlichte numerische Resultat soll mindestens mit folgenden Angaben archiviert werden:
+### Stage 1.5D
 
 ```text
-Git-Commit
-Solverversion / Stage
-M_SL
-m_chi bzw. r_c
-xi
-lambda
-q(r_a) / Seed
-Matching-Radius r_a
-Earth-Closure / EOS-Version
-Toleranzen
-Mesh / Schrittweite
-Randresiduen
-R
-M_ADM
-abgeleitete Observablen
-Konvergenzstatus
-Cross-Solver-Status
+500 km -> validiert
+300 km -> validiert
+275 km -> Kandidat
+250 km und kleiner -> offen
 ```
 
-## 15. Aktuelle Aussagegrenze
+### Stage 1.6 Layered-PREM-EOS
 
-Der aktuelle numerische Stand zeigt, dass der dokumentierte kleine redistributive Referenzzweig bis `r_c = 300 km` voll gekoppelt und cross-solver-validiert verfolgt werden konnte und dass für diesen Zweig inzwischen Gravitation, P-Wellen-Geschwindigkeit, ICB/CMB-Lage, P-Wellen-Laufzeit und Trägheitsmoment als differentielle Modellvorhersagen berechnet wurden.
+GR-Baseline:
 
-Das ist ein deutlich weitergehender numerischer Stand als Stage 1.3C, aber weiterhin **kein experimenteller Nachweis** eines Schwarzen Lochs im Erdzentrum.
+```text
+Delta R/R ~ 4.17e-9
+Delta M/M ~ 4.44e-8
+```
+
+Cross-Solver:
+
+```text
+r_c=500 km -> Delta M/M ~ -9.2e-6, validiert
+r_c=300 km -> Delta M/M ~ -8.65e-6, validiert
+r_c=250 km -> Kandidat
+r_c=200 km -> offen
+```
+
+## 4. Struktur-/Observablenblock
+
+Auf den validierten 500-/300-km-Zweigen wurden Stage-1.7-Observablen berechnet. Größenordnungen:
+
+```text
+max |Delta g/g|, r>=100 km ~ 1.8e-4 ... 2.1e-4
+|Delta Vp/Vp|              ~ 3e-6
+Delta r_ICB                ~ -44 ... -61 m
+Delta r_CMB                ~ -35 ... -34 m
+Delta T_P                  ~ +0.009 ... +0.012 s
+Delta I/I                  ~ -(7...8)e-6
+```
+
+Stage 1.8/1.9 ergänzen 1D P-/PKP-/PKIKP-Raytracing und toroidale Normalmodenproxies. Diese Blöcke sind Sensitivitätsrechnungen und noch kein Real-Data-Likelihood-Fit.
+
+## 5. Horizon- und Nahzonen-Härtung
+
+Ab Stage 1.5 wurde die Randbehandlung explizit BH-konsistent gehärtet. Ein reales SL besitzt einen Horizont; die unmittelbare Nahzone darf nicht durch eine reguläre Zentrumslösung ersetzt werden.
+
+Für kleine `M_SL` sind die linearen Eigenwertverschiebungen zwischen regulärem Zentrum und BH-Robin-Randbedingung zwar klein, die physikalisch korrekte Randbedingung bleibt dennoch der BH-Horizont-/Near-Zone-Zweig.
+
+## 6. Langzeit-/Akkretionsstack
+
+### Kanonische Bondi-Referenz
+
+Für den Erdkern-Referenzzustand und `M_SL=1e16 kg`:
+
+```text
+Mdot_Bondi ~ 1.28e4 kg/s
+```
+
+Die Formel ist algebraisch reproduziert. Ihre direkte Anwendung auf festen Erdkernstoff ist jedoch eine physikalische Modellannahme.
+
+### Ballistik / Diffusion / Creep / Wärme
+
+Stages 3.2–3.6 testeten Grenzregime für
+
+- direkte Teilchencapture,
+- Festkörperdiffusion,
+- nichtlinearen Creep,
+- Wärmeleitung,
+- lokale Thermalisierung,
+- Melt-Front-Feedback.
+
+Diese Rechnungen zeigten, dass „Wärme -> sofort vollständige Schmelze -> automatisch Bondi“ keine zwingende Ein-Schritt-Folge ist.
+
+## 7. Rheologie-Härtung
+
+Stage 3.8 ersetzt konstante Viskosität durch eine stressabhängige hcp-Fe-Potenzrheologie. Die entscheidende Erkenntnis ist, dass geophysikalische Niedrig-Strain-Viskositäten nicht unverändert in die SL-Nahzone extrapoliert werden dürfen.
+
+Stage 3.9 ergänzt ideal-plastische Cavity-Grenztests.
+
+## 8. Hochdruck-EOS
+
+Stage 3.10/3.11 ersetzten einfache PREM-/konstante-`Gamma`-Extrapolationen schrittweise durch Hochdruck-Fe-EOS-Sensitivitäten.
+
+Wichtige Korrektur:
+
+```text
+alte ~54 r_s Capture-Grenze -> nicht EOS-robust, zurückgezogen
+```
+
+Die tatsächliche Nahzonen-EOS ändert sich über kondensierte, ionisierte und degenerierte Materieregime und kann nicht durch ein einziges konstantes `Gamma` beschrieben werden.
+
+## 9. Relativistischer Michel-Solver – Stage 3.12
+
+Für stationäre kugelsymmetrische GR-Akkretion wurde die Michel-Kritikpunktstruktur implementiert.
+
+Der allgemeine barotrope Solver wurde gegen eine analytische `Gamma=2`-Lösung getestet:
+
+```text
+relative Mdot-Abweichung ~ 2e-14
+```
+
+Mit einer phenomenologischen condensed -> degenerierte-Elektronen-EOS und `Y_e`-Sensitivität ergibt sich für `M_SL=1e16 kg`:
+
+```text
+Mdot_Michel ~ 147 ... 1460 kg/s
+```
+
+Daraus folgen bei `Mdot ~ M^2` ungefähr:
+
+```text
+t(+1%) ~ 2.1e3 ... 2.1e4 yr
+```
+
+gegenüber 4.54 Gyr Erdalter.
+
+Erforderliche mittlere Langzeitunterdrückung:
+
+```text
+~2e5 ... 2e6
+```
+
+## 10. Solid -> Michel Interface – Stage 3.13
+
+Eine reduzierte serielle Kopplung wurde konstruiert:
+
+```text
+Mdot_solid(Delta P) = Mdot_Michel(P_inner)
+```
+
+Bei der durch die 5-TPa-Fe-Schmelz-/EOS-Sensitivität markierten Millimeterzone konvergieren die Gleichgewichte nahezu auf die ununterdrückte Michel-Kapazität.
+
+Damit ist hcp-Fe-Creep auf dieser Skala kein ausreichender `10^5–10^6`-Limiter im reduzierten Modell.
+
+## 11. Coulomb-Plastizität – Stage 3.14
+
+Die tiefe degenerierte Zone wird nicht mehr mit einem hcp-Fe-`8 GPa`-Cap behandelt.
+
+Getestet wurden Coulombkristall-Skalierungen, Bruchkinetik und aktuelle Perfect-Plasticity-Sensitivitäten.
+
+Zentrale numerische Befunde:
+
+- Michel-Kritikpunkte liegen im oder nahe am untersuchten dimensionslosen Coulomb-Plastizitätsratenbereich.
+- Die reduzierte hydrostatisch-vs-Michel Druckabweichung am Kritikpunkt übersteigt die verwendete Polycristall-Yield-Skala grob um `~1.6e2 ... 1.1e3`.
+- Ein rein elastischer Coulombkristall kann den Michel-Zustand in diesem Vergleich nicht halten; Yield tritt vorher auf.
+- Nach Yield ist ein plastisches Weiterfließen ein relevanter Kandidat und keine automatische Blockade.
+
+Korrektur:
+
+```text
+Stage-3.13 8-GPa-Mikrorettung -> als physische Coulomb-Grenze zurückgezogen
+```
+
+## 12. Aktuelle numerische Entscheidungslage
+
+### Bestandene/hart dokumentierte Punkte
+
+- GR-Grenztests des SL-TOV-Minimalstacks.
+- Layered-PREM-Baseline auf `~1e-7` oder besser.
+- voll gekoppelte 500-/300-km-Referenzpunkte.
+- Horizon-/BH-konsistente Randwertbehandlung.
+- Michel-Solver analytischer Selfcheck.
+- zahlreiche Grenz-/Sensitivitätsrechnungen für Akkretion, Wärme, EOS und Rheologie.
+
+### Nicht abgeschlossen
+
+- vollständige nichtstationäre relativistische Elastoplastik + Plasma + Wärme,
+- realistische Elektroneneinfang-/Kompositionsentwicklung,
+- vollständiger Massenscan,
+- Formation Rule,
+- Real-Data-Seismologie-Likelihood,
+- unabhängige experimentelle Signatur.
+
+## 13. Aktueller stärkster negativer Befund
+
+Für den `1e16 kg`-Referenzzweig liefert Standard-Hawking + ununterdrückte relativistische Michel-Akkretion im Stage-3.12-Modell **kein langfristig überlappendes Massenfenster**.
+
+Dieser Befund ist modellabhängig, aber er ist derzeit der stärkste physikalische Gegentest des Erdmoduls und wird nicht als bestanden umetikettiert.
+
+## 14. Nächste numerische Priorität
+
+Massenscan über mehrere Größenordnungen:
+
+```text
+M_SL ~ 1e8 ... 1e16 kg
+```
+
+mit identischem Stack für
+
+```text
+Hawking + Michel + Solid/Plasma-Transport + Earth-age + Earth-Matching.
+```
+
+Ziel ist die Bestimmung eines tatsächlich verbleibenden Parameterfensters oder dessen Ausschluss innerhalb des gewählten Modells.
