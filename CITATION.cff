@@ -1,14 +1,25 @@
 cff-version: 1.2.0
-message: "If you use or discuss this research draft, please cite it as below."
-title: "BH-Kernhypothese - Erdmodul V1.0"
+message: "If you use or discuss the current repository text, please cite it as below. The archived V1.0 PDF remains the original publication record from 2026-08-23."
+title: "BH-/SL-Kernhypothese - Erdmodul V1.2"
 type: report
 authors:
   - family-names: "Schlicksupp"
     given-names: "Daniel Marcel"
     affiliation: "Independent researcher, Rheinland-Pfalz, Deutschland"
-version: "1.0"
-date-released: "2026-08-23"
+version: "1.2"
+date-released: "2026-08-25"
 abstract: >-
-  Theorie- und Forschungsentwurf zur Prüfung einer zentralen kompakten
-  Schwarzloch-Komponente im Erdinneren gegen PREM, Seismologie,
-  Trägheitsmoment, Akkretionsentwicklung und Wärmehaushalt.
+  Theorie- und Forschungsentwurf eines kleinen redistributiven zentralen
+  Schwarzloch-Modells fuer die Erde. Der aktuelle Repository-Text trennt
+  Massenbuchhaltung, geophysikalische Konsistenztests und die numerische
+  SL-TOV/Earth-Matching-Erweiterung. Numerische Validierung bezeichnet
+  Solver- und Konvergenzkriterien und keinen experimentellen Nachweis eines
+  Schwarzen Lochs im Erdzentrum.
+keywords:
+  - black hole
+  - Earth interior
+  - PREM
+  - scalar-tensor gravity
+  - TOV
+  - geophysics
+  - numerical relativity
