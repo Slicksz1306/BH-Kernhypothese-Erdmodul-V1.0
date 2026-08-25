@@ -1,9 +1,9 @@
-# SL/BH-Kernhypothese Erdmodul V1.4
+# SL/BH-Kernhypothese Erdmodul V1.5
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Stand:** 25.08.2026  
-**Forschungsstand:** Stage 3.68
+**Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.69/3.70 definiert, nicht durchgefuehrt
 
 ## 1. Gegenstand
 
@@ -207,9 +207,12 @@ Die korrekte Aussage lautet:
 
 > Der Standard-Hawking-Zweig H+ faellt innerhalb des aktuellen Projektmodells. Ein nichtstandardmaessiger kleiner H0-Zweig kann in den bisherigen reduzierten heutigen Erdtests verborgen bleiben, besitzt aber keine positive Detektion, keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung und keinen hergeleiteten Standard-Formationweg.
 
-## 14. Verbleibende Endstufen
+## 14. Verbleibende Endstufen – formal definiert
 
-1. High-Fidelity-Multiphysik/HPC: relativistische Elastoplastik + Dense Plasma/QED/Nuklearreaktionen + kinetischer Transport + Horizon-Capture + 3-D-Full-Wave-Seismik.
-2. Dedizierter experimenteller/Real-Data-Test auf eine eindeutige verbleibende H0-Signatur.
+**Stage 3.69 – High-Fidelity Multiphysics: DEFINED / NOT PERFORMED.** Verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/GR-Capture-Architektur mit expliziten Transport-, QED-/Pair-/Nuklear-Zeitskalen und anschliessendem 3-D-Full-Wave-Export.
 
-Vollstaendige Endmatrix: [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md).
+**Stage 3.70 – Experimental H0 Falsification: DEFINED / NOT PERFORMED.** Dedizierter Real-Data-/Likelihood-Test einer quantitativen H0-Signatur, die erst aus Stage 3.69 stammen darf.
+
+Der letzte tatsaechlich bearbeitete Teststand bleibt Stage 3.68. Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
+
+Vollstaendige Endmatrix der bearbeiteten Stages: [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md).
