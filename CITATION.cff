@@ -10,11 +10,17 @@ version: "1.2"
 date-released: "2026-08-25"
 abstract: >-
   Theorie- und Forschungsentwurf eines kleinen redistributiven zentralen
-  Schwarzloch-Modells fuer die Erde. Der aktuelle Repository-Text trennt
-  Massenbuchhaltung, geophysikalische Konsistenztests und die numerische
-  SL-TOV/Earth-Matching-Erweiterung. Numerische Validierung bezeichnet
-  Solver- und Konvergenzkriterien und keinen experimentellen Nachweis eines
-  Schwarzen Lochs im Erdzentrum.
+  Schwarzloch-Modells fuer die Erde. Der aktuelle Repository-Stand umfasst
+  Massenbuchhaltung, geophysikalische Konsistenztests, einen voll gekoppelten
+  SL-TOV/Earth-Matching-Stack, eine Layered-PREM-Earth-Closure und den
+  numerischen Entwicklungsstand Stage 1.7. Fuer den Referenzzweig
+  M_SL=1e16 kg und q(r_a)=1e-14 sind r_c=500 km und r_c=300 km voll gekoppelt
+  validiert; der 300-km-Punkt ist cross-solver-validiert. Aus den validierten
+  Zweigen wurden differentielle Vorhersagen fuer Gravitation,
+  P-Wellen-Geschwindigkeit, ICB/CMB-Lage, P-Wellen-Laufzeit und
+  Traegheitsmoment berechnet. Numerische Validierung bezeichnet Solver- und
+  Konvergenzkriterien und keinen experimentellen Nachweis eines Schwarzen
+  Lochs im Erdzentrum.
 keywords:
   - black hole
   - Earth interior
@@ -23,3 +29,6 @@ keywords:
   - TOV
   - geophysics
   - numerical relativity
+  - Earth matching
+  - seismic observables
+  - scientific model
