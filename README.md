@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Aktueller Theorie-Textstand:** Erdmodul V1.3  
-**Aktueller Forschungsstand:** Stage 3.14  
+**Aktueller Forschungsstand:** Stage 3.15  
 **Stand:** 25.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
@@ -21,19 +21,19 @@ Die definierende Annahme lautet: Im Erdzentrum wird ein kleines zentrales Schwar
 
 Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Numerisch bestandene Solver-, Matching- oder Cross-Solver-Tests sind keine empirischen Nachweise.
 
-## Aktueller Kernstatus in einem Satz
+## Aktueller Kernstatus
 
-Die starke Variante, in der ein zentrales Schwarzes Loch einen wesentlichen Anteil der Erdmasse oder Erdgravitation trägt, ist mit der beobachteten Erdstruktur nicht vereinbar. Ein wesentlich kleineres zentrales Schwarzes Loch wird dadurch nicht grundsätzlich ausgeschlossen. Der derzeit härteste offene beziehungsweise belastende Block ist die **Langzeitakkretion**.
+Die starke Variante, in der ein zentrales Schwarzes Loch einen wesentlichen Anteil der Erdmasse oder Erdgravitation trägt, ist mit der beobachteten Erdstruktur nicht vereinbar. Ein wesentlich kleineres zentrales Schwarzes Loch wird dadurch nicht grundsätzlich ausgeschlossen.
+
+Für das lange verwendete Referenzmodell `M_SL=1e16 kg` ist die relativistische Langzeitakkretion derzeit der stärkste negative Test. Stage 3.15 zeigt jedoch, dass die gesamte Erd-SL-Massenachse nicht durch diesen einen Referenzpunkt entschieden ist.
 
 ## Redistributive Massenbuchhaltung
 
-Für eine gewählte SL-Masse `M_SL` wird der strukturelle Ersatzradius `r_rep` definiert durch
-
 ```text
-M_PREM(<r_rep) = M_SL.
+M_PREM(<r_rep) = M_SL
 ```
 
-Im ideal kugelsymmetrischen Grenzfall bleibt außerhalb der Ersatzregion die eingeschlossene Masse erhalten:
+Im ideal kugelsymmetrischen Grenzfall gilt außerhalb der Ersatzregion
 
 ```text
 M_model(<r) = M_PREM(<r),   r >= r_rep.
@@ -41,173 +41,125 @@ M_model(<r) = M_PREM(<r),   r >= r_rep.
 
 Damit werden SL-Masse und gewöhnliche Materie nicht doppelt gezählt.
 
-## Drei getrennte Radien
-
-```text
-Schwarzschildradius:        r_s   = 2 G M_SL / c^2
-Akkretions-/Bondiskala:     r_B   = G M_SL / c_eff^2
-Struktureller Ersatzradius: M_PREM(<r_rep) = M_SL
-```
-
-`r_s`, `r_B` und `r_rep` sind physikalisch unterschiedliche Größen.
-
 ## Feldtheoretischer Minimalrahmen
 
-Der aktuelle sphärische Jordan-Frame-Minimalstack verwendet
+Der sphärische Jordan-Frame-Minimalstack verwendet
 
 ```text
 F(chi) = F0 + xi chi^2
-V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4
+V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4.
 ```
 
-mit gekoppelten Metrik-, Druck-, Massen- und Skalarfeldgleichungen. Der Grenzfall
+Der GR-Grenzfall muss für `xi -> 0`, `chi -> 0`, `dchi/dr -> 0` auf die gewöhnliche TOV-Struktur zurückfallen. Ein reales zentrales Schwarzes Loch wird über eine Horizon-/Matching-Randbedingung und nicht als reguläres TOV-Zentrum behandelt.
 
-```text
-xi -> 0, chi -> 0, dchi/dr -> 0
-```
+## Earth-Matching
 
-muss auf die gewöhnliche GR-TOV-Struktur zurückfallen.
-
-Der zentrale SL wird über eine **Horizon-/Matching-Randbedingung** behandelt; ein reales Schwarzes Loch ist kein reguläres TOV-Zentrum.
-
-## Earth-Matching und geophysikalischer Stand
-
-Für den am weitesten untersuchten Referenzzweig
+Für den Referenzzweig
 
 ```text
 M_SL   = 1e16 kg
 q(r_a) = 1e-14
 ```
 
-wurden mit der Layered-PREM-Closure voll gekoppelte Earth-Matching-Lösungen bei `r_c=500 km` und `r_c=300 km` cross-solver-validiert. `250–275 km` bleibt Kandidatenbereich; kleinere Reichweiten sind numerisch nicht als voll gekoppelte Lösungen promoted.
-
-Die GR-Baseline der gehärteten Closure reproduziert ungefähr
+sind `r_c=500 km` und `r_c=300 km` mit der gehärteten Layered-PREM-Closure voll gekoppelt numerisch validiert; der 300-km-Punkt ist cross-solver-validiert. Die GR-Baseline reproduziert ungefähr
 
 ```text
 Delta R/R ~ 4.17e-9
 Delta M/M ~ 4.44e-8.
 ```
 
-Abgeleitete Sensitivitäten des Referenzzweigs umfassen unter anderem:
+Seismologische Laufzeiten, ICB/CMB-Verschiebungen, Gravitation, Trägheitsmoment und prototypische Normalmoden wurden als Modellsensitivitäten untersucht. Sie sind keine gemessenen SL-Signaturen.
 
-- relative Gravitation außerhalb der zentralen Zone,
-- PREM-nahe Dichte-/Geschwindigkeitsproxies,
-- ICB-/CMB-Verschiebungen,
-- P-/PKP-/PKIKP-Laufzeitänderungen,
-- Materie-Trägheitsmoment,
-- prototypische Normalmoden.
+## Akkretionsblock bis Stage 3.14
 
-Diese Größen sind **Modellvorhersagen und Sensitivitäten**, keine gemessenen SL-Signaturen.
+Die klassische Bondi-Algebra wurde reproduziert; kein mathematischer Fehler in der Formel wurde gefunden. Die entscheidende Frage ist ihre physikalische Anwendbarkeit auf kondensierte, plastische und degenerierte Erdmaterie.
 
-## Akkretions- und Langzeitblock — Stage 2 bis 3.14
+Härtere Tests führten zu mehreren Korrekturen:
 
-Der Akkretionsblock wurde wesentlich über die frühere einfache Bondi-Abschätzung hinaus erweitert.
+- „lokale Wärme schmilzt zwangsläufig alles bis zur Bondiskala“ ist zu stark,
+- die frühere `~54 r_s`-Grenze aus einem konstanten `Gamma~4`-Toymodell ist nicht EOS-robust,
+- die Stage-3.13-`8 GPa`-Mikrorettung ist nicht auf tiefe Coulombmaterie übertragbar.
 
-### Was bestehen blieb
-
-Die klassische Bondi-Formel ist mathematisch korrekt innerhalb ihrer Fluid-/EOS-Annahmen. Eine direkte Anwendung auf festen Erdkernstoff ist jedoch eine physikalische Modellannahme und keine algebraische Notwendigkeit.
-
-### Was korrigiert wurde
-
-Mehrere frühere Zwischenresultate wurden nach härteren Tests ausdrücklich zurückgezogen oder eingeengt:
-
-- Die alte Aussage, lokale Wärme müsse automatisch alles bis zur Bondiskala schmelzen, war zu stark.
-- Die frühere Stage-3.10-Grenze von ungefähr `54 r_s` war ein Artefakt einer konstanten `Gamma~4`-Extrapolation und ist **keine robuste physikalische Grenze**.
-- Die Stage-3.13-`8 GPa`-Mikrorettung kann nicht in das tiefe Coulomb-Regime übertragen werden und ist als physischer Rettungsmechanismus **zurückgezogen**.
-
-### Relativistische Michel-Akkretion — Stage 3.12
-
-Der volle GR-Test zeigt, dass für steife kausale EOS relativistische Michel-Kritikpunkte existieren können, auch wenn die Newtonsche Bondi-Topologie für `Gamma>5/3` versagt.
-
-Mit einer phenomenologischen condensed-matter -> degenerierte-Elektronen-EOS ergaben sich für `M_SL=1e16 kg` je nach effektiver Elektronenfraktion ungefähr
+Der relativistische Michel-Test mit einer phenomenologischen condensed-to-degenerate EOS ergibt für `M_SL=1e16 kg` ungefähr
 
 ```text
-Mdot_Michel ~ 1.5e2 ... 1.5e3 kg/s.
+Mdot_Michel ~ 147 ... 1460 kg/s,
 ```
 
-Die mittlere Rate für nur `+1%` Masse über 4.54 Gyr liegt dagegen bei ungefähr
+während die mittlere Rate für `+1%` Masse über 4.54 Gyr nur ungefähr `6.98e-4 kg/s` beträgt. Ein gewöhnlicher hcp-Fe-Festkörper bei Millimeterradien liefert im reduzierten Modell keine ausreichende Unterdrückung; auch eine generische Coulomb-Festkörperblockade ist durch die getestete Plastizitätsphysik nicht nachgewiesen.
+
+## Stage 3.15 – vollständiger Massenscan und wichtige Korrektur
+
+Stage 3.12 hatte Hawking und Michel als **getrennte** Langzeitgrenzen verglichen. Stage 3.15 löst beide Beiträge gleichzeitig:
 
 ```text
-Mdot_1% ~ 6.98e-4 kg/s.
+dM/dt = k_Michel M^2 - A_H/M^2.
 ```
 
-Damit benötigt der `1e16 kg`-Referenzzweig in diesem Modell eine Unterdrückung von ungefähr
+Damit existiert im reduzierten Modell ein instabiles Gleichgewicht
 
 ```text
-~2e5 ... 2e6
+M_eq = (A_H/k_Michel)^(1/4)
 ```
 
-gegenüber der ununterdrückten Michel-Rate.
-
-### Solid/Michel-Kopplung — Stage 3.13
-
-Eine selbstkonsistente reduzierte hcp-Fe-Solid/Michel-Kopplung bei Millimeterradien ergab nahezu die volle Michel-Rate. Ein gewöhnlicher fester hcp-Fe-Bereich liefert in diesem Modell daher **nicht automatisch** die benötigte Unterdrückung.
-
-### Coulomb-Plastizität — Stage 3.14
-
-Für die tiefe, degenerierte Materie ist gewöhnliche hcp-Fe-Rheologie nicht mehr die passende Beschreibung. Der Test wurde daher auf Coulombkristall-Skalierungen und aktuelle Plastizitätsresultate umgestellt.
-
-Der reduzierte Vergleich zeigt:
-
-- die Michel-Kritikpunkte liegen im oder nahe am untersuchten dimensionslosen Coulomb-Plastizitätsbereich,
-- die Michel-Druckabweichung übersteigt die verwendete Coulomb-Yield-Skala deutlich,
-- ein rein elastischer Coulombkristall würde daher vor Erreichen des Michel-Zustands yielden,
-- aktuelle Plastizitätsmodelle sprechen eher für plastisches Weiterfließen nach dem Yield als für einen dauerhaft blockierenden Hochviskositätszustand.
-
-Damit ist die einfache Rettung
+bei ungefähr
 
 ```text
-"Festkörper -> kein Nachschub"
+M_eq ~ 1.28e11 ... 2.28e11 kg
 ```
 
-für `M_SL=1e16 kg` derzeit **nicht nachgewiesen**.
+für den Stage-3.12-`Y_e`-Sensitivitätsbereich.
 
-## Hawking + Michel
-
-Im Stage-3.12-Sensitivitätsmodell liegen die geologischen Michel-Massenobergrenzen grob bei
+Die frühere starke Aussage
 
 ```text
-~4.8e9 ... 4.8e10 kg,
+"Standard-Hawking + ununterdrückte Michel-Akkretion -> kein gemeinsames Langzeitfenster"
 ```
 
-während der einfache Standard-Hawking-Erdalter-Benchmark eine Überlebensuntergrenze von ungefähr
+wird daher **korrigiert**: Bei gleichzeitiger Massenentwicklung existiert ein Hawking/Michel-Kompensationsband.
+
+Das Gleichgewicht ist instabil, aber die lineare e-Faltungszeit liegt ungefähr bei `4.2e9 ... 2.4e10 Jahren`. Für weniger als `1%` Netto-Massenänderung über 4.54 Gyr beträgt das Anfangsmassenband je nach `Y_e` ungefähr `-0.5/+0.5%` bis `-4.4/+5.1%` um `M_eq`.
+
+### Warum das noch keine Lösung ist
+
+Der PREM-Ersatzradius dieses neuen Massenbands beträgt nur ungefähr `133 ... 161 m`. In diesem kleinen `M_SL`-/sub-km-Bereich ist das voll gekoppelte Earth Matching noch nicht cross-solver-validiert.
+
+Außerdem skaliert die dimensionslose Michel-Deformationsrate am Kritikpunkt ungefähr wie `1/M`. Das neue `~1e11 kg`-Band liegt um etwa `4e3 ... 5e4` unter den Massengrenzen, für die die Stage-3.14-Coulomb-Plastizitätsdaten direkt im kalibrierten MD-Ratenbereich liegen. Die Materialtransportphysik ist dort deshalb erneut offen.
+
+Details: [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md).
+
+## Aktueller konservativer Status
 
 ```text
-~1.19e11 kg
+M_SL ~ 1e16 kg:
+    stark durch relativistische Langzeitakkretion belastet
+
+M_SL ~ 1e11 kg:
+    neues Hawking/Michel-Kandidatenband im reduzierten ODE,
+    aber Earth Matching und Materialtransport noch nicht validiert
 ```
 
-ergibt.
+Damit ist weder ein Erd-SL nachgewiesen noch die gesamte kleine Erd-SL-Hypothese ausgeschlossen.
 
-Damit existiert in **diesem konkreten Modell** kein überlappendes Langzeitfenster für Standard-Hawking plus ununterdrückte Michel-Akkretion. Das ist ein starker negativer Befund, aber noch kein empirischer Ausschluss der gesamten SL-Kernhypothese, weil die reale nichtstationäre Fest-/Plasma-/Kompositionskopplung noch nicht vollständig gelöst ist.
+## Nächste harte Tests
 
-## Was als Nächstes entschieden werden muss
-
-Die derzeit wichtigsten offenen Tests sind:
-
-1. vollständiger Massenscan über mehrere Größenordnungen von `M_SL`,
-2. gekoppelte relativistische Festkörper-/Plasma-/Thermaltransportgleichungen,
-3. realistische Elektroneneinfang-/Kompositionsentwicklung in der tiefen Near Zone,
-4. robuste Formation Rule,
-5. reale Seismologie-/Normalmoden-Likelihood statt Sensitivitätsproxies,
-6. unabhängige vorab definierte Detektionssignaturen.
-
-## Falsifikationsprinzip
-
-Eine konkrete Parameterwahl muss mit **demselben Parametersatz** gleichzeitig gegen Erdmasse, Radius, Trägheitsmoment, Seismologie, Normalmoden, Wärmehaushalt, Langzeitstabilität, Formation, Akkretion und numerische Konvergenz bestehen.
-
-Wenn ein harter Test einen Zweig ausschließt, wird dieser Zweig nicht durch nachträgliches Umdeuten als bestanden markiert.
+1. voll gekoppeltes Earth Matching im neuen `~1e11 kg`-Band,
+2. Near-Zone-Transport bei dimensionslosen Raten außerhalb der Stage-3.14-MD-Kalibrierung,
+3. Hawking-Greybody-/Teilchenspezies-, Spin- und Ladungssensitivität,
+4. Formation Rule für das niedrige Massenband,
+5. reale Seismologie-/Normalmoden-Likelihood und vorab definierte Detektionssignaturen.
 
 ## Dateien
 
-- [`THEORIE.md`](THEORIE.md) – aktueller Erdmodul-Theoriestand V1.3.
-- [`TEST_STATUS.md`](TEST_STATUS.md) – aktuelle Test- und Validierungsmatrix bis Stage 3.14.
-- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – numerischer und physikalischer Entwicklungsstand.
-- [`AKKRETION_STATUS.md`](AKKRETION_STATUS.md) – detaillierter Akkretions-/Langzeitstatus Stage 2 bis 3.14.
+- [`THEORIE.md`](THEORIE.md) – Theorierahmen.
+- [`TEST_STATUS.md`](TEST_STATUS.md) – Test- und Validierungsmatrix.
+- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – numerischer Entwicklungsstand.
+- [`AKKRETION_STATUS.md`](AKKRETION_STATUS.md) – Akkretions-/Langzeitstatus.
+- [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md) – aktueller Hawking/Michel-Massenscan.
 - [`CHANGELOG.md`](CHANGELOG.md) – Versions- und Korrekturhistorie.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) – Anforderungen für Review und Reproduktion.
 - [`CITATION.cff`](CITATION.cff) – Zitiermetadaten.
 - `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` – unveränderte Erstveröffentlichung.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.3*, theoretischer Forschungsentwurf, aktueller Entwicklungsstand Stage 3.14, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.3*, theoretischer Forschungsentwurf, aktueller Entwicklungsstand Stage 3.15, Rheinland-Pfalz, Deutschland.
