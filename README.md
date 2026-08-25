@@ -1,4 +1,4 @@
-# BH-/SL-Kernhypothese – Erdmodul
+# SL/BH-Kernhypothese Erdmodul
 
 ## Veröffentlichungsangaben
 
@@ -17,7 +17,7 @@ Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
 ## Wissenschaftlicher Status
 
-Die BH-/SL-Kernhypothese ist ein **theoretisches Forschungsmodell**. `SL` steht in diesem Projekt für **Schwarzes Loch**. Für die Erde wird als Modellannahme geprüft, ob ein kleines zentrales Schwarzes Loch mit einer entsprechend redistributiven Materieverteilung vereinbar sein kann.
+Die SL/BH-Kernhypothese ist ein **theoretisches Forschungsmodell**. `SL` steht in diesem Projekt für **Schwarzes Loch**. Für die Erde wird als Modellannahme geprüft, ob ein kleines zentrales Schwarzes Loch mit einer entsprechend redistributiven Materieverteilung vereinbar sein kann.
 
 Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Begriffe wie „bestanden“ oder „validiert“ beziehen sich ausschließlich auf klar benannte interne Konsistenz- beziehungsweise numerische Solvertests, nicht auf einen experimentellen Nachweis.
 
@@ -150,4 +150,4 @@ A. M. Dziewonski & D. L. Anderson (1981), *Preliminary Reference Earth Model*, P
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *BH-/SL-Kernhypothese – Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
