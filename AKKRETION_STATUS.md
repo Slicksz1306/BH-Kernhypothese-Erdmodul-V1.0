@@ -1,287 +1,170 @@
-# Akkretions- und Langzeitstatus – Stage 2 bis 3.14
+# Akkretions- und Langzeitstatus – Stage 2 bis 3.15
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul V1.3  
-**Stand:** 25.08.2026  
-**Referenzmasse:** `M_SL = 1e16 kg`
+**Stand:** 25.08.2026
 
-## 1. Zweck
+## 1. Grundprinzip
 
-Dieses Dokument fasst ausschließlich den Akkretions-, Wärme-, Rheologie-, EOS- und Langzeitblock zusammen.
+Die Bondi- und Michel-Gleichungen werden in diesem Projekt als physikalische Modelle innerhalb klar benannter Annahmen verwendet. Numerische Reproduktion einer Formel ist kein Nachweis eines Erd-SL.
 
-Es trennt bewusst:
+## 2. Referenzzweig 1e16 kg
 
-- mathematische Referenzformeln,
-- physikalische Modellannahmen,
-- Grenzregime/Sensitivitäten,
-- numerisch gehärtete Resultate,
-- korrigierte oder zurückgezogene Zwischenresultate.
-
-## 2. Kanonischer Bondi-Benchmark
-
-Für den PREM-nahen Erdkern-Referenzzustand wurde als konservative Fluidreferenz verwendet:
-
-```text
-Mdot_Bondi ~ 1.28e4 kg/s
-```
-
-für `M_SL=1e16 kg`.
-
-Die Bondi-Algebra wurde reproduziert. Der Streitpunkt ist nicht die Formel selbst, sondern ihre direkte Anwendbarkeit auf kondensierte, plastische und degenerierte Materie.
-
-## 3. Hawking-Benchmark
-
-Ein einfacher Standard-Hawking-Lebensdauerbenchmark ergibt für Überleben über `4.54 Gyr` eine Größenordnung
-
-```text
-M_Hawking,min ~ 1.19e11 kg.
-```
-
-Diese Zahl ist ein Benchmark innerhalb Standard-Hawking, keine experimentelle Messung des Erd-SL.
-
-## 4. Stage 3.2 – mikrophysikalische Skalen
-
-Für `M_SL=1e16 kg` wurden unter anderem bestimmt:
+Für `M_SL=1e16 kg` wurden folgende Größen als Benchmarks gehärtet:
 
 ```text
 r_s ~ 1.49e-11 m
 r_B ~ 5.26e-3 m
+Mdot_Bondi ~ 1.28e4 kg/s
 ```
 
-sowie atomare Abstände, thermische Fe-Skalen und direkte Capture-Proxies.
+Ein einfacher Standard-Hawking-Benchmark liefert eine Erdalter-Survival-Skala um `1.19e11 kg`.
 
-Ein direkter ballistischer Grenzfall kann viele Größenordnungen unter Bondi liegen. Er ist aber kein allgemeines Gesetz für gebundene, kollektiv wechselwirkende Materie.
+## 3. Stage 3.2–3.6 – Mikroakkretion, Creep und Wärme
 
-## 5. Stage 3.2–3.4 – Festkörpersupply
+Ballistische Capture-Proxies, Festkörperdiffusion, Creep, Knudsen-/Kontinuumsübergänge und Wärmeleitung zeigen, dass ein fester Erdkern nicht automatisch wie ein ideales Bondi-Gas behandelt werden darf.
 
-Als Grenzregime wurden untersucht:
+Die frühe Aussage, lokale Wärme müsse zwangsläufig bis zur Bondiskala schmelzen und damit Bondi starten, wurde durch ein Zwei-Phasen-/Thermalisierungsmodell abgeschwächt. Ein Schmelzübergang benötigt gleichzeitig ausreichende lokale Energiedeposition und eine ausreichend große Schmelzzone.
 
-- atomare/diskrete Capture-Proxies,
-- Diffusion,
-- Creep,
-- Knudsen-/Kontinuumsübergänge,
-- mechanische Energie und Wärmeleitung.
+## 4. Stage 3.7–3.11 – Bondi-Audit und Hochdruck-EOS
 
-Wichtiger Befund:
+Die klassische Bondi-Algebra wurde reproduziert; kein mathematischer Fehler in der Formel gefunden.
 
-> Ein fester innerer Kern verhält sich nicht automatisch wie ein ideales Bondi-Gas. Das allein beweist aber noch keine geologische Langzeitstabilität.
+PREM-nahe Stiffness und Hochdruck-Fe-EOS zeigen jedoch, dass eine konstante Gas-EOS nicht bis in die SL-Nahzone extrapoliert werden darf. Die frühere `~54 r_s`-Grenze eines konstanten `Gamma~4`-Toymodells ist daher als physische Langzeitgrenze zurückgezogen.
 
-## 6. Stage 3.5/3.6 – Melt-Feedback
+## 5. Stage 3.12 – relativistische Michel-Akkretion
 
-Eine frühe Melt-Abschätzung verwendete implizit die volle mechanische Leistung als lokalen Energieeintrag.
+Ein allgemeiner barotroper Schwarzschild-Michel-Solver wurde gegen einen analytischen `Gamma=2`-Fall geprüft; die relative `Mdot`-Abweichung lag bei etwa `2e-14`.
 
-Stage 3.6 korrigierte dies zu
+Für eine phenomenologische condensed-to-degenerate-EOS und fünf `Y_e`-Sensitivitätszweige ergibt sich bei `M_SL=1e16 kg`:
 
 ```text
-P_local = f_th Mdot c_s^2.
+Mdot_Michel ~ 147 ... 1460 kg/s.
 ```
 
-Damit müssen mindestens zwei Bedingungen gleichzeitig erfüllt sein:
+Ohne Gegenprozess wäre `+1%` Masse bereits nach ungefähr `2.1e3 ... 2.1e4 Jahren` erreicht. Für reine Akkretionsstabilität wären daher Unterdrückungen um `2e5 ... 2e6` gegenüber dieser Michel-Kapazität nötig.
 
-1. Schmelzzone erreicht die relevante Akkretionsskala,
-2. Energiefeedback kann die Schmelze aufrechterhalten.
+## 6. Stage 3.13 – Solid/Michel-Kopplung
 
-Für einen repräsentativen Fall war `f_th~1%` nicht automatisch ausreichend, um bis `r_B` zu schmelzen.
+Eine reduzierte hcp-Fe-Solid/Michel-Kopplung bei Millimeterradien ergibt nahezu die volle Michel-Kapazität. Gewöhnlicher hcp-Fe-Creep liefert dort keine ausreichende `1e5 ... 1e6`-Unterdrückung.
 
-**Resultat:** Die einfache Aussage „Wärme schmilzt alles und Bondi startet zwangsläufig“ wird nicht verwendet.
+Die alte mikroskopische Sensitivität mit einem `8 GPa`-Stresscap wurde nicht als physische Lösung akzeptiert, weil die tiefe Materie dort kein gewöhnliches hcp-Fe mehr ist.
 
-## 7. Stage 3.7 – Bondi-Audit
+## 7. Stage 3.14 – Coulomb-Plastizität
 
-Der klassische 4D-Bondi-Koeffizient wurde gegen die Literaturform reproduziert.
+In der degenerierten Tiefe wurden Coulombkristall-Skalierungen, Bruchkinetik und aktuelle Perfect-Plasticity-Sensitivitäten verwendet.
+
+Für den `1e16 kg`-Referenzzweig liegen die Michel-Kritikpunkte im oder nahe am untersuchten dimensionslosen Materialratenbereich. Die Michel-Druckabweichung übersteigt die verwendete Coulomb-Yield-Skala deutlich; ein rein elastischer Coulombkristall ist daher keine selbstverständliche permanente Akkretionsbarriere.
+
+Die Stage-3.13-`8 GPa`-Mikrorettung bleibt als Coulomb-Langzeitgrenze zurückgezogen.
+
+## 8. Stage 3.15 – simultane Hawking/Michel-Entwicklung
+
+Die frühere Stage-3.12-Aussage
 
 ```text
-kein algebraischer Bondi-Fehler gefunden
+Standard-Hawking + ununterdrücktes Michel -> kein Langzeit-Overlap
 ```
 
-Die physikalische Frage lautet vielmehr:
+war als getrennte Schnittmengenbetrachtung zu stark.
+
+Stage 3.15 löst stattdessen beide Prozesse gemeinsam:
 
 ```text
-Welche Transportgleichung verbindet festen/plastischen Kernstoff mit dem SL-Sink?
+dM/dt = k_Michel M^2 - A_H/M^2.
 ```
 
-## 8. Stage 3.8/3.9 – nichtlineare hcp-Fe-Rheologie
-
-Konstante Viskosität wurde durch eine stressabhängige Potenzrheologie ersetzt.
-
-Dadurch verschwand die einfache Vorstellung, eine langsame geophysikalische Viskosität könne unverändert in die stark belastete Near Zone übertragen werden.
-
-Je nach Stress kann hcp-Fe sehr viel schneller deformieren.
-
-## 9. Stage 3.10 – Stiff-EOS Toy-Modell
-
-PREM-nahe lokale Stiffness-Werte lagen deutlich über `Gamma=5/3`.
-
-Ein konstantes `Gamma~4`-Toy-Modell erzeugte zunächst eine scheinbare kritische effektive Capture-Grenze um
+Damit besitzt jeder feste `Y_e`-Michel-Zweig ein Gleichgewicht
 
 ```text
-~54 r_s.
+M_eq = (A_H/k_Michel)^(1/4),
 ```
 
-Diese Grenze wird **nicht mehr als physikalische Langzeitgrenze verwendet**.
+bei dem Akkretion und Verdampfung betragsgleich sind.
 
-## 10. Stage 3.11 – Hochdruck-EOS
-
-Smith-/Hakim-basierte Fe-EOS-Sensitivitäten zeigten:
-
-- PREM ist für die Near Zone zu grob,
-- echte Fe-EOS reicht bis in den TPa-Bereich,
-- der mikroskopische Sonic-/Capture-Bereich liegt aber noch tiefer,
-- konstantes `Gamma~4` ist über diesen gesamten Bereich nicht zulässig.
-
-**Korrektur:** Die alte `~54 r_s`-Grenze ist nicht EOS-robust und bleibt zurückgezogen.
-
-## 11. Stage 3.12 – voller relativistischer Michel-Test
-
-Für Schwarzschild-Akkretion wurde die relativistische Michel-Kritikpunktstruktur implementiert.
-
-Der allgemeine barotrope Solver reproduziert den analytischen `Gamma=2`-Test mit relativer `Mdot`-Abweichung von ungefähr
+Für den fünfgliedrigen `Y_e`-Sweep ergibt der einfache Standard-Hawking-Benchmark:
 
 ```text
-~2e-14.
+M_eq ~ 1.28e11 ... 2.28e11 kg.
 ```
 
-Mit einer phenomenologischen condensed -> degenerierte-Elektronen-EOS und einem `Y_e`-Sensitivitätsscan ergibt sich:
+### Stabilität
+
+Das Gleichgewicht ist instabil, aber die e-Faltungszeit ist lang:
 
 ```text
-Mdot_Michel ~ 147 ... 1460 kg/s
+~4.23e9 ... 2.37e10 Jahre.
 ```
 
-für `M_SL=1e16 kg`.
-
-Daraus:
+Die exakte reduzierte ODE-Integration über `4.54 Gyr` ergibt ein Anfangsmassenband mit weniger als `1%` Nettoänderung von ungefähr
 
 ```text
-t(+1%) ~ 2.1e3 ... 2.1e4 yr
+-0.51/+0.53% bis -4.40/+5.12% um M_eq.
 ```
 
-und zur geologischen Stabilität ist eine Unterdrückung von grob
+Das ist ein **Kompensationsband**, kein Attraktor.
+
+### Wichtige physikalische Grenze
+
+Für dieses niedrige Massenband ist die Stage-3.14-Coulomb-Plastizitätskalibrierung nicht direkt anwendbar. Die dimensionslose Michel-Deformationsrate skaliert ungefähr wie `1/M`.
+
+Die 2026-MD-Ratengrenze `2e-5 omega_p` wird je nach Proxy erst oberhalb von ungefähr
 
 ```text
-~2e5 ... 2e6
+5.4e14 ... 1.2e16 kg
 ```
 
-gegenüber Michel nötig.
+erreicht. Das neue Gleichgewichtsband liegt etwa `4e3 ... 5e4` darunter.
 
-## 12. Stage 3.12 – Michel/Hawking-Massenfenster
-
-Bei gleicher äußerer Referenz skaliert der Michel-Benchmark ungefähr mit `M^2`.
-
-Die <1%-Wachstums-Massenobergrenze liegt in der `Y_e`-Sensitivität grob bei
+Am Gleichgewicht ergeben sich als reine Skalierung ungefähr
 
 ```text
-~4.8e9 ... 4.8e10 kg.
+0.085 ... 0.52 omega_p  (u^r/r)
+0.17  ... 1.05 omega_p  (Kontinuitätsproxy),
 ```
 
-Vergleich mit Standard-Hawking:
+also weit außerhalb der Stage-3.14-MD-Kalibrierung.
+
+Damit kann der Coulomb-Plastizitätstest aus Stage 3.14 dieses neue niedrige Massenband derzeit **nicht direkt ausschließen**.
+
+## 9. Earth-Matching-Folge
+
+Für `M_eq~1e11 kg` liegt der PREM-Ersatzradius nur bei ungefähr
 
 ```text
-M_Hawking,min ~1.19e11 kg.
+133 ... 161 m.
 ```
 
-Somit gilt innerhalb dieses konkreten Modells:
+Dieser Bereich liegt unterhalb der bisher voll gekoppelten, cross-solver-validierten niedrigen-Massenauflösung. Die geophysikalische Verträglichkeit des Stage-3.15-Kandidatenbands ist daher noch offen.
+
+## 10. Hawking-Leistungs-Sensitivität
+
+Ein Multiplikatorscan `f_H=0.1,1,10,100` bewahrt im reduzierten Modell qualitativ einen Balancepunkt und verschiebt ihn gemäß
 
 ```text
-kein Standard-Hawking + ununterdrücktes-Michel Langzeit-Overlap.
+M_eq proportional f_H^(1/4).
 ```
 
-## 13. Stage 3.13 – hcp-Fe Solid/Michel Interface
+Die Faktoren sind Sensitivitätsparameter und keine präzise Greybody-/Teilchenspezies-Modellierung.
 
-Eine reduzierte serielle Kopplung wurde gelöst:
+## 11. Aktueller konservativer Status
 
 ```text
-Mdot_solid(Delta P) = Mdot_Michel(P_inner).
+M_SL ~ 1e16 kg:
+    relativistische Langzeitakkretion bleibt ein starker negativer Test.
+
+M_SL ~ 1e11 kg:
+    neues Hawking/Michel-Kompensationsband im reduzierten ODE,
+    aber Materialtransport und Earth Matching noch nicht validiert.
 ```
 
-Bei einer Millimeter-Grenzfläche genügten kleine subprozentige Druckabweichungen, um nahezu die volle Michel-Kapazität zu speisen.
+Die gesamte kleine Erd-SL-Hypothese ist damit weder bestätigt noch durch die bisherigen Akkretionstests vollständig ausgeschlossen.
 
-Damit liefert normaler hcp-Fe-Creep auf dieser Skala keine `1e5–1e6`-Unterdrückung.
+## 12. Nächste Arbeit
 
-Eine Sensitivität mit einem mikroskopischen Interface und `8 GPa`-Stresscap konnte geometrisch eine Unterdrückung von Größenordnung `1e6` erzeugen.
+1. voll gekoppeltes Earth Matching im `~1e11 kg`-Band,
+2. Transportmodell für extrem hohe dimensionslose Deformationsraten,
+3. Hawking-Greybody-/Teilchenspezies-, Spin- und Ladungssensitivität,
+4. nichtstationäre thermische Rückkopplung,
+5. Formation Rule.
 
-Diese Sensitivität wurde ausdrücklich nicht als physische Lösung akzeptiert, weil die tiefe Materie dort kein gewöhnliches hcp-Fe mehr ist.
-
-## 14. Stage 3.14 – Coulombkristall
-
-Die tiefe degenerierte Materie wurde deshalb mit Coulombkristall-Skalierungen geprüft.
-
-Verwendet wurden:
-
-- Coulomb-Schermodul-Skalierungen,
-- Bruch-/Haltbarkeitskinetik,
-- dimensionslose Ionenplasmafrequenz `omega_p`,
-- aktuelle Perfect-Plasticity-Sensitivitäten.
-
-### Kritischer Befund
-
-Die Stage-3.12-Michel-Kritikpunkte liegen im oder nahe am untersuchten dimensionslosen Coulomb-Plastizitätsratenbereich.
-
-Die reduzierte hydrostatisch-vs-Michel Druckabweichung am kritischen Punkt übersteigt die verwendete Coulomb-Yield-Skala grob um
-
-```text
-~1.6e2 ... 1.1e3.
-```
-
-Damit ist ein rein elastischer Coulombkristall nicht selbstkonsistent als dauerhafte Barriere gegen den Michel-Zustand.
-
-Nach Yield ist plastisches Weiterfließen ein relevanter Kandidat.
-
-## 15. Korrektur der Stage-3.13-8-GPa-Mikrorettung
-
-Der `8 GPa`-Cap stammte aus dynamischer hcp-Fe-Physik.
-
-Im tiefen Coulomb-Regime skaliert die relevante Festigkeit mit der lokalen Coulomb-Energieskala und kann absolut extrem viel größer sein.
-
-Daher ist die Stage-3.13-`8 GPa`-Mikrogrenze **nicht übertragbar** und als physikalischer Langzeit-Rettungsmechanismus zurückgezogen.
-
-## 16. Was derzeit nicht gezeigt wurde
-
-Nicht gezeigt wurde ein realer Mechanismus, der für `M_SL=1e16 kg` zuverlässig
-
-```text
-10^5 ... 10^6
-```
-
-Unterdrückung gegenüber der relativistischen Michel-Kapazität erzeugt.
-
-Ebenso nicht gezeigt wurde, dass Michel in der realen Erde exakt ununterdrückt realisiert wird.
-
-Beide Aussagen wären stärker als die vorhandenen Modelle zulassen.
-
-## 17. Aktuelle konservative Aussage
-
-Für `M_SL=1e16 kg` ist die Langzeitakkretion derzeit der stärkste negative Test des Erd-SL-Modells.
-
-Innerhalb
-
-```text
-Standard-Hawking
-+ phenomenologische Dense-Matter-EOS
-+ ununterdrückte Michel-Akkretion
-```
-
-ist der Zweig geologisch nicht lebensfähig.
-
-Ein verbleibender Erd-SL-Zweig benötigt daher entweder
-
-- deutlich kleinere Masse,
-- modifizierte Verdampfungsphysik,
-- oder einen quantitativ nachgewiesenen starken Transport-Suppressionsmechanismus.
-
-## 18. Nächster Test
-
-Der nächste harte Schritt ist ein konsistenter Massenscan:
-
-```text
-M_SL ~ 1e8 ... 1e16 kg
-```
-
-mit demselben Stack aus
-
-```text
-Earth Matching
-+ Hawking
-+ Michel
-+ Coulomb/Plasma-Transport
-+ geologischem Alter.
-```
-
-Ziel ist die Feststellung, ob überhaupt ein gemeinsames Parameterfenster existiert.
+Details zum Massenscan: [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md).
