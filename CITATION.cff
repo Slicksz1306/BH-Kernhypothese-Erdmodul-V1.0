@@ -14,16 +14,18 @@ abstract: >-
   einen relativistischen Skalar-Tensor-Minimalrahmen, BH-/Horizon-konsistente
   Randbedingungen, Layered-PREM-Earth-Matching, geophysikalische und
   seismologische Sensitivitaeten sowie einen gestuften Akkretions-,
-  Hochdruck-EOS-, Rheologie- und Langzeit-Audit bis Stage 3.14. Fuer den
+  Hochdruck-EOS-, Rheologie- und Langzeit-Audit bis Stage 3.15. Fuer den
   Referenzzweig M_SL=1e16 kg sind r_c=500 km und r_c=300 km voll gekoppelt
-  numerisch validiert, der 300-km-Punkt cross-solver-validiert. Der aktuelle
-  staerkste Gegentest ist die relativistische Michel-Akkretion: in einer
-  phenomenologischen condensed-to-degenerate EOS ergibt sich fuer den
-  1e16-kg-Zweig eine Akkretionskapazitaet weit oberhalb der geologischen
-  Langzeitrate; eine ausreichende Festkoerper-/Coulomb-Unterdrueckung ist
-  bisher nicht nachgewiesen. Numerische Validierung bezeichnet ausschliesslich
-  Solver- und Konvergenzkriterien und keinen experimentellen Nachweis eines
-  Schwarzen Lochs im Erdzentrum.
+  numerisch validiert, der 300-km-Punkt cross-solver-validiert. Der
+  relativistische Michel-Test belastet den 1e16-kg-Zweig stark. Stage 3.15
+  korrigiert jedoch die fruehere getrennte Hawking/Michel-Schnittmengenlogik:
+  in einer reduzierten simultanen Massenentwicklung dM/dt=k M^2-A/M^2
+  erscheint fuer den getesteten Y_e-Bereich ein instabiles Kompensationsband
+  bei etwa 1.28e11 bis 2.28e11 kg. Dieses niedrige Massenband ist weder durch
+  den bisherigen Coulomb-Plastizitaets-Ratenbereich noch durch das aktuelle
+  sub-km Earth Matching validiert. Numerische Validierung bezeichnet
+  ausschliesslich Solver- und Konvergenzkriterien und keinen experimentellen
+  Nachweis eines Schwarzen Lochs im Erdzentrum.
 keywords:
   - black hole
   - Earth interior
@@ -33,6 +35,8 @@ keywords:
   - geophysics
   - numerical relativity
   - Michel accretion
+  - Hawking radiation
+  - mass evolution
   - high-pressure equation of state
   - Coulomb crystal
   - seismic observables
