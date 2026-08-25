@@ -2,27 +2,27 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 25.08.2026  
-**Aktuelle Stufe:** Earth Matching 1.3C
+**Aktuelle Stufe:** Stage 1.7
 
 ## 1. Bedeutung von „validiert“
 
 In diesem Dokument bedeutet **numerisch validiert** ausschließlich:
 
-- der definierte Solver hat die festgelegten Randbedingungen erfüllt,
+- der definierte Solver erfüllt die festgelegten Randbedingungen,
 - die Lösung erfüllt die jeweiligen Residual-/Regularitätskriterien,
-- und – wo für die jeweilige Stufe gefordert – die vorgesehenen Konvergenzchecks sind bestanden.
+- die für die jeweilige Stage vorgesehenen Konvergenz- oder Cross-Solver-Checks sind bestanden.
 
 Es bedeutet **nicht**:
 
 - experimentell bestätigt,
-- astrophysikalisch/geophysikalisch beobachtet,
+- geophysikalisch direkt beobachtet,
 - oder als Fundamentaltheorie bewiesen.
 
-Die Validierung ist immer relativ zur konkret implementierten Gleichung, Closure, Diskretisierung und Parameterwahl zu lesen.
+Die Validierung ist immer relativ zur konkret implementierten Gleichung, Closure, Diskretisierung, Parameterwahl und Teststufe zu lesen.
 
 ## 2. Modellkern
 
-Der aktuelle sphärische Minimalstack verwendet im Jordan Frame
+Der sphärische Minimalstack verwendet im Jordan Frame
 
 ```text
 F(chi) = F0 + xi chi^2
@@ -46,48 +46,39 @@ psi -> 0
 
 muss auf die gewöhnliche GR-TOV-Struktur zurückfallen.
 
-Die hydrostatische Außenintegration beginnt bei einem Matching-Radius
+Die Außenintegration beginnt bei
 
 ```text
 r_a > r_h
 r_h = 2 G M_SL / c^2.
 ```
 
-Die unmittelbare BH-Nahzone wird nicht als gewöhnliche TOV-Flüssigkeit extrapoliert.
+Die unmittelbare BH-Nahzone wird nicht als gewöhnliche TOV-Flüssigkeit durch den Horizont extrapoliert.
 
-## 3. Earth-Closure
+## 3. Referenzzweig
 
-Die derzeitige Closure ist PREM-kalibriert:
+Der am weitesten untersuchte aktuelle Zweig verwendet
 
-1. `rho_PREM(r)` wird als Referenzprofil verwendet.
-2. Daraus wird eine hydrostatische Referenzdruckkurve konstruiert.
-3. Die numerischen Paare `(p,rho)` definieren `epsilon(p)`.
+```text
+M_SL   = 1e16 kg
+q(r_a) = 1e-14.
+```
 
-Das ist eine **Earth-Matching-Closure**, keine fundamentale Fe/Ni-Hochdruck-EOS.
+Dieser Parametersatz wird für die Stage-1.5D-, Stage-1.6- und Stage-1.7-Vergleiche beibehalten, damit die Teststufen nicht durch jeweils neue Fitparameter vermischt werden.
 
 ## 4. Stufen dürfen nicht vermischt werden
 
-### Stage 1.2 – Skalarisierungs-/Continuation-Problem
+Die einzelnen Stages testen unterschiedliche Ebenen:
 
-Stage 1.2 validiert den nichttrivialen **Skalarsektor** und seine Randbedingungen für mehrere Eingabeskalen und Selbstkopplungen. Dort existieren konvergierte fundamentale, knotenfreie Lösungen auch bei kurzen `r_c`-Werten.
+- **Stage 1.2:** nichttrivialer Skalar-BVP / Continuation,
+- **Stage 1.3B/C:** frühe voll gekoppelte Earth-Matching-Läufe,
+- **Stage 1.5D:** verbesserte BH-konsistente Randwertfortsetzung,
+- **Stage 1.6:** Layered-PREM-EOS und Cross-Solver-Validierung,
+- **Stage 1.7:** Ableitung beobachtungsnaher Erdobservablen.
 
-Das ist wichtig, ist aber **noch nicht dasselbe** wie eine voll rückgekoppelte Erdvorhersage für Radius und ADM-Masse.
+Ein Punkt kann daher in einer niedrigeren Stufe numerisch existieren, ohne bereits als vollständige Earth-Matching-Lösung einer höheren Stufe validiert zu sein.
 
-Daher ist die Aussage
-
-```text
-Stage 1.2: Skalar-BVP bei 100 km validiert
-```
-
-nicht im Widerspruch zu
-
-```text
-Stage 1.3C: voll gekoppelte 100-km-Erdlösung noch nicht validiert.
-```
-
-Die beiden Aussagen testen verschiedene numerische Ebenen.
-
-## 5. Stage 1.3B – voll gekoppelte 1000-km-Referenz
+## 5. Historischer Stand Stage 1.3B
 
 Für `r_c = 1000 km` wurden voll gekoppelte differentielle Läufe für
 
@@ -96,9 +87,9 @@ M_SL = 1e12, 1e16, 1e18 kg
 q0   = 1e-14, 1e-13, 3e-13
 ```
 
-unter den festgelegten Stage-1.3B-Kriterien als numerisch validiert markiert.
+unter den damaligen Kriterien validiert.
 
-Beispiel für den später in 1.3C fortgesetzten Zweig:
+Beispiel des später fortgesetzten Referenzzweigs:
 
 ```text
 M_SL        = 1e16 kg
@@ -111,20 +102,9 @@ deltaM/M_E  = 3.9143e-05
 validated   = true
 ```
 
-Radius und ADM-Masse sind in diesem Lauf Forward-Ausgaben; sie werden nicht als freie Zielparameter auf exakte Erdwerte gefittet.
+## 6. Historischer Stand Stage 1.3C
 
-## 6. Stage 1.3C – Fortsetzung zu kürzeren Reichweiten
-
-Der konkrete Zweig
-
-```text
-M_SL = 1e16 kg
-q0   = 1e-14
-```
-
-wurde von `r_c = 1000 km` zu kürzeren Skalen fortgesetzt.
-
-### Precision Single Shooting
+Die damalige Precision-Single-Shooting-Fortsetzung ergab:
 
 | `r_c` | Status | `Robin_norm` | `deltaR/R_E` | `deltaM/M_E` |
 |---:|---|---:|---:|---:|
@@ -137,13 +117,7 @@ wurde von `r_c = 1000 km` zu kürzeren Skalen fortgesetzt.
 | 120 km | nicht validiert | `-2.84e+03` | `1.66e-04` | `3.60e-01` |
 | 100 km | nicht validiert | `4.996e+03` | `2.89e-04` | `5.17e-01` |
 
-Ein endlicher Output allein zählt ausdrücklich nicht als Lösung. Sobald das Randresiduum oder die Feldamplitude die Kriterien verletzt, wird der Punkt nicht promoted.
-
-## 7. 100-km-Collocation-Crosscheck
-
-Für `r_c = 100 km` wurde zusätzlich ein sparse Finite-Difference-Collocation-Ansatz getestet.
-
-Ein 70-Punkt-Lauf erreicht beispielsweise
+Ein 70-Punkt-Collocation-Lauf bei 100 km erreichte zwar
 
 ```text
 max_abs_residual ~ 1.20e-06
@@ -151,78 +125,198 @@ deltaR/R_E       ~ -1.85e-04
 deltaM/M_E       ~  6.61e-05
 ```
 
-Das Residuum allein reicht jedoch nicht. Die 50/60/70-Punkt-Meshes stimmen in den vorhergesagten Erdobservablen noch nicht ausreichend überein.
+aber keine ausreichende Mesh-Konvergenz. Deshalb blieb 100 km Kandidat und wurde nicht promoted.
 
-Daher gilt:
+Dieser alte Stand setzte die voll gekoppelte Frontier bei 500 km. Die späteren Stages verschieben diese **numerische** Frontier.
 
-```text
-100 km = candidate only
-100 km != validated full-coupled result
-```
+## 7. Stage 1.5D – BH-konsistente Fortsetzung
 
-## 8. Aktuelle konservative Frontier
+Mit verbesserter BH-konsistenter Randwertbehandlung wurde der Referenzzweig weitergeführt.
 
-Für den speziellen Pfad
+| `r_c` | Status Stage 1.5D |
+|---:|---|
+| 500 km | validiert |
+| 300 km | validiert |
+| 275 km | Kandidat |
+| 250–100 km | offen |
 
-```text
-M_SL = 1e16 kg
-q0   = 1e-14
-```
-
-lautet der derzeit belastbare numerische Stand:
+Für `r_c = 300 km` gilt ungefähr
 
 ```text
-voll gekoppelt validiert: r_c = 1000, 750, 500 km
-numerisch offen:          r_c <= 300 km
+xi / xi_crit,BH ≈ 1.000142
+q_max            ≈ 1e-14.
 ```
 
-Die Grenze bei 500 km ist **keine physikalische Mindestreichweite**. Sie ist die aktuelle Konditionierungs-/Solvergrenze dieser Implementierung.
+Die differentielle Massenabweichung des SL-Zweigs gegenüber dem jeweiligen GR-Lauf beträgt ungefähr
 
-## 9. Promotionsregeln für Short-Range-Lösungen
+```text
+Delta M_SL / M_GR ≈ -(8–9)e-6.
+```
 
-Eine Short-Range-Lösung wird erst als validiert markiert, wenn alle folgenden Bedingungen erfüllt sind:
+Die ältere GR/PREM-Barotrop-Closure hatte dagegen eine systematische Baselineabweichung von ungefähr
 
-1. Solver/Optimizer konvergiert regulär.
-2. Das maximale normierte Rand-/Gleichungsresiduum liegt unter der festgelegten Toleranz.
-3. Die Lösung ist unter Mesh-Verfeinerung konvergent.
-4. Die Lösung bleibt bei Umkehr der Continuation-Richtung stabil.
-5. Sie stimmt im Überlappungsbereich mit dem validierten Long-Range-Zweig überein.
-6. Radius und ADM-Masse bleiben endlich und reproduzierbar.
-7. Die nichttriviale Feldamplitude bleibt auf dem vorgesehenen fundamentalen Zweig.
+```text
+~ 6.94e-5.
+```
 
-## 10. Nächste numerische Schritte
+Damit war die Closure-Ungenauigkeit größer als das zu untersuchende differentielle SL-Signal. Das motivierte Stage 1.6.
 
-Für `r_c < 500 km` sind insbesondere vorgesehen:
+## 8. Stage 1.6 – Layered-PREM-EOS
+
+Stage 1.6 verwendet eine deutlich präzisere geschichtete PREM-nahe Earth-Closure.
+
+### 8.1 GR-Baseline
+
+Die reproduzierte GR-Baseline liegt ungefähr bei
+
+```text
+Delta R/R ≈ 4.17e-9
+Delta M/M ≈ 4.44e-8.
+```
+
+Konservativ liegt die numerische Baseline damit auf dem Niveau `~1e-7` oder besser.
+
+### 8.2 Voll gekoppelte SL-Läufe
+
+| `r_c` | `Delta M/M` gegenüber GR | Status Stage 1.6 |
+|---:|---:|---|
+| 500 km | `≈ -9.2e-6` | validiert |
+| 300 km | `≈ -8.65e-6` | validiert |
+| 250 km | — | Kandidat |
+| 200 km | — | offen |
+
+Der **kleinste derzeit cross-solver-validierte voll gekoppelte Punkt ist `r_c = 300 km`**.
+
+Die 300-km-Grenze ist eine Solver-/Validierungsfrontier des aktuellen Referenzzweigs, keine physikalische Ausschlussgrenze für kleinere Reichweiten.
+
+## 9. Stage 1.7 – abgeleitete Erdobservablen
+
+Auf den cross-solver-validierten 500- und 300-km-Punkten wurden beobachtungsnähere Größen berechnet.
+
+### 9.1 Relative Gravitation
+
+| `r_c` | `max |Delta g/g|`, `r >= 100 km` | zentrale Größenordnung ab `r >= 10 km` |
+|---:|---:|---:|
+| 500 km | `≈ 1.8e-4` | `≈ 1.5e-3` |
+| 300 km | `≈ 2.1e-4` | `≈ 1.6e-3` |
+
+### 9.2 P-Wellen-Geschwindigkeit
+
+Für beide Referenzpunkte liegt
+
+```text
+|Delta V_P/V_P| ~ 3e-6.
+```
+
+### 9.3 ICB-/CMB-Lage
+
+| `r_c` | `Delta r_ICB` | `Delta r_CMB` |
+|---:|---:|---:|
+| 500 km | `-43.8 m` | `-35.0 m` |
+| 300 km | `-61.1 m` | `-33.9 m` |
+
+### 9.4 P-Wellen-Laufzeit
+
+| `r_c` | `Delta T_P` |
+|---:|---:|
+| 500 km | `+0.0119 s` |
+| 300 km | `+0.0088 s` |
+
+### 9.5 Materie-Trägheitsmoment
+
+Die differentielle Änderung liegt in der Größenordnung
+
+```text
+Delta I/I ~ -(7–8)e-6.
+```
+
+Die Stage-1.7-Werte sind Modellvorhersagen der angegebenen numerischen Lösungen und keine bereits beobachteten terrestrischen Anomalien.
+
+## 10. Amplitudenscan bei `r_c = 300 km`
+
+Die Sensitivität auf größere Randamplituden wurde zusätzlich untersucht:
+
+| `q(r_a)` | `Delta r_ICB` | `Delta r_CMB` | `Delta T_P` |
+|---:|---:|---:|---:|
+| `1e-14` | `≈ -61 m` | `≈ -34 m` | `+0.0088 s` |
+| `1e-13` | `≈ -604 m` | `≈ -339 m` | `≈ +0.095 s` |
+| `3e-13` | `≈ -1.77 km` | `≈ -1.02 km` | nicht als konservativer Referenzwert promoted |
+
+Diese Punkte bilden einen Sensitivitätsscan. Größere `q`-Werte werden nicht allein aufgrund dieses Scans als physikalisch zulässige Erdparameter promoted.
+
+## 11. Aktuelle Statusmatrix
+
+Für den Referenzzweig
+
+```text
+M_SL   = 1e16 kg
+q(r_a) = 1e-14
+```
+
+ergibt sich derzeit:
+
+| Bereich | aktueller konservativer Status |
+|---|---|
+| `r_c = 500 km` | voll gekoppelt validiert |
+| `r_c = 300 km` | voll gekoppelt + cross-solver-validiert; Stage-1.7-Observablen berechnet |
+| `r_c = 250–275 km` | Kandidatenbereich; Status hängt von Stage/Solver ab |
+| `r_c <= 200–250 km` | numerisch offen |
+
+Die verschiedenen Stage-Grenzen werden bewusst getrennt dokumentiert. Es wird keine künstlich schärfere physikalische Grenze aus unterschiedlichen Solverstufen zusammengesetzt.
+
+## 12. Promotionsregeln für Short-Range-Lösungen
+
+Eine Short-Range-Lösung wird erst als validiert markiert, wenn mindestens erfüllt sind:
+
+1. reguläre Solver-/Optimizer-Konvergenz,
+2. Rand- und Gleichungsresiduen unter den festgelegten Toleranzen,
+3. Mesh-Konvergenz,
+4. Stabilität gegenüber Continuation-Richtung,
+5. Übereinstimmung unabhängiger Solver im Überlappungsbereich,
+6. endliche und reproduzierbare Radius-/ADM-Masse,
+7. Erhalt des vorgesehenen nichttrivialen fundamentalen Zweigs,
+8. konsistente Earth-Closure-Baseline.
+
+## 13. Offene numerische Arbeit
+
+Für kürzere Reichweiten bleiben insbesondere:
 
 - steifer Boundary-Value-Solver,
-- sparse/analytische Jacobians,
+- analytische/sparse Jacobians,
 - Multiple Shooting,
 - adaptive Mesh-Verfeinerung,
 - Pseudo-Arclength-Continuation,
 - Vorwärts-/Rückwärts-Continuation,
-- unabhängiger Solver-Crosscheck.
+- unabhängige Solver-Crosschecks,
+- fundamentale Fe/Ni-Hochdruck-EOS,
+- vollständiger Seismologie-/Normalmoden-Likelihood-Fit.
 
-Erst danach dürfen kurze Reichweiten als voll gekoppelte Theorieergebnisse promoted werden.
+## 14. Reproduzierbarkeitsprinzip
 
-## 11. Reproduzierbarkeitsprinzip
-
-Jedes veröffentlichte numerische Resultat sollte mindestens gemeinsam mit folgenden Angaben archiviert werden:
+Jedes veröffentlichte numerische Resultat soll mindestens mit folgenden Angaben archiviert werden:
 
 ```text
 Git-Commit
-Solverversion
+Solverversion / Stage
 M_SL
 m_chi bzw. r_c
 xi
 lambda
-q0 / Seed
+q(r_a) / Seed
 Matching-Radius r_a
+Earth-Closure / EOS-Version
 Toleranzen
-Mesh/Schrittweite
+Mesh / Schrittweite
 Randresiduen
 R
 M_ADM
+abgeleitete Observablen
 Konvergenzstatus
+Cross-Solver-Status
 ```
 
-Damit bleibt klar, welcher Zahlenwert zu welcher konkreten Gleichungs- und Solverversion gehört.
+## 15. Aktuelle Aussagegrenze
+
+Der aktuelle numerische Stand zeigt, dass der dokumentierte kleine redistributive Referenzzweig bis `r_c = 300 km` voll gekoppelt und cross-solver-validiert verfolgt werden konnte und dass für diesen Zweig inzwischen Gravitation, P-Wellen-Geschwindigkeit, ICB/CMB-Lage, P-Wellen-Laufzeit und Trägheitsmoment als differentielle Modellvorhersagen berechnet wurden.
+
+Das ist ein deutlich weitergehender numerischer Stand als Stage 1.3C, aber weiterhin **kein experimenteller Nachweis** eines Schwarzen Lochs im Erdzentrum.
