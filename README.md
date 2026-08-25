@@ -1,4 +1,4 @@
-# BH-Kernhypothese - Erdmodul V1.0
+# BH-/SL-Kernhypothese – Erdmodul
 
 ## Veröffentlichungsangaben
 
@@ -6,101 +6,141 @@
 **Geburtsdatum:** 13.06.1988  
 **Region:** Rheinland-Pfalz  
 **Land:** Deutschland  
-**Version:** Erdmodul V1.0  
-**Veröffentlichungsdatum:** 23.08.2026  
+**Aktueller Theorie-Textstand:** Erdmodul V1.2  
+**Numerischer Entwicklungsstand:** SL-TOV / Earth Matching 1.3C  
+**Stand:** 25.08.2026  
+**Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
 Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
-## Status
+> **Versionshinweis:** Der Repository-Name enthält aus historischen Gründen weiterhin `V1.0`. Die Datei `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` ist die unveränderte Veröffentlichungsfassung vom 23.08.2026 und bleibt als Archiv-/Prioritätsnachweis erhalten. `THEORIE.md` dokumentiert den aktuellen Erdmodul-Stand. Der vorhandene SHA-256-Hash bezieht sich weiterhin auf die unveränderte V1.0-PDF.
 
-Dieses Repository veröffentlicht das eingefrorene **Erdmodul V1.0** der BH-Kernhypothese als Theorie- und Forschungsentwurf. Es wird keine experimentelle Bestätigung eines Schwarzen Lochs im Erdzentrum behauptet.
+## Wissenschaftlicher Status
 
-## Kernaussage
+Die BH-/SL-Kernhypothese ist ein **theoretisches Forschungsmodell**. `SL` steht in diesem Projekt für **Schwarzes Loch**. Für die Erde wird als Modellannahme geprüft, ob ein kleines zentrales Schwarzes Loch mit einer entsprechend redistributiven Materieverteilung vereinbar sein kann.
 
-Geprüft wird, ob im Zentrum der Erde eine kompakte, schwarzlochähnliche Zentralmasse existieren könnte, ohne die bekannten globalen und geophysikalischen Beobachtungen zu verletzen.
+Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Begriffe wie „bestanden“ oder „validiert“ beziehen sich ausschließlich auf klar benannte interne Konsistenz- beziehungsweise numerische Solvertests, nicht auf einen experimentellen Nachweis.
 
-Die starke Variante - ein Zentral-BH als dominierende Quelle der Erdmasse beziehungsweise Erdgravitation - wird in V1.0 verworfen. Offen bleibt nur eine deutlich kleinere Zentralmasse als separate Hypothese.
+## Aktuelles Erdmodell V1.2
 
-## Modellbasis
+Das finale Erdmodell ist **nicht** die frühere starke Grenzvariante `M_SL ~ M_Earth`. Diese Variante bleibt unter PREM/Standard-GR mit der beobachteten radialen Massenverteilung, Seismologie und dem Trägheitsmoment unvereinbar und ist nicht Bestandteil des aktuellen Erdmodells.
 
-Als Nullmodell dient PREM (Preliminary Reference Earth Model). Die Zentralmasse wird in V1.0 nicht zusätzlich zur gemessenen Erdmasse addiert, sondern ersetzt die entsprechende PREM-Masse im Zentrum:
-
-```text
-M_PREM(<r_rep) = M_c
-```
-
-Außerhalb der Ersatzregion gilt im ideal kugelsymmetrischen Modell:
+Der aktuelle kleine, redistributive Zweig verwendet stattdessen die Massenbuchhaltung
 
 ```text
-M'(<r) = M_PREM(<r)
-g'(r) = g_PREM(r)
+M_PREM(<r_rep) = M_SL
 ```
 
-Wichtige Skalen:
+Das zentrale Objekt wird also **nicht zusätzlich** zur gemessenen Erdmasse addiert. Es ersetzt im Basismodell dieselbe PREM-Masse im Zentrum. Im ideal kugelsymmetrischen redistributiven Grenzfall bleibt außerhalb der Ersatzregion die eingeschlossene Gesamtmasse gleich:
 
 ```text
-r_s = 2 G M_c / c^2
-r_B = G M_c / c_s^2
+M'(<r) = M_PREM(<r),  r >= r_rep
 ```
 
-Horizontgröße, Akkretions-/Einflussradius und strukturelle Ersatzregion sind nicht identisch.
+Damit bleibt dort auch das monopole äußere Gravitationsfeld unverändert. Das ist eine Massenbuchhaltungsbedingung und für sich allein noch keine vollständige selbstkonsistente Innenraumlösung.
 
-Beispiel für `M_c = 1e20 kg`:
+## Drei getrennte Skalen
 
 ```text
-r_s   ~ 1.49e-7 m
-r_B   ~ 52.6 m
-r_rep ~ 122 km
+Schwarzschildradius:        r_s   = 2 G M_SL / c^2
+Bondi-/Referenzskala:       r_B   = G M_SL / c_eff^2
+Struktureller Ersatzradius: M_PREM(<r_rep) = M_SL
 ```
 
-## Prüffelder
+`r_s`, `r_B` und `r_rep` dürfen nicht gleichgesetzt werden. Insbesondere ist `c_eff` im Erdmodul nur eine modellabhängige Referenzgröße. Die seismische P-Wellen-Geschwindigkeit eines festen/mehrphasigen Kerns ist nicht automatisch der thermodynamische Schallparameter eines idealen Bondi-Fluids.
 
-Das Modell wird gegen folgende Beobachtungsklassen konfrontiert:
+## Ergebnis des V1.2-Konsistenzmoduls
 
-- Erdmasse und Radius
-- PREM-Seismologie und Normalmoden
-- normiertes Trägheitsmoment
-- Akkretions- und Langzeitentwicklung
-- terrestrischer Wärmehaushalt
-- Entstehungs- und Einfangmechanismen
+Für den kleinen redistributiven Erd-BH-Zweig wurde innerhalb der verwendeten Modellannahmen kein ausschließender Widerspruch in den bislang implementierten Prüfungen gefunden. Untersucht wurden insbesondere:
 
-## Akkretionsbenchmark
+- Gesamtmassen-Buchhaltung und äußere Gravitation,
+- Größenordnung des Trägheitsmoments,
+- seismologische Einordnung,
+- Trennung von Horizont-, Einfluss- und Strukturgrößen,
+- Akkretions- und Kontinuumsregime,
+- Wärme- und Langzeitbedingungen.
 
-Als Referenz wird klassische Bondi-Akkretion verwendet:
+Das bedeutet **interne Modellkompatibilität innerhalb der geprüften Randbedingungen**, nicht empirische Bestätigung.
+
+## Numerische Erweiterung: SL-TOV / Earth Matching
+
+Der aktuelle Simulationsstack geht über die rein redistributive V1.2-Buchhaltung hinaus. Implementiert ist eine sphärische Jordan-Frame-Minimalfassung mit
 
 ```text
-dM/dt = 4 pi lambda G^2 rho_c M^2 / c_s^3
+F(chi) = F0 + xi chi^2
+V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4
 ```
 
-Dieser Ausdruck ist im Erdmodul ausdrücklich ein Benchmark und keine bewiesene Akkretionsgleichung für den realen, dichten und mehrphasigen Erdkern.
+und den Zustandsgrößen
 
-## Ergebnis V1.0
+```text
+y = [m, nu, p, chi, psi]
+psi = dchi/dr
+```
 
-**Verworfen bzw. stark disfavored:**
+Die hydrostatische Integration startet erst an einem Matching-Radius `r_a > r_h`; die unbekannte unmittelbare BH-Nahzone wird nicht künstlich als gewöhnliche TOV-Flüssigkeit fortgesetzt. Der GR-Grenzfall `xi -> 0`, `chi -> 0` ist als harter Solvercheck implementiert.
 
-- Zentral-BH als Hauptträger der Erdmasse/Erdgravitation.
-- Große Zentralmassen mit makroskopischen Ersatzregionen, die mit Seismologie, Rotation, Wärmehaushalt oder Langzeitentwicklung kollidieren.
+### Konservativ validierter numerischer Stand 1.3C
 
-**Offen:**
+Für den konkret fortgesetzten Zweig
 
-- Wesentlich kleinere zentrale kompakte Objekte.
-- Der mikroskopische Akkretionsbereich unterhalb der klassischen Kontinuumsgrenze, der eine eigene atomare/quantitative Transporttheorie erfordert.
+```text
+M_SL = 1e16 kg
+q0   = 1e-14
+```
 
-## Falsifikationsbedingung
+ist die voll gekoppelte Lösung unter den festgelegten numerischen Kriterien für folgende Kopplungs-/Reichweitenskalen validiert:
 
-Eine konkrete Erd-BH-Version muss mit **demselben Parametersatz** gleichzeitig bestehen gegen:
+```text
+r_c = 1000 km
+r_c =  750 km
+r_c =  500 km
+```
 
-1. Erdmasse und Radius,
-2. Trägheitsmoment,
-3. Seismologie/Normalmoden,
-4. Wärmehaushalt,
-5. geologisches Alter,
-6. physikalisch konsistente Entstehungs- und Akkretionsgeschichte.
+Bei `r_c = 300 km` wird das aktuelle Single-Shooting numerisch schlecht konditioniert; darunter wird es stark instabil. Ein 100-km-Collocation-Lauf erreicht kleine Gleichungsresiduen, ist wegen fehlender Mesh-Konvergenz aber **nur Kandidat und nicht validiert**.
+
+Die derzeitige Grenze `r_c >= 500 km` ist daher eine **numerische Frontier dieses speziellen Fortsetzungszweigs**, keine physikalische Ausschlussgrenze für kürzere Reichweiten.
+
+Siehe [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) für die genaue Trennung zwischen validierten, Kandidaten- und offenen Bereichen.
+
+## Offene Physik
+
+Noch nicht geschlossen sind insbesondere:
+
+1. Formation Rule / Entstehungsmechanismus des zentralen SL,
+2. sub-kontinuierliche beziehungsweise mikroskopische Capture-/Akkretionsphysik,
+3. thermischer Energie- und Transportabschluss der BH-Nahzone,
+4. fundamentale Hochdruck-Fe/Ni-EOS statt reiner PREM-Barotrop-Closure,
+5. vollständiger PREM-/Normalmoden-/Laufzeit-Likelihood-Fit,
+6. robuste Short-Range-BVP-Lösung mit Mesh- und Richtungs-Konvergenz,
+7. unabhängige, vorab festgelegte Detektionssignaturen.
+
+## Falsifikationsprinzip
+
+Eine konkrete Parameterwahl muss mit **demselben Parametersatz** gleichzeitig gegen alle relevanten Beobachtungsklassen bestehen. Parameter dürfen nicht für jeden Test separat nachjustiert werden.
+
+Mindestens zu prüfen sind:
+
+- Erdmasse und Radius,
+- normiertes Trägheitsmoment,
+- Seismologie und Normalmoden,
+- Wärmehaushalt,
+- geologisches Alter und Langzeitstabilität,
+- konsistente Formation und Akkretion,
+- numerische Stabilität und Konvergenz der vollständigen Randwertlösung.
+
+## Dateien
+
+- [`THEORIE.md`](THEORIE.md) – aktueller Erdmodul-Theoriestand V1.2 mit numerischer Erweiterung.
+- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – reproduzierbarer Status und Validierungsgrenzen des aktuellen SL-TOV/Earth-Matching-Stacks.
+- `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` – archivierte Erstveröffentlichung V1.0 vom 23.08.2026.
+- `SHA256SUMS.txt` – Prüfsumme der archivierten V1.0-PDF.
+- `CITATION.cff` – Zitiermetadaten des aktuellen Repository-Textstands.
 
 ## Primärreferenz
 
-A. M. Dziewonski & D. L. Anderson (1981), *Preliminary Reference Earth Model*, Physics of the Earth and Planetary Interiors 25, 297-356. DOI: 10.1016/0031-9201(81)90046-7.
+A. M. Dziewonski & D. L. Anderson (1981), *Preliminary Reference Earth Model*, Physics of the Earth and Planetary Interiors 25, 297–356. DOI: 10.1016/0031-9201(81)90046-7.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *BH-Kernhypothese - Erdmodul V1.0*, Theorie- und Forschungsentwurf, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *BH-/SL-Kernhypothese – Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
