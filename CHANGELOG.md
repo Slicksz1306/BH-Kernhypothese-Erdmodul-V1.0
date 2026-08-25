@@ -2,74 +2,138 @@
 
 Dieses Changelog dokumentiert die öffentlich sichtbaren Entwicklungsstände des Erdmoduls.
 
-## V1.2 / Stage 1.7 — 25.08.2026
+## V1.3 / Stage 3.14 — 25.08.2026
 
-Aktueller Theorie- und Numerikstand des Repositories.
+Größere Härtung des Akkretions-, Near-Zone- und Materialphysikblocks.
 
-### Modell und Dokumentation
+### Dokumentation
 
-- Titel auf **SL/BH-Kernhypothese Erdmodul** vereinheitlicht.
-- Kleiner redistributiver SL/BH-Zweig bleibt das aktuelle Erd-Basismodell.
-- Massenbuchhaltung weiterhin `M_PREM(<r_rep) = M_SL`.
-- Strikte Trennung von Modellannahme, numerischer Validierung und experimentellem Nachweis.
-- `TEST_STATUS.md` als zusammenhängende Test- und Validierungsmatrix ergänzt.
+- `README.md`, `THEORIE.md`, `TEST_STATUS.md`, `NUMERIK_STATUS.md` und `CITATION.cff` auf V1.3 / Stage 3.14 aktualisiert.
+- `AKKRETION_STATUS.md` ergänzt.
+- Wissenschaftliche Aussagegrenzen deutlicher getrennt: Modellannahme, numerische Validierung, Sensitivität, Korrektur und empirischer Nachweis.
 
-### Stage 1.5D
+### Stage 1.8/1.9
 
-Für den Referenzzweig
+- 1D P-/PKP-/PKIKP-Raytracing ergänzt.
+- toroidale Normalmoden als vereinfachter FEM-Prototyp untersucht.
+- kleine Modellverschiebungen werden nicht als Präzisionsnachweis promoted.
+
+### Stage 2
+
+- algebraische Stabilitätsfilter dokumentiert.
+- Bondi-/Hawking-Benchmarks gehärtet.
+- heutige galaktische PBH-Capture-Raten als Formationstest aufgenommen.
+- vorgeschlagene Quantenunterdrückung nur als umstrittene Sensitivität geführt.
+
+### Stage 3.2–3.6 – Mikroakkretion / Wärme
+
+- direkte ballistische Capture-Proxies,
+- Festkörperdiffusion und Creep,
+- Knudsen-/Kontinuumschecks,
+- Wärmeleitung und Melt-Front-Feedback,
+- explizite lokale Thermalisierungsfraktion `f_th`.
+
+Korrektur: Die einfache Aussage „lokale Wärme schmilzt automatisch bis zur Bondiskala und startet zwangsläufig Bondi“ ist zu stark.
+
+### Stage 3.7 – Mathematik-/Literatur-Audit
+
+- Bondi-Algebra und 4D-Koeffizient reproduziert.
+- kein mathematischer Fehler in der klassischen Bondi-Formel gefunden.
+- Hauptfrage ist die physikalische Anwendbarkeit auf kondensierte Erdmaterie.
+
+### Stage 3.8/3.9 – nichtlineare Rheologie
+
+- konstante Viskosität durch stressabhängige hcp-Fe-Potenzrheologie ersetzt.
+- Cavity-/Yield-Grenztests ergänzt.
+- Niedrig-Strain-Geoviskositäten werden nicht mehr unverändert in die SL-Nahzone extrapoliert.
+
+### Stage 3.10/3.11 – Hochdruck-EOS
+
+- PREM-/konstante-`Gamma`-Extrapolation durch Hochdruck-Fe-EOS-Sensitivitäten gehärtet.
+- alte Stage-3.10-Capture-Grenze von ungefähr `54 r_s` als nicht EOS-robust erkannt und zurückgezogen.
+
+### Stage 3.12 – relativistische Michel-Akkretion
+
+Wichtige Korrektur: Das Fehlen eines Newtonschen Bondi-Kritikpunkts für `Gamma>5/3` bedeutet nicht, dass in voller GR keine kritische BH-Akkretion existiert.
+
+Ein allgemeiner barotroper Michel-Solver wurde implementiert und gegen eine analytische `Gamma=2`-Lösung getestet:
 
 ```text
-M_SL   = 1e16 kg
-q(r_a) = 1e-14
+relative Mdot-Abweichung ~ 2e-14
 ```
 
-wurde die BH-konsistente Fortsetzung erweitert:
+Für `M_SL=1e16 kg` und eine phenomenologische condensed -> degenerierte-Elektronen-EOS ergibt der `Y_e`-Sensitivitätsbereich ungefähr
 
-- `r_c = 500 km`: validiert,
-- `r_c = 300 km`: validiert,
-- `r_c = 275 km`: Kandidat,
-- `r_c <= 250 km`: numerisch offen.
+```text
+Mdot_Michel ~ 147 ... 1460 kg/s.
+```
 
-Für 300 km gilt ungefähr `xi/xi_crit,BH ≈ 1.000142`, `q_max ≈ 1e-14`. Die differentielle Massenabweichung gegenüber dem jeweiligen GR-Lauf liegt ungefähr bei `-(8–9)e-6`.
+Die Zeit bis `+1%` Masse liegt nur bei ungefähr
 
-### Stage 1.6
+```text
+~2.1e3 ... 2.1e4 yr.
+```
 
+Erforderliche Langzeitunterdrückung gegenüber Michel:
+
+```text
+~2e5 ... 2e6.
+```
+
+Unter Standard-Hawking + ununterdrückter Michel-Akkretion wurde in diesem Modell kein überlappendes geologisches Massenfenster gefunden.
+
+### Stage 3.13 – Solid/Michel Interface
+
+Eine reduzierte selbstkonsistente hcp-Fe-Solid->Michel-Kopplung bei Millimeterradien ergibt nahezu die volle Michel-Kapazität. Gewöhnlicher hcp-Fe-Creep liefert dort nicht die benötigte `1e5–1e6`-Unterdrückung.
+
+Eine mikroskopische Sensitivität mit `8 GPa`-Stresscap zeigte zunächst mögliche starke geometrische Unterdrückung, wurde aber als materialphysikalisch nicht abgesichert markiert.
+
+### Stage 3.14 – Coulomb-Plastizität
+
+Die tiefe degenerierte Zone wurde auf Coulombkristall-Skalierungen und aktuelle Plastizitätsmodelle umgestellt.
+
+Befunde:
+
+- Michel-Kritikpunkte liegen im/nahe am untersuchten dimensionslosen Coulomb-Plastizitätsratenbereich.
+- die reduzierte Michel-Druckabweichung übersteigt die verwendete Coulomb-Yield-Skala deutlich.
+- ein rein elastischer Coulombkristall würde vorher yielden.
+- plastisches Weiterfließen nach dem Yield ist ein relevanter Kandidat und keine automatische Akkretionsblockade.
+
+Korrektur:
+
+```text
+Stage-3.13 8-GPa-Mikrorettung -> als physikalische Coulomb-Langzeitgrenze zurückgezogen.
+```
+
+### Aktuelle Konsequenz
+
+Der `M_SL=1e16 kg`-Referenzzweig steht unter einem deutlich stärkeren Langzeit-Akkretionsdruck als im Stage-1.7-Repository-Stand. Eine belastbare Unterdrückung von `~1e5–1e6` gegenüber Michel ist bisher nicht nachgewiesen.
+
+Der nächste prioritäre Test ist ein vollständiger Massenscan über mehrere Größenordnungen.
+
+---
+
+## V1.2 / Stage 1.7 — 25.08.2026
+
+- Titel auf **SL/BH-Kernhypothese Erdmodul** vereinheitlicht.
+- kleiner redistributiver SL/BH-Zweig als aktuelles Erd-Basismodell dokumentiert.
 - Layered-PREM-Earth-Closure eingeführt.
-- GR-Baseline verbessert auf ungefähr `Delta R/R ≈ 4.17e-9` und `Delta M/M ≈ 4.44e-8`.
-- `r_c = 500 km`: voll gekoppelt validiert, `Delta M/M ≈ -9.2e-6`.
-- `r_c = 300 km`: voll gekoppelt und cross-solver-validiert, `Delta M/M ≈ -8.65e-6`.
-- `r_c = 250 km`: Kandidat.
-- `r_c = 200 km`: offen.
-- Kleinster derzeit cross-solver-validierter voll gekoppelter Punkt: `300 km`.
-
-### Stage 1.7
-
-Für die validierten 500- und 300-km-Referenzzweige wurden beobachtungsnähere Erdobservablen berechnet.
-
-- `max |Delta g/g|` für `r >= 100 km`: ungefähr `1.8e-4` (500 km) und `2.1e-4` (300 km).
-- zentrale Größenordnung ab `r >= 10 km`: ungefähr `1.5e-3` bzw. `1.6e-3`.
-- `|Delta V_P/V_P| ~ 3e-6`.
-- ICB-Verschiebung: `-43.8 m` (500 km), `-61.1 m` (300 km).
-- CMB-Verschiebung: `-35.0 m` (500 km), `-33.9 m` (300 km).
-- P-Wellen-Laufzeit: `+0.0119 s` (500 km), `+0.0088 s` (300 km).
-- Materie-Trägheitsmoment: `Delta I/I ~ -(7–8)e-6`.
-
-Zusätzlich wurde für `r_c = 300 km` ein Amplitudenscan dokumentiert. Bei `q=1e-13` ergeben sich ungefähr ICB/CMB-Verschiebungen von `-604 m/-339 m` und `Delta T_P ≈ +0.095 s`; bei `q=3e-13` ungefähr `-1.77 km/-1.02 km`. Diese größeren Amplituden sind Sensitivitätspunkte und nicht als konservative Erdparameter promoted.
+- GR-Baseline auf ungefähr `Delta R/R ~4.17e-9`, `Delta M/M ~4.44e-8` verbessert.
+- `r_c=500 km` und `r_c=300 km` voll gekoppelt validiert; 300 km cross-solver-validiert.
+- Gravitation, P-Wellen-Proxies, ICB/CMB, Laufzeit und Trägheitsmoment als differentielle Modellgrößen dokumentiert.
 
 ## Früherer V1.2 / Stage 1.3C-Stand — 25.08.2026
 
-Der erste öffentliche V1.2-Numerikstand dokumentierte eine Precision-Single-Shooting-Frontier bei `r_c = 500 km` für `M_SL=1e16 kg`, `q0=1e-14`. `r_c=300 km` war mit dem damaligen Solver noch nicht validiert; der 100-km-Collocation-Lauf blieb wegen fehlender Mesh-Konvergenz Kandidat.
-
-Dieser Stand bleibt historisch nachvollziehbar, wurde aber durch Stage 1.5D, 1.6 und 1.7 überholt.
+Der erste öffentliche V1.2-Numerikstand dokumentierte eine Precision-Single-Shooting-Frontier bei `r_c=500 km` für `M_SL=1e16 kg`, `q0=1e-14`. Dieser Stand wurde durch spätere Stages überholt.
 
 ## V1.0 — 23.08.2026
 
 Erstveröffentlichung des Erdmoduls.
 
-- Archivierte Veröffentlichungsfassung: `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf`.
-- Integritätsnachweis über `SHA256SUMS.txt`.
-- Diese PDF bleibt unverändert als Archiv- und Prioritätsnachweis erhalten.
+- archivierte Veröffentlichungsfassung: `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf`,
+- Integritätsnachweis über `SHA256SUMS.txt`,
+- PDF bleibt unverändert als Archiv- und Prioritätsnachweis erhalten.
 
 ## Versionsprinzip
 
-Der Repository-Name enthält aus historischen Gründen weiterhin `V1.0`. Der aktuelle Textstand wird in `README.md`, `THEORIE.md`, `NUMERIK_STATUS.md`, `TEST_STATUS.md` und `CITATION.cff` geführt. Archivierte Publikationsdateien werden nicht nachträglich überschrieben.
+Archivierte Publikationsdateien werden nicht nachträglich überschrieben. Der aktuelle Forschungsstand wird in den Markdown-Dateien und `CITATION.cff` geführt.
