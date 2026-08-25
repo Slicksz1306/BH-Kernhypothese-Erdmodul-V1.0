@@ -129,10 +129,17 @@ Mindestens zu prüfen sind:
 - konsistente Formation und Akkretion,
 - numerische Stabilität und Konvergenz der vollständigen Randwertlösung.
 
+## Wissenschaftlicher Review
+
+Technische Kritik, Reproduktionsversuche und Falsifikationsanalysen sind ausdrücklich erwünscht. Für belastbare Reviews bitte [`CONTRIBUTING.md`](CONTRIBUTING.md) beachten. Das Repository enthält außerdem ein strukturiertes GitHub-Issue-Template für konzeptionelle, mathematische, numerische und empirische Einwände.
+
 ## Dateien
 
 - [`THEORIE.md`](THEORIE.md) – aktueller Erdmodul-Theoriestand V1.2 mit numerischer Erweiterung.
 - [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – reproduzierbarer Status und Validierungsgrenzen des aktuellen SL-TOV/Earth-Matching-Stacks.
+- [`CHANGELOG.md`](CHANGELOG.md) – nachvollziehbare Entwicklung der öffentlichen Theorie- und Numerikstände.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) – Anforderungen für Reproduktion, Review und technische Einwände.
+- [`LICENSE`](LICENSE) – Rechte- und Nutzungshinweis für die öffentliche Veröffentlichung.
 - `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` – archivierte Erstveröffentlichung V1.0 vom 23.08.2026.
 - `SHA256SUMS.txt` – Prüfsumme der archivierten V1.0-PDF.
 - `CITATION.cff` – Zitiermetadaten des aktuellen Repository-Textstands.
