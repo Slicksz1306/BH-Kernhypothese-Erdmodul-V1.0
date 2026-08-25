@@ -1,259 +1,391 @@
-# BH-Kernhypothese – Erdmodul V1.0
+# BH-/SL-Kernhypothese – Erdmodul V1.2
 
 **Autor:** Daniel Marcel Schlicksupp  
-**Geburtsdatum:** 13.06.1988  
-**Region:** Rheinland-Pfalz  
-**Land:** Deutschland  
-**Version:** V1.0  
-**Stand:** 23.08.2026
+**Region:** Rheinland-Pfalz, Deutschland  
+**Theorie-Textstand:** V1.2  
+**Numerischer Entwicklungsstand:** SL-TOV / Earth Matching 1.3C  
+**Stand:** 25.08.2026  
+**Erstveröffentlichung V1.0:** 23.08.2026
 
-## 1. Forschungsfrage
+## 1. Gegenstand und Status
 
-Das Erdmodul untersucht die Hypothese, dass im Zentrum der Erde eine kompakte, schwarzlochartige Zentralmasse existieren könnte. Das Modell wird ausdrücklich gegen bekannte geophysikalische Randbedingungen geprüft und beansprucht keine experimentelle Bestätigung.
+`SL` bezeichnet in diesem Projekt ein **Schwarzes Loch**.
 
-Die starke Variante, nach der ein Zentral-BH den überwiegenden Teil der Erdmasse beziehungsweise Erdgravitation trägt, wird in V1.0 verworfen. Geprüft bleibt nur eine deutlich kleinere Zentralmasse als separate Hypothese.
+Die definierende Modellannahme des Erdmoduls lautet:
 
-## 2. Nullmodell und Massenbuchhaltung
+> Im Zentrum der Erde befindet sich ein kleines Schwarzes Loch, dessen Masse im Basismodell nicht zusätzlich zur Erdmasse addiert wird, sondern eine gleich große Menge der sonst angenommenen zentralen PREM-Masse ersetzt.
 
-Als geophysikalisches Nullmodell dient PREM (Preliminary Reference Earth Model).
+Diese Aussage ist eine **Hypothese**, keine Beobachtung. Es gibt in diesem Projekt bislang keinen direkten experimentellen Nachweis eines Schwarzen Lochs im Erdzentrum.
 
-Die Zentralmasse wird nicht zusätzlich zur gemessenen Erdmasse addiert. Sie ersetzt im Modell genau die normale PREM-Masse innerhalb eines Ersatzradius `r_rep`:
+V1.2 trennt drei Ebenen strikt:
 
-```text
-M_PREM(<r_rep) = M_c
-```
+1. **Massenbuchhaltung / redistributives Basismodell**,
+2. **geophysikalische Konsistenztests**,
+3. **dynamische numerische Erweiterung** durch den SL-TOV/Earth-Matching-Stack.
 
-Außerhalb dieser Region bleibt die eingeschlossene Gesamtmasse unverändert:
+Damit wird vermieden, dass eine bestandene interne Rechenprüfung fälschlich als empirische Bestätigung ausgegeben wird.
 
-```text
-M'(<r) = M_PREM(<r),  r >= r_rep
-```
+## 2. Abgrenzung von der früheren starken Grenzvariante
 
-Damit bleibt im ideal kugelsymmetrischen Fall auch das äußere Gravitationsfeld unverändert:
+Die frühere Grenzidee
 
 ```text
-g'(r) = g_PREM(r)
+M_SL ~ M_Earth
 ```
 
-Ein kleines Zentralobjekt wäre daher nicht allein durch eine Messung der Oberflächengravitation nachweisbar.
+als nahezu alleiniger Träger der Erdmasse beziehungsweise Erdgravitation ist **nicht** das finale Erdmodell.
 
-## 3. Referenzwerte
+Unter PREM und Standard-GR würde eine derart starke Zentralisierung die beobachtete radiale Massenverteilung, das Trägheitsmoment und die seismologische Struktur massiv verändern. Diese Variante bleibt deshalb verworfen beziehungsweise stark ausgeschlossen.
 
-Verwendete zentrale PREM-Größen beziehungsweise Referenzwerte:
+Das aktuelle Modell untersucht einen **wesentlich kleineren redistributiven SL-Zweig**. Die Aussage „die starke Variante scheitert“ ist logisch nicht identisch mit „jede beliebig kleine Zentralmasse ist ausgeschlossen“.
+
+## 3. Nullmodell und Massenbuchhaltung
+
+Als geophysikalische Referenz dient PREM (Preliminary Reference Earth Model).
+
+Für eine gewählte Zentralmasse `M_SL` wird ein struktureller Ersatzradius `r_rep` definiert durch
 
 ```text
-R_IC ≈ 1221.5 km
-rho_c ≈ 1.31e4 kg/m^3
-v_P ≈ 11.26 km/s
-M_IC ≈ 9.84e22 kg
+M_PREM(<r_rep) = M_SL
 ```
 
-Die im Modell integrierte Masse des inneren Erdkerns beträgt ungefähr:
+Das bedeutet: Im Basismodell wird genau diese normale PREM-Masse aus dem Zentralbereich entfernt und durch die kompakte Zentralmasse ersetzt.
+
+Für `r >= r_rep` gilt in der ideal kugelsymmetrischen Massenbuchhaltung
 
 ```text
-M_IC ≈ 9.8433e22 kg
+M_model(<r) = M_PREM(<r)
 ```
 
-## 4. Drei unterschiedliche Radien
-
-Für eine Zentralmasse `M_c` sind drei physikalisch verschiedene Skalen zu unterscheiden.
-
-Schwarzschildradius:
+und damit für den monopolen Newton-Grenzfall
 
 ```text
-r_s = 2 G M_c / c^2
+g_model(r) = g_PREM(r).
 ```
 
-Bondi-/Einflussradius in der hier verwendeten Konvention:
+Wichtig: Dies ist eine **Buchhaltungsidentität**, keine vollständige Aussage darüber, dass Druckprofil, Materialgleichung, Seismologie und relativistische Feldgleichungen automatisch identisch bleiben. Genau diese zusätzliche Selbstkonsistenz wird in den weiteren Modulen geprüft.
+
+## 4. Drei physikalisch verschiedene Radien
+
+### 4.1 Schwarzschildradius
 
 ```text
-r_B = G M_c / c_s^2
+r_s = 2 G M_SL / c^2
 ```
 
-Struktureller Ersatzradius:
+`r_s` ist die Horizontskala eines nichtrotierenden, ungeladenen klassischen Schwarzschild-Lochs.
+
+### 4.2 Bondi-/Referenzskala
+
+Als hydrodynamischer Referenzbenchmark kann formal verwendet werden
 
 ```text
-M_PREM(<r_rep) = M_c
+r_B = G M_SL / c_eff^2
 ```
 
-Beispiel für `M_c = 1e20 kg`:
+wobei die Literatur teilweise eine Konvention mit Faktor 2 verwendet.
+
+Im Erdinneren ist `c_eff` **nicht** unkritisch mit der seismischen P-Wellen-Geschwindigkeit gleichzusetzen. In einem festen beziehungsweise mehrphasigen Medium enthält `v_P` Beiträge der elastischen Module und ist nicht automatisch derselbe Parameter wie die adiabatische Schallgeschwindigkeit eines idealen Bondi-Fluids.
+
+Daher ist `r_B` im Erdmodul eine **modellabhängige Referenzskala**, keine direkt gemessene Akkretionszone.
+
+### 4.3 Struktureller Ersatzradius
 
 ```text
-r_s   ≈ 1.49e-7 m
-r_B   ≈ 52.6 m
-r_rep ≈ 122 km
+M_PREM(<r_rep) = M_SL
 ```
 
-Der Ereignishorizont kann also mikroskopisch sein, während die zugehörige Massenumverteilung makroskopische geophysikalische Größenordnungen erreicht.
-
-## 5. Ersatzradius nach Zentralmasse
-
-Nahe dem Erdzentrum gilt näherungsweise:
+Nahe dem Zentrum folgt bei annähernd konstanter Dichte `rho_c`
 
 ```text
-r_rep ≈ [3 M_c / (4 pi rho_c)]^(1/3)
+r_rep ~= [3 M_SL / (4 pi rho_c)]^(1/3).
 ```
 
-Referenzwerte:
+Bei `rho_c ~ 1.31e4 kg/m^3` ergeben sich als Größenordnungswerte:
 
-| M_c | r_rep |
+| `M_SL` | `r_rep` ungefähr |
 |---:|---:|
-| 1e10 kg | 56.7 m |
-| 1e12 kg | 263 m |
-| 1e14 kg | 1.22 km |
-| 1e16 kg | 5.67 km |
-| 1e18 kg | 26.3 km |
-| 1e20 kg | 122 km |
-| 1e21 kg | 263 km |
-| 1e22 kg | 568 km |
+| `1e10 kg` | `57 m` |
+| `1e12 kg` | `0.26 km` |
+| `1e14 kg` | `1.2 km` |
+| `1e16 kg` | `5.7 km` |
+| `1e18 kg` | `26 km` |
+| `1e20 kg` | `122 km` |
+| `1e22 kg` | `568 km` |
 
-## 6. Trägheitsmoment
-
-Ein idealisierter Punkt-BH trägt bezüglich der Erdrotation praktisch kein internes Trägheitsmoment bei, während die ersetzte verteilte Materie eines besitzt. Im einfachen Ersatzmodell gilt daher:
+Der zentrale Punkt ist die Skalentrennung:
 
 ```text
-Delta C = -(8 pi / 3) Integral[0,r_rep] rho(r) r^4 dr
+r_s != r_B != r_rep.
 ```
 
-Beispielwerte aus dem V1.0-Sensitivitätsmodell:
+Ein mikroskopischer Horizont bedeutet nicht automatisch eine mikroskopische strukturelle Änderung der umgebenden Erde.
+
+## 5. Trägheitsmoment
+
+Wird zentral verteilte Materie durch eine nahezu punktförmige Masse ersetzt, ändert sich ihr Beitrag zum axialen Trägheitsmoment. Im einfachen kugelsymmetrischen Ersatzmodell lautet die erste Ordnungsgröße
 
 ```text
-M_c = 1e20 kg  -> Delta C / C ≈ -7.45e-9
-M_c = 1e22 kg  -> Größenordnung ≈ -16 ppm
+Delta C = -(8 pi / 3) Integral[0,r_rep] rho(r) r^4 dr.
 ```
 
-Das normierte Trägheitsmoment der realen Erde ist daher ein wichtiger Constraint für große Zentralmassen.
+Deshalb werden größere `M_SL` beziehungsweise größere `r_rep` zunehmend durch das gemessene normierte Trägheitsmoment eingeschränkt.
 
-## 7. Seismologie
+Dieser Test ist unabhängig davon relevant, ob das äußere monopole Gravitationsfeld durch exakte Massenredistribution unverändert bleibt.
 
-PREM ist aus seismischen Laufzeiten, Normalmoden und globalen Erdparametern aufgebaut. Große Ersatzregionen können deshalb nicht beliebig im Zentrum verborgen werden.
+## 6. Seismologie
 
-Ein Objekt mit `M_c ≈ 1e20 kg` würde im Ersatzmodell eine zentrale Strukturregion von ungefähr 122 km erfordern. Das ist keine mikroskopische Störung mehr. Dagegen entspricht `M_c ≈ 1e12 kg` nur einer Ersatzregion von ungefähr 263 m und ist für globale Seismologie wesentlich schwieriger direkt aufzulösen.
+PREM kodiert die beobachtete radiale Erdstruktur über seismische Laufzeiten, Normalmoden und globale Parameter. Ein redistributives Modell darf daher nicht nur die Gesamtmasse reproduzieren; es muss auch mit den Wellen- und Strukturbeobachtungen vereinbar sein.
 
-Das V1.0-Ergebnis lautet daher qualitativ:
+Qualitativ gilt:
 
 ```text
-große M_c -> Seismologie stark restriktiv
-kleine M_c -> globale Seismologie zunehmend schwach
+größeres r_rep -> stärkere strukturelle/seismologische Angriffsfläche
+kleineres r_rep -> geringere direkte Auflösung durch globale Seismologie
 ```
 
-Eine präzise statistische Obergrenze erfordert einen vollständigen Normalmoden- beziehungsweise Laufzeit-Likelihood-Fit und wird in V1.0 nicht vorgetäuscht.
+V1.2 behauptet **keine** fertige statistische Seismologie-Obergrenze. Dafür wäre ein vollständiger Laufzeit-/Normalmoden-Likelihood-Fit mit konsistenter Materialphysik nötig.
 
-## 8. Akkretionsbenchmark
+## 7. Akkretion: Benchmark, nicht Beweis
 
-Als Referenzbenchmark wird klassische Bondi-Akkretion verwendet:
+Die klassische Bondi-Formel
 
 ```text
-dM/dt = 4 pi lambda G^2 rho_c M^2 / c_s^3
+dM/dt = 4 pi lambda G^2 rho M^2 / c_eff^3
 ```
 
-Mit `lambda = 1/4` und den verwendeten zentralen Referenzwerten ergibt sich näherungsweise:
+wird nur als Referenzbenchmark verwendet.
+
+Der reale innere Erdkern ist kein unendliches, homogenes, ideales Bondi-Gas. Relevante Abweichungen können unter anderem entstehen durch
+
+- Festkörper-/Flüssigkeitsstruktur,
+- Druck- und Temperaturabhängigkeit der EOS,
+- Viskosität und elastische Reaktion,
+- Wärmeleitung und Konvektion,
+- diskrete atomare beziehungsweise ballistische Capture-Prozesse,
+- relativistische Nahzonenphysik.
+
+Deshalb dürfen aus einer Bondi-Zeit allein **keine modellunabhängigen harten Ausschlussgrenzen** abgeleitet werden.
+
+Der in V1.0 verwendete Übergang `r_B ~ atomarer Abstand` bei einer Masse der Größenordnung `10^8 kg` bleibt höchstens ein Marker dafür, wann ein Kontinuumsmodell selbst fragwürdig wird. Er ist keine fundamentale Naturkonstante und hängt unmittelbar von der gewählten `c_eff`- und Materiedefinition ab.
+
+## 8. Wärme- und Langzeitbedingung
+
+Wird ein Teil `eta` der akkretierten Ruheenergie lokal als Wärme deponiert,
 
 ```text
-dM/dt ≈ 1.28e-28 M^2  kg/s
+L_SL = eta (dM/dt) c^2,
 ```
 
-und damit die charakteristische Bondi-Zeit:
+muss diese zusätzliche Leistung mit dem terrestrischen Wärmehaushalt vereinbar bleiben.
+
+Auch hier gilt: Die Stärke des Constraints hängt von der tatsächlichen Capture-Rate, der radiativen/thermischen Effizienz und dem Energieabtransport ab. V1.2 verwendet den Wärmehaushalt daher als Konsistenzbedingung und nicht als frei stehenden Beweis gegen oder für das Modell.
+
+Über geologische Zeiten muss außerdem eine gemeinsame Lösung für
 
 ```text
-t_B = M/(dM/dt) = 1/(k M)
+M_SL(t), Erdstruktur(t), Energiefluss(t)
 ```
 
-Referenzwerte:
+existieren. Ein statischer Snapshot allein genügt nicht.
 
-| M_c | r_B | t_B |
-|---:|---:|---:|
-| 1e10 kg | 5.3 nm | 24.7 Mrd. Jahre |
-| 1e12 kg | 0.53 µm | 247 Mio. Jahre |
-| 1e14 kg | 52.6 µm | 2.47 Mio. Jahre |
-| 1e16 kg | 5.3 mm | 24,700 Jahre |
-| 1e18 kg | 0.53 m | 247 Jahre |
-| 1e20 kg | 52.6 m | 2.47 Jahre |
-| 1e22 kg | 5.26 km | etwa 9 Tage |
+## 9. Formation Rule
 
-Diese Werte sind ausdrücklich **modellabhängige Benchmarks**. Der reale Erdinnenraum ist kein ideales Bondi-Gas; Festkörperphysik, Mehrphasenstruktur, Viskosität, Wärmeleitung und mikroskopischer Transport können relevant sein.
+Normale Erdkernmaterie kollabiert unter Standard-GR nicht spontan zu einem kleinen Schwarzen Loch der hier betrachteten Art.
 
-## 9. Kontinuumsgrenze
+Das Modell benötigt deshalb eine explizite Entstehungs- beziehungsweise Einfanggeschichte. Denkbare Klassen sind beispielsweise eine primordiale Seed-Hypothese oder ein anderer klar formulierter Mechanismus. Solange ein solcher Mechanismus nicht quantitativ geschlossen ist, bleibt die **Formation Rule eine offene Physikfrage**.
 
-Aus der zentralen Eisendichte ergibt sich grob ein atomarer Abstand in der Größenordnung:
+Die Formation Rule darf nicht nachträglich so gewählt werden, dass sie lediglich die gewünschten heutigen Parameter reproduziert; sie muss eigene überprüfbare Konsequenzen besitzen.
+
+## 10. Ergebnis des redistributiven V1.2-Erdmoduls
+
+Der kleine redistributive Zweig wurde gegen die bislang implementierten Modell- und Konsistenzbedingungen geprüft. Innerhalb dieser Randbedingungen wurde **kein ausschließender Widerspruch** gefunden in Bezug auf
+
+- Massenbuchhaltung,
+- äußeres monopoles Gravitationsfeld,
+- Trägheitsmoment-Größenordnung,
+- seismologische Größenordnungseinordnung,
+- Skalentrennung,
+- Akkretionsregime,
+- Wärme-/Langzeitbenchmark.
+
+Das ist der Sinn von „V1.2 hat die internen Konsistenztests bestanden“.
+
+Es bedeutet ausdrücklich **nicht**:
 
 ```text
-d ≈ 1.9e-10 m
+BH im Erdkern experimentell nachgewiesen.
 ```
 
-Setzt man als grobe Trennung `r_B ≈ d`, erhält man eine charakteristische Masse von ungefähr:
+Die empirische Frage bleibt offen.
+
+## 11. Dynamische Erweiterung: SL-TOV-Minimalmodell
+
+Um über die reine Massenredistribution hinauszugehen, wurde ein numerisch ausführbares sphärisches Modell im Jordan Frame implementiert.
+
+Verwendet werden die Funktionen
 
 ```text
-M_continuum ≈ 3.6e8 kg
+F(chi) = F0 + xi chi^2
+V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4.
 ```
 
-Für deutlich kleinere Massen wird eine klassische hydrodynamische Bondi-Beschreibung zunehmend selbst inkonsistent. Dort wäre eine ballistische, atomare beziehungsweise quantenmechanische Mikroakkretionstheorie erforderlich.
-
-## 10. Langzeitentwicklung
-
-Das Erdalter beträgt ungefähr 4.54 Milliarden Jahre. Im einfachen Bondi-Benchmark liegt die Massenskala, bei der `t_B` ungefähr dem Erdalter entspricht, bei:
+Der Zustandsvektor lautet
 
 ```text
-M_* ≈ 5.4e10 kg
+y = [m, nu, p, chi, psi]
+psi = dchi/dr.
 ```
 
-Diese Zahl ist **keine experimentelle harte Obergrenze**. Sie ist nur die charakteristische Langzeit-/Runaway-Skala dieses speziellen Akkretionsbenchmarks.
+Implementiert sind unter anderem
 
-## 11. Wärmehaushalt
+- die gekoppelte sphärische Massen-/Metrik-/Druckentwicklung,
+- die Skalarfeldgleichung,
+- Materieerhaltung/TOV-Hydrostatik,
+- eine algebraische Spurengleichung für die Krümmung,
+- ein Matching-Shell-Integrator außerhalb der SL-Nahzone,
+- ein harter GR-Grenztest.
 
-Der gesamte terrestrische Oberflächenwärmefluss liegt in der Größenordnung von etwa 47 TW. Wird ein Anteil `eta` der akkretierten Ruheenergie im Erdinneren als Wärme deponiert,
+Im Grenzfall
 
 ```text
-L_BH = eta (dM/dt) c^2
+xi -> 0
+chi -> 0
+psi -> 0
 ```
 
-entsteht ein zusätzlicher Constraint. Seine Stärke hängt jedoch direkt von der unbekannten Energie- und Transporteffizienz `eta` ab. Deshalb wird daraus in V1.0 keine modellunabhängige harte Massengrenze abgeleitet.
+muss das System auf die gewöhnliche GR-TOV-Struktur zurückfallen.
 
-## 12. Entstehungsproblem
+## 12. Earth-Closure und Matching
 
-Normales Erdkernmaterial ist unter Standard-GR nicht annähernd kompakt genug, um spontan zu einem Schwarzen Loch der betrachteten Masse zu kollabieren.
+Die aktuelle Earth-Closure verwendet PREM als Referenz. Aus der PREM-Dichte wird eine hydrostatische Referenzdruckkurve konstruiert; die Paare `(p,rho)` definieren eine numerische barotrope Closure `epsilon(p)`.
 
-Für `M_c = 1e20 kg` gilt ungefähr:
+Diese Closure ist **keine fundamentale Hochdruck-Fe/Ni-Mineralgleichung**. Sie ist ein PREM-kalibriertes erstes Earth-Matching-Modell.
+
+Die Integration wird nicht blind durch den Horizont geführt. Sie beginnt bei
 
 ```text
-r_rep ≈ 122 km
-r_s   ≈ 1.5e-7 m
+r_a > r_h
+r_h = 2 G M_SL / c^2.
 ```
 
-Ein Zentralobjekt müsste daher beispielsweise primordial gewesen, später eingefangen worden oder durch einen bisher unbekannten Bildungsmechanismus entstanden sein.
-
-## 13. Starke und schwache Version
-
-### Verworfen / stark disfavored in V1.0
+Am Matching-Radius werden die notwendigen Außenwerte für
 
 ```text
-M_c ~ M_Earth
+m(r_a), p(r_a), chi(r_a), chi'(r_a)
 ```
 
-als Erklärung des überwiegenden Anteils der Erdmasse beziehungsweise Erdgravitation. Eine solche Zentralisierung wäre mit der beobachteten Massenverteilung, Seismologie und dem Trägheitsmoment der Erde nicht vereinbar.
+gesetzt beziehungsweise geshootet.
 
-### Offen als separate Hypothese
+Die unmittelbare SL-Nahzone bleibt ein separates Problem für Capture, Akkretion, Thermodynamik und Hochdruck-Mikrophysik.
 
-Eine wesentlich kleinere zentrale kompakte Masse ist durch die vorherige Aussage nicht automatisch ausgeschlossen. Für kleine Massen verschiebt sich der zentrale theoretische Engpass von der äußeren Gravitation zu Formation und Mikroakkretion.
+## 13. Nichttrivialer Skalarzweig
 
-## 14. Falsifikationsbedingungen
+Im Minimalmodell ist
 
-Eine konkrete Erd-BH-Version muss mit **demselben festen Parametersatz** gleichzeitig bestehen gegen:
+```text
+chi = 0
+```
+
+immer eine Lösung. Ein unbeschränkter Optimierer kann daher trivial auf den GR-Zweig zurückfallen.
+
+Nichttriviale scalarisierte Lösungen werden deshalb über Eigenwertsuche, Seed und numerische Continuation verfolgt. Die Erdobservablen dürfen dabei nicht beliebig als freie Fitparameter missbraucht werden; in den fortgeschrittenen Läufen werden Radius und ADM-Masse als Forward-Ausgaben des gewählten Zweigs kontrolliert.
+
+## 14. Numerischer Status Earth Matching 1.3C
+
+Für den konkret fortgesetzten voll gekoppelten Zweig
+
+```text
+M_SL = 1e16 kg
+q0   = 1e-14
+```
+
+werden als Promotionskriterien unter anderem verwendet:
+
+```text
+|normalized Robin residual| < 1e-5
+q_max < 1e-13
+endlicher Oberflächenradius
+endliche ADM-Masse
+```
+
+Der Zweig ist mit dem aktuellen Präzisions-Single-Shooting validiert bei
+
+```text
+r_c = 1000 km
+r_c =  750 km
+r_c =  500 km.
+```
+
+Die zugehörigen differentiellen Radius-/Massenabweichungen gegenüber dem verwendeten GR-/PREM-Closurelauf liegen in diesem numerischen Zweig ungefähr in der Größenordnung weniger `1e-5`.
+
+Bei
+
+```text
+r_c = 300 km
+```
+
+wird das aktuelle Randwertproblem schlecht konditioniert; bei kürzeren Skalen versagt die Single-Shooting-Formulierung zunehmend numerisch.
+
+Für `r_c = 100 km` wurde zusätzlich eine sparse Collocation untersucht. Die Gleichungsresiduen können bis in die Größenordnung `1e-6` reduziert werden, aber verschiedene Mesh-Auflösungen liefern noch keine konvergenten Vorhersagen für Erdradius und Masse. Diese Lösung ist daher **Kandidat, nicht validiertes Resultat**.
+
+Die konservative Aussage lautet:
+
+> Für den speziellen Fortsetzungsweg `M_SL=1e16 kg`, `q0=1e-14` liegt die derzeit numerisch validierte Frontier bei `r_c >= 500 km`. Kürzere Skalen sind aktuell numerisch offen und nicht physikalisch ausgeschlossen.
+
+## 15. Explorative Tensor-Realisierung
+
+Zusätzlich wurde eine effektive schwache-Feld-Parametrisierung untersucht, beispielsweise mit einem Tensorfenster der Form
+
+```text
+S_mu^nu = W(r) diag(-s_t, s_r, s_perp, s_perp)
+```
+
+und einer redistributiven Gewichtsfunktion `W`.
+
+Dieser Ansatz ist derzeit **keine bewiesene ghost-freie kovariante Tensorfeldtheorie**. Insbesondere sind tangentiale und zeitartige Komponenten ohne vollständige Wirkung beziehungsweise konstitutive Gleichungen nicht unabhängig identifizierbar.
+
+Dieser Stage-4A-Ansatz bleibt deshalb explorativ und wird nicht als abgeschlossene Fundamentaltheorie ausgegeben.
+
+## 16. Falsifikationsbedingungen
+
+Eine konkrete Erd-SL-Version muss mit **einem festen Parametersatz** gleichzeitig bestehen gegen:
 
 1. Erdmasse und Radius,
 2. normiertes Trägheitsmoment,
 3. PREM-Seismologie und Normalmoden,
 4. terrestrischen Wärmehaushalt,
-5. geologisches Alter und Langzeitstabilität,
-6. eine physikalisch konsistente Entstehungs- und Akkretionsgeschichte.
+5. geologisches Alter und Langzeitentwicklung,
+6. physikalisch konsistente Formation,
+7. physikalisch konsistente Capture-/Akkretionsgeschichte,
+8. robuste numerische Konvergenz,
+9. mindestens eine unabhängige vorab definierte Beobachtungssignatur.
 
-Ad-hoc-Cavities oder nachträglich eingeführte freie Parameter dürfen nicht für jeden einzelnen Test unabhängig angepasst werden.
+Nicht zulässig ist, für jeden Test neue unabhängige freie Parameter einzuführen, bis der Test automatisch bestanden wird.
 
-## 15. Abschluss V1.0
+## 17. Offene Arbeit
 
-Das Erdmodul kommt zu folgendem Ergebnis:
+Die nächsten wissenschaftlich relevanten Schritte sind:
 
-> Ein dominanter Zentral-BH als Quelle der Erdmasse beziehungsweise Erdgravitation ist mit der bekannten Erdstruktur nicht vereinbar. Ein wesentlich kleineres zentrales kompaktes Objekt ist eine andere, derzeit nicht bestätigte Hypothese. Deren entscheidende offene Physik liegt insbesondere bei Entstehung, Mikroakkretion und einem vollständig selbstkonsistenten Materiemodell des innersten Kerns.
+- steifer BVP-/Multiple-Shooting-Solver mit analytischen oder sparsamen Jacobians,
+- Mesh- und Continuation-Richtungs-Konvergenz für `r_c < 500 km`,
+- fundamentale Hochdruck-EOS statt PREM-Barotrop-Proxy,
+- explizite Near-Zone-Capture-/Akkretionsgleichungen,
+- thermischer Transportabschluss,
+- Formation Rule mit eigener Vorhersage,
+- vollständiger Seismologie-/Normalmoden-Likelihood-Fit,
+- vorregistrierte Messsignaturen, die das SL-Modell von PREM/GR unterscheiden.
+
+## 18. Schlussfolgerung V1.2 / 1.3C
+
+Das Erdmodul hat sich seit V1.0 in zwei wichtigen Punkten verändert:
+
+1. Der **kleine redistributive SL-Zweig** ist nun die klar definierte Erd-Hypothese; die erdmassige starke Grenzvariante ist ausdrücklich nicht das finale Modell.
+2. Zusätzlich existiert ein **dynamischer SL-TOV/Earth-Matching-Stack**, der nichttriviale gekoppelte Lösungen numerisch verfolgt und seine derzeitige Konvergenzgrenze offen dokumentiert.
+
+Die aktuelle wissenschaftlich zulässige Aussage ist daher:
+
+> Innerhalb der implementierten V1.2-Basistests und des spezifizierten numerisch validierten 1.3C-Zweigs wurde kein interner ausschließender Widerspruch gefunden. Eine direkte empirische Detektion eines Schwarzen Lochs im Erdzentrum liegt damit nicht vor. Formation, Near-Zone-Mikrophysik, vollständige Geophysik-Likelihood und robuste Short-Range-Lösungen bleiben offene Prüfsteine.
 
 ## Primärreferenz
 
@@ -261,4 +393,4 @@ A. M. Dziewonski & D. L. Anderson (1981), *Preliminary Reference Earth Model*, P
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *BH-Kernhypothese – Erdmodul V1.0*, Theorie- und Forschungsentwurf, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *BH-/SL-Kernhypothese – Erdmodul V1.2*, Theorie- und Forschungsentwurf, numerischer Entwicklungsstand Earth Matching 1.3C, Rheinland-Pfalz, Deutschland.
