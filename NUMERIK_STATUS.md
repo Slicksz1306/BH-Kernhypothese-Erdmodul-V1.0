@@ -2,8 +2,8 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 25.08.2026  
-**Theorie-Textstand:** V1.4  
-**Aktuelle Stufe:** Stage 3.68
+**Theorie-Textstand:** V1.5  
+**Aktuelle Stufe:** Stage 3.68 bearbeitet; Stage 3.69/3.70 definiert, nicht durchgefuehrt
 
 ## 1. Was „numerisch validiert“ bedeutet
 
@@ -106,3 +106,7 @@ H0 fundamentale Basis: OPEN.
 H0 Formation: stark negativ.
 Empirischer Nachweis: keiner.
 ```
+
+## Stage 3.69/3.70 – nur Protokolldefinition
+
+V1.5 definiert die High-Fidelity-Multiphysik- und H0-Real-Data-Endtests. Es wurde **kein** Stage-3.69-HPC-Lauf und **keine** dedizierte Stage-3.70-H0-Likelihood-Analyse durchgefuehrt. Siehe [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
