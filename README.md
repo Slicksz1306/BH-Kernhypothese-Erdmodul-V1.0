@@ -4,216 +4,146 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
-**Aktueller Theorie-Textstand:** Erdmodul V1.3  
-**Aktueller Forschungsstand:** Stage 3.17  
+**Aktueller Theorie-Textstand:** Erdmodul V1.4  
+**Aktueller Forschungsstand:** Stage 3.68  
 **Stand:** 25.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
 Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
-> **Archivhinweis:** `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs- und Prioritätsnachweis erhalten. Die aktuelle Weiterentwicklung wird in den Markdown-Dateien dokumentiert.
+> **Archivhinweis:** `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs- und Prioritätsnachweis erhalten. Die aktuelle Forschungsfassung wird in den Markdown-Dateien dokumentiert.
 
-## Wissenschaftlicher Status
+## Wissenschaftlicher Status in einem Satz
 
-Die **SL/BH-Kernhypothese Erdmodul** ist ein theoretisches Forschungsmodell. `SL` bezeichnet ein **Schwarzes Loch**.
+Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Der Standard-Hawking-Zweig H+ faellt im aktuellen Projekt-Reinterpretationstest gegen ein publiziertes Super-Kamiokande-`anti-nu_e`-Limit; der nichtstandardmaessige H0-Zweig ohne Hawking-Strahlung wird durch die bisherigen reduzierten Erdtests nicht ausgeschlossen, besitzt aber weder eine positive Detektion noch einen hergeleiteten Standard-Formationweg.
 
-Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Numerisch bestandene Solver-, Matching-, Forward- oder Cross-Solver-Tests sind keine empirischen Nachweise.
+## Zwei getrennte Hypothesen
 
-Die starke Variante, in der ein zentrales Schwarzes Loch einen wesentlichen Anteil der Erdmasse oder Erdgravitation trägt, ist mit der beobachteten Erdstruktur nicht vereinbar. Ein wesentlich kleinerer zentraler SL-Zweig wird weiter getestet.
+### H+ - mit Standard-Hawking
 
-## Redistributive Massenbuchhaltung – aktuelle Korrektur
+H+ verwendet die uebliche semiklassische Hawking-Strahlung.
 
-Frühere Fassungen verwendeten die Buchhaltung
-
-```text
-M_PREM(<r_rep) = M_SL.
-```
-
-Stage 3.16 zeigt jedoch, dass `r_rep` **nicht** als physische leere Ersatzkugel interpretiert werden darf. Eine harte zentrale Kavität wäre unter dem Erdkern-Druck mechanisch nicht haltbar.
-
-Der aktuelle Kandidatenzweig ist daher **smooth compensated**:
+Nach der Greybody-/Neutrino-Haertung liegt der relevante Projektbereich bei ungefaehr
 
 ```text
-rho_new(r) = rho_PREM(r) - M_SL w(r)
+M_BH = 4.82e11 ... 5.49e11 kg
+T_H  = 21.99 ... 19.31 MeV.
 ```
 
-mit
+Der konservative Projektfluss im SK-IV-Band 25.29-31.29 MeV liegt ueber dem publizierten spektrumsunabhaengigen beobachteten 90%-CL-Grenzwert von `0.04 cm^-2 s^-1 MeV^-1`.
 
 ```text
-integral 4 pi r^2 w(r) dr = 1.
+H+ Standard-Hawking: FAIL im getesteten Modell.
 ```
 
-Damit wird die SL-Masse weiterhin nicht doppelt gezählt, aber gewöhnliche Materie bleibt bis in die Near Zone vorhanden. `r_rep` ist nur noch eine Buchhaltungs-/Größenskala.
+Dies ist eine **Reinterpretation** eines Super-Kamiokande-Limits, keine offizielle Super-Kamiokande-Erdzentrum-BH-Analyse.
 
-## Feldtheoretischer Minimalrahmen
+### H0 - ohne Hawking
 
-Der sphärische Jordan-Frame-Minimalstack verwendet
+H0 setzt als nichtstandardmaessige Gegenhypothese
 
 ```text
-F(chi) = F0 + xi chi^2
-V(chi) = 1/2 m_chi^2 chi^2 + 1/4 lambda chi^4.
+P_Hawking = 0.
 ```
 
-Der GR-Grenzfall muss für `xi -> 0`, `chi -> 0`, `dchi/dr -> 0` auf die gewöhnliche TOV-Struktur zurückfallen. Ein reales zentrales Schwarzes Loch wird über eine Horizon-/Matching-Randbedingung und nicht als reguläres TOV-Zentrum behandelt.
+H0 ist damit kein Standard-GR/QFT-Zweig. Hawking-basierte Neutrino-/Gamma-Grenzen sind fuer H0 definitionsgemaess nicht anwendbar; die fundamentale Begruendung fuer `P_Hawking=0` bleibt offen.
 
-## Earth-Matching
+## Aktiver Erdbranch
 
-Für den historischen Referenzzweig
+Die starke Variante mit einem wesentlichen Anteil der Erdmasse im zentralen BH ist verworfen. Der aktive kleine Branch ist **smooth compensated**:
 
 ```text
-M_SL   = 1e16 kg
-q(r_a) = 1e-14
+rho_new(r) = rho_PREM(r) - M_BH w(r)
+Integral 4 pi r^2 w(r) dr = 1.
 ```
 
-wurden `r_c=500 km` und `r_c=300 km` mit der gehärteten Layered-PREM-Closure voll gekoppelt numerisch validiert; der 300-km-Punkt ist cross-solver-validiert.
-
-**Wichtige Stage-3.16-Korrektur:** Diese älteren Hard-/Vacuum-Near-Zone-Matching-Ergebnisse dürfen nicht automatisch als Validierung des neuen `R_smooth`-Branches gelten. Das Earth Matching muss für die materiereiche glatte Near Zone neu gerechnet werden.
-
-## Akkretionsblock
-
-Die klassische Bondi-Algebra wurde reproduziert; kein mathematischer Fehler in der Formel wurde gefunden. Die entscheidende Frage ist ihre physikalische Anwendbarkeit auf kondensierte, plastische und degenerierte Erdmaterie.
-
-Der relativistische Michel-Test ergibt für `M_SL=1e16 kg` in der getesteten phenomenologischen condensed-to-degenerate EOS ungefähr
+Eine harte leere Ersatzkugel ist mechanisch verworfen. Drei verschiedene Skalen duerfen nicht verwechselt werden:
 
 ```text
-Mdot_Michel ~ 147 ... 1460 kg/s.
+r_s = 2 G M_BH / c^2
+r_B = G M_BH / c_eff^2
+M_PREM(<r_rep) = M_BH.
 ```
 
-Damit bleibt der alte `1e16 kg`-Referenzzweig durch Langzeitakkretion stark belastet.
+## Stand der Erdtests
 
-## Stage 3.15 – Hawking/Michel-Massenscan
+Fuer den kleinen smooth H0-Zweig liefern die bisher ausgefuehrten reduzierten Tests keinen robusten Ausschluss durch
 
-Die gleichzeitige reduzierte Massenentwicklung
+- Gesamtmasse / `GM`,
+- Traegheitsmoment und Rotation,
+- smooth PREM-Massenbuchhaltung,
+- reduzierte Hydrostatik,
+- vereinfachte Seismik/Normalmoden,
+- Langzeitwaerme,
+- den gestuften Akkretionsaudit aus Festigkeit, Yield, plastischem Supply, Rotation, Knudsen-Uebergang, Loss Cone und radiativem Feedback.
+
+Das bedeutet **Kompatibilitaet innerhalb der getesteten Modelle**, nicht Evidenz fuer ein BH im Erdzentrum.
+
+## Formation
+
+Formation wurde separat getestet.
 
 ```text
-dM/dt = k_Michel M^2 - A_H/M^2
+In-situ-Kollaps normaler Erdmaterie: FAIL
+spaeter direkter Earth-Capture: FAIL
+Proto-Earth-/Planetesimal-Standardcapture: FAIL
+normaler Halo -> kalte protoplanetare Scheibe: FAIL unter den getesteten Bedingungen
+cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunftsmechanismus nicht hergeleitet
 ```
 
-besitzt ein instabiles Hawking/Michel-Gleichgewicht bei ungefähr
+Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
+
+## Endstatus Stage 3.68
+
+| Bereich | H+ Standard-Hawking | H0 ohne Hawking |
+|---|---|---|
+| starke Zentralmassenvariante | FAIL | FAIL |
+| kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
+| Super-K / Hawking-Neutrinos | **FAIL im Projekt-Reinterpretationstest** | nicht anwendbar |
+| Akkretion / Waerme | gekoppelte H+-Probleme | exakte Rate OPEN; kein robuster Ausschluss im kleinen Branch |
+| spaetere Earth-Capture-Formation | FAIL | FAIL |
+| Standard-Formation/Delivery | stark negativ | stark negativ |
+| direkte Detektion | keine | keine |
+| positive eindeutige Signatur | keine | keine |
+
+**Konservatives Fazit:**
 
 ```text
-M_eq ~ 1.28e11 ... 2.28e11 kg.
+H+ Standard-Hawking: FAIL im getesteten Modell.
+H0 als heutige versteckte Zentralmasse: OPEN / durch bisherige Erdtests nicht ausgeschlossen.
+H0 fundamentale Begruendung fuer kein Hawking: OPEN.
+H0 Formation: stark negativ / kein Standardweg gefunden.
+Empirischer Nachweis: keiner.
 ```
 
-Die lineare e-Faltungszeit liegt ungefähr bei `4.2e9 ... 2.4e10 Jahren`. Ein kleines Anfangsmassenband kann im reduzierten ODE über 4.54 Gyr weniger als 1% Netto-Massenänderung zeigen.
+## Was real noch fehlt
 
-Das ist **kein Attraktor und kein Nachweis**. Die Materialtransportphysik liegt bei diesem niedrigen Massenband außerhalb der Stage-3.14-MD-Kalibrierung, und das Earth Matching ist dort noch nicht validiert.
+Zwei Endstufen liegen ausserhalb der abgeschlossenen Desk-Study-Testserie:
 
-Details: [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md).
-
-## Stage 3.16 – externe Geophysik-Härtetests
-
-Ein externer Einwand gegen eine wörtliche zentrale Ersatzkugel wurde quantitativ geprüft.
-
-### Hard cavity
-
-Bei `P_c~364 GPa` ergibt sich für eine nahezu leere Kugelkavität eine charakteristische von-Mises-Skala von ungefähr
-
-```text
-sigma_VM ~546 GPa.
-```
-
-Die Druckkollaps-Zeitskala beträgt grob
-
-```text
-~1.08 s        für M_SL=1e16 kg,
-~0.025–0.030 s für das Stage-3.15-Massenband.
-```
-
-Der `R_hard`-Zweig wird daher als statischer Erdbranch verworfen.
-
-### Zentralstreu-Geometrie
-
-Der PREM-basierte radiale P-Wellenweg Zentrum→Oberfläche beträgt ungefähr
-
-```text
-606.77 s.
-```
-
-Ein **realer** zentraler Streuer würde für flache Erdbeben daher ungefähr bei
-
-```text
-1210–1214 s  (~20.2 min)
-```
-
-ankommen und im kugelsymmetrischen 1-D-Modell nahezu unabhängig von der Epizentraldistanz sein.
-
-Die Zeitgeometrie ist korrekt; entscheidend ist aber, ob der physische Branch überhaupt einen starken zentralen Streuer enthält.
-
-## Stage 3.17 – Seismik des glatten Branches
-
-Seismometer koppeln nicht direkt an den Ereignishorizont, sondern an Dichte, Druck und elastische Eigenschaften des umgebenden Materials.
-
-Mit einer glatten Massenkompensation und dem bisherigen fixed-elastic-moduli-Forward-Proxy ergeben sich für das Stage-3.15-Massenband:
-
-```text
-PKIKP 180° Laufzeitänderung:
-R_mix=100 km:      ~21–86 ns
-R_mix=500 km:      ~0.8–3.5 ns
-R_mix=1221.5 km:   ~0.14–0.58 ns.
-```
-
-Selbst eine absichtlich scharfe fractional-PREM-Grenze bei `R_mix=100 km` hätte nur eine Normalinzidenz-Reflexionsamplitude in der Größenordnung
-
-```text
-~6e-10 ... 1e-9.
-```
-
-Ein glatter Taper besitzt diesen führenden Sprung gar nicht.
-
-Damit ist die starke ~1212-s-Hard-Cavity-Reflexion **keine automatische Vorhersage** des `R_smooth`-Branches.
-
-Die noch ungelöste Near-Zone besitzt im Stage-3.15-Band nur eine Größenskala von ungefähr `133–161 m`. Hypothetische lokale Vp-Erhöhungen über diese gesamte Zone liefern im einfachen PKIKP-180°-Timing-Proxy ungefähr:
-
-```text
-+1% Vp:     ~0.23–0.28 ms
-+10% Vp:    ~2.1–2.6 ms
-+50% Vp:    ~7.9–9.5 ms
-+100% Vp:   ~11.8–14.3 ms.
-```
-
-Das ist noch kein voller elastischer Full-Wave-Test; antipodale Fokussierung, Modenkonversion, Dämpfung und reale Near-Zone-Mineralphysik fehlen.
-
-Details: [`SEISMIK_STAGE3_16_17.md`](SEISMIK_STAGE3_16_17.md).
-
-## Aktueller konservativer Status
-
-```text
-M_SL ~ 1e16 kg:
-    stark durch relativistische Langzeitakkretion belastet
-
-R_hard / leere zentrale Ersatzkugel:
-    mechanisch verworfen
-
-M_SL ~ 1e11 kg, R_smooth:
-    Hawking/Michel-Kandidatenband im reduzierten ODE,
-    verteilte smooth-Kompensation im Seismikproxy extrem klein,
-    Near-Zone-Transport und neues Earth Matching weiterhin offen
-```
-
-Damit ist weder ein Erd-SL nachgewiesen noch die gesamte kleine Erd-SL-Hypothese ausgeschlossen.
-
-## Nächste harte Tests
-
-1. voll gekoppeltes Earth Matching des `R_smooth`-Branches im `~1e11 kg`-Band,
-2. selbstkonsistentes Near-Zone-Profil `rho(r), Vp(r), Vs(r)`,
-3. elastischer Full-Wave-/Antipodal-Array-Synthetic,
-4. Near-Zone-Transport außerhalb der Stage-3.14-MD-Kalibrierung,
-5. Hawking-Greybody-/Teilchenspezies-, Spin- und Ladungssensitivität,
-6. Formation Rule für das niedrige Massenband.
+1. High-Fidelity-Multiphysik/HPC fuer die Near Zone plus 3-D-Full-Wave-Seismik.
+2. Dedizierter experimenteller bzw. Real-Data-Test auf eine eindeutige H0-Signatur.
 
 ## Dateien
 
-- [`THEORIE.md`](THEORIE.md) – Theorierahmen.
-- [`TEST_STATUS.md`](TEST_STATUS.md) – Test- und Validierungsmatrix.
-- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – numerischer Entwicklungsstand.
-- [`AKKRETION_STATUS.md`](AKKRETION_STATUS.md) – Akkretions-/Langzeitstatus.
-- [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md) – Hawking/Michel-Massenscan.
-- [`SEISMIK_STAGE3_16_17.md`](SEISMIK_STAGE3_16_17.md) – externe Geophysik-Einwände und Smooth-Branch-Seismik.
-- [`CHANGELOG.md`](CHANGELOG.md) – Versions- und Korrekturhistorie.
-- [`CITATION.cff`](CITATION.cff) – Zitiermetadaten.
-- `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` – unveränderte Erstveröffentlichung.
+- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - vollstaendige Endmatrix und Schlussfolgerung.
+- [`PUBLIC_UPDATE_V1_4.md`](PUBLIC_UPDATE_V1_4.md) - kurze oeffentliche Zusammenfassung.
+- [`THEORIE.md`](THEORIE.md) - aktueller Theorierahmen.
+- [`TEST_STATUS.md`](TEST_STATUS.md) - Test- und Falsifikationsmatrix.
+- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) - numerischer Status und Aussagegrenzen.
+- [`AKKRETION_STATUS.md`](AKKRETION_STATUS.md) - Akkretions-/Langzeitstatus.
+- [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md) - historischer Stage-3.15-Massenscan.
+- [`SEISMIK_STAGE3_16_17.md`](SEISMIK_STAGE3_16_17.md) - historischer Seismik-Haertetest.
+- [`CHANGELOG.md`](CHANGELOG.md) - Korrektur- und Versionshistorie.
+- [`CITATION.cff`](CITATION.cff) - Zitiermetadaten.
+- `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` - unveraenderte Erstveroeffentlichung.
+
+## Literatur-Kernreferenzen
+
+- Dziewonski, A. M. & Anderson, D. L. (1981), *Preliminary Reference Earth Model*.
+- Super-Kamiokande Collaboration, arXiv:2305.05135, Tabelle 2.
+- Arbey & Auffinger, BlackHawk, arXiv:1905.04268; BlackHawk v3.0, arXiv:2606.06355.
+- Cantiello et al. (2026), *Accretion of Primordial Black Holes in Stellar Interiors*, arXiv:2606.02726.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.3*, theoretischer Forschungsentwurf, aktueller Entwicklungsstand Stage 3.17, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.4*, theoretischer Forschungsentwurf, Abschlussstand Stage 3.68, Rheinland-Pfalz, Deutschland.
