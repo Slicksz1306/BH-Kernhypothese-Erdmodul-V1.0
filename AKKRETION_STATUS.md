@@ -1,6 +1,6 @@
 # Akkretions- und Langzeitstatus - Abschluss Stage 3.68
 
-**Projekt:** SL/BH-Kernhypothese Erdmodul V1.4  
+**Projekt:** SL/BH-Kernhypothese Erdmodul V1.5  
 **Stand:** 25.08.2026
 
 ## 1. Aussagegrenze
@@ -114,4 +114,6 @@ H0:
     reduzierte Erdalter-Massen-/Waermetests schliessen den kleinen Branch nicht aus.
 ```
 
-Der fehlende Endtest ist eine gekoppelte relativistische Multiphysik-Simulation mit realer Dense-Matter-, Plasma-, QED-, Nuklear- und kinetischer Physik.
+## 13. Stage 3.69 – ausstehende High-Fidelity-Schliessung
+
+Die exakte H0-Akkretionsrate bleibt eine offene Multiphysikfrage. V1.5 definiert Stage 3.69 als `DEFINED / NOT PERFORMED`: GR-Hydro/Kinetik, Elastoplastik, Dense-Matter-EOS, Transport, QED-/Nuklear-Zeitskalen und Horizon-Capture muessen in einem reproduzierbaren verschachtelten Solver gekoppelt werden. Der erste realistische Meilenstein ist ein 1-D/2-D-Prototyp. Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
