@@ -1,113 +1,74 @@
 # Changelog
 
-Dieses Changelog dokumentiert die öffentlich sichtbaren Entwicklungsstände des Erdmoduls.
+Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls.
 
-## V1.3 / Stage 3.15 — 25.08.2026
+## V1.4 / Stage 3.68 - 25.08.2026
 
-Massenscan `M_SL~1e8...1e16 kg` und wichtige Korrektur des kombinierten Hawking/Michel-Langzeitarguments.
+Abschluss und Konsolidierung der Stage-3-Haertetestserie.
 
-### Stage 3.15 – simultane Massenentwicklung
+### Zentrale Aenderungen
 
-Statt Standard-Hawking und Michel-Akkretion als getrennte Ausschlussgrenzen zu schneiden, wird nun die reduzierte gemeinsame Gleichung verwendet:
+- H+ und H0 werden nun strikt getrennt dokumentiert.
+- **H+** verwendet Standard-Hawking-Strahlung.
+- **H0** setzt als nichtstandardmaessige Gegenhypothese `P_Hawking=0` und ist damit kein Standard-GR/QFT-Zweig.
+- Stage 3.28 korrigierte die fruehere Hawking-Normierung; der relevante H+-Bereich verschob sich auf etwa `4.82e11 ... 5.49e11 kg`.
+- Stage 3.30 verwendete Greybody-Primaerneutrinos und publizierte spektrumsunabhaengige Super-Kamiokande-Grenzen. Der H+-Projektfluss im Band `25.29-31.29 MeV` liegt ueber dem publizierten SK-IV-90%-CL-Limit. **H+ wird deshalb innerhalb des getesteten Modells als FAIL markiert.**
+- Der kleine H0-Branch wurde durch Langzeitakkretion, Festigkeit/Yield, radialen Supply, Rotation, Knudsen-/kinetische Transition, Loss-Cone-Recycling, reduzierten Fokker-Planck/Reservoir-Closure und radiatives/QED-Feedback gehaertet. Keine robuste vollstaendige Akkretionssperre wurde gefunden; die exakte Multiphysik-Rate bleibt OPEN.
+- Die physische starke Near Zone wurde von der `~100 m`-Buchhaltungszone getrennt; starke Materialaenderungen liegen im kleinen Branch auf mikro-/nanoskopischen Skalen. Fruehere zu grosse Seismikproxies wurden entsprechend korrigiert.
+- Formation wurde separat abgeschlossen: In-situ-Kollaps, spaeter Earth-Capture, Proto-Earth-/Planetesimal-Capture und normale Halo-to-disk Delivery scheitern unter den getesteten Standardbedingungen. Ein extrem cold/co-moving Zustand bleibt nur als unhergeleitete Anfangsbedingung.
+- Neuer Endstatus: `FINAL_STATUS_STAGE3_68.md`.
+- Neue oeffentliche Kurzfassung: `PUBLIC_UPDATE_V1_4.md`.
 
-```text
-dM/dt = k_Michel M^2 - A_H/M^2.
-```
-
-Für die fünf Stage-3.12-`Y_e`-Zweige ergibt sich im einfachen Standard-Hawking-Benchmark ein instabiles Gleichgewicht
-
-```text
-M_eq ~ 1.28e11 ... 2.28e11 kg.
-```
-
-Die lineare e-Faltungszeit liegt ungefähr bei
-
-```text
-4.23e9 ... 2.37e10 Jahre.
-```
-
-Für weniger als `1%` Netto-Massenänderung über `4.54 Gyr` liegt das Anfangsmassenband je nach `Y_e` ungefähr bei
+### Konservativer Endstatus
 
 ```text
--0.51/+0.53% bis -4.40/+5.12% um M_eq.
+H+ Standard-Hawking: FAIL im getesteten Modell.
+H0 heutige Existenzhypothese: OPEN / durch bisherige Erdtests nicht ausgeschlossen.
+H0 fundamentale Begruendung fuer kein Hawking: OPEN.
+H0 Formation: stark negativ / kein Standardweg gefunden.
+Empirischer Nachweis: keiner.
 ```
 
-### Korrektur zu Stage 3.12
+### Verbleibende Endstufen
 
-Die frühere starke Aussage
-
-```text
-Standard-Hawking + ununterdrücktes Michel -> kein überlappendes Langzeitfenster
-```
-
-wird korrigiert. Sie entstand aus getrennten Einzelgrenzen. Bei simultaner Evolution existiert im reduzierten Modell ein Hawking/Michel-Kompensationsband.
-
-Dieses Band ist kein stabiler Attraktor und kein Nachweis eines Erd-SL.
-
-### Materialphysik-Grenze
-
-Das neue Gleichgewichtsband liegt weit unterhalb des direkten Stage-3.14-Coulomb-MD-Ratenbereichs. Die dimensionslose Michel-Deformationsrate skaliert ungefähr wie `1/M`.
-
-Die Stage-3.14-MD-Kalibrierung ist je nach Proxy erst oberhalb von ungefähr
-
-```text
-5.4e14 ... 1.2e16 kg
-```
-
-direkt anwendbar. Das neue `~1e11 kg`-Band liegt etwa `4e3 ... 5e4` darunter.
-
-### Earth-Matching-Grenze
-
-Für das neue Kandidatenband beträgt der PREM-Ersatzradius nur ungefähr
-
-```text
-133 ... 161 m.
-```
-
-Der voll gekoppelte Earth-Matching-Stack ist in diesem niedrigen `M_SL`-/sub-km-Bereich noch nicht cross-solver-validiert.
-
-### Neue Datei
-
-- `MASSENSCAN_STAGE3_15.md` – vollständige öffentliche Zusammenfassung des Massenscans.
+- High-Fidelity-Multiphysik/HPC inklusive 3-D-Full-Wave-Seismik.
+- Dedizierter experimenteller bzw. Real-Data-Test.
 
 ---
 
-## V1.3 / Stage 3.14 — 25.08.2026
+## V1.3 / Stage 3.15-3.17 - 25.08.2026
 
-Größere Härtung des Akkretions-, Near-Zone- und Materialphysikblocks.
+- simultaner Hawking/Michel-Massenscan statt getrennt geschnittener Einzelgrenzen;
+- instabiles reduziertes Kompensationsband im damaligen einfachen Hawking/Michel-Modell;
+- Hard-Cavity mechanisch verworfen;
+- smooth-compensated Branch eingefuehrt;
+- erste Smooth-Branch-Seismikproxies dokumentiert.
 
-- Bondi-Algebra reproduziert; kein mathematischer Fehler gefunden.
-- Mikroakkretion, Creep, Wärme und Zwei-Phasen-Feedback untersucht.
-- alte `~54 r_s`-Grenze als nicht EOS-robust zurückgezogen.
-- relativistische Michel-Akkretion implementiert und analytisch gegengeprüft.
-- für `M_SL=1e16 kg` ergab die phenomenologische Dense-Matter-EOS `Mdot_Michel~147...1460 kg/s`.
-- hcp-Fe-Solid/Michel-Kopplung lieferte bei Millimeterradien keine ausreichende Unterdrückung.
-- Coulomb-Plastizität schwächte eine generische Festkörperblockade weiter.
-- Stage-3.13-`8 GPa`-Mikrorettung als Coulomb-Langzeitgrenze zurückgezogen.
+Diese Zwischenstaende wurden durch V1.4/Stage 3.68 teilweise korrigiert bzw. ueberholt.
 
 ---
 
-## V1.2 / Stage 1.7 — 25.08.2026
+## V1.3 / Stage 3.14 - 25.08.2026
+
+- Bondi-/Michel-Akkretionsaudit;
+- Hochdruck-EOS- und Rheologie-Haertung;
+- `~54 r_s`-Toygrenze zurueckgezogen;
+- relativistischer Michel-Solver mit analytischem Selfcheck;
+- Coulomb-Plastizitaets-Sensitivitaeten;
+- hcp-Fe-`8 GPa`-Mikrorettung als Coulomb-Langzeitgrenze zurueckgezogen.
+
+---
+
+## V1.2 / Stage 1.7 - 25.08.2026
 
 - Titel auf **SL/BH-Kernhypothese Erdmodul** vereinheitlicht.
-- kleiner redistributiver SL/BH-Zweig als aktuelles Erd-Basismodell dokumentiert.
-- Layered-PREM-Earth-Closure eingeführt.
-- GR-Baseline auf ungefähr `Delta R/R~4.17e-9`, `Delta M/M~4.44e-8` verbessert.
-- `r_c=500 km` und `r_c=300 km` voll gekoppelt validiert; 300 km cross-solver-validiert.
-- Gravitation, P-Wellen-Proxies, ICB/CMB, Laufzeit und Trägheitsmoment als differentielle Modellgrößen dokumentiert.
+- Layered-PREM-Earth-Closure und fruehe geophysikalische Sensitivitaeten dokumentiert.
 
-## Früherer V1.2 / Stage 1.3C-Stand — 25.08.2026
+---
 
-Der erste öffentliche V1.2-Numerikstand dokumentierte eine Precision-Single-Shooting-Frontier bei `r_c=500 km` für `M_SL=1e16 kg`, `q0=1e-14`. Dieser Stand wurde durch spätere Stages überholt.
+## V1.0 - 23.08.2026
 
-## V1.0 — 23.08.2026
+Erstveroeffentlichung des Erdmoduls.
 
-Erstveröffentlichung des Erdmoduls.
-
-- archivierte Veröffentlichungsfassung: `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf`,
-- Integritätsnachweis über `SHA256SUMS.txt`,
-- PDF bleibt unverändert als Archiv- und Prioritätsnachweis erhalten.
-
-## Versionsprinzip
-
-Archivierte Publikationsdateien werden nicht nachträglich überschrieben. Der aktuelle Forschungsstand wird in den Markdown-Dateien und `CITATION.cff` geführt.
+- archivierte V1.0-PDF bleibt unveraendert als Prioritaets-/Archivnachweis;
+- spaetere Forschungsstaende werden nicht rueckwirkend in die Archiv-PDF geschrieben.
