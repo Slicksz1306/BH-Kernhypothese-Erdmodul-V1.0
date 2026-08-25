@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Aktueller Theorie-Textstand:** Erdmodul V1.3  
-**Aktueller Forschungsstand:** Stage 3.15  
+**Aktueller Forschungsstand:** Stage 3.17  
 **Stand:** 25.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
@@ -17,29 +17,33 @@ Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
 Die **SL/BH-Kernhypothese Erdmodul** ist ein theoretisches Forschungsmodell. `SL` bezeichnet ein **Schwarzes Loch**.
 
-Die definierende Annahme lautet: Im Erdzentrum wird ein kleines zentrales Schwarzes Loch als redistributive Zentralmasse modelliert. Seine Masse wird im Basismodell nicht zusätzlich zur Erdmasse addiert, sondern ersetzt dieselbe PREM-Masse im Zentralbereich.
+Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Numerisch bestandene Solver-, Matching-, Forward- oder Cross-Solver-Tests sind keine empirischen Nachweise.
 
-Es wird **keine direkte Detektion eines Schwarzen Lochs im Erdzentrum behauptet**. Numerisch bestandene Solver-, Matching- oder Cross-Solver-Tests sind keine empirischen Nachweise.
+Die starke Variante, in der ein zentrales Schwarzes Loch einen wesentlichen Anteil der Erdmasse oder Erdgravitation trägt, ist mit der beobachteten Erdstruktur nicht vereinbar. Ein wesentlich kleinerer zentraler SL-Zweig wird weiter getestet.
 
-## Aktueller Kernstatus
+## Redistributive Massenbuchhaltung – aktuelle Korrektur
 
-Die starke Variante, in der ein zentrales Schwarzes Loch einen wesentlichen Anteil der Erdmasse oder Erdgravitation trägt, ist mit der beobachteten Erdstruktur nicht vereinbar. Ein wesentlich kleineres zentrales Schwarzes Loch wird dadurch nicht grundsätzlich ausgeschlossen.
-
-Für das lange verwendete Referenzmodell `M_SL=1e16 kg` ist die relativistische Langzeitakkretion derzeit der stärkste negative Test. Stage 3.15 zeigt jedoch, dass die gesamte Erd-SL-Massenachse nicht durch diesen einen Referenzpunkt entschieden ist.
-
-## Redistributive Massenbuchhaltung
+Frühere Fassungen verwendeten die Buchhaltung
 
 ```text
-M_PREM(<r_rep) = M_SL
+M_PREM(<r_rep) = M_SL.
 ```
 
-Im ideal kugelsymmetrischen Grenzfall gilt außerhalb der Ersatzregion
+Stage 3.16 zeigt jedoch, dass `r_rep` **nicht** als physische leere Ersatzkugel interpretiert werden darf. Eine harte zentrale Kavität wäre unter dem Erdkern-Druck mechanisch nicht haltbar.
+
+Der aktuelle Kandidatenzweig ist daher **smooth compensated**:
 
 ```text
-M_model(<r) = M_PREM(<r),   r >= r_rep.
+rho_new(r) = rho_PREM(r) - M_SL w(r)
 ```
 
-Damit werden SL-Masse und gewöhnliche Materie nicht doppelt gezählt.
+mit
+
+```text
+integral 4 pi r^2 w(r) dr = 1.
+```
+
+Damit wird die SL-Masse weiterhin nicht doppelt gezählt, aber gewöhnliche Materie bleibt bis in die Near Zone vorhanden. `r_rep` ist nur noch eine Buchhaltungs-/Größenskala.
 
 ## Feldtheoretischer Minimalrahmen
 
@@ -54,79 +58,123 @@ Der GR-Grenzfall muss für `xi -> 0`, `chi -> 0`, `dchi/dr -> 0` auf die gewöhn
 
 ## Earth-Matching
 
-Für den Referenzzweig
+Für den historischen Referenzzweig
 
 ```text
 M_SL   = 1e16 kg
 q(r_a) = 1e-14
 ```
 
-sind `r_c=500 km` und `r_c=300 km` mit der gehärteten Layered-PREM-Closure voll gekoppelt numerisch validiert; der 300-km-Punkt ist cross-solver-validiert. Die GR-Baseline reproduziert ungefähr
+wurden `r_c=500 km` und `r_c=300 km` mit der gehärteten Layered-PREM-Closure voll gekoppelt numerisch validiert; der 300-km-Punkt ist cross-solver-validiert.
 
-```text
-Delta R/R ~ 4.17e-9
-Delta M/M ~ 4.44e-8.
-```
+**Wichtige Stage-3.16-Korrektur:** Diese älteren Hard-/Vacuum-Near-Zone-Matching-Ergebnisse dürfen nicht automatisch als Validierung des neuen `R_smooth`-Branches gelten. Das Earth Matching muss für die materiereiche glatte Near Zone neu gerechnet werden.
 
-Seismologische Laufzeiten, ICB/CMB-Verschiebungen, Gravitation, Trägheitsmoment und prototypische Normalmoden wurden als Modellsensitivitäten untersucht. Sie sind keine gemessenen SL-Signaturen.
-
-## Akkretionsblock bis Stage 3.14
+## Akkretionsblock
 
 Die klassische Bondi-Algebra wurde reproduziert; kein mathematischer Fehler in der Formel wurde gefunden. Die entscheidende Frage ist ihre physikalische Anwendbarkeit auf kondensierte, plastische und degenerierte Erdmaterie.
 
-Härtere Tests führten zu mehreren Korrekturen:
-
-- „lokale Wärme schmilzt zwangsläufig alles bis zur Bondiskala“ ist zu stark,
-- die frühere `~54 r_s`-Grenze aus einem konstanten `Gamma~4`-Toymodell ist nicht EOS-robust,
-- die Stage-3.13-`8 GPa`-Mikrorettung ist nicht auf tiefe Coulombmaterie übertragbar.
-
-Der relativistische Michel-Test mit einer phenomenologischen condensed-to-degenerate EOS ergibt für `M_SL=1e16 kg` ungefähr
+Der relativistische Michel-Test ergibt für `M_SL=1e16 kg` in der getesteten phenomenologischen condensed-to-degenerate EOS ungefähr
 
 ```text
-Mdot_Michel ~ 147 ... 1460 kg/s,
+Mdot_Michel ~ 147 ... 1460 kg/s.
 ```
 
-während die mittlere Rate für `+1%` Masse über 4.54 Gyr nur ungefähr `6.98e-4 kg/s` beträgt. Ein gewöhnlicher hcp-Fe-Festkörper bei Millimeterradien liefert im reduzierten Modell keine ausreichende Unterdrückung; auch eine generische Coulomb-Festkörperblockade ist durch die getestete Plastizitätsphysik nicht nachgewiesen.
+Damit bleibt der alte `1e16 kg`-Referenzzweig durch Langzeitakkretion stark belastet.
 
-## Stage 3.15 – vollständiger Massenscan und wichtige Korrektur
+## Stage 3.15 – Hawking/Michel-Massenscan
 
-Stage 3.12 hatte Hawking und Michel als **getrennte** Langzeitgrenzen verglichen. Stage 3.15 löst beide Beiträge gleichzeitig:
+Die gleichzeitige reduzierte Massenentwicklung
 
 ```text
-dM/dt = k_Michel M^2 - A_H/M^2.
+dM/dt = k_Michel M^2 - A_H/M^2
 ```
 
-Damit existiert im reduzierten Modell ein instabiles Gleichgewicht
+besitzt ein instabiles Hawking/Michel-Gleichgewicht bei ungefähr
 
 ```text
-M_eq = (A_H/k_Michel)^(1/4)
+M_eq ~ 1.28e11 ... 2.28e11 kg.
 ```
 
-bei ungefähr
+Die lineare e-Faltungszeit liegt ungefähr bei `4.2e9 ... 2.4e10 Jahren`. Ein kleines Anfangsmassenband kann im reduzierten ODE über 4.54 Gyr weniger als 1% Netto-Massenänderung zeigen.
 
-```text
-M_eq ~ 1.28e11 ... 2.28e11 kg
-```
-
-für den Stage-3.12-`Y_e`-Sensitivitätsbereich.
-
-Die frühere starke Aussage
-
-```text
-"Standard-Hawking + ununterdrückte Michel-Akkretion -> kein gemeinsames Langzeitfenster"
-```
-
-wird daher **korrigiert**: Bei gleichzeitiger Massenentwicklung existiert ein Hawking/Michel-Kompensationsband.
-
-Das Gleichgewicht ist instabil, aber die lineare e-Faltungszeit liegt ungefähr bei `4.2e9 ... 2.4e10 Jahren`. Für weniger als `1%` Netto-Massenänderung über 4.54 Gyr beträgt das Anfangsmassenband je nach `Y_e` ungefähr `-0.5/+0.5%` bis `-4.4/+5.1%` um `M_eq`.
-
-### Warum das noch keine Lösung ist
-
-Der PREM-Ersatzradius dieses neuen Massenbands beträgt nur ungefähr `133 ... 161 m`. In diesem kleinen `M_SL`-/sub-km-Bereich ist das voll gekoppelte Earth Matching noch nicht cross-solver-validiert.
-
-Außerdem skaliert die dimensionslose Michel-Deformationsrate am Kritikpunkt ungefähr wie `1/M`. Das neue `~1e11 kg`-Band liegt um etwa `4e3 ... 5e4` unter den Massengrenzen, für die die Stage-3.14-Coulomb-Plastizitätsdaten direkt im kalibrierten MD-Ratenbereich liegen. Die Materialtransportphysik ist dort deshalb erneut offen.
+Das ist **kein Attraktor und kein Nachweis**. Die Materialtransportphysik liegt bei diesem niedrigen Massenband außerhalb der Stage-3.14-MD-Kalibrierung, und das Earth Matching ist dort noch nicht validiert.
 
 Details: [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md).
+
+## Stage 3.16 – externe Geophysik-Härtetests
+
+Ein externer Einwand gegen eine wörtliche zentrale Ersatzkugel wurde quantitativ geprüft.
+
+### Hard cavity
+
+Bei `P_c~364 GPa` ergibt sich für eine nahezu leere Kugelkavität eine charakteristische von-Mises-Skala von ungefähr
+
+```text
+sigma_VM ~546 GPa.
+```
+
+Die Druckkollaps-Zeitskala beträgt grob
+
+```text
+~1.08 s        für M_SL=1e16 kg,
+~0.025–0.030 s für das Stage-3.15-Massenband.
+```
+
+Der `R_hard`-Zweig wird daher als statischer Erdbranch verworfen.
+
+### Zentralstreu-Geometrie
+
+Der PREM-basierte radiale P-Wellenweg Zentrum→Oberfläche beträgt ungefähr
+
+```text
+606.77 s.
+```
+
+Ein **realer** zentraler Streuer würde für flache Erdbeben daher ungefähr bei
+
+```text
+1210–1214 s  (~20.2 min)
+```
+
+ankommen und im kugelsymmetrischen 1-D-Modell nahezu unabhängig von der Epizentraldistanz sein.
+
+Die Zeitgeometrie ist korrekt; entscheidend ist aber, ob der physische Branch überhaupt einen starken zentralen Streuer enthält.
+
+## Stage 3.17 – Seismik des glatten Branches
+
+Seismometer koppeln nicht direkt an den Ereignishorizont, sondern an Dichte, Druck und elastische Eigenschaften des umgebenden Materials.
+
+Mit einer glatten Massenkompensation und dem bisherigen fixed-elastic-moduli-Forward-Proxy ergeben sich für das Stage-3.15-Massenband:
+
+```text
+PKIKP 180° Laufzeitänderung:
+R_mix=100 km:      ~21–86 ns
+R_mix=500 km:      ~0.8–3.5 ns
+R_mix=1221.5 km:   ~0.14–0.58 ns.
+```
+
+Selbst eine absichtlich scharfe fractional-PREM-Grenze bei `R_mix=100 km` hätte nur eine Normalinzidenz-Reflexionsamplitude in der Größenordnung
+
+```text
+~6e-10 ... 1e-9.
+```
+
+Ein glatter Taper besitzt diesen führenden Sprung gar nicht.
+
+Damit ist die starke ~1212-s-Hard-Cavity-Reflexion **keine automatische Vorhersage** des `R_smooth`-Branches.
+
+Die noch ungelöste Near-Zone besitzt im Stage-3.15-Band nur eine Größenskala von ungefähr `133–161 m`. Hypothetische lokale Vp-Erhöhungen über diese gesamte Zone liefern im einfachen PKIKP-180°-Timing-Proxy ungefähr:
+
+```text
++1% Vp:     ~0.23–0.28 ms
++10% Vp:    ~2.1–2.6 ms
++50% Vp:    ~7.9–9.5 ms
++100% Vp:   ~11.8–14.3 ms.
+```
+
+Das ist noch kein voller elastischer Full-Wave-Test; antipodale Fokussierung, Modenkonversion, Dämpfung und reale Near-Zone-Mineralphysik fehlen.
+
+Details: [`SEISMIK_STAGE3_16_17.md`](SEISMIK_STAGE3_16_17.md).
 
 ## Aktueller konservativer Status
 
@@ -134,20 +182,25 @@ Details: [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md).
 M_SL ~ 1e16 kg:
     stark durch relativistische Langzeitakkretion belastet
 
-M_SL ~ 1e11 kg:
-    neues Hawking/Michel-Kandidatenband im reduzierten ODE,
-    aber Earth Matching und Materialtransport noch nicht validiert
+R_hard / leere zentrale Ersatzkugel:
+    mechanisch verworfen
+
+M_SL ~ 1e11 kg, R_smooth:
+    Hawking/Michel-Kandidatenband im reduzierten ODE,
+    verteilte smooth-Kompensation im Seismikproxy extrem klein,
+    Near-Zone-Transport und neues Earth Matching weiterhin offen
 ```
 
 Damit ist weder ein Erd-SL nachgewiesen noch die gesamte kleine Erd-SL-Hypothese ausgeschlossen.
 
 ## Nächste harte Tests
 
-1. voll gekoppeltes Earth Matching im neuen `~1e11 kg`-Band,
-2. Near-Zone-Transport bei dimensionslosen Raten außerhalb der Stage-3.14-MD-Kalibrierung,
-3. Hawking-Greybody-/Teilchenspezies-, Spin- und Ladungssensitivität,
-4. Formation Rule für das niedrige Massenband,
-5. reale Seismologie-/Normalmoden-Likelihood und vorab definierte Detektionssignaturen.
+1. voll gekoppeltes Earth Matching des `R_smooth`-Branches im `~1e11 kg`-Band,
+2. selbstkonsistentes Near-Zone-Profil `rho(r), Vp(r), Vs(r)`,
+3. elastischer Full-Wave-/Antipodal-Array-Synthetic,
+4. Near-Zone-Transport außerhalb der Stage-3.14-MD-Kalibrierung,
+5. Hawking-Greybody-/Teilchenspezies-, Spin- und Ladungssensitivität,
+6. Formation Rule für das niedrige Massenband.
 
 ## Dateien
 
@@ -155,11 +208,12 @@ Damit ist weder ein Erd-SL nachgewiesen noch die gesamte kleine Erd-SL-Hypothese
 - [`TEST_STATUS.md`](TEST_STATUS.md) – Test- und Validierungsmatrix.
 - [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) – numerischer Entwicklungsstand.
 - [`AKKRETION_STATUS.md`](AKKRETION_STATUS.md) – Akkretions-/Langzeitstatus.
-- [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md) – aktueller Hawking/Michel-Massenscan.
+- [`MASSENSCAN_STAGE3_15.md`](MASSENSCAN_STAGE3_15.md) – Hawking/Michel-Massenscan.
+- [`SEISMIK_STAGE3_16_17.md`](SEISMIK_STAGE3_16_17.md) – externe Geophysik-Einwände und Smooth-Branch-Seismik.
 - [`CHANGELOG.md`](CHANGELOG.md) – Versions- und Korrekturhistorie.
 - [`CITATION.cff`](CITATION.cff) – Zitiermetadaten.
 - `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` – unveränderte Erstveröffentlichung.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.3*, theoretischer Forschungsentwurf, aktueller Entwicklungsstand Stage 3.15, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.3*, theoretischer Forschungsentwurf, aktueller Entwicklungsstand Stage 3.17, Rheinland-Pfalz, Deutschland.
