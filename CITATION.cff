@@ -1,26 +1,29 @@
 cff-version: 1.2.0
 message: "If you use or discuss the current repository text, please cite it as below. The archived V1.0 PDF remains the original publication record from 2026-08-23."
-title: "SL/BH-Kernhypothese Erdmodul V1.2"
+title: "SL/BH-Kernhypothese Erdmodul V1.3"
 type: report
 authors:
   - family-names: "Schlicksupp"
     given-names: "Daniel Marcel"
     affiliation: "Independent researcher, Rheinland-Pfalz, Deutschland"
-version: "1.2"
+version: "1.3"
 date-released: "2026-08-25"
 abstract: >-
   Theorie- und Forschungsentwurf eines kleinen redistributiven zentralen
   Schwarzloch-Modells fuer die Erde. Der aktuelle Repository-Stand umfasst
-  Massenbuchhaltung, geophysikalische Konsistenztests, einen voll gekoppelten
-  SL-TOV/Earth-Matching-Stack, eine Layered-PREM-Earth-Closure und den
-  numerischen Entwicklungsstand Stage 1.7. Fuer den Referenzzweig
-  M_SL=1e16 kg und q(r_a)=1e-14 sind r_c=500 km und r_c=300 km voll gekoppelt
-  validiert; der 300-km-Punkt ist cross-solver-validiert. Aus den validierten
-  Zweigen wurden differentielle Vorhersagen fuer Gravitation,
-  P-Wellen-Geschwindigkeit, ICB/CMB-Lage, P-Wellen-Laufzeit und
-  Traegheitsmoment berechnet. Numerische Validierung bezeichnet Solver- und
-  Konvergenzkriterien und keinen experimentellen Nachweis eines Schwarzen
-  Lochs im Erdzentrum.
+  einen relativistischen Skalar-Tensor-Minimalrahmen, BH-/Horizon-konsistente
+  Randbedingungen, Layered-PREM-Earth-Matching, geophysikalische und
+  seismologische Sensitivitaeten sowie einen gestuften Akkretions-,
+  Hochdruck-EOS-, Rheologie- und Langzeit-Audit bis Stage 3.14. Fuer den
+  Referenzzweig M_SL=1e16 kg sind r_c=500 km und r_c=300 km voll gekoppelt
+  numerisch validiert, der 300-km-Punkt cross-solver-validiert. Der aktuelle
+  staerkste Gegentest ist die relativistische Michel-Akkretion: in einer
+  phenomenologischen condensed-to-degenerate EOS ergibt sich fuer den
+  1e16-kg-Zweig eine Akkretionskapazitaet weit oberhalb der geologischen
+  Langzeitrate; eine ausreichende Festkoerper-/Coulomb-Unterdrueckung ist
+  bisher nicht nachgewiesen. Numerische Validierung bezeichnet ausschliesslich
+  Solver- und Konvergenzkriterien und keinen experimentellen Nachweis eines
+  Schwarzen Lochs im Erdzentrum.
 keywords:
   - black hole
   - Earth interior
@@ -29,6 +32,8 @@ keywords:
   - TOV
   - geophysics
   - numerical relativity
-  - Earth matching
+  - Michel accretion
+  - high-pressure equation of state
+  - Coulomb crystal
   - seismic observables
-  - scientific model
+  - scientific hypothesis
