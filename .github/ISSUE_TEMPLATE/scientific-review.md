@@ -1,6 +1,6 @@
 ---
 name: Wissenschaftlicher Review
-aabout: Reproduktion, Falsifikation oder technischer Einwand
+about: Reproduktion, Falsifikation oder technischer Einwand
 title: "[Review] "
 labels: ""
 assignees: ""
