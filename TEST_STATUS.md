@@ -1,51 +1,39 @@
-# SL/BH-Kernhypothese Erdmodul – aktueller Test- und Validierungsstand
+# SL/BH-Kernhypothese Erdmodul – Test- und Validierungsstand
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 25.08.2026  
-**Theorie-Textstand:** Erdmodul V1.2  
-**Numerischer Entwicklungsstand:** Stage 1.7  
+**Theorie-Textstand:** Erdmodul V1.3  
+**Aktueller Forschungsstand:** Stage 3.14
 
 ## 1. Statusbegriffe
 
-Die in diesem Repository verwendeten Begriffe werden strikt getrennt:
+- **validiert** = der konkret benannte numerische Solver-/Konvergenztest erfüllt die festgelegten Kriterien.
+- **Kandidat** = numerisch plausibel, aber nicht vollständig cross-solver-/mesh-bestätigt.
+- **Sensitivität** = Parameter- oder Modellvergleich; keine empirische Grenze.
+- **offen** = mit den vorhandenen Gleichungen/Daten noch nicht belastbar entschieden.
+- **korrigiert/zurückgezogen** = ein früheres Zwischenresultat wurde durch einen härteren Test ersetzt.
+- **empirisch bestätigt** = würde unabhängige Messdaten erfordern und ist derzeit nicht erreicht.
 
-- **validiert** = der konkret angegebene numerische Test bzw. Solver-Check erfüllt die festgelegten Kriterien,
-- **Kandidat** = numerisch plausibel, aber mindestens ein erforderlicher Crosscheck fehlt,
-- **offen** = mit dem aktuellen Verfahren noch nicht belastbar entschieden,
-- **empirisch bestätigt** = würde eine unabhängige Beobachtung oder Messung erfordern und ist derzeit **nicht** erreicht.
-
-Kein numerischer Status in diesem Dokument ist ein direkter Nachweis eines Schwarzen Lochs im Erdzentrum.
+Keiner der hier dokumentierten Tests ist eine direkte Detektion eines Schwarzen Lochs im Erdzentrum.
 
 ## 2. Referenzzweig
 
-Der derzeit am weitesten ausgearbeitete Referenzzweig verwendet
+Der am weitesten ausgearbeitete Testzweig verwendet
 
 ```text
 M_SL = 1e16 kg
 q(r_a) = 1e-14
 ```
 
-mit einer kleinen redistributiven Zentralmasse. Das zentrale Objekt wird im Basismodell nicht zusätzlich zur Erdmasse addiert, sondern ersetzt dieselbe PREM-Masse im Zentralbereich.
-
-## 3. Stage 1.3C – frühere Short-Range-Frontier
-
-Der ältere voll gekoppelte Single-Shooting-Stand validierte den Referenzzweig bei
+mit redistributiver Zentralmasse:
 
 ```text
-r_c = 1000 km
-r_c =  750 km
-r_c =  500 km
+M_PREM(<r_rep) = M_SL.
 ```
 
-und verlor unterhalb von 500 km zunehmend die numerische Konditionierung. Der damalige 100-km-Collocation-Lauf blieb wegen fehlender Mesh-Konvergenz Kandidat.
+## 3. Struktur- und Earth-Matching-Block
 
-Dieser Stand ist historisch wichtig, wurde aber durch die späteren Solver- und EOS-Stufen erweitert.
-
-## 4. Stage 1.5D – BH-konsistente Fortsetzung
-
-Mit der verbesserten BH-konsistenten Randwertbehandlung wurde die frühere Frontier verschoben.
-
-Für den Referenzzweig gilt:
+### Stage 1.5D – BH-konsistente Fortsetzung
 
 | `r_c` | Status |
 |---:|---|
@@ -54,174 +42,234 @@ Für den Referenzzweig gilt:
 | 275 km | Kandidat |
 | 250–100 km | offen |
 
-Für `r_c = 300 km` wurde im validierten Zweig ungefähr
+### Stage 1.6 – Layered-PREM-Closure
+
+GR-Baseline:
 
 ```text
-xi / xi_crit,BH ≈ 1.000142
-q_max            ≈ 1e-14
+Delta R/R ~ 4.17e-9
+Delta M/M ~ 4.44e-8
 ```
 
-erreicht.
+Voll gekoppelte Referenzpunkte:
 
-Die differentielle Massenabweichung des SL-Zweigs gegenüber dem zugehörigen GR-Lauf liegt in dieser Stufe ungefähr bei
-
-```text
-Delta M_SL / M_GR ≈ -(8–9)e-6.
-```
-
-Zum Vergleich lag die ältere systematische Abweichung der reinen GR/PREM-Barotrop-Closure in der Größenordnung
-
-```text
-~ 6.94e-5,
-```
-
-also deutlich über dem differentiellen Signal des späteren SL-Zweigs. Genau deshalb wurde die Earth-Closure anschließend weiter verbessert.
-
-## 5. Stage 1.6 – Layered-PREM-EOS und Cross-Solver-Validierung
-
-Stage 1.6 ersetzt die grobere Barotrop-Proxy-Baseline durch eine stärker geschichtete PREM-nahe Earth-Closure.
-
-### GR-Baseline
-
-Die neue GR-Baseline reproduziert die Zielwerte mit ungefähr
-
-```text
-Delta R / R ≈ 4.17e-9
-Delta M / M ≈ 4.44e-8
-```
-
-und liegt damit konservativ auf dem Niveau `~1e-7` oder besser.
-
-### Voll gekoppelte SL-Läufe
-
-Für den Referenzzweig wurden cross-solver-validiert:
-
-| `r_c` | `Delta M/M` gegenüber GR | Status |
+| `r_c` | `Delta M/M` gegen GR | Status |
 |---:|---:|---|
-| 500 km | `≈ -9.2e-6` | validiert |
-| 300 km | `≈ -8.65e-6` | validiert |
+| 500 km | `~ -9.2e-6` | validiert |
+| 300 km | `~ -8.65e-6` | cross-solver-validiert |
 | 250 km | — | Kandidat |
 | 200 km | — | offen |
 
-Der **kleinste derzeit cross-solver-validierte voll gekoppelte Punkt ist damit `r_c = 300 km`**.
+Die 300-km-Grenze ist eine Solverfrontier, keine physikalische Mindestreichweite.
 
-Diese 300-km-Grenze ist eine aktuelle numerische Validierungsgrenze des implementierten Zweigs, keine fundamentale physikalische Mindestreichweite.
+### Stage 1.7 – Erdobservablen
 
-## 6. Stage 1.7 – abgeleitete Erdobservablen
-
-Auf den validierten Referenzlösungen wurden anschließend messnähere Größen ausgewertet.
-
-### 6.1 Relative Gravitation
-
-Für `M_SL = 1e16 kg`, `q(r_a)=1e-14`:
-
-| `r_c` | `max |Delta g/g|` für `r >= 100 km` | zentrale Größenordnung ab `r >= 10 km` |
-|---:|---:|---:|
-| 500 km | `≈ 1.8e-4` | `≈ 1.5e-3` |
-| 300 km | `≈ 2.1e-4` | `≈ 1.6e-3` |
-
-Diese Werte sind Modellvorhersagen des konkret angegebenen numerischen Zweigs, keine bereits gemessenen Anomalien.
-
-### 6.2 P-Wellen-Geschwindigkeit
-
-Die relative Änderung der modellierten P-Wellen-Geschwindigkeit liegt für die validierten Referenzzweige in der Größenordnung
+Für den Referenzzweig wurden als differentielle Modellgrößen unter anderem berechnet:
 
 ```text
-|Delta V_P / V_P| ~ 3e-6.
+max |Delta g/g| (r >=100 km): ~1.8e-4 ... 2.1e-4
+|Delta Vp/Vp|:                 ~3e-6
+Delta r_ICB:                   ~ -44 ... -61 m
+Delta r_CMB:                   ~ -35 ... -34 m
+Delta T_P:                     ~ +0.009 ... +0.012 s
+Delta I/I:                     ~ -(7...8)e-6
 ```
 
-### 6.3 ICB-/CMB-Verschiebungen
+Diese Werte sind Sensitivitäten des angegebenen Modells, keine beobachteten Anomalien.
 
-`ICB` = Inner Core Boundary, `CMB` = Core-Mantle Boundary.
+### Stage 1.8/1.9 – Seismologie-/Normalmoden-Proxies
 
-| `r_c` | `Delta r_ICB` | `Delta r_CMB` |
-|---:|---:|---:|
-| 500 km | `-43.8 m` | `-35.0 m` |
-| 300 km | `-61.1 m` | `-33.9 m` |
+- 1D P-/PKP-/PKIKP-Raytracing implementiert.
+- Für `q=1e-14` liegen typische gleiche-Distanz-Laufzeitverschiebungen im Millisekundenbereich.
+- Toroidale Normalmoden wurden mit einem vereinfachten SNREI-artigen FEM-Prototyp untersucht.
+- Absolute Moden besitzen in der vereinfachten Closure ungefähr Prozent-Bias; kleine SL-GR-Frequenzverschiebungen sind nicht als Präzisionsnachweis promoted.
 
-### 6.4 P-Wellen-Laufzeit
+## 4. Stabilität, Langzeit und Formation
 
-Die berechnete differentielle P-Wellen-Laufzeitänderung beträgt:
+### Stage 2.0 – algebraische Stabilitätsfilter
 
-| `r_c` | `Delta T_P` |
-|---:|---:|
-| 500 km | `+0.0119 s` |
-| 300 km | `+0.0088 s` |
-
-### 6.5 Trägheitsmoment
-
-Für die Materiekomponente liegt die differentielle Änderung des normierten Trägheitsmoments in der Größenordnung
+Für die getesteten kleinen `q`-Zweige bleiben
 
 ```text
-Delta I / I ~ -(7–8)e-6.
+F > 0
+D = F + 3/2 F_chi^2 > 0.
 ```
 
-Auch dieser Wert gehört zum angegebenen Referenzzweig und ist nicht als unabhängige Messung zu lesen.
+Damit wurde kein elementarer negativer effektiver Planck-Massen-/Ghost-Filter verletzt. Eine vollständige dynamische Stabilitätsanalyse ist nicht abgeschlossen.
 
-## 7. Stage-1.7-Amplitudenscan bei `r_c = 300 km`
+### Stage 2.1–2.5 – Bondi/Hawking Benchmarks
 
-Zusätzlich wurde die Reaktion auf größere Feldamplituden untersucht. Dieser Scan dient der Sensitivitätsanalyse und darf nicht mit dem validierten Referenzpunkt `q=1e-14` gleichgesetzt werden.
-
-| `q(r_a)` | `Delta r_ICB` | `Delta r_CMB` | `Delta T_P` |
-|---:|---:|---:|---:|
-| `1e-14` | `≈ -61 m` | `≈ -34 m` | `+0.0088 s` |
-| `1e-13` | `≈ -604 m` | `≈ -339 m` | `≈ +0.095 s` |
-| `3e-13` | `≈ -1.77 km` | `≈ -1.02 km` | nicht als konservativer Referenzwert promoted |
-
-Der Scan zeigt, dass die beobachtungsnahen Signaturen mit wachsender Amplitude schnell größer werden. Er dient damit auch dazu, zukünftige Ausschluss- und Sensitivitätsgrenzen zu formulieren.
-
-## 8. Was gegenüber dem alten Repository-Stand erreicht wurde
-
-Der frühere öffentliche Stand endete im Wesentlichen bei der Stage-1.3C-Frontier von 500 km. Seitdem wurden folgende Fortschritte erzielt:
-
-1. BH-konsistentere Randwertbehandlung,
-2. Fortsetzung des voll gekoppelten Zweigs bis 300 km,
-3. Layered-PREM-EOS / deutlich präzisere GR-Baseline,
-4. Cross-Solver-Validierung der 500- und 300-km-Punkte,
-5. explizite Gravitätsprofile,
-6. P-Wellen-Geschwindigkeitsänderungen,
-7. ICB-/CMB-Verschiebungen,
-8. P-Wellen-Laufzeitänderungen,
-9. Trägheitsmoment-Abweichungen,
-10. Amplituden-Sensitivität bei `r_c=300 km`.
-
-Damit ist der aktuelle Entwicklungsstand deutlich weiter als der alte 1.3C-Repository-Text.
-
-## 9. Konservativer aktueller Status
-
-Für den konkret dokumentierten Referenzzweig
+Für `M_SL=1e16 kg` liefert die unmodifizierte kanonische Bondi-Referenz grob
 
 ```text
-M_SL = 1e16 kg
-q(r_a) = 1e-14
+Mdot_Bondi ~ 1.28e4 kg/s
 ```
 
-lautet der derzeit belastbare numerische Status:
+und wäre geologisch viel zu schnell.
+
+Ein einfacher Standard-Hawking-Lebensdauerbenchmark ergibt eine Erdalter-Untergrenze in der Größenordnung
 
 ```text
-r_c = 500 km  -> validiert
-r_c = 300 km  -> validiert und cross-solver-bestätigt
-r_c = 250–275 km -> Kandidatenbereich
-r_c <= 200–250 km -> numerisch offen, abhängig von Stufe und Solver
+M_Hawking,min ~ 1.19e11 kg.
 ```
 
-Die exakte Grenze hängt vom jeweiligen Testlevel ab. Deshalb werden Stage-1.5D-, Stage-1.6- und Stage-1.7-Aussagen getrennt dokumentiert und nicht zu einer künstlich schärferen physikalischen Grenze vermischt.
+### Stage 2.6/2.7 – vorgeschlagene Quantenunterdrückung
 
-## 10. Noch offene harte Prüfsteine
+Eine vorgeschlagene quantenmechanische Capture-Unterdrückung wurde als Sensitivität geprüft, ist in der Literatur jedoch umstritten. Sie wird **nicht** als gelöster Langzeitmechanismus verwendet.
 
-Trotz des Fortschritts bleiben insbesondere offen:
+### Stage 2.9 – Formation/Capture
 
-- robuste Fortsetzung unterhalb von 300 km,
-- vollständige Mesh-/Jacobian-/Continuation-Konvergenz im Short-Range-Bereich,
-- fundamentale Hochdruck-Fe/Ni-EOS statt PREM-kalibrierter Näherung,
-- Near-Zone-Capture- und Akkretionsphysik,
-- thermischer Langzeitabschluss,
-- konsistente Formation Rule,
-- vollständiger Seismologie-/Normalmoden-Likelihood-Fit,
-- unabhängige, vorab definierte Detektionssignaturen und reale Datenanalyse.
+Einfache heutige galaktische PBH-Einfangraten sind für den Referenzfall extrem klein. Ein gewöhnlicher heutiger Capture-Ursprung ist daher stark unplausibel; frühe primordial gebundene Entstehung bleibt als offene Formation Rule getrennt.
 
-## 11. Wissenschaftliche Aussagegrenze
+## 5. Mikroakkretion und Wärme
 
-Der aktuelle Stand erlaubt die Aussage, dass innerhalb der implementierten Gleichungen, Randbedingungen und numerischen Tests ein kleiner redistributiver SL/BH-Zweig bis `r_c = 300 km` reproduzierbar numerisch verfolgt und mit mehreren abgeleiteten Erdobservablen charakterisiert wurde.
+### Stage 3.2–3.5
 
-Er erlaubt **nicht** die Aussage, dass ein Schwarzes Loch im Erdzentrum experimentell nachgewiesen wurde.
+Getestet wurden als Grenzregime:
+
+- direkte ballistische Capture-Proxies,
+- Knudsen-/Kontinuumschecks,
+- Festkörperdiffusion,
+- Creep-Supply,
+- Wärmeleitung,
+- Melt-Front-/Stefan-Proxies.
+
+Ergebnis: **„lokale Wärme schmilzt zwangsläufig alles und startet automatisch Bondi“ ist zu stark.** Ob eine Fluidzone entsteht, hängt von Transport, lokaler Thermalisierung, Rheologie und Phasenfeedback ab.
+
+### Stage 3.6 – korrigierter Zwei-Phasen-Proxy
+
+Stage 3.5 hatte implizit volle lokale Energiedeponierung in der Melt-Radius-Abschätzung verwendet. Stage 3.6 führte explizit
+
+```text
+P_local = f_th * Mdot * c_s^2
+```
+
+ein.
+
+Für einen repräsentativen Fall `eta=1e14 Pa s`, `k=100 W/m/K`, `DeltaT=500 K` liegt die Melt-to-rB-Schwelle eher bei mehreren Prozent lokaler Kopplung als bei ~1%.
+
+## 6. Literatur-/Rheologie-Audit
+
+### Stage 3.7
+
+- Die klassische Bondi-Algebra und der 4D-Koeffizient wurden reproduziert.
+- Kein mathematischer Fehler in der Bondi-Formel gefunden.
+- Hauptproblem ist die **Anwendbarkeit** auf kondensierte Erdmaterie.
+
+### Stage 3.8/3.9
+
+- konstante Viskosität durch stressabhängige hcp-Fe-Potenzrheologie ersetzt,
+- starke Deformationsraten nahe der SL-Nahzone zeigen, dass langsame geophysikalische Viskositäten nicht direkt extrapoliert werden dürfen,
+- ideal-plastische Cavity-Grenztests zeigen Übergänge im GPa-Festigkeitsbereich.
+
+## 7. Hochdruck-EOS und relativistische Akkretion
+
+### Stage 3.10
+
+Ein PREM-basierter lokaler Stiffness-Check ergab `Gamma_eff` im Kern grob deutlich über `5/3`. Eine konstante `Gamma~4`-Extrapolation wurde als Toy-Modell geprüft.
+
+**Korrektur:** Die daraus abgeleitete alte Capture-Grenze um `~54 r_s` ist nicht robust und wurde später zurückgezogen.
+
+### Stage 3.11
+
+Smith-/Hakim-basierte Hochdruck-Fe-EOS wurden bis in den TPa-Bereich als gehärtete äußere Near-Zone verwendet. Ergebnis:
+
+- gemessene/DFT-gestützte Fe-EOS reicht wesentlich weiter als PREM,
+- der eigentliche mikroskopische Capture-/Sonic-Bereich liegt aber noch tiefer,
+- konstantes `Gamma~4` darf nicht bis zum Horizont extrapoliert werden.
+
+### Stage 3.12 – relativistische Michel-Akkretion
+
+Wichtige Korrektur: Für steife kausale EOS kann die volle GR-Michel-Lösung einen regulären kritischen Akkretionszweig besitzen, auch wenn die Newtonsche Bondi-Topologie für `Gamma>5/3` versagt.
+
+Der allgemeine barotrope Michel-Solver reproduziert den analytischen `Gamma=2`-Test mit relativer Mdot-Abweichung von ungefähr `2e-14`.
+
+Mit einer phenomenologischen condensed-matter -> degenerierte-Elektronen-EOS wurden für `M_SL=1e16 kg` über einen `Y_e`-Sensitivitätsbereich ungefähr
+
+```text
+Mdot_Michel ~ 147 ... 1460 kg/s
+```
+
+erhalten.
+
+Die Zeit bis `+1%` Masse liegt dann nur bei ungefähr
+
+```text
+~2.1e3 ... 2.1e4 yr.
+```
+
+Für weniger als `1%` Wachstum über `4.54 Gyr` ist eine Unterdrückung gegenüber Michel von ungefähr
+
+```text
+~2e5 ... 2e6
+```
+
+erforderlich.
+
+### Stage 3.12 Hawking/Michel-Massenfenster
+
+Unter Standard-Hawking + **ununterdrückter** Stage-3.12-Michel-Akkretion ergibt sich in diesem Modell kein Langzeit-Überlappungsfenster:
+
+```text
+Michel <1%-Massenobergrenze ~4.8e9 ... 4.8e10 kg
+Hawking-Erdatler-Untergrenze ~1.19e11 kg
+```
+
+Das ist ein **starker negativer Modellbefund**.
+
+## 8. Festkörper-/Plasma-Kopplung
+
+### Stage 3.13
+
+Eine reduzierte selbstkonsistente hcp-Fe-Solid->Michel-Interface-Kopplung bei Millimeterradien ergab nahezu die volle Michel-Kapazität bei subprozentigen Druckabweichungen. Damit liefert gewöhnliche hcp-Fe-Rheologie dort nicht die benötigte `1e5–1e6`-Unterdrückung.
+
+Eine scheinbare Rettung bei einem mikroskopischen Interface mit einem `8 GPa`-Stresscap wurde als Sensitivität gefunden, aber ausdrücklich als materialphysikalisch unsicher markiert.
+
+### Stage 3.14 – Coulomb-Plastizität
+
+Die tiefe Materie wurde auf Coulombkristall-Skalierungen umgestellt. Ergebnis:
+
+- die Stage-3.12-Michel-Kritikpunkte liegen im oder nahe am untersuchten dimensionslosen Coulomb-Plastizitätsratenbereich,
+- die reduzierte Michel-Druckabweichung liegt deutlich über der verwendeten Coulomb-Yield-Skala,
+- ein rein elastischer Coulombkristall würde yielden,
+- aktuelle Plastizitätsresultate sprechen nach Yield eher für fortgesetzten plastischen Fluss als für eine dauerhaft blockierende starre Phase.
+
+**Korrektur:** Die Stage-3.13-`8 GPa`-Mikrorettung wird als physikalische Langzeitgrenze zurückgezogen, weil dieser hcp-Fe-Stresscap im Coulomb-Regime nicht übertragbar ist.
+
+## 9. Aktuelle Statusmatrix
+
+| Bereich | Status |
+|---|---|
+| starke Erd-SL-Variante | mit Erdstruktur unvereinbar |
+| kleiner redistributiver Earth-Matching-Zweig | numerisch bis 300 km gehärtet |
+| Seismologie/Normalmoden | Sensitivitäten, kein empirischer Nachweis |
+| Standard-Bondi direkt auf festen Kern | nicht automatisch gerechtfertigt |
+| relativistische Michel-Akkretion | starker negativer Test für `1e16 kg` |
+| hcp-Fe-Solid-Suppression | bei mm-Skalen nicht ausreichend im reduzierten Modell |
+| Coulomb-Solid-Suppression | einfache Blockade derzeit nicht nachgewiesen |
+| Formation | offen / gewöhnlicher heutiger Capture stark unplausibel |
+| empirische Detektion | keine |
+
+## 10. Nächster harter Test
+
+Der nächste prioritäre Schritt ist ein **Massenscan** mit demselben physikalischen Stack:
+
+```text
+M_SL ~ 1e8 ... 1e16 kg
+```
+
+gegen
+
+- Standard-Hawking,
+- relativistische Michel-Akkretion,
+- Coulomb-/Plasma-Transport,
+- Earth-age-Wachstum,
+- strukturelle Earth-Matching-Grenzen.
+
+Ziel ist nicht, einen bevorzugten Massenpunkt zu retten, sondern zu bestimmen, ob überhaupt ein konsistentes Erd-SL-Massenfenster verbleibt.
+
+## 11. Aussagegrenze
+
+Der aktuelle Stand zeigt einen weit ausgearbeiteten, falsifizierbaren theoretischen Erd-SL-Rahmen mit bestandenen numerischen Teiltests und gleichzeitig einem starken offenen/negativen Akkretionsblock.
+
+Er erlaubt **nicht** die Aussage, dass ein Schwarzes Loch im Erdzentrum experimentell nachgewiesen oder die Hypothese als etablierte physikalische Theorie bestätigt wurde.
