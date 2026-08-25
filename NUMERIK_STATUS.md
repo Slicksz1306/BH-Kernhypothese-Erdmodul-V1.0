@@ -1,6 +1,6 @@
 # Numerischer Status – SL-TOV / Earth Matching
 
-**Projekt:** BH-/SL-Kernhypothese – Erdmodul  
+**Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 25.08.2026  
 **Aktuelle Stufe:** Earth Matching 1.3C
 
