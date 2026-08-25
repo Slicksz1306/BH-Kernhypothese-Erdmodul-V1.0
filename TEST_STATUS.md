@@ -2,8 +2,8 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 25.08.2026  
-**Theorie-Textstand:** Erdmodul V1.4  
-**Aktueller Forschungsstand:** Stage 3.68
+**Theorie-Textstand:** Erdmodul V1.5  
+**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; 3.69/3.70 definiert, nicht durchgefuehrt
 
 ## Statusbegriffe
 
@@ -39,7 +39,7 @@ Stage 3.28 korrigierte die Hawking-Normierung. Der relevante H+-Bereich verschob
 4.82e11 ... 5.49e11 kg.
 ```
 
-Stage 3.30 verglich ein konservatives Greybody-Primaer-`anti-nu_e`-Signal mit publizierten spektrumsunabhaengigen SK-IV-Limits.
+Stage 3.30 verglich ein konservatives Greybody-Primär-`anti-nu_e`-Signal mit publizierten spektrumsunabhaengigen SK-IV-Limits.
 
 ```text
 25.29-31.29 MeV:
@@ -82,7 +82,7 @@ Die weiteren Stages prueften Yield, plastischen Supply, Rotation, Knudsen-Ueberg
 | Test | kleiner smooth H0-Branch |
 |---|---|
 | Gesamtmasse / `GM` | kompatibel durch redistributive Buchhaltung |
-| Traegheitsmoment / Rotation | Effekt im kleinen Branch extrem klein |
+| Trägheitsmoment / Rotation | Effekt im kleinen Branch extrem klein |
 | reduzierte Hydrostatik | kein Ausschluss |
 | starke gesamte `r_rep`-Zone | frueherer Proxy **korrigiert**; physische starke Zone liegt viel tiefer |
 | Body-wave Timing Proxy | kein messbarer robuster Ausschluss |
@@ -117,8 +117,10 @@ Die weiteren Stages prueften Yield, plastischen Supply, Rotation, Knudsen-Ueberg
 
 ## 8. Verbleibende Endstufen
 
-1. High-Fidelity-Multiphysik/HPC inklusive echter 3-D-Full-Wave-Seismik.
-2. Dedizierter experimenteller bzw. Real-Data-Test.
+- **Stage 3.69 – High-Fidelity Multiphysics:** `DEFINED / NOT PERFORMED`.
+- **Stage 3.70 – Experimental H0 Falsification:** `DEFINED / NOT PERFORMED`.
+
+Diese Definitionen sind keine bestandenen Tests. Der letzte tatsaechlich bearbeitete Teststand bleibt Stage 3.68. Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
 
 ## 9. Konservativer Schluss
 
