@@ -7,7 +7,7 @@ authors:
     given-names: "Daniel Marcel"
     affiliation: "Independent researcher, Rheinland-Pfalz, Deutschland"
 version: "1.5"
-date-released: "2026-08-25"
+date-released: "2026-08-26"
 abstract: >-
   Theoretischer Forschungsentwurf eines kleinen zentralen Schwarzloch-Modells
   fuer die Erde mit glatter redistributiver PREM-Massenbuchhaltung. Die bis
@@ -21,19 +21,24 @@ abstract: >-
   ausgeschlossen, besitzt aber keine positive Detektion. H0 ist kein
   Standard-GR/QFT-Zweig und benoetigt eine fundamentale Begruendung fuer das
   Ausbleiben der Hawking-Strahlung. Die getesteten Standard-Formation-/Delivery-
-  Pfade, einschliesslich spaetem Earth-Capture, Proto-Earth-/Planetesimal-
-  Capture und normaler Halo-to-disk-Einbettung, sind stark negativ. V1.5
-  definiert Stage 3.69 (High-Fidelity Multiphysics) und Stage 3.70
-  (Experimental H0 Falsification) als verbleibende Validierungsprotokolle;
-  beide sind ausdruecklich DEFINED / NOT PERFORMED. Der Forschungsstand ist
-  weder ein experimenteller Nachweis eines Erdzentrum-BH noch eine etablierte
-  Theorie.
+  Pfade sind stark negativ. Stage 3.68E integriert externes Fachfeedback als
+  technische Modellhaertung: der zentrale PREM-Sound-Speed-Proxy wird explizit
+  mit c_eff=10.4355 km/s dokumentiert, Quantum/Wave-Capture wird als offener
+  Pflichtblock fuer die kleine Horizontskala in Stage 3.69 aufgenommen, und
+  direkte Seismik wird nur bei einer makroskopisch gekoppelten Signatur als
+  aussichtsreicher Stage-3.70-Kanal behandelt. V1.5 definiert Stage 3.69
+  (High-Fidelity Multiphysics) und Stage 3.70 (Experimental H0 Falsification)
+  als verbleibende Validierungsprotokolle; beide sind ausdruecklich DEFINED /
+  NOT PERFORMED. Der Forschungsstand ist weder ein experimenteller Nachweis
+  eines Erdzentrum-BH noch eine etablierte Theorie.
 keywords:
   - black hole
   - Earth interior
   - PREM
   - geophysics
   - Michel accretion
+  - quantum absorption
+  - wave capture
   - Hawking radiation
   - greybody factors
   - neutrinos
