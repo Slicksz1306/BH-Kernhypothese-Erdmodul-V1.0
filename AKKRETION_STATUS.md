@@ -2,412 +2,316 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 26.08.2026  
-**Forschungsstand:** Materie-/Capture-/Transport-Closure bis Stage 3.69E/A-9 bearbeitet; first-principles Netto-`Mdot` offen
+**Forschungsstand:** Matter-/Capture-/Transportstack bis A12c partiell bearbeitet; general-EOS Netto-`Mdot` offen
 
 ## Aussagegrenze
 
-Bondi-/Michel-Raten bleiben aeussere Supply-/Kapazitaetsbenchmarks. Einzelteilchen-/Wellenquerschnitte sind innere Sink-Benchmarks. Die reale Rate muss beide ueber Transport, Recycling, Backpressure, Charge und Reaktionen koppeln.
+Die reale BH-Akkretionsrate ist eine gekoppelte Groesse:
+
+```text
+outer relativistic supply(EOS)
+-> dense-matter transport/recycling/backpressure
+-> charge/composition
+-> inner wave capture
+-> net Mdot_BH.
+```
+
+Daher gilt weiterhin:
 
 ```text
 Mdot_net != automatisch Mdot_Michel
-Mdot_net != automatisch p_single * Mdot_Michel
+Mdot_net != automatisch p_single * Mdot_supply.
 ```
 
-A9 liefert jetzt erstmals eine reduzierte Residence-/Processing-Closure zwischen diesen beiden Extremen.
-
-## Referenzskalen bei `M_BH=1e11 kg`
+Neu seit A12c gilt zusaetzlich:
 
 ```text
-rho_c = 13.0885 g/cm^3
-c_eff = 10.4355 km/s
+historical Michel benchmark != universal supply rate.
+```
+
+Der historische Projektbereich wird ab jetzt nur noch als **LEGACY / EOS-SENSITIVE BENCHMARK** gefuehrt.
+
+# 1. Referenzzustand Erde
+
+PREM-Zentrum:
+
+```text
+rho_c      ~13.08848 g/cm3
+c_eff      ~10.4355 km/s
+Kappa_S    ~1.4253 TPa
+Pressure   ~363.852 GPa
+dK/dP      ~2.356.
+```
+
+Bei `M=1e11 kg`:
+
+```text
 r_B ~6.13e-8 m
-r_s ~1.49e-16 m
+r_s ~1.49e-16 m.
 ```
 
-Historischer Michel-Supply-Benchmark:
+# 2. Innerer Wave-/Capture-Sink
+
+## Proton
+
+Bei Earth-speed `10.4355 km/s`, `M=1e11 kg`:
 
 ```text
-Mdot_Michel ~1.47e-8 ... 1.46e-7 kg/s
-             ~0.46 ... 4.61 kg/year.
+sigma_p ~2.174e-22 m2
+sigma_p/sigma_classical ~0.9503.
 ```
 
-## Wave-Sink-Ergebnisse
+Keine Orders-of-Magnitude-Wellenunterdrueckung.
 
-### Protonen
-
-```text
-neutral Earth-speed proton @1e11 kg:
-sigma_p ~2.174e-22 m^2
-~0.9503 sigma_classical
-```
-
-Keine starke Protonen-Wellenunterdrueckung.
-
-Charged-Proton-Subtest:
+Charged-Proton-Sensitivitaet:
 
 ```text
 Q=0 e      -> ~0.949 classical
 Q=3.67 e   -> ~0.889
 Q=10 e     -> ~0.765
-Q=24.18 e  -> ~0.517
+Q=24.18 e  -> ~0.517.
 ```
 
-Charge-Feedback ist relevant, aber im getesteten Bereich kein Orders-of-Magnitude-Protonenstopper.
+Charged-electron long-range Coulomb matching bleibt OPEN.
 
-### Fe/Ni
+## Fe/Ni
 
-`Fe-56`/`Ni-58` sind `0+`; erster kohärenter Composite-Proxy ist Klein-Gordon/scalar.
+Dominante `Fe-56`/`Ni-58`-Kerne haben `0+`; kohärenter erster Composite-Proxy ist scalar/Klein-Gordon.
+
+Bei `M=1e11 kg`:
 
 ```text
-Fe-56 @1e11 kg: ~0.99754 classical
-Ni-58 @1e11 kg: ~0.99646 classical
+Fe-56 ~0.99754 classical
+Ni-58 ~0.99646 classical.
 ```
-
-Keine grosse kohärente Fe/Ni-Wellenunterdrueckung gefunden.
-
-## Screening
-
-Dense-Fe Elektronenscreening liegt im reduzierten freien-Elektronenproxy auf atomaren/sub-nm Skalen:
 
 ```text
-~few 1e-11 ... 1e-10 m << r_B.
+large coherent Fe/Ni wave suppression: NOT FOUND.
 ```
 
-Daher ist eine kleine BH-Nettoladung lokal wichtig, aber kein ungescreenter Coulomb-Blocker ueber die gesamte `r_B`-Supply-Zone.
+# 3. Recycling statt Single-pass-Faktor
 
-## Single-pass versus Recycling
-
-Direkter Hintergrund-Single-pass-Proxy:
+Direkter Single-pass-Hintergrundproxy bei `1e11 kg` lag bei etwa
 
 ```text
-Mdot_single ~3.1e-14 kg/s
+Mdot_single ~3.1e-14 kg/s.
 ```
 
-Luecke zum Michel-Supply:
-
-```text
-factor ~4.7e5 ... 4.7e6.
-```
-
-Diese Luecke ist **kein** nachgewiesener Suppressionsfaktor.
-
-Fuer repeated encounters:
+Ein kleiner one-pass Loss-Cone ist aber kein stationaerer Unterdrueckungsfaktor. Fuer wiederholte Encounters gilt exakt
 
 ```text
 chi_capture = p/(p+e_perm)
 ```
 
-mit Einzelpass-Capture `p` und permanentem Escape `e_perm`.
+mit permanentem Escape `e_perm`.
 
-Ohne permanenten Escape kann ein sehr kleines `p` durch Recycling zu hoher eventual capture fuehren. Eine Netto-Unterdrueckung nahe dem Single-pass-Wert erfordert dagegen einen physikalischen dauerhaften Escape-/Backpressure-Kanal.
+A10 zeigte, dass selbst ein lokaler `Kn~1`-Uebergang nicht automatisch permanenten Escape bedeutet, weil die aeussere Fe/WDM-Zone kollisionsoptisch dick bleibt.
 
-## Kollisionalitaet – A7-Korrektur
+# 4. A9-A12 inner processing capacity
 
-Strong-coupling/geometrischer Branch:
-
-```text
-rho~r^-3/2
-lambda_geom~r^3/2
-Kn~r^1/2
-```
-
-=> `Kn` sinkt nach innen; kein automatischer collisionless transition.
-
-Weak-Coulomb/Spitzer:
+A9 definierte
 
 ```text
-lambda_C~T^2/n
-Kn_C~r^-3/2
+Xi = Mdot_supply / Mdot_capacity.
 ```
 
-=> collisionless transition moeglich, aber nur falls die Materie tatsaechlich `Gamma<<1` erreicht.
-
-## Backpressure-PDE
-
-Ein eigener sphärischer 1-D-Bondi-Euler-Prototyp reproduziert den analytischen transsonischen Massenfluss auf Prozentniveau.
-
-- absorbierender Innenrand: stationaerer Bondi-Flux bleibt erhalten;
-- reflektierender Innenrand: Druckaufbau + outward shock.
+Bei Verwendung des **historischen** Supply-Benchmarks war:
 
 ```text
-sonic shielding != Schutz gegen langfristiges Massestauen.
+M=1e10 kg: supply-/transition-sensitive, teils Xi>1
+M=1e11 kg: Xi_high~0.0079...0.905 je nach transition proxy
+M=2e11 kg: klare Processing-Reserve
+M=5e11 kg: grosse Processing-Reserve.
 ```
 
-Ein echter reflektierender/Backpressure-Mechanismus kann Supply reduzieren; Recycling mit endlicher Capture ist physikalisch ein anderer Grenzfall.
-
-## A8 – Strong Coupling und Weak-Reaction-Zeitskalen
-
-EC-Energieschwellen im freien Fermi-Proxy:
+A10s first-principles-informierter Transportenvelope verengte den Vergleich weiter. Im schnellsten/escape-freundlichsten Envelope:
 
 ```text
-58Ni -> 58Co:
-x~1.66e-4
-r~6.84e4 r_s
-Gamma_i(Zeff=26)~203
-
-56Fe -> 56Mn:
-x~5.08e-6
-r~2.09e3 r_s
-Gamma_i(Zeff=26)~35.6
+1e10 kg: Xi_high~1.468
+1e11 kg: Xi_high~2.81e-3
+2e11 kg: Xi_high~4.28e-4
+5e11 kg: Xi_high~3.54e-5.
 ```
 
-Der weak-Spitzer-Branch ist dort ohne expliziten EOS-/Ionisationsnachweis nicht selbstkonsistent.
+Damit war unter dem historischen hohen Supply nur der `1e10 kg`-Unterrand capacity-overloaded.
 
-Publizierter schneller `56Fe`-EC-Vergleich:
+# 5. A11/A12 dynamischer Backpressure
+
+Mit dem aus dem historischen A10-Supply abgeleiteten `1e10 kg` Capacity-Limiter
 
 ```text
-lambda_ec~1.5916e4 s^-1
-tau_ec~6.28e-5 s.
+A_cap~0.681
 ```
 
-Energetische Schwelle und Reaktionsgleichgewicht sind getrennte Fragen.
+bildet der zeitabhaengige sphaerische PDE-Solver einen nach aussen laufenden Backpressure-/Shock-Zweig.
 
-# A9 – Residence / Processing / Backpressure Closure
-
-## A9.1 Exact repeated-encounter closure
+A12 Hochaufloesung bei `t=0.8 r_B/c_inf`:
 
 ```text
-p       = capture per encounter
-e_perm  = permanent escape per encounter
-recycle = 1-p-e_perm
-
-chi_capture = p/(p+e_perm).
+N=128  shock~1.269 r_B, inner mdot~2.10e-2
+N=256  shock~1.254 r_B, inner mdot~1.63e-2
+N=512  shock~1.233 r_B, inner mdot~1.12e-2
+N=1024 shock~1.229 r_B, inner mdot~6.94e-3.
 ```
 
-Bei `e_perm~0`:
+Long-domain:
 
 ```text
-t_res = t_cycle/p.
+t=0.8 -> shock~1.26 r_B
+t=1.2 -> ~1.74 r_B
+t=1.6 -> ~2.22 r_B
+t=2.0 -> ~2.68 r_B.
 ```
 
-## A9.2 Strong-coupling permanent escape
-
-Im A7 strong-coupling/geometrischen Sensitivitaetsbranch
+Daher:
 
 ```text
-lambda=lambda_0 x^3/2
+stationary 1e10 shock-regulated Mdot: NOT ESTABLISHED.
 ```
 
-ist der collisional optical depth bis `r_B`
+A12b koppelte literaturgebundene Fe-Viskositaet/Waermeleitung als Reduced Sensitivitaet in die PDE. Diese Terme entfernten den Backpressure-Ast unter der historischen Capacity-Randbedingung nicht.
+
+# 6. A12b Ionisation
+
+A12b implementiert einen More/Thomas-Fermi-`Zbar(rho,T)`-Fit mit Fe-Korrekturfaktor `0.270`.
+
+Erdkernreferenz:
 
 ```text
-tau_coll = 2 r_B/lambda_0 [x_t^-1/2 - 1].
+rho=13.0885 g/cm3
+T=6000 K
+Zbar~2.76.
 ```
 
-Die instantane Maxwell-Fraktion oberhalb `v_esc` ist im Scaling etwa `0.343`, aber permanenter **ballistischer** Escape wird durch
+Gegen eine publizierte solid-density Average-Atom-Definition liegt dieser Fit im Bereich `0.1...10 eV` etwa `12...16 %` niedriger. `Zbar` wird deshalb als Modell-/Definitionsband und nicht als exakte Observable verwendet.
+
+# 7. A12c – historischer Supply wird korrigiert
+
+## 7.1 Herkunft des Legacy-Benchmarks
+
+Der historische Projekt-Supply war bei `M=1e16 kg` mit einer phenomenologischen Dense-Matter-Michel-EOS zu
 
 ```text
-exp(-tau_coll)
+147 ... 1460 kg/s
 ```
 
-unterdrueckt.
-
-An den getesteten atomaren Transition-Skalen gilt typischerweise
+berechnet und mit `Mdot~M^2` auf `M=1e11 kg` skaliert:
 
 ```text
-tau_coll ~1e3 ... >1e5.
+1.47e-8 ... 1.46e-7 kg/s.
 ```
 
-Damit ist `e_perm` im Reduced Strong-Coupling-Branch praktisch null und `chi_capture~1`.
+Dieser Bereich wird weiterhin als Regressions-/Legacy-Benchmark archiviert, aber nicht mehr als feste aeussere Rate verwendet.
 
-Der collisionless Gegenbranch (`e_perm~0.343`) liefert dagegen `chi~1e-6...1e-4`; genau dieser Kontrast zeigt, dass first-principles WDM-Transport der entscheidende Discriminator ist.
+## 7.2 Relativistischer stiff-EOS Michel-Test
 
-## A9.3 Reservoir processing capacity
+Fuer `Gamma>5/3` ist die Newton-Bondi-Lösung nicht die richtige kritische Loesung; A12c verwendet deshalb die relativistische Michel-Kritikalitaet.
 
-Fuer
+Bei gleicher PREM-Aussenbedingung und `M=1e11 kg` ergibt der **konstante-Gamma Sensitivitaetsscan**:
+
+| Gamma | Mdot [kg/s] |
+|---:|---:|
+| `1.75` | `1.19e-7` |
+| `1.80` | `2.89e-8` |
+| `1.85` | `8.02e-9` |
+| `2.00` | `3.35e-10` |
+| `2.20` | `1.50e-11` |
+| `2.356` local PREM proxy | `2.40e-12` |
+
+Der historische Projektbereich entspricht in diesem einfachen konstanten-Gamma-GR-Surrogat etwa
 
 ```text
-rho=rho_0 x^-3/2
+Gamma~1.743...1.826.
 ```
 
-ist die Reduced Reservoir-Masse zwischen `r_t` und `r_B`
+PREM besitzt am Zentrum lokal
 
 ```text
-M_res=(8 pi/3) rho_0 r_B^3 [1-x_t^3/2].
+dK/dP~2.356.
 ```
 
-Processing capacity:
+Fuer einen reinen lokalen Polytropen ist `dK/dP=Gamma`. **Das ist nur ein lokaler stiffness proxy**. Er darf nicht unveraendert bis zum Horizon fortgesetzt werden, weil Fe/Ni vorher ionisiert, degeneriert und sein EOS-Regime wechselt.
+
+Damit ist die Zahl `2.40e-12 kg/s` **keine neue Endrate**.
+
+## 7.3 Korrigierter 1e10-Status
+
+Der fruehere Satz
 
 ```text
-Mdot_capacity=M_res/t_res.
+1e10 kg -> dynamic backpressure
 ```
 
-Definiert wird
+war zu allgemein. Er galt fuer den historischen hohen/soft-EOS Supply.
+
+Mit dem A10-fast Processing-Capacity-Denominator ergibt der stiff-EOS Supply-Test etwa:
 
 ```text
-Xi_required=Mdot_supply/Mdot_capacity.
+Gamma=1.80  -> Xi~0.29
+Gamma=1.85  -> Xi~0.081
+Gamma=2.00  -> Xi~0.0034
+Gamma=2.356 -> Xi~2.4e-5.
 ```
+
+Im konstanten-Gamma Vergleich liegt der Capacity-Uebergang bei ungefaehr
 
 ```text
-Xi<=1:
-    vorhandenes Reduced Reservoir kann den Supply ohne zusaetzlichen Capture-Pile-up verarbeiten.
-
-Xi>1:
-    Backpressure/Pile-up/Supply-Rueckkopplung wird relevant; exakte Mdot bleibt offen.
+Xi=1 -> Gamma~1.756.
 ```
 
-## A9.4 `M=1e11 kg`
-
-| `r_t` | `p` | `t_res` [s] | `Mdot_capacity` [kg/s] | `Xi_low` | `Xi_high` |
-|---:|---:|---:|---:|---:|---:|
-| `3e-11 m` | `3.30e-5` | `1.36e-12` | `1.85e-5` | `7.94e-4` | `7.88e-3` |
-| `1e-10 m` | `9.90e-6` | `2.76e-11` | `9.13e-7` | `1.61e-2` | `1.60e-1` |
-| `2e-10 m` | `4.95e-6` | `1.56e-10` | `1.61e-7` | `9.11e-2` | `9.05e-1` |
-
-**Befund:** Der gesamte historische Supply-Benchmark ist fuer alle drei getesteten Transition-Skalen im Reduced Strong-Coupling/Recycling-Branch processing-capable.
-
-Damit wird bei `1e11 kg` eine permanente `1e5...1e6`-Gesamtunterdrueckung durch den kleinen Einmal-Loss-Cone nicht gestuetzt, solange die aktuelle strong-coupling-Recyclingclosure gilt.
-
-## A9.5 Massenscan
+Daher lautet der aktuelle Status:
 
 ```text
 M=1e10 kg:
-    r_t=3e-11 m -> Xi_low~0.25, Xi_high~2.49
-    r_t=1e-10 m -> Xi_low~5.10, Xi_high~50.7
-    r_t=2e-10 m -> Xi_low~29, Xi_high~288
-    => BACKPRESSURE-SENSITIVE / OPEN
+BACKPRESSURE CONDITIONAL ON SUPPLY EOS.
 
-M=1e11 kg:
-    Xi_high~0.0079 ... 0.905
-    => supply-processing capable
-
-M=2e11 kg:
-    Xi_high~0.00139 ... 0.160
-    => clear capacity reserve
-
-M=5e11 kg:
-    Xi_high~1.4e-4 ... 1.62e-2
-    => very large capacity reserve.
+soft/high supply -> capacity overload and dynamic backpressure possible
+stiff/lower supply -> no capacity overload required.
 ```
 
-## A9.6 Kritischer Reduced-Transport-Uebergang
+## 7.4 >=1e11 kg
+
+Eine niedrigere stiff-EOS Supply-Rate verschlechtert den inneren Processing-Befund nicht. Sie vergroessert die Processing-Reserve.
 
 ```text
-xcrit low supply  ~8.507e-3
-xcrit high supply ~3.397e-3.
+M>=1e11 kg:
+inner A9-A12 processing-capable result survives,
+but the actual supply/net Mdot is reopened and EOS-dependent.
 ```
 
-Bei `1e11 kg`:
+# 8. Aktueller Netto-Mdot-Status
+
+Es gibt derzeit **keine belastbare einzelne finale Mdot-Zahl**.
 
 ```text
-rcrit,low  ~5.21e-10 m
-rcrit,high ~2.08e-10 m.
+historical Michel supply: LEGACY / EOS-SENSITIVE
+single-pass wave sink: not the net rate
+inner processing capacity: quantitatively constrained
+1e10 backpressure: conditional on outer supply EOS
+>=1e11 processing: robust within current inner-transport models
+final outer supply: OPEN
+final net Mdot: OPEN.
 ```
 
-Fuer feste physikalische Transition-Skalen:
+Der aktuell wichtigste fehlende Schritt ist nicht mehr ein weiterer freier Unterdrueckungsfaktor, sondern ein **general-EOS relativistischer Michel-Eigenwert**.
 
-| `r_t` | `Mcrit` low | `Mcrit` high |
-|---:|---:|---:|
-| `3e-11 m` | `5.75e9 kg` | `1.44e10 kg` |
-| `1e-10 m` | `1.92e10 kg` | `4.80e10 kg` |
-| `2e-10 m` | `3.84e10 kg` | `9.61e10 kg` |
+# 9. Langzeit-/Waerme-Kontext
 
-Die genaue Schwelle ist transport-/EOS-abhaengig; sie ist keine Fundamentalkonstante.
+Fruehere globale Waerme-/Erdalter-Proxies wurden gegen historische Supply-Raten getestet. Da A12c die reale Supply-Spanne wieder oeffnet, muessen diese Langzeittests nach A13 mit dem neuen `Mdot_supply(EOS)`-Band erneut ausgefuehrt werden.
 
-## A9.7 Charge-neutrality timescale
+Keine alte Waerme-Kompatibilitaet wird als positiver Nachweis interpretiert.
 
-Elektronen-Plasmaresponse:
+# 10. Naechster Pflichtblock
 
 ```text
-omega_pe=sqrt(n_e e^2/(m_e epsilon_0))
-t_plasma=1/omega_pe.
+Stage 3.69I / A13:
+PREM outer state
+-> general/piecewise Fe/Ni EOS
+-> relativistic variable-EOS critical point
+-> Mdot_supply(EOS) band
+-> A9-A12 transport/capture coupling
+-> revised net Mdot_BH band
+-> rerun long-term/heat constraints.
 ```
 
-Beispiel `M=1e11 kg, r_t=1e-10 m`:
-
-```text
-t_plasma/t_res~2.7e-9.
-```
-
-Bulk-quasineutraler Transport ist damit im Reduced Model gut motiviert. Der diskrete BH-Charge-State bleibt trotzdem nicht exakt geloest.
-
-## A9.8 Minimal Weak-Network Gate
-
-Bei `M=1e11 kg`:
-
-```text
-Ni-threshold:
-t_res~9.13e-14 s
-lambda_required~1.10e13 s^-1
-
-Fe-threshold:
-t_res~1.50e-17 s
-lambda_required~6.69e16 s^-1.
-```
-
-Der publizierte `56Fe`-Vergleichswert
-
-```text
-lambda_ec~1.5916e4 s^-1
-```
-
-liegt viele Groessenordnungen darunter.
-
-```text
-prompt weak equilibrium / one-pass neutronization:
-NOT SUPPORTED in the fast supply-processing branch.
-```
-
-Ein langlebiger makroskopischer Backpressure-Stau kann Residence-Zeiten vergroessern und Weak-Reaktionen wieder relevant machen; das betrifft vor allem den offenen `1e10 kg`-Unterrand.
-
-## Reduced Netto-Mdot consequence
-
-Fuer `M>=~1e11 kg` im aktuellen Strong-Coupling/Recycling Reduced Branch gilt
-
-```text
-chi_transport~1.
-```
-
-Damit am `1e11 kg`-Referenzpunkt:
-
-```text
-Mdot_BH,reduced ~1.47e-8 ... 1.46e-7 kg/s
-                ~0.46 ... 4.61 kg/year.
-```
-
-Dies ist **keine Messung und keine first-principles WDM-Endrate**. Es ist die Konsequenz der aktuell miteinander konsistenten Reduced Closures A5-A9.
-
-## Globaler Waerme-/Langzeit-Kontext
-
-Bei `eta=1`:
-
-```text
-Mdot_max aus 47 TW ~5.23e-4 kg/s.
-```
-
-Der obere historische kleine Michel-Benchmark bei `5e11 kg` bleibt mit etwa `3.65e-6 kg/s` deutlich darunter. Die frueheren Erdalter-/Massen-Stressproxies hatten die Supply-Skalen ebenfalls nicht automatisch ausgeschlossen.
-
-Damit falsifiziert die A9-Nahe-Supply-Rate H0 im bisherigen reduzierten Langzeit-/Waermerahmen nicht automatisch. Lokale Energieablagerung und echte Effizienz bleiben Full-Stack-Fragen.
-
-## Aktueller Status
-
-```text
-outer supply capacity: benchmarked, not final
-proton wave sink: calculated
-charged proton feedback: partially calculated
-Fe/Ni scalar wave sink: calculated, near classical
-long-range Coulomb blocking: not supported by screening proxy
-single-pass suppression as net Mdot: rejected
-strong-coupling inward branch: reduced self-consistent proxy
-backpressure suppression: demonstrated as reflecting PDE extreme
-A9 repeated-encounter/processing closure: calculated
-M>=~1e11 strong-coupling branch: supply-processing capable
-M=1e10: backpressure-sensitive / OPEN
-prompt weak equilibrium: not supported in fast branch
-final first-principles chi_transport: OPEN
-final species-resolved Mdot_BH: OPEN
-```
-
-## Naechster Block
-
-```text
-Stage 3.69F / A-10:
-first-principles-informed WDM transport
-+ time-dependent hydro/kinetic sink coupling
-+ A4/A5 absorptive inner boundary
--> replace geometric mean-free-path proxy
--> determine e_perm(r,E,species)
--> final reduced species-resolved Mdot band.
-```
-
-H+ und H0 bleiben parallel; diese Materieclosure ist gemeinsam, H+ besitzt zusaetzliche Hawking-Terme.
+H+ und H0 bleiben parallel. Diese Materieclosure ist gemeinsam; H+ besitzt zusaetzliche Hawking-Terme und den bereits dokumentierten H+-Neutrinobefund.
