@@ -3,12 +3,13 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 26.08.2026  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69A/3.69A-1 Quantum-Capture-Teilmodul teilweise durchgefuehrt; Stage 3.69 Full-Multiphysics und Stage 3.70 nicht durchgefuehrt
+**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69A/3.69A-1 und Stage 3.69A-3 Quantum/Wave-Capture-Teilmodule numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 nicht durchgefuehrt
 
 ## Statusbegriffe
 
 - **PASS/kompatibel** = innerhalb des konkret benannten reduzierten Modells kein Widerspruch gefunden; kein empirischer Nachweis.
 - **FAIL** = der konkret benannte Branch/Mechanismus widerspricht dem verwendeten Test oder kann die erforderliche Bedingung nicht erfuellen.
+- **CALCULATED** = definierter Benchmark numerisch berechnet, ohne Aussage ueber die noch offene Full-Stack-Closure.
 - **OPEN** = mit vorhandenen Gleichungen/Daten nicht abschliessend entschieden.
 - **nicht anwendbar** = der Test setzt Physik voraus, die der jeweilige Branch definitionsgemaess nicht besitzt.
 - **zurueckgezogen/korrigiert** = fruehere Zwischenaussage durch einen haerteren Test ersetzt.
@@ -18,9 +19,11 @@ Kein Status in dieser Datei ist eine direkte Detektion eines Erdzentrum-BH.
 ## 1. Branch-Definition
 
 ```text
-H+ = Standard-Hawking-Strahlung
-H0 = P_Hawking = 0 (nichtstandardmaessige Gegenhypothese)
+H+ = mit Standard-Hawking-Strahlung
+H0 = ohne Hawking-Strahlung
 ```
+
+Beide Branches bleiben parallel dokumentiert. Gemeinsame Materie-/Capture-Tests werden nicht automatisch einem Branch zugerechnet; H+ besitzt zusaetzliche Hawking-Quellterme.
 
 ## 2. Strukturbranches
 
@@ -47,34 +50,22 @@ Projektfluss ~0.098 ... 0.122 cm^-2 s^-1 MeV^-1
 SK-IV observed 90% CL = 0.04 cm^-2 s^-1 MeV^-1
 ```
 
-**Status:**
-
 ```text
 H+ Standard-Hawking: FAIL im Projekt-Reinterpretationstest.
 ```
 
 Aussagegrenze: keine offizielle Super-K-Erdzentrum-BH-Exklusion.
 
-## 4. H0 - Akkretion / Langzeit
+## 4. Akkretion / Langzeit – gemeinsame und H0-relevante Tests
 
-Der Stage-3.12-Michel-Benchmark fuer `1e16 kg` lautet
-
-```text
-Mdot_Michel ~147 ... 1460 kg/s.
-```
-
-Fuer den zentralen PREM-Supply-Proxy wird jetzt explizit
+Fuer den zentralen PREM-Supply-Proxy:
 
 ```text
 c_eff = sqrt(V_P^2 - 4/3 V_S^2)
-      = 10.4355 km/s
+      = 10.4355 km/s.
 ```
 
-mit `V_P=11.2622 km/s` und `V_S=3.6678 km/s` dokumentiert.
-
-Die weiteren Stages prueften Yield, plastischen Supply, Rotation, Knudsen-Uebergang, kinetischen Capture, Loss-Cone-Recycling und radiatives/QED-Feedback.
-
-| Teiltest | H0-Status |
+| Teiltest | Status |
 |---|---|
 | statische Festkoerperbarriere | kein robuster Blocker |
 | Rotation/Winkelimpuls | kein robuster Blocker |
@@ -88,17 +79,22 @@ Die weiteren Stages prueften Yield, plastischen Supply, Rotation, Knudsen-Ueberg
 | Schwarzschild-Dirac radial solver | **IMPLEMENTED** |
 | Horizon/current self-check | **PASS als numerischer Solver-Selfcheck** |
 | Dirac in/out matching | **IMPLEMENTED; Matchingradius-Benchmarks stabil** |
+| Low-`alpha` externe Regression | **PASS** |
+| Intermediate-`alpha` Doran-Struktur | **PASS qualitativ/numerisch** |
+| Earth-speed neutral proton mass scan `1e10...5e11 kg` | **CALCULATED** |
+| flux-stabile schwache Partialwellen-Auswertung | **IMPLEMENTED** |
+| Charge-Feedback-Kraftskalen | **CALCULATED** |
+| stationaerer Equal-T-Plasma-Chargebenchmark | **CALCULATED** |
+| charged Dirac capture `sigma_p,e(Q)` | **OPEN** |
 | coherent Fe/Ni scalar/composite capture | **OPEN** |
-| electrostatic charge-feedback closure | **OPEN** |
+| Dense-Matter-Screening/Transport-Chargeclosure | **OPEN** |
 | species-resolved dense-core net `Mdot` | **OPEN** |
 | globaler 47-TW-Waerme-Sanity-Check | kein Ausschluss des getesteten kleinen Michel-Benchmarks |
 | Erdalter-Masse/Waerme im kleinen Branch | kein Ausschluss in den reduzierten Stressproxies |
 
-Der 47-TW-Sanity-Check verwendet `P_heat=eta Mdot c^2`. Fuer `eta=1` folgt `Mdot_max~1.65e4 kg/year`. Der obere bisherige Michel-Benchmark bei `5e11 kg` liegt bei etwa `115 kg/year` bzw. `0.328 TW`, also rund Faktor `143` darunter. Das ist ein globaler Proxy, keine lokale Multiphysik-Loesung.
+## 5. Stage 3.69A-1 – isolierter Schwarzschild-Dirac-Capture
 
-### 4.1 Stage 3.69A-1 – isolierter Schwarzschild-Dirac-Capture
-
-Fuer `alpha=0.2` ist die Partialwellen-Cross-Section gegen den Matchingradius stabil:
+Fuer `alpha=0.2`:
 
 ```text
 E/m=1.5:
@@ -117,25 +113,121 @@ Weitere Benchmarkstruktur:
 ```text
 E/m=1.5: Dirac ~123.259, klassisch ~128.680
 E/m=2.0: Dirac ~103.965, klassisch ~103.380
-E/m=5.0: Dirac ~89.682,  klassisch ~87.174
+E/m=5.0: Dirac ~89.682, klassisch ~87.174
 high-energy target: 27*pi ~84.823
 ```
 
-Dies reproduziert qualitativ die publizierte Doran-Struktur aus energieabhaengigen Unter-/Ueberschwingungen um den klassischen Grenzwert und Annaeherung an den geometrisch-optischen Grenzwert. Ein datenpunktgenauer Regressionstest gegen eine digitalisierte Doran-Kurve bleibt offen.
+Der Solver reproduziert die qualitative Doran-Struktur. Ein vollstaendiger punktweiser Kurvenregressionstest bleibt offen.
 
-Am Erd-Referenzpunkt `M_BH=1e11 kg`, `v=10.4355 km/s` liefert die publizierte Unruh-Low-Energy-Naeherung als isolierter Einzelteilchenbenchmark:
+## 6. Stage 3.69A-3 – Earth-speed Proton Capture
+
+Referenz:
 
 ```text
-electron sigma ~3.46e-26 m^2
-proton   sigma ~6.34e-23 m^2
-classical collisionless low-v proxy ~2.29e-22 m^2
+M_BH variable
+v = 10.4355 km/s
+u = 3.4809081e-5.
 ```
 
-Diese Querschnitte duerfen nicht direkt in eine Netto-`Mdot` umgedeutet werden. Dichte Fe/Ni-Materie, Kollisionen, Kernstruktur, Zusammensetzung und Ladungsfeedback fehlen noch.
+### 6.1 Flux-stabile Absorption
 
-## 5. Erdstruktur / Seismik
+Fuer sehr schwache Partialwellen wird nicht nur
 
-| Test | kleiner smooth H0-Branch |
+```text
+P_abs = 1-|S|^2
+```
+
+verwendet, sondern aus dem konservierten Strom direkt
+
+```text
+P_abs = (-W_H)/(2 q |A_in|^2),
+q=p/(E+m), W_H=-1.
+```
+
+Damit wird Catastrophic Cancellation bei `|S|~1` vermieden.
+
+### 6.2 Protonen-Massenscan
+
+| `M_BH` | `alpha_p` | `kmax` | `x_match` | `sigma_D/sigma_classical` | `sigma_D` [m^2] |
+|---:|---:|---:|---:|---:|---:|
+| `1e10 kg` | `0.0353107` | 3 | `5e6` | `0.0326735` | `7.47496e-26` |
+| `1e11 kg` | `0.353107` | 3 | `5e6` | `0.950295` | `2.17406e-22` |
+| `2e11 kg` | `0.706215` | 5 | `2e6` | `1.008071` | `9.22496e-22` |
+| `5e11 kg` | `1.76554` | 9 | `1e6` | `0.996621` | `5.70011e-21` |
+
+Partialwellenschnitt beim oberen Punkt:
+
+```text
+kmax=5 -> 0.6015 classical
+kmax=6 -> 0.8420
+kmax=7 -> 0.99630
+kmax=8 -> 0.99662110
+kmax=9 -> 0.99662113.
+```
+
+Matchingradius-Spotcheck `M=1e11 kg, kmax=3`:
+
+```text
+x_match=1e6 -> 0.95024543 classical
+x_match=5e6 -> 0.95029487 classical
+x_match=1e7 -> 0.95035969 classical.
+```
+
+### 6.3 Korrektur des frueheren Protonenbenchmarks
+
+Die Unruh-Low-Energy-Naeherung lieferte bei `M=1e11 kg`
+
+```text
+sigma_Unruh,p ~6.3447e-23 m^2.
+```
+
+Der volle Dirac-Matcher liefert
+
+```text
+sigma_Dirac,p ~2.1741e-22 m^2
+             ~0.9503 sigma_classical.
+```
+
+Damit ist die fruehere Unruh-Protonenextrapolation fuer `alpha_p~0.353` als finaler Earth-speed-Wert **ersetzt**, nicht der Unruh-Benchmark als solcher verworfen.
+
+## 7. Stage 3.69A-3 – Charge Feedback
+
+Bei `M_BH=1e11 kg` und einer Elementarladung:
+
+```text
+|F_C/F_G| proton   = 0.0206661
+|F_C/F_G| electron = 37.9461.
+```
+
+Klassische Kraftgrenzen:
+
+```text
+Q_max,p   = +48.3884 e = 7.75268e-18 C
+|Q_max,e| =   0.026353 e = 4.22224e-21 C.
+```
+
+Equal-T stationaerer Plasma-Benchmark nach Zajacek et al.:
+
+```text
+Q_eq ~ +24.1810 e = 3.87423e-18 C.
+```
+
+RN-Extremalladungsskala:
+
+```text
+Q_extremal ~8.6175 C
+Q_eq/Q_extremal ~4.50e-19.
+```
+
+Interpretation:
+
+- Die Metrik bleibt auf diesen Ladungsskalen praktisch Schwarzschild.
+- Die Dynamik geladener Teilchen kann trotzdem stark veraendert werden.
+- Die stationaere Zajacek-Formel ist **kein** Erdkerngleichgewicht; dichte Fe/Ni-Materie, Screening, Kollisionen und Transport fehlen.
+
+## 8. Erdstruktur / Seismik
+
+| Test | kleiner smooth Branch |
 |---|---|
 | Gesamtmasse / `GM` | kompatibel durch redistributive Buchhaltung |
 | Traegheitsmoment / Rotation | Effekt im kleinen Branch extrem klein |
@@ -146,9 +238,7 @@ Diese Querschnitte duerfen nicht direkt in eine Netto-`Mdot` umgedeutet werden. 
 | direkte Nano-/Mikrometer-Seismik | keine realistische raeumliche Aufloesung |
 | echte 3-D-Full-Wave-Likelihood | **nicht durchgefuehrt; nur sinnvoll bei makroskopisch gekoppelter Signatur** |
 
-Stage 3.68E stuft Seismik als H0-Hauptkanal herab: eine reine `r_B~61 nm`-Near-Zone ist nicht direkt global-seismisch aufloesbar. Stage 3.70 soll Seismik nur weiterverfolgen, falls Stage 3.69 eine makroskopische `Delta rho`, `Delta V_P`, `Delta V_S`-Struktur oder koharente Streu-/Normalmodensignatur erzeugt.
-
-## 6. Formation
+## 9. Formation
 
 | Mechanismus | Status |
 |---|---|
@@ -160,49 +250,46 @@ Stage 3.68E stuft Seismik als H0-Hauptkanal herab: eine reine `r_B~61 nm`-Near-Z
 | Halo -> Protosternwolke -> kalte Scheibe -> SI/Pebble | **FAIL** unter Standardbedingungen |
 | bereits cold/co-moving Anfangsbedingung | mathematisch moeglich, Herkunft **OPEN / stark unmotiviert** |
 
-## 7. Stage 3.68E - externes Fachfeedback
-
-Technische Rueckmeldungen aus Numerical Relativity/HPC und globaler Seismologie wurden ohne private Mailtexte in den Modellstand integriert.
-
-| Rueckmeldung | Konsequenz |
-|---|---|
-| Bondi-Raten benoetigen explizites `c_eff` | PREM-basierter Wert `10.4355 km/s` dokumentiert |
-| klassischer Supply muss bei sehr kleiner Horizontskala nicht finale Capture-Rate sein | Quantum/Wave-Capture als Pflichtblock in Stage 3.69 |
-| aeussere Newton-/Materialzone + innere GR-Zone ist bei konservativem Matching grundsaetzlich vertretbar | Domain-Decomposition bleibt Stage-3.69-Basisarchitektur |
-| globale Waerme ist starker Sanity-Check | 47-TW-Proxy explizit gerechnet; kleiner Michel-Benchmark bleibt darunter |
-| Nano-/Mikrometer-Near-Zone nicht direkt seismisch aufloesbar | Seismik nur noch konditional bei makroskopischer Kopplung |
-
-Diese Punkte sind Modellhaertung, keine externe Bestaetigung der H0-Hypothese.
-
-## 8. Endmatrix
+## 10. Endmatrix
 
 | Bereich | H+ | H0 |
 |---|---|---|
 | starke Erd-SL-Variante | FAIL | FAIL |
-| kleiner smooth PREM-Branch | kein eigener Ausschluss | kein eigener Ausschluss |
-| Standard-Hawking-Neutrinos | **FAIL** | nicht anwendbar |
-| Akkretions-/Waermeaudit | H+-gekoppelt | isoliertes Dirac-Capture-Teilmodul teilweise geloest; Dense-Matter-Netto-Rate OPEN |
-| Seismik/Normalmoden reduziert | kein positiver Nachweis | kein positiver Nachweis; direkter Mikrobereich nicht aufloesbar |
+| kleiner smooth PREM-Branch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
+| Standard-Hawking-Neutrinos | **FAIL im getesteten Projektmodell** | nicht anwendbar |
+| neutraler Earth-speed Proton Dirac Capture | **CALCULATED**, gemeinsamer Materieblock | **CALCULATED**, gemeinsamer Materieblock |
+| Charge-Feedback-Kraftskalen | **CALCULATED** | **CALCULATED** |
+| charged Dirac `sigma_p,e(Q)` | OPEN | OPEN |
+| Dense Fe/Ni-Netto-Akkretion | OPEN | OPEN |
+| Seismik/Normalmoden reduziert | kein positiver Nachweis | kein positiver Nachweis |
 | spaeter Earth-Capture | FAIL | FAIL |
 | Standard-Formation/Delivery | stark negativ | stark negativ |
 | direkte experimentelle Detektion | keine | keine |
 | eindeutige positive Signatur | keine | keine |
 
-## 9. Verbleibende Endstufen
+## 11. Verbleibende Endstufen
 
-- **Stage 3.69 – High-Fidelity Multiphysics:** Full-Stack `NOT PERFORMED`; Quantum/Wave-Capture-Submodul `3.69A/3.69A-1` teilweise implementiert und benchmarkiert.
-- **Stage 3.70 – Experimental H0 Falsification:** `DEFINED / NOT PERFORMED`; Seismik nur bei makroskopisch gekoppelter Signatur.
+- **Stage 3.69A-4:** charged Dirac capture + selbstkonsistentes `Q(t)`.
+- **Stage 3.69 Full-Multiphysics:** Dense-Matter-Komposition, Screening, coherent Fe/Ni scalar/composite capture bzw. Dissociation, Transport/Reaktionen und species-resolved Netto-`Mdot`.
+- **Stage 3.70:** dedizierte branch-spezifische Real-Data-/Experiment-Likelihood einer aus Stage 3.69 abgeleiteten Signatur.
 
-Diese Teilfortschritte sind keine bestandene Stage 3.69. Offen bleiben insbesondere coherent Fe/Ni scalar/composite capture, Ladungsfeedback, dichte Transport-/Reaktionsclosure und die selbstkonsistente Netto-`Mdot`-Loesung. Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md), [`STAGE3_69A_QUANTUM_WAVE_CAPTURE.md`](STAGE3_69A_QUANTUM_WAVE_CAPTURE.md), [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md).
-
-## 10. Konservativer Schluss
+## 12. Konservativer Schluss
 
 ```text
-H+ Standard-Hawking: FAIL im getesteten Modell.
-H0 heutige Existenzhypothese: OPEN / durch bisherige Erdtests nicht ausgeschlossen.
-H0 isolierte Spin-1/2-Wave-Capture: teilweise numerisch geloest/benchmarkiert.
-H0 exakte Dense-Matter-Netto-Akkretionsrate: OPEN.
-H0 fundamentale Begruendung: OPEN.
-H0 Formation: stark negativ / kein Standardweg gefunden.
+H+ Standard-Hawking: FAIL im getesteten Projekt-Reinterpretationsmodell; Branch bleibt separat erhalten.
+H0 heutige Existenzhypothese: OPEN / durch bisherige reduzierte Erdtests nicht ausgeschlossen.
+Neutraler Earth-speed Proton Dirac Capture: CALCULATED.
+Bei M=1e11 kg liegt sigma_p bei ~0.9503 sigma_classical; keine starke Protonen-Wellenunterdrueckung.
+Charge-feedback force/equilibrium scales: CALCULATED as benchmarks.
+Charged capture + dense Fe/Ni charge/screening closure: OPEN.
+Finale species-resolved Netto-Akkretionsrate: OPEN.
+Formation: stark negativ / kein Standardweg gefunden.
 Empirischer Nachweis: keiner.
 ```
+
+Details:
+
+- [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md)
+- [`STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`](STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md)
+- [`stage3_69a3_earth_proton_charge.py`](stage3_69a3_earth_proton_charge.py)
+- [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md)
