@@ -246,5 +246,5 @@ Empirischer Nachweis eines Erdzentrum-BH:
 - `stage3_69b_a6_reduced_closure.py`
 - `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
 - `stage3_69c_a7_collision_recycling_pde.py`
-- `STAGE3_69D_A8_DENSE_FE_REACTION_TIMESCALES.md`
-- `stage3_69d_a8_dense_fe_reaction_timescales.py`
+- `STAGE3_69D_A8_WDM_WEAK_TIMESCALES.md`
+- `stage3_69d_a8_wdm_weak_timescales.py`
