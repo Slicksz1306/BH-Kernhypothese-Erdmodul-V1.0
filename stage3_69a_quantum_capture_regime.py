@@ -16,6 +16,7 @@ U = 1.66053906660e-27
 
 M_BH = 1.0e11
 V = 10.4355e3
+PROJECT_MASSES = (1.0e10, 1.0e11, 2.0e11, 5.0e11)
 
 M_E = 9.1093837139e-31
 M_P = 1.67262192595e-27
@@ -26,6 +27,16 @@ PARTICLES = [
     ("proton", M_P),
     ("Fe-56 nucleus", M_FE56),
 ]
+
+
+def alpha_g(bh_mass, particle_mass):
+    return G * bh_mass * particle_mass / (HBAR * C)
+
+
+def transition_mass(particle_mass):
+    """BH mass for alpha_g = 1."""
+    return HBAR * C / (G * particle_mass)
+
 
 r_s = 2.0 * G * M_BH / C**2
 r_B = G * M_BH / V**2
@@ -49,24 +60,36 @@ print()
 
 header = (
     f"{'particle':<15} {'lambda_dB[m]':>16} {'lambda/r_s':>16} "
-    f"{'alpha_g':>14} {'k*r_s':>14}"
+    f"{'alpha_g':>14} {'M(alpha=1)[kg]':>18}"
 )
 print(header)
 print('-' * len(header))
 
 for name, mass in PARTICLES:
     lambda_db = H / (mass * V)
-    alpha_g = G * M_BH * mass / (HBAR * C)
-    k_r_s = (mass * V / HBAR) * r_s
+    coupling = alpha_g(M_BH, mass)
+    m_transition = transition_mass(mass)
     print(
         f"{name:<15} {lambda_db:16.9e} {lambda_db/r_s:16.9e} "
-        f"{alpha_g:14.9e} {k_r_s:14.9e}"
+        f"{coupling:14.9e} {m_transition:18.9e}"
+    )
+
+print()
+print("alpha_g over selected project masses")
+print(f"{'M_BH[kg]':>14} {'electron':>14} {'proton':>14} {'Fe-56':>14}")
+print('-' * 60)
+for bh_mass in PROJECT_MASSES:
+    values = [alpha_g(bh_mass, mass) for _, mass in PARTICLES]
+    print(
+        f"{bh_mass:14.6e} {values[0]:14.6e} "
+        f"{values[1]:14.6e} {values[2]:14.6e}"
     )
 
 print()
 print("Interpretation:")
-print("- Schrödinger is an outer wave/regime proxy only.")
+print("- Schroedinger is an outer wave/regime proxy only.")
 print("- Final horizon absorption requires a relativistic, horizon-regular")
 print("  Klein-Gordon/Dirac treatment with ingoing boundary conditions.")
+print("- The proton alpha_g~1 transition lies inside the project mass range.")
 print("- Bondi/Michel supply must not be equated directly with Mdot_BH until")
 print("  the kinetic-to-wave capture closure is solved.")
