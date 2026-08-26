@@ -80,6 +80,33 @@ lambda_dB >> r_s  bedeutet nicht fuer alle Teilchensorten dasselbe Capture-Regim
 
 Die Teilchenmasse und die Schwarzschild-Dirac-Kopplung muessen explizit beruecksichtigt werden.
 
+### 3.1 Kopplungs-Uebergang im Projekt-Massenbereich
+
+Die Masse, bei der `alpha_g=1` erreicht wird, ist
+
+```text
+M_transition = hbar c/(G m).
+```
+
+Damit folgt:
+
+| Spezies | M_transition fuer alpha_g=1 [kg] |
+|---|---:|
+| Elektron | 5.200e14 |
+| Proton | 2.832e11 |
+| Fe-56-Kern | 5.100e9 |
+
+Fuer typische Projektmassen:
+
+| M_BH [kg] | alpha_e | alpha_p | alpha_Fe56 |
+|---:|---:|---:|---:|
+| 1e10 | 1.923e-5 | 3.531e-2 | 1.961 |
+| 1e11 | 1.923e-4 | 3.531e-1 | 19.608 |
+| 2e11 | 3.846e-4 | 7.062e-1 | 39.217 |
+| 5e11 | 9.615e-4 | 1.766 | 98.042 |
+
+Das ist fuer Stage 3.69A wesentlich: Elektronen bleiben im gesamten kleinen Projektbranch im schwachen Quantenkopplungsregime; Protonen durchlaufen innerhalb des interessanten Massenbereichs den Uebergang `alpha_g~1`; ein intakter Fe-56-Kern liegt bereits bei kleinen Projektmassen im starken Kopplungsbereich. Daher ist eine einzige universelle geometrische Capture-Fraktion nicht gerechtfertigt.
+
 ## 4. Literaturbenchmark fuer Fermionabsorption
 
 Doran, Lasenby, Dolan & Hinder (Phys. Rev. D 71, 124020; arXiv:gr-qc/0503019) berechnen die Absorption massiver Spin-1/2-Teilchen durch direkte numerische Integration der Dirac-Gleichung auf einem Schwarzschild-Hintergrund mit rein einlaufender physikalischer Horizon-Loesung.
@@ -119,7 +146,7 @@ Die bisherige schematische Identifikation
 Mdot_BH = Mdot_Michel
 ```
 
-ist nicht als abgeschlossene Mikrophysik zulässig. Stattdessen wird Stage 3.69 jetzt strukturell als
+ist nicht als abgeschlossene Mikrophysik zulaessig. Stattdessen wird Stage 3.69 jetzt strukturell als
 
 ```text
 Mdot_supply
@@ -159,10 +186,15 @@ Zu implementieren ist ein reproduzierbarer Schwarzschild-Dirac-Partialwellensolv
 Schroedinger-Aussenproxy: brauchbar fuer Regime-/Wellencheck, nicht fuer finale Horizon-Capture.
 Dirac/Schwarzschild-Capture: erforderlich.
 Teilchenspezifische Regime: identifiziert.
+Protonen-Uebergang alpha_g~1 liegt bei ~2.83e11 kg.
 Volle Capture-Rate: OPEN.
 H0 dadurch weder bestaetigt noch ausgeschlossen.
 Stage 3.69A-1: NOT PERFORMED.
 ```
+
+## Reproduzierbarkeit
+
+Der Scale-/Coupling-Check ist in [`stage3_69a_quantum_capture_regime.py`](stage3_69a_quantum_capture_regime.py) reproduzierbar.
 
 ## Referenzen
 
