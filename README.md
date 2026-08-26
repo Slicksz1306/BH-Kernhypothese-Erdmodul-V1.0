@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller numerischer Forschungsstand:** Stage 3.69 bis A12c partiell bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
+**Aktueller numerischer Forschungsstand:** Stage 3.69 bis A13 partiell bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
 **Stand:** 26.08.2026  
 **Erstveroeffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -166,7 +166,7 @@ Cp~850 J/kg/K
 
 wurden in einen Reduced dissipativen PDE-Test eingebaut. Unter der historischen hohen Supply-Randbedingung entfernen diese Terme den `1e10 kg` Backpressure-Ast nicht.
 
-# A12c – wichtigste aktuelle Korrektur: Supply ist EOS-abhaengig
+# A12c – Supply ist EOS-abhaengig
 
 Der fruehere Michelbereich
 
@@ -202,30 +202,77 @@ Gamma~1.743...1.826.
 
 **Wichtig:** Der lokale PREM-Stiffness-Wert `dK/dP~2.356` darf nicht als konstantes globales Gamma bis zum Horizon fortgesetzt werden. Reales Fe/Ni ionisiert, degeneriert und wechselt sein EOS-Regime. `2.40e-12 kg/s` ist daher **keine finale Endrate**.
 
-## Korrigierter Massensplit
+# A13 – General-EOS relativistischer Supply
 
-Der fruehere Kurzsatz
+A13 implementiert die Michel-Kritikalitaet jetzt fuer eine allgemeine thermodynamisch konsistente barotrope/isentrope EOS.
 
-```text
-1e10 kg -> dynamic backpressure
-```
-
-war zu allgemein. Aktuell gilt:
+Am kritischen Punkt gilt
 
 ```text
-1e10 kg:
-backpressure CONDITIONAL ON SUPPLY EOS.
-soft/high supply -> capacity overload possible
-stiff/lower supply -> overload can disappear.
+u_s^2 = a_s^2/(1+3 a_s^2)
+r_s/M = (1+3 a_s^2)/(2 a_s^2)
+h_s/sqrt(1+3 a_s^2) = h_inf.
 ```
 
-Im konstanten-Gamma GR-Sensitivitaetsscan liegt die A10-fast `Xi=1`-Grenze bei etwa
+Der neue Solver regressiert A12c in konstanten-Steifigkeits-Grenzfaellen auf etwa `1e-4` relativ oder besser.
+
+### Kontrolliertes variable-EOS Surrogat
+
+PREM `P`, `K_S` und `dK/dP` werden am Aussenrand gleichzeitig gematched. Die PREM-Steifigkeit wird nur bis
 
 ```text
-Gamma~1.756.
+rho_soft = 30 ... 47.2 g/cm3
 ```
 
-Fuer `>=1e11 kg` bleibt der innere Processing-Befund bestehen. Ein niedrigerer stiff-EOS Supply vergroessert die Processing-Reserve, bestimmt aber noch nicht die finale Netto-Mdot.
+gehalten, entsprechend den direkt untersuchten Fe-QMD/first-principles-Domaenen. Danach wird ein transparenter Sensitivitaetsscan
+
+```text
+beta_mid = 1.4 ... 1.8
+```
+
+verwendet. Tief innen geht der Surrogatast um den Elektronen-Relativitaetsmarker
+
+```text
+p_F=m_e c -> rho~2.10e6 g/cm3
+```
+
+mit Sensitivitaet `1e5...1e7 g/cm3` gegen `beta_inner=4/3`.
+
+**Dies ist kein statistisches Konfidenzintervall und keine finale Fe/Ni-EOS.**
+
+Im getesteten Surrogat ergibt sich bei `M=1e11 kg`:
+
+```text
+Mdot_supply ~4.64e-8 ... 1.37e-6 kg/s.
+```
+
+Damit wird A12c weiter praezisiert:
+
+```text
+constant PREM stiffness to horizon -> STRESS LIMIT ONLY
+variable EOS softening -> supply can return to the historical range or above.
+```
+
+### Rueckkopplung an die innere A10-Processing-Capacity
+
+| M_BH | Mdot_min [kg/s] | Mdot_max [kg/s] | Xi_min | Xi_max |
+|---:|---:|---:|---:|---:|
+| `1e10` | `4.64e-10` | `1.37e-8` | `0.467` | `13.76` |
+| `1e11` | `4.64e-8` | `1.37e-6` | `8.94e-4` | `2.64e-2` |
+| `2e11` | `1.86e-7` | `5.47e-6` | `1.36e-4` | `4.01e-3` |
+| `5e11` | `1.16e-6` | `3.42e-5` | `1.12e-5` | `3.32e-4` |
+
+Daraus folgt im **getesteten A13-Surrogat**:
+
+```text
+M>=1e11 kg:
+inner processing-capable bleibt robust; Xi_max<<1.
+
+M=1e10 kg:
+Xi kreuzt 1 -> Backpressure bleibt supply/EOS-conditional.
+```
+
+Der echte tabellierte Fe/Ni-Isentropen-Supply bleibt OPEN.
 
 # Aktuelle Statusmatrix
 
@@ -238,9 +285,11 @@ Fuer `>=1e11 kg` bleibt der innere Processing-Befund bestehen. Ein niedrigerer s
 | Charge-/Screening | teilweise berechnet | teilweise berechnet |
 | A9-A12 inner processing/transport | stark gehaertet / PARTIAL | stark gehaertet / PARTIAL |
 | historical Michel supply | **LEGACY / EOS-SENSITIVE** | **LEGACY / EOS-SENSITIVE** |
+| A13 general-EOS machinery | **PASS regression / PARTIAL physical closure** | **PASS regression / PARTIAL physical closure** |
+| A13 variable-EOS surrogate supply | **CALCULATED** | **CALCULATED** |
 | `1e10 kg` Backpressure | supply/EOS-conditional | supply/EOS-conditional |
-| `>=1e11 kg` inner processing | processing-capable in current models | processing-capable in current models |
-| general-EOS outer supply | OPEN | OPEN |
+| `>=1e11 kg` inner processing | robust processing-capable im getesteten A13-Surrogat | robust processing-capable im getesteten A13-Surrogat |
+| real tabulated Fe/Ni outer supply | OPEN | OPEN |
 | final net `Mdot_BH` | OPEN | OPEN |
 | Formation/Delivery | stark negativ | stark negativ |
 | direkte Detektion | keine | keine |
@@ -258,19 +307,20 @@ normaler Halo -> protoplanetare cold disk: FAIL unter getesteten Bedingungen
 cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunft nicht hergeleitet.
 ```
 
-# Naechster Pflichtblock – Stage 3.69I / A13
+# Naechster Pflichtblock – A13b
 
 ```text
-PREM outer state
--> general/piecewise Fe/Ni EOS
--> thermodynamic P(rho,T), E(rho,T), T(rho,e)
--> bounded Zbar uncertainty
--> relativistic variable-EOS sonic/critical point
--> Mdot_supply(EOS) band
--> recouple A9-A12 transport/capture
--> revised net Mdot_BH band
+public liquid-Fe isentrope / SESAME-consistent data ingestion
+-> interpolate rho-P-(T where available)
+-> thermodynamic h(rho) reconstruction
+-> general-EOS Michel critical solve directly on data
+-> compare against A13 surrogate family
+-> final outer-supply bracket
+-> recouple A9-A12
 -> rerun long-term/heat constraints.
 ```
+
+Grant et al. (2021) berichten oeffentlich verfuegbare Daten fuer liquid-Fe Ramp-/Isentropenmessungen und gute Uebereinstimmung mit SESAME 92141 im Erdkernbereich. Diese Daten sind der bevorzugte naechste reale Isentropenanker.
 
 # Zentrale aktuelle Dateien
 
@@ -280,10 +330,12 @@ PREM outer state
 - `stage3_69h_a12b_zbar_dissipative_closure.py`
 - `STAGE3_69H_A12C_STIFF_EOS_GR_SUPPLY.md`
 - `stage3_69h_a12c_stiff_eos_gr_supply.py`
+- `STAGE3_69I_A13_GENERAL_EOS_MICHEL.md`
+- `stage3_69i_a13_general_eos_michel.py`
 - `STAGE3_69I_A13_PLAN.md`
 - `AKKRETION_STATUS.md`
 - `TEST_STATUS.md`
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69H/A12c partiell, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69I/A13 partiell, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
