@@ -1,65 +1,63 @@
-# Stage 3.69H / A12 – Tabulated WDM EOS/Zbar + Dissipative Transport + Shock Convergence
+# Stage 3.69H / A12 – WDM EOS/Zbar, Dissipation und Supply-Rekalibrierung
 
 **Stand:** 26.08.2026  
-**Status:** PARTIAL CALCULATED THROUGH A12b / SHOCK+TRANSPORT+ZBAR SENSITIVITY DONE / FULL THERMODYNAMIC WDM CLOSURE OPEN
+**Status:** PARTIAL CALCULATED THROUGH A12c / INNER TRANSPORT HARDENED / OUTER SUPPLY REOPENED AS EOS-SENSITIVE
 
 ## Ziel
 
-A12 greift die wichtigsten A11-Restunsicherheiten an:
+A12 haertet gleichzeitig den inneren Transport und den aeusseren Supply:
 
 ```text
 Fe/Ni EOS + ionization
-+ explicit dissipative transport
-+ high-resolution shock convergence
--> dynamic species-aware Mdot_BH band.
++ dissipative transport
++ high-resolution backpressure tests
++ relativistic stiff-EOS Michel supply
+-> dynamic Mdot_BH band.
 ```
 
-## A12 – bereits gerechnet
+## A12 – Shock/Transport Audit
 
-- Literaturkorrektur Wang 2014 -> Sjostrom/Crockett 2018 high-pressure EOS revision;
-- Fe/FeNi-Transportanker aus outer-core QMD/first-principles Literatur;
+Erledigt:
+
+- Literaturkorrektur Wang 2014 -> Sjostrom/Crockett 2018;
+- Fe/FeNi-Transportanker aus first-principles/QMD Literatur;
 - Bondi-scale Reynolds-/Peclet-Massenscan `1e10...5e11 kg`;
 - `1e10 kg` Shock-Konvergenz `N=128,256,512,1024`;
 - long-domain Shock-Propagation bis `t=2 r_B/c_inf`;
 - Mass-/Energieaudit auf Rundungsniveau.
 
-A12-Hauptbefund:
+A12-Befund unter dem **historischen hohen Supply**:
 
 ```text
-1e10 kg capacity-limited branch:
+1e10 kg:
     outward-propagating backpressure shock
-    NOT a demonstrated stationary shock-regulated Mdot.
+    no demonstrated stationary shock-regulated Mdot
 
 >=1e11 kg:
-    current reduced supply-processing branch survives transport-timescale audit.
+    reduced supply-processing branch survives transport-timescale audit.
 ```
 
-## A12b – neu gerechnet
+## A12b – Zbar + dissipative sensitivity
 
-### 1. Bounded Zbar closure
+### Bounded Zbar
 
-A12b implementiert den analytischen More/Thomas-Fermi-Fit fuer `Zbar(rho,T)` mit dem publizierten Fe-Low-T-Korrekturfaktor
+A12b implementiert den More/Thomas-Fermi-Fit fuer `Zbar(rho,T)` mit dem publizierten Fe-Low-T-Korrekturfaktor
 
 ```text
 factor_Fe = 0.270.
 ```
 
-Bei der Erdkernreferenz
+Erdkernreferenz:
 
 ```text
 rho=13.0885 g/cm3
 T=6000 K
+Zbar_Fe~2.761.
 ```
 
-folgt
+Gegen eine publizierte solid-density Average-Atom-Definition liegt der korrigierte More-Fit bei `0.1...10 eV` etwa `12...16 %` niedriger. Diese Definition-/Modellunsicherheit bleibt sichtbar.
 
-```text
-Zbar_Fe ~2.761.
-```
-
-Gegen eine publizierte solid-density Average-Atom-Definition `Z_WS,2` liegt der korrigierte More-Fit im Bereich `0.1...10 eV` etwa `12...16 %` niedriger. Diese Differenz wird als systematische Definition-/Modellunsicherheit behalten.
-
-### 2. Reduced inward Zbar map
+Reduced inward map:
 
 ```text
 x=1       -> Zbar~2.76
@@ -71,11 +69,11 @@ x=1e-3    -> ~23.28
 x=1e-4    -> ~25.06
 ```
 
-Tief innen ist das eine TF-Extrapolation, keine direkte DFT-MD-Tabelle.
+Tief innen ist dies eine TF-Extrapolation, keine direkte DFT-MD-Tabelle.
 
-### 3. Physische Viskositaet/Waermeleitung im PDE-Sensitivitaetstest
+### eta/k in der PDE
 
-A12b koppelt die dokumentierten Bereiche
+Literaturgebundene Bereiche
 
 ```text
 eta=8.5...26 mPa s
@@ -83,56 +81,133 @@ k=67...87 W/m/K
 Cp=850 J/kg/K
 ```
 
-explizit als radiale Newtonsche Spannung und Waermefluss in den kontrollierten A11-Gamma-PDE-Solver.
+wurden als radiale Newtonsche Spannung und Waermefluss in den kontrollierten Gamma-PDE-Solver gekoppelt.
 
-Beim `1e10 kg` Capacity-Branch (`A_cap~0.681`) bleibt der outward/backpressure Ast fuer inviscid, weak-dissipation und strong-dissipation Tests qualitativ erhalten.
+Unter dem historischen `1e10 kg` Capacity-Limiter bleibt der outward/backpressure Ast qualitativ erhalten. Die realistischen eta/k-Werte entfernen den Backpressure-Ast in diesem Reduced Test nicht.
 
-Beispiel `N=64, t=0.8 r_B/c_inf`:
+## A12c – relativistische stiff-EOS Supply-Rekalibrierung
 
-```text
-inviscid:             shock~1.39 r_B, inner flux~0.0241
-Re=98.5, Pe=10.62:    shock~1.39 r_B, inner flux~0.0243
-Re=32.2, Pe=8.18:     shock~1.39 r_B, inner flux~0.0241
-```
+A12c korrigiert einen wichtigeren Punkt: Der historische Michel-Supply ist selbst stark EOS-abhaengig.
 
-Bei `t=0.6` und staerkerer Dissipation:
+PREM-Zentrum:
 
 ```text
-N=80 -> shock~1.083 r_B, inner flux~0.0276
-N=96 -> shock~1.059 r_B, inner flux~0.0271.
+rho       ~13.08848 g/cm3
+Kappa_S   ~1.4253 TPa
+Pressure  ~363.852 GPa
+dK/dP     ~2.356
+c_eff     ~10.4355 km/s.
 ```
+
+Fuer einen **lokalen** Polytropen ist `dK/dP=Gamma`. Daher ist `Gamma~2.356` ein lokaler Stiffness-Proxy, aber keine globale Fe-EOS bis zum Horizon.
+
+Fuer `Gamma>5/3` wird die volle relativistische Michel-Kritikalitaet verwendet; die Newton-Bondi-Grenze ist dort nicht zulaessig.
+
+Bei `M=1e11 kg` ergibt der konstante-Gamma GR-Sensitivitaetsscan ungefaehr:
+
+| Gamma | Mdot [kg/s] |
+|---:|---:|
+| `1.75` | `1.19e-7` |
+| `1.80` | `2.89e-8` |
+| `1.85` | `8.02e-9` |
+| `2.00` | `3.35e-10` |
+| `2.20` | `1.50e-11` |
+| `2.356` local PREM proxy | `2.40e-12` |
+
+Der historische Projektbereich
 
 ```text
-literature-scale eta/k do not remove the 1e10-kg backpressure branch
-in this reduced dissipative sensitivity.
+1.47e-8 ... 1.46e-7 kg/s
 ```
 
-### 4. >=1e11 kg
+entspricht im einfachen konstanten-Gamma GR-Surrogat etwa
 
-Da Re/Pe mit `r_B` wachsen und A10/A11 dort bereits `Xi_high<<1` ergaben, findet A12b keinen neuen dissipativen Mechanismus, der den aktuellen Reduced supply-processing Ast automatisch umkehrt.
+```text
+Gamma ~1.743 ... 1.826.
+```
+
+Damit gilt ab A12c:
+
+```text
+historical Michel supply = LEGACY / EOS-SENSITIVE BENCHMARK
+not a universal outer-supply rate.
+```
+
+### Konsequenz fuer 1e10 kg
+
+Der bisherige A10-fast Wert
+
+```text
+Xi_high(1e10)~1.468
+```
+
+war an den historischen hohen/soft-EOS Supply gekoppelt.
+
+Mit stiff-EOS GR-Supply sinkt `Xi` stark:
+
+```text
+Gamma=1.80  -> Xi~0.29
+Gamma=1.85  -> Xi~0.081
+Gamma=2.00  -> Xi~0.0034
+Gamma=2.356 -> Xi~2.4e-5.
+```
+
+Im einfachen konstanten-Gamma Vergleich liegt `Xi=1` bei etwa
+
+```text
+Gamma~1.756.
+```
+
+Daher wird die fruehere Kurzform
+
+```text
+1e10 kg -> dynamic backpressure
+```
+
+korrigiert zu
+
+```text
+1e10 kg -> backpressure CONDITIONAL on sufficiently high/soft-EOS supply.
+           A stiff-EOS supply can remove the capacity overload.
+```
+
+### Konsequenz fuer >=1e11 kg
+
+Eine niedrigere reale Supply-Rate macht den bereits gefundenen processing-capable Ast nicht schwieriger, sondern leichter:
+
+```text
+>=1e11 kg inner processing capability:
+SURVIVES / STRENGTHENED under lower stiff-EOS supply.
+```
+
+Das liefert noch keine finale Netto-Mdot.
 
 ## Acceptance Criteria – aktueller Stand
 
-1. EOS/Zbar Quellen und Extrapolation sichtbar: **PARTIAL PASS**
-2. reusable bounded `Zbar(rho,T)` closure: **CALCULATED via More/TF fit**
-3. dissipative Koeffizienten nicht frei: **PASS fuer eta/k sensitivity**
-4. physische eta/k direkt im PDE: **PARTIAL PASS im Gamma-EOS-Surrogat**
-5. `1e10 kg` Backpressure unter eta/k: **SURVIVES**
-6. `>=1e11 kg` supply-processing unter eta/k scaling: **SURVIVES REDUCED AUDIT**
-7. full `P(rho,T),E(rho,T),mu_e(rho,T)` table: **OPEN**
-8. thermodynamically exact `T(rho,e)` Fe/Ni inversion: **OPEN**
-9. electron-ion relaxation in two-temperature PDE: **OPEN**
-10. species-resolved final Mdot band: **OPEN**
+1. WDM/EOS Quellen sichtbar: **PARTIAL PASS**
+2. bounded `Zbar(rho,T)` closure: **CALCULATED via More/TF**
+3. eta/k nicht frei: **PASS fuer sensitivity**
+4. eta/k in Reduced PDE: **PARTIAL PASS**
+5. high-resolution 1e10 shock regime: **CALCULATED**
+6. stationary 1e10 shock Mdot: **NOT ESTABLISHED**
+7. relativistischer stiff-EOS Supply: **CALCULATED als constant-Gamma sensitivity**
+8. historical Michel benchmark universell: **REJECTED / DOWNGRADED TO LEGACY**
+9. full general-EOS relativistic Michel supply: **OPEN**
+10. full `P(rho,T), E(rho,T), mu_e(rho,T)` table: **OPEN**
+11. two-temperature e-i relaxation: **OPEN**
+12. final species-resolved net Mdot: **OPEN**
 
-## Naechster Unterblock: A12c
+## Naechster Pflichtblock – Stage 3.69I / A13
 
 ```text
-Mie-Gruneisen / tabulated-Fe thermodynamic surrogate
-+ explicit T(rho,e) inversion
-+ More/AA Zbar uncertainty band
-+ two-temperature electron/ion relaxation bracket
-+ viscosity / conduction on the physical temperature field
-+ repeat 1e10, 1e11, 2e11, 5e11 dynamic scan
+PREM outer state
+-> piecewise/general Fe/Ni EOS
+-> P(rho,T), E(rho,T), T(rho,e)
+-> bounded Zbar uncertainty
+-> relativistic Michel critical point with variable EOS
+-> Mdot_supply(EOS)
+-> A9-A12 transport/capture sink
+-> final reduced net-Mdot band.
 ```
 
 A12 bleibt PARTIAL; Stage 3.69 Full-Multiphysics bleibt OPEN.
