@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 26.08.2026  
-**Forschungsstand:** bis Stage 3.69E/A-9 numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen
+**Forschungsstand:** bis Stage 3.69G/A-11 numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen
 
 ## Statusbegriffe
 
@@ -28,7 +28,6 @@ Beide bleiben parallel.
 | starke Zentralmassenvariante | **FAIL** |
 | Hard-Cavity/Hard-Replacement | **FAIL / verworfen** |
 | kleiner smooth-compensated Branch | weiter getestet; kein eigener Makro-Ausschluss in reduzierten Modellen |
-| `r_s`, `r_B`, `r_rep` getrennt | **DONE** |
 | vereinfachte Seismik/Normalmoden | kein robuster Ausschluss, kein positiver Nachweis |
 | globale Waermeproxies | kein Ausschluss des getesteten kleinen Supply-Benchmarks |
 
@@ -49,12 +48,11 @@ Keine offizielle Super-K-Erdzentrum-BH-Exklusion wird behauptet.
 | Horizon/current conservation | **PASS** |
 | In/Out matching | **PASS an getesteten Benchmarks** |
 | Low-alpha externe Dirac-Regression | **PASS** |
-| Intermediate-alpha Doran-Struktur | **PASS qualitativ/numerisch** |
 | Earth-speed Protonenscan `1e10...5e11 kg` | **CALCULATED** |
 | `M=1e11 kg` neutraler Protonenwert | **CALCULATED: ~0.9503 classical** |
 | charged Proton Dirac `Q=0...24e` | **PARTIAL PASS / CALCULATED** |
 | charged Electron Coulomb-Fernfeld | **OPEN** |
-| Fe-56/Ni-58 korrekter `0+` scalar/KG solver | **PASS low-alpha regression** |
+| Fe-56/Ni-58 `0+` scalar/KG solver | **PASS low-alpha regression** |
 | Fe-56 coherent capture @`1e11 kg` | **CALCULATED: ~0.99754 classical** |
 | Ni-58 coherent capture @`1e11 kg` | **CALCULATED: ~0.99646 classical** |
 | grosse Wave-Suppression bei `1e11 kg` | **NOT FOUND** |
@@ -62,99 +60,133 @@ Keine offizielle Super-K-Erdzentrum-BH-Exklusion wird behauptet.
 | ungescreenter `r_B`-weiter Coulombblocker | **NOT SUPPORTED** |
 | Single-pass `p` als automatische Netto-Mdot-Fraktion | **CORRECTED / REJECTED** |
 | repeated-encounter formula `chi=p/(p+e)` | **DONE** |
-| strong-coupling radial Knudsen scaling | **CALCULATED: Kn decreases inward** |
+| strong-coupling radial Knudsen scaling | **CALCULATED** |
 | early weak-Spitzer switch ohne `Gamma<<1` | **NOT JUSTIFIED** |
 | 1-D absorbing Bondi PDE | **PASS benchmark auf Prozentniveau** |
 | reflecting/backpressure PDE | **CALCULATED; outward shock demonstrated** |
-| relativistische Elektronendegeneration | **CALCULATED** |
-| `58Ni` EC energetic threshold | **CALCULATED** |
-| `56Fe` EC energetic threshold | **CALCULATED** |
 | prompt one-pass weak equilibrium/neutronization | **NOT SUPPORTED** |
-| A9 collisional escape optical-depth proxy | **CALCULATED** |
-| A9 reservoir processing capacity | **CALCULATED** |
-| A9 critical transition radius / critical BH mass | **CALCULATED** |
-| A9 plasma-response / bulk quasineutrality proxy | **CALCULATED** |
-| A9 weak-reaction residence gate | **CALCULATED** |
-| `M>=~1e11 kg` strong-coupling/recycling reduced branch | **SUPPLY-PROCESSING CAPABLE** |
-| `M=1e10 kg` transport | **OPEN / BACKPRESSURE-SENSITIVE** |
-| finale first-principles species-resolved `Mdot_BH` | **OPEN** |
 
-## A9 – zentrale quantitative Closure
+## A9 – Residence/Recycling Reduced Closure
 
-Bei repeated encounters gilt
+A9 koppelt repeated encounters, permanenten Escape, Reservoir-Processing, Plasmaresponse und Weak-Reaction-Gates.
 
 ```text
-chi_capture = p/(p+e_perm).
+chi_capture = p/(p+e_perm)
 ```
 
-Im A7/A9 strong-coupling/geometrischen Proxy wird fuer den permanenten ballistischen Escape
+Massensplit:
 
 ```text
-e_perm ~ f(v>v_esc) exp(-tau_coll)
+M=1e10 kg: transition-/backpressure-sensitive
+M=1e11 kg: supply-processing capable im getesteten strong-coupling bracket
+M=2e11 kg: klare Processing-Reserve
+M=5e11 kg: sehr grosse Processing-Reserve.
 ```
 
-verwendet. Fuer die getesteten atomaren Transition-Skalen ist `tau_coll>>1`, so dass `e_perm` praktisch verschwindet und Misses rezykliert werden.
-
-Fuer `M=1e11 kg` und `r_t=3e-11...2e-10 m`:
+Bei `M=1e11 kg` und `r_t=3e-11...2e-10 m`:
 
 ```text
-Xi_high = Mdot_supply,high / Mdot_capacity
-        ~0.0079 ... 0.905.
+Xi_high ~0.0079 ... 0.905.
 ```
 
-Damit benoetigt der aktuelle Reduced Strong-Coupling-Branch bei `1e11 kg` keinen zusaetzlichen Capture-Pile-up, um den historischen Michel-/Supply-Benchmark zu verarbeiten.
+Promptes Weak-Equilibrium bleibt im schnellen Branch nicht gestuetzt.
 
-Massenscan:
+## A10 – First-Principles-Informed WDM Transport Envelope
+
+Publizierte Fe-QMD-/EOS-Daten wurden auf den Reduced Earth path abgebildet.
+
+Direkte Datenbereiche:
 
 ```text
-M=1e10 kg: transition-scale/backpressure sensitive
-M=1e11 kg: supply-processing capable in tested strong-coupling bracket
-M=2e11 kg: clear capacity reserve
-M=5e11 kg: very large capacity reserve.
+WDM Fe QMD transport: rho~12.5...25 g/cm3, T~0.5...15 eV
+2025 Fe first-principles EOS: rho~7.874...47.2 g/cm3, T~5500 K...1e9 K.
 ```
 
-Kritischer Reduced-Uebergang:
+Der direkt QMD-kalibrierte aeussere Shell ist bereits stark optisch dick.
+
+Schnellstes / escape-freundlichstes A10-Envelope:
 
 ```text
-xcrit low  ~8.507e-3
-xcrit high ~3.397e-3.
+M=1e10 kg: tau_total~1.92e2, Xi_high~1.47
+M=1e11 kg: tau_total~1.93e3, Xi_high~2.81e-3
+M=2e11 kg: tau_total~3.86e3, Xi_high~4.28e-4
+M=5e11 kg: tau_total~9.66e3, Xi_high~3.54e-5.
 ```
 
-Fuer physikalische atomare Transition-Skalen `3e-11...2e-10 m` entspricht das grob
+Damit gilt:
 
 ```text
-Mcrit ~5.8e9 ... 9.6e10 kg.
+local Kn~1 != permanent escape through the outer Fe/WDM reservoir.
 ```
 
-## A9 – Weak-/Charge-Timescales
+A10 reproduziert den A9-Massensplit, bleibt aber wegen fehlender voller `Zbar/EOS/transport`-Abdeckung **PARTIAL FIRST-PRINCIPLES-INFORMED**.
 
-Bei `M=1e11 kg`:
+## A11 – Time-Dependent Partial-Sink PDE
+
+A11 testet den A9/A10-Split erstmals dynamisch mit einem sphärischen Finite-Volume-HLL-Solver.
+
+### Regression / Conservation
 
 ```text
-Ni-threshold:
-    t_res ~9.13e-14 s
-    lambda_required ~1.10e13 s^-1
-
-Fe-threshold:
-    t_res ~1.50e-17 s
-    lambda_required ~6.69e16 s^-1.
+absorbing Bondi: PASS auf Prozentniveau
+reflecting boundary: Backpressure/outward shock reproduziert
+partial sink: implementiert
+mass residual: ~1e-16 ... few 1e-15
+energy audit residual: ~1e-16 ... few 1e-15.
 ```
 
-Der publizierte schnelle `56Fe`-Vergleichswert bei `rho*Ye=1e11 g/cm^3, T9=3`
+### Fe-like Sensitivitaet
+
+`A=0.99754` wird nur als Sensitivitaet verwendet, **nicht** mit der A5-Cross-Section gleichgesetzt.
+
+Bei `gamma=1.5` bleibt dieser Lauf praktisch auf dem voll absorbierenden Ast.
+
+### Dynamischer Massensplit
+
+Aus A10 wird als Transport-Capacity-Sensitivitaet
 
 ```text
-lambda_ec ~1.5916e4 s^-1
+A_cap=min(1,1/Xi_high)
 ```
 
-liegt viele Groessenordnungen darunter.
+verwendet.
+
+Damit:
 
 ```text
-prompt weak equilibrium / one-pass neutronization: NOT SUPPORTED
+1e10 kg, fast-envelope high-supply:
+    Xi_high~1.468 -> A_cap~0.681
+    -> dynamischer Backpressure-Zweig entsteht
+    -> innerer Flux stark reduziert
+
+>=1e11 kg:
+    Xi_high<<1 -> A_cap=1
+    -> PDE bleibt auf absorbierendem/supply-processing Ast.
 ```
 
-im schnellen supply-processing Branch.
+Der A9/A10-Massensplit wird damit **dynamisch reproduziert**.
 
-Die Elektronen-Plasmaantwort ist wesentlich schneller als die Reduced Residence-Zeit; bulk-quasineutraler Transport ist deshalb als Reduced Closure motiviert. Der diskrete BH-Charge-State bleibt trotzdem nicht exakt geloest.
+### Offene A11-Konvergenz
+
+Der `1e10 kg / A~0.681` Shockbranch ist in der Regimeentscheidung stabil, aber die exakte Endrate noch nicht gitterkonvergiert.
+
+Bei `gamma=1.5`, `t=0.6 r_B/c_inf`:
+
+```text
+N=80  -> inner flux ~0.027
+N=120 -> ~0.025
+N=160 -> ~0.023
+N=200 -> ~0.021
+N=240 -> ~0.019.
+```
+
+Daher:
+
+```text
+A11 dynamic regime split: CALCULATED
+A11 exact 1e10 shock-branch Mdot: OPEN
+full tabulated WDM EOS/Zbar PDE: OPEN.
+```
 
 ## Wichtige Korrekturen
 
@@ -167,6 +199,8 @@ A6 r_coll~lambda_geom collisionless shortcut -> CORRECTED in A7
 sonic point prevents all long-term feedback -> CORRECTED; shock/backpressure can propagate outward
 EC threshold open -> instant NSE/neutronization -> CORRECTED
 small one-pass p -> stationary chi=p -> CORRECTED by A9 repeated-encounter closure
+local Kn=1 -> permanent outer escape -> REJECTED by A10 optical-depth audit
+capacity deficit -> static arbitrary suppression -> REPLACED by A11 dynamic backpressure test.
 ```
 
 ## Formation
@@ -187,11 +221,12 @@ small one-pass p -> stationary chi=p -> CORRECTED by A9 repeated-encounter closu
 | Hawking-Neutrinotest | **FAIL im Projektmodell** | nicht anwendbar |
 | Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
 | Charge-/Screening-Subtests | teilweise berechnet | teilweise berechnet |
-| A9 Residence/Recycling Reduced Closure | **CALCULATED** | **CALCULATED** |
-| `>=~1e11 kg` Strong-Coupling Transport | supply-processing capable | supply-processing capable |
-| `1e10 kg` Transport | OPEN / backpressure-sensitive | OPEN / backpressure-sensitive |
-| Prompt weak equilibrium | not supported in fast branch | not supported in fast branch |
-| finale First-Principles Dense-Matter-`Mdot` | **OPEN** | **OPEN** |
+| A9 Residence/Recycling | **CALCULATED** | **CALCULATED** |
+| A10 WDM transport envelope | **PARTIAL CALCULATED** | **PARTIAL CALCULATED** |
+| A11 dynamic partial-sink PDE | **PARTIAL CALCULATED** | **PARTIAL CALCULATED** |
+| `>=1e11 kg` current Reduced transport branch | supply-processing / absorbing dynamic branch | supply-processing / absorbing dynamic branch |
+| `1e10 kg` current Reduced transport branch | dynamic backpressure possible / exact Mdot OPEN | dynamic backpressure possible / exact Mdot OPEN |
+| finale Full-WDM species-resolved `Mdot` | **OPEN** | **OPEN** |
 | Formation | stark negativ | stark negativ |
 | direkte Detektion | keine | keine |
 | eindeutige positive Signatur | keine | keine |
@@ -199,13 +234,12 @@ small one-pass p -> stationary chi=p -> CORRECTED by A9 repeated-encounter closu
 ## Naechster Block
 
 ```text
-Stage 3.69F / A-10:
-first-principles-informed WDM transport
-+ time-dependent hydro/kinetic sink coupling
-+ absorptive A4/A5 inner boundary
--> replace geometric mean-free-path proxy
--> e_perm(r,E,species)
--> final reduced species-resolved Mdot band.
+Stage 3.69H / A12:
+tabulated Fe/Ni EOS + Zbar
++ thermal conductivity / viscosity / relaxation
++ species/charge advection
++ high-resolution shock convergence
+-> dynamic Mdot band with explicit EOS uncertainty.
 ```
 
 ## Schluss
@@ -213,10 +247,9 @@ first-principles-informed WDM transport
 ```text
 H+ Standard-Hawking: FAIL im getesteten Projektmodell.
 H0: OPEN / nicht nachgewiesen.
-Materie-Capture-Wellenblock: stark gehaertet; keine grosse Wave-Suppression bei 1e11 kg gefunden.
-A9: fuer >=~1e11 kg ist der aktuelle strong-coupling/recycling Reduced Branch supply-processing capable.
-1e10 kg: weiterhin backpressure-/transition-sensitive.
-Finale Unsicherheit: first-principles WDM Transport/EOS + gekoppelte Hydro/Kinetik.
+A9-A11: >=1e11 kg bleibt im aktuellen Reduced Matter-Branch supply-processing/absorbing.
+1e10 kg: dynamischer Backpressure-Zweig moeglich; exakte Endrate noch OPEN.
+Full-WDM EOS/Zbar/dissipative transport: OPEN.
 Formation: stark negativ.
 Empirischer Erdzentrum-BH-Nachweis: keiner.
 ```
