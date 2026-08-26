@@ -2,7 +2,7 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul V1.5  
 **Stand:** 26.08.2026  
-**Status:** INITIALIZED / REGIME CLASSIFIED / FULL DIRAC SOLVER NOT PERFORMED
+**Status:** REGIME CLASSIFIED / DIRAC RADIAL PROTOTYPE IMPLEMENTED / FULL ABSORPTION MATCHING OPEN
 
 ## Ziel
 
@@ -118,11 +118,11 @@ Wichtige Benchmarks aus dieser Arbeit:
 - `alpha_g >> 1`: Annaeherung an die klassische Punktteilchen-Capture.
 - hohe Energie: geometrisch-optischer Grenzwert.
 
-Die dort angegebene Low-Energy-Unruh-Naherung wird fuer V1.5 **nicht** pauschal auf Protonen oder Fe-56 extrapoliert. Fuer `alpha_g~0.35` bzw. `~19.6` ist ein eigener numerischer Dirac-Lauf der sauberere naechste Schritt.
+Die dort angegebene Low-Energy-Unruh-Naherung wird fuer V1.5 **nicht** pauschal auf Protonen oder Fe-56 extrapoliert. Fuer `alpha_g~0.35` bzw. `~19.6` ist ein eigener numerischer Dirac-Lauf der sauberere Schritt.
 
 ## 5. Klassischer Collisionless-Benchmark
 
-Der exakte klassische Punktteilchen-Benchmark fuer ein Schwarzschild-BH kann als externer Grenzcheck verwendet werden. Bei `u=v/c=3.48091e-5` ergibt sich fuer `M_BH=1e11 kg`:
+Der klassische Punktteilchen-Benchmark fuer ein Schwarzschild-BH kann als externer Grenzcheck verwendet werden. Bei `u=v/c=3.48091e-5` ergibt sich fuer `M_BH=1e11 kg` grob
 
 ```text
 sigma_classical ~= 2.28778e-22 m^2.
@@ -136,8 +136,6 @@ rho * v * sigma_classical
 
 mit zentraler PREM-Dichte beschreibt einen collisionless Ballistic-Flux aus einem asymptotischen Teilchenbad und nicht einen dissipativen dichten Fluidstrom. Sie darf daher nicht als Ersatz fuer Michel-Akkretion verwendet werden.
 
-Gerade der grosse Unterschied zwischen Fluid-Supply und collisionless Capture zeigt, warum Stage 3.69 die kollisional/kinetische Uebergangszone und Recycling explizit loesen muss.
-
 ## 6. Konsequenz fuer die H0-Akkretionsgleichung
 
 Die bisherige schematische Identifikation
@@ -146,7 +144,7 @@ Die bisherige schematische Identifikation
 Mdot_BH = Mdot_Michel
 ```
 
-ist nicht als abgeschlossene Mikrophysik zulaessig. Stattdessen wird Stage 3.69 jetzt strukturell als
+ist nicht als abgeschlossene Mikrophysik zulaessig. Stattdessen wird Stage 3.69 strukturell als
 
 ```text
 Mdot_supply
@@ -165,36 +163,88 @@ Mdot_BH = sum_i Integral dE [ Mdot_i,supply(E) * Gamma_i(E) ]
 
 wobei `Gamma_i(E)` erst aus einer horizon-konsistenten relativistischen Wellenrechnung bzw. einer daran kalibrierten Transportclosure stammen darf.
 
-## 7. Naechster numerischer Schritt – Stage 3.69A-1
+## 7. Stage 3.69A-1 – Schwarzschild-Dirac-Prototyp
 
-**Noch nicht durchgefuehrt.**
+**Teilweise durchgefuehrt am 26.08.2026.**
 
-Zu implementieren ist ein reproduzierbarer Schwarzschild-Dirac-Partialwellensolver nach dem Prinzip:
+Implementiert wurden:
 
-1. Painleve-Gullstrand- oder horizon-regulaere Eddington-Finkelstein-Koordinaten.
-2. Massive Dirac-Gleichung auf festem Schwarzschild-Hintergrund.
-3. rein einlaufende/regelmaessige Horizon-Randbedingung.
-4. radiale Integration nach aussen.
-5. Matching auf ein-/auslaufende asymptotische Wellen.
-6. Partialwellensumme fuer `sigma_abs(E,m,M_BH)`.
-7. Reproduktion publizierter Benchmarkkurven vor Anwendung auf den Erdbranch.
-8. danach Kopplung an die lokale Fe/Ni-Plasma-/Kernzusammensetzung aus Stage 3.69.
+1. radiale massive Dirac-Gleichung in horizon-regulaeren Painleve-Gullstrand-Koordinaten,
+2. regulaerer `s=0`-Horizon-Branch,
+3. erster Taylor-Koeffizient zur stabilen Initialisierung direkt ausserhalb `r=2M`,
+4. radiale DOP853-Integration,
+5. konservierter Dirac-Strom/Wronskian als harter Solver-Selfcheck.
+
+Benchmark:
+
+```text
+alpha=0.2, u=0.5, x=r/M: 2+1e-6 -> 1000
+```
+
+Ergebnis:
+
+```text
+kappa=-1: relative Wronskian drift ~3.68e-10
+kappa=+1: relative Wronskian drift ~1.45e-11
+```
+
+Damit gilt nur fuer dieses numerische Teilmodul:
+
+```text
+regular horizon branch + radial Dirac integration: SELF-CHECK PASS.
+```
+
+### Noch nicht bestanden: asymptotisches Matching
+
+Die physikalische Absorptionsrate erfordert die stabile Zerlegung
+
+```text
+U(r->infinity) = alpha_kappa U_in + beta_kappa U_out
+```
+
+und danach die Partialwellensumme. Ein erster Leading-Order-Matching-Versuch war bei kleinen Impulsen noch zu sensitiv gegen den Matchingradius. Daher wird daraus bewusst **keine** physikalische `sigma_abs` berichtet.
+
+Akzeptanzkriterien fuer den naechsten Substep:
+
+- stabile `|alpha_kappa|` gegen Matchingradius und Matchingfenster,
+- Reproduktion der publizierten Doran-Kurve bei `alpha=0.2`,
+- Reproduktion des Unruh-Low-Energy-Limits bei `alpha<<1`,
+- High-energy-Konvergenz gegen den geometrisch-optischen Grenzwert.
+
+Details: [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md).
+
+## 8. Analytischer Low-Energy-Grenzcheck
+
+Am Projekt-Referenzpunkt `M_BH=1e11 kg`, `u=10.4355 km/s / c` ergibt die publizierte Unruh/Doran-Low-Energy-Naeherung fuer das Elektron
+
+```text
+alpha_e = 1.92308e-4
+sigma_lowE,e ~= 3.4554e-26 m^2.
+```
+
+Dieser Elektronenwert liegt klar im schwachen Kopplungsregime und ist ein sinnvoller spaeterer Solver-Benchmark. Fuer das Proton liefert dieselbe Formel formal `~6.3447e-23 m^2`, wird bei `alpha_p~0.353` aber **nicht als finale Projektabsorption akzeptiert**, bis das volle numerische Matching funktioniert. Fuer Fe-56 wird die schwach gekoppelte Low-Energy-Naeherung nicht extrapoliert.
 
 ## Status
 
 ```text
-Schroedinger-Aussenproxy: brauchbar fuer Regime-/Wellencheck, nicht fuer finale Horizon-Capture.
-Dirac/Schwarzschild-Capture: erforderlich.
+Schroedinger-Aussenproxy: DONE als Regime-/Wellencheck.
 Teilchenspezifische Regime: identifiziert.
-Protonen-Uebergang alpha_g~1 liegt bei ~2.83e11 kg.
-Volle Capture-Rate: OPEN.
+Protonen-Uebergang alpha_g~1: ~2.83e11 kg.
+Dirac radial equation: IMPLEMENTED.
+Regular horizon boundary: IMPLEMENTED.
+Wronskian/current conservation: SELF-CHECK PASS.
+Asymptotic in/out matching: OPEN.
+Partial-wave sigma_abs: OPEN.
+Species-resolved net Mdot: OPEN.
 H0 dadurch weder bestaetigt noch ausgeschlossen.
-Stage 3.69A-1: NOT PERFORMED.
+Stage 3.69 insgesamt: weiterhin NOT PERFORMED als kompletter Multiphysik-Endtest.
 ```
 
 ## Reproduzierbarkeit
 
-Der Scale-/Coupling-Check ist in [`stage3_69a_quantum_capture_regime.py`](stage3_69a_quantum_capture_regime.py) reproduzierbar.
+- [`stage3_69a_quantum_capture_regime.py`](stage3_69a_quantum_capture_regime.py)
+- [`stage3_69a1_dirac_prototype.py`](stage3_69a1_dirac_prototype.py)
+- [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md)
 
 ## Referenzen
 
