@@ -5,8 +5,8 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Aktueller Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.69/3.70 definiert, nicht durchgefuehrt  
-**Stand:** 25.08.2026  
+**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69/3.70 definiert, nicht durchgefuehrt  
+**Stand:** 26.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
 Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
@@ -15,7 +15,7 @@ Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
 ## Wissenschaftlicher Status in einem Satz
 
-Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Der Standard-Hawking-Zweig H+ faellt im aktuellen Projekt-Reinterpretationstest gegen ein publiziertes Super-Kamiokande-`anti-nu_e`-Limit; der nichtstandardmaessige H0-Zweig ohne Hawking-Strahlung wird durch die bisherigen reduzierten Erdtests nicht ausgeschlossen, besitzt aber weder eine positive Detektion noch einen hergeleiteten Standard-Formationweg.
+Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Der Standard-Hawking-Zweig H+ faellt im aktuellen Projekt-Reinterpretationstest gegen ein publiziertes Super-Kamiokande-`anti-nu_e`-Limit; der nichtstandardmaessige H0-Zweig ohne Hawking-Strahlung wird durch die bisherigen reduzierten Erdtests nicht ausgeschlossen, besitzt aber weder eine positive Detektion noch einen hergeleiteten Standard-Formationweg. Die exakte H0-Netto-Akkretionsrate bleibt offen und muss in Stage 3.69 inklusive Quantum/Wave-Capture geschlossen werden.
 
 ## Zwei getrennte Hypothesen
 
@@ -65,12 +65,22 @@ r_B = G M_BH / c_eff^2
 M_PREM(<r_rep) = M_BH.
 ```
 
+Fuer den zentralen PREM-Supply-Proxy wird nun explizit
+
+```text
+c_eff = sqrt(V_P^2 - 4/3 V_S^2)
+      = 10.4355 km/s
+      ~ 10.44 km/s
+```
+
+mit `V_P=11.2622 km/s` und `V_S=3.6678 km/s` dokumentiert. Bei `M_BH~1e11 kg` folgt `r_B~61 nm`.
+
 ## Stand der Erdtests
 
 Fuer den kleinen smooth H0-Zweig liefern die bisher ausgefuehrten reduzierten Tests keinen robusten Ausschluss durch
 
 - Gesamtmasse / `GM`,
-- Trägheitsmoment und Rotation,
+- Traegheitsmoment und Rotation,
 - smooth PREM-Massenbuchhaltung,
 - reduzierte Hydrostatik,
 - vereinfachte Seismik/Normalmoden,
@@ -78,6 +88,26 @@ Fuer den kleinen smooth H0-Zweig liefern die bisher ausgefuehrten reduzierten Te
 - den gestuften Akkretionsaudit aus Festigkeit, Yield, plastischem Supply, Rotation, Knudsen-Uebergang, Loss Cone und radiativem Feedback.
 
 Das bedeutet **Kompatibilitaet innerhalb der getesteten Modelle**, nicht Evidenz fuer ein BH im Erdzentrum.
+
+## Stage 3.68E – externes Fachfeedback integriert
+
+Technische Rueckmeldungen aus Numerical Relativity/HPC und globaler Seismologie wurden am 26.08.2026 ausgewertet und ohne private Mailtexte in den Modellstand integriert.
+
+Die wichtigsten Konsequenzen:
+
+```text
+1. c_eff fuer Bondi/Supply explizit dokumentiert: 10.4355 km/s.
+2. Bondi/Michel nicht mehr automatisch als finale Horizont-Capture-Rate interpretiert.
+3. Quantum/Wave-Capture als Pflichtblock in Stage 3.69 aufgenommen.
+4. 47-TW-Waerme-Sanity-Check explizit gerechnet:
+   oberer kleiner Michel-Benchmark ~0.328 TW bei eta=1 -> kein globaler Ausschluss.
+5. Seismik fuer Stage 3.70 herabgestuft:
+   nur aussichtsreich, wenn Stage 3.69 eine makroskopisch gekoppelte Signatur erzeugt.
+```
+
+Diese Integration ist **Modellhaertung, keine externe Bestaetigung der Hypothese**.
+
+Details: [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md).
 
 ## Formation
 
@@ -93,15 +123,16 @@ cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunftsmechanismus nic
 
 Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
 
-## Endstatus Stage 3.68
+## Endstatus Stage 3.68 / 3.68E
 
 | Bereich | H+ Standard-Hawking | H0 ohne Hawking |
 |---|---|---|
 | starke Zentralmassenvariante | FAIL | FAIL |
 | kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
 | Super-K / Hawking-Neutrinos | **FAIL im Projekt-Reinterpretationstest** | nicht anwendbar |
-| Akkretion / Wärme | gekoppelte H+-Probleme | exakte Rate OPEN; kein robuster Ausschluss im kleinen Branch |
-| spätere Earth-Capture-Formation | FAIL | FAIL |
+| Akkretion / Waerme | gekoppelte H+-Probleme | exakte Netto-Rate OPEN; Quantum/Wave-Capture ausstehend |
+| Seismik | kein positiver Nachweis | direkter Mikrobereich nicht aufloesbar; makroskopische Kopplung OPEN |
+| spaetere Earth-Capture-Formation | FAIL | FAIL |
 | Standard-Formation/Delivery | stark negativ | stark negativ |
 | direkte Detektion | keine | keine |
 | positive eindeutige Signatur | keine | keine |
@@ -111,6 +142,7 @@ Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
 ```text
 H+ Standard-Hawking: FAIL im getesteten Modell.
 H0 als heutige versteckte Zentralmasse: OPEN / durch bisherige Erdtests nicht ausgeschlossen.
+H0 exakte Netto-Akkretionsrate: OPEN; Quantum/Wave-Capture nicht geloest.
 H0 fundamentale Begruendung fuer kein Hawking: OPEN.
 H0 Formation: stark negativ / kein Standardweg gefunden.
 Empirischer Nachweis: keiner.
@@ -120,15 +152,16 @@ Empirischer Nachweis: keiner.
 
 Die zwei Endstufen sind in V1.5 formal definiert, aber **nicht durchgefuehrt**:
 
-1. **Stage 3.69 – High-Fidelity Multiphysics:** verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/GR-Capture-Architektur; erster realistischer Meilenstein ist ein reproduzierbarer 1-D/2-D-Prototyp.
-2. **Stage 3.70 – Experimental H0 Falsification:** dedizierter Real-Data-/Likelihood-Test einer erst aus Stage 3.69 abgeleiteten Signatur.
+1. **Stage 3.69 – High-Fidelity Multiphysics:** verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/Quantum-Wave-Capture/GR-Horizon-Sink-Architektur; erster realistischer Meilenstein ist ein reproduzierbarer 1-D/2-D-Prototyp.
+2. **Stage 3.70 – Experimental H0 Falsification:** dedizierter Real-Data-/Likelihood-Test einer erst aus Stage 3.69 abgeleiteten Signatur. Seismik wird nur dann priorisiert, wenn eine makroskopisch gekoppelte Struktur vorhergesagt wird.
 
 Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
 
 ## Dateien
 
 - [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) - Stage 3.69/3.70, definiert aber nicht durchgefuehrt.
-- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - Endmatrix der tatsaechlich bearbeiteten Stages bis 3.68.
+- [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md) - technische Integration externen Fachfeedbacks.
+- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - Endmatrix der tatsaechlich bearbeiteten internen Stages bis 3.68.
 - [`PUBLIC_UPDATE_V1_5.md`](PUBLIC_UPDATE_V1_5.md) - Definition der verbleibenden Endtests.
 - [`PUBLIC_UPDATE_V1_4.md`](PUBLIC_UPDATE_V1_4.md) - Abschlusszusammenfassung Stage 3.68.
 - [`THEORIE.md`](THEORIE.md) - aktueller Theorierahmen.
@@ -144,10 +177,12 @@ Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_7
 ## Literatur-Kernreferenzen
 
 - Dziewonski, A. M. & Anderson, D. L. (1981), *Preliminary Reference Earth Model*.
+- Davies, J. H. & Davies, D. R. (2010), *Earth's surface heat flux*, `47 +/- 2 TW`.
+- Doran, C., Lasenby, A., Dolan, S. & Hinder, I. (2005), *Fermion absorption cross section of a Schwarzschild black hole*, arXiv:gr-qc/0503019.
 - Super-Kamiokande Collaboration, arXiv:2305.05135, Tabelle 2.
 - Arbey & Auffinger, BlackHawk, arXiv:1905.04268; BlackHawk v3.0, arXiv:2606.06355.
 - Cantiello et al. (2026), *Accretion of Primordial Black Holes in Stellar Interiors*, arXiv:2606.02726.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Stages 1-3.68 bearbeitet und dokumentiert, Stage 3.69/3.70 als Validierungsprotokolle definiert und nicht durchgefuehrt, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Stages 1-3.68 bearbeitet und dokumentiert, Stage 3.68E externes Fachfeedback integriert, Stage 3.69/3.70 als Validierungsprotokolle definiert und nicht durchgefuehrt, Rheinland-Pfalz, Deutschland.
