@@ -2,14 +2,14 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
-**Stand:** 25.08.2026  
-**Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.69/3.70 definiert, nicht durchgefuehrt
+**Stand:** 26.08.2026  
+**Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69/3.70 definiert, nicht durchgefuehrt
 
 ## 1. Gegenstand
 
 Die definierende Hypothese des Erdmoduls lautet:
 
-> Im Erdzentrum wird eine kleine zentrale kompakte Schwarzloch-Masse als theoretische Zusatzkomponente untersucht. Im aktiven Basismodell wird ihre Masse glatt gegen normale PREM-Masse bilanziert, so dass sie nicht zusaetzlich zur gemessenen Erdmasse addiert wird.
+> Im Erdzentrum wird eine kleine zentrale kompakte Schwarzloch-Masse als theoretische Zusatzkomponente untersucht. Im aktiven Basismodell wird ihre Masse glatt gegen normale PREM-Masse bilanziert, so dass sie nicht zusaetzzlich zur gemessenen Erdmasse addiert wird.
 
 Es wird **keine direkte Detektion** eines Schwarzen Lochs im Erdzentrum behauptet.
 
@@ -52,7 +52,7 @@ Damit bleibt die Gesamtmasse im ideal kugelsymmetrischen Buchhaltungsgrenzfall u
 
 Der historische Hard-Cavity-/Hard-Replacement-Branch ist mechanisch verworfen.
 
-## 5. Drei verschiedene Radien
+## 5. Drei verschiedene Radien und expliziter Sound-Speed-Proxy
 
 ```text
 r_s = 2 G M_BH / c^2
@@ -67,6 +67,24 @@ r_s != r_B != r_rep.
 ```
 
 `r_rep` ist nur eine Massenbuchhaltungs-/Groessenskala, keine physische Vakuumgrenze.
+
+Fuer den zentralen PREM-Supply-Proxy werden
+
+```text
+rho_c = 13.0885 g/cm^3
+V_P   = 11.2622 km/s
+V_S   = 3.6678 km/s
+```
+
+verwendet. Daraus folgt
+
+```text
+c_eff = sqrt(V_P^2 - 4/3 V_S^2)
+      = 10.4355 km/s
+      ~ 10.44 km/s.
+```
+
+Damit liegt bei `M_BH~1e11 kg` die Bondi-Skala bei Groessenordnung `~61 nm`. Dieser `c_eff`-Wert ist ein aeusserer PREM-/Supply-Proxy, keine mikroskopische Dispersionsrelation der tiefsten Capture-Zone.
 
 ## 6. Minimaler Gravitationsrahmen
 
@@ -126,9 +144,31 @@ Die folgenden moeglichen Blockaden wurden als reduzierte Grenz-/Sensitivity-Test
 
 Keiner dieser reduzierten Tests liefert derzeit eine robuste vollstaendige Akkretionssperre. Die exakte nichtstationaere MeV-Mikrophysik bleibt jedoch offen.
 
+Seit Stage 3.68E wird zusaetzlich festgehalten, dass Bondi/Michel nicht automatisch bis zur Horizontabsorption extrapoliert werden duerfen. Bei `M~1e11 kg` liegt `r_s~1.5e-16 m`; deshalb ist ein separater **Quantum/Wave-Capture**-Block erforderlich, falls relevante Teilchenwellenlaengen bzw. Streuskalen den geometrisch-optischen Grenzfall nicht rechtfertigen.
+
+```text
+Bondi/Michel = aeusserer Supply-Benchmark
+Quantum/Wave-Capture = offene innere Absorptionsphysik
+finale Netto-Mdot = OPEN bis zur Kopplung in Stage 3.69
+```
+
 ## 9. H0-Langzeit- und Waermevertraeglichkeit
 
 Fuer den kleinen H0-Zweig fuehren die getesteten Michel-Skalierungen ueber ein Erdalter zu sehr kleinen globalen Massenanteilen. Selbst sehr konservative lokale Energieobergrenzen bleiben gegen die gesamte Erdwaerme klein.
+
+Ein zusaetzlicher globaler Sanity-Check verwendet `P_Earth ~47 +/- 2 TW`. Fuer
+
+```text
+P_heat = eta Mdot c^2
+```
+
+folgt bei `eta=1` eine maximale globale Vergleichsrate von ungefaehr
+
+```text
+Mdot_max ~1.65e4 kg/year.
+```
+
+Der obere bisherige Michel-Benchmark des kleinen Branches bei `5e11 kg` liegt bei ungefaehr `115 kg/year` bzw. `0.328 TW` fuer `eta=1`, also rund Faktor `143` unter dieser Vergleichsskala.
 
 Daraus folgt nur:
 
@@ -136,13 +176,15 @@ Daraus folgt nur:
 kein Ausschluss durch die getesteten globalen Massen-/Waermeproxies.
 ```
 
-Es folgt nicht, dass die exakte Akkretionsrate gemessen oder bewiesen waere.
+Es folgt nicht, dass die exakte Akkretionsrate gemessen oder bewiesen waere. Lokale Energiepartition und reale Effizienz `eta` bleiben Stage-3.69-Outputs.
 
 ## 10. Erdstruktur und Seismik
 
-Im smooth-compensated Branch ist die aeussere eingeschlossene Masse nahezu PREM-identisch. Bei `M~1e11 kg` ist die Bondi-/Kompressionsskala nur Groessenordnung `~60 nm`, waehrend der Buchhaltungsradius Groessenordnung `~100 m` besitzt.
+Im smooth-compensated Branch ist die aeussere eingeschlossene Masse nahezu PREM-identisch. Bei `M~1e11 kg` ist die Bondi-/Kompressionsskala nur Groessenordnung `~61 nm`, waehrend der Buchhaltungsradius Groessenordnung `~100 m` besitzt.
 
 Daraus folgt, dass starke lokale Materialaenderungen nicht ueber die ganze `~100 m`-Zone angenommen werden duerfen. Fruehere Millisekunden-Proxies, die die gesamte Buchhaltungszone als stark veraendert behandelten, wurden entsprechend abgeschaerft.
+
+Externes Fachfeedback aus globaler Seismologie bestaerkt die bereits interne Einschaetzung, dass eine reine Nano-/Mikrometer-Near-Zone nicht direkt seismisch raeumlich aufloesbar ist. Seismik wird fuer Stage 3.70 deshalb nur dann als aussichtsreicher Kanal behandelt, wenn Stage 3.69 eine **makroskopisch gekoppelte** `Delta rho`, `Delta V_P`, `Delta V_S`-Struktur oder eine koharente Normalmoden-/Streusignatur oberhalb realer Datenempfindlichkeit erzeugt.
 
 Die bisher ausgefuehrten reduzierten Laufzeit-, Streu- und Normalmodenproxies liefern keinen robusten Ausschluss des kleinen smooth H0-Zweigs und auch keine positive Detektion.
 
@@ -205,14 +247,14 @@ Die korrekte wissenschaftliche Aussage lautet nicht „die Theorie ist bewiesen�
 
 Die korrekte Aussage lautet:
 
-> Der Standard-Hawking-Zweig H+ faellt innerhalb des aktuellen Projektmodells. Ein nichtstandardmaessiger kleiner H0-Zweig kann in den bisherigen reduzierten heutigen Erdtests verborgen bleiben, besitzt aber keine positive Detektion, keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung und keinen hergeleiteten Standard-Formationweg.
+> Der Standard-Hawking-Zweig H+ faellt innerhalb des aktuellen Projektmodells. Ein nichtstandardmaessiger kleiner H0-Zweig kann in den bisherigen reduzierten heutigen Erdtests verborgen bleiben, besitzt aber keine positive Detektion, keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung und keinen hergeleiteten Standard-Formationweg. Die finale H0-Akkretionsrate bleibt zudem offen, bis Supply, Kinetik und Quantum/Wave-Capture in Stage 3.69 gekoppelt wurden.
 
 ## 14. Verbleibende Endstufen – formal definiert
 
-**Stage 3.69 – High-Fidelity Multiphysics: DEFINED / NOT PERFORMED.** Verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/GR-Capture-Architektur mit expliziten Transport-, QED-/Pair-/Nuklear-Zeitskalen und anschliessendem 3-D-Full-Wave-Export.
+**Stage 3.69 – High-Fidelity Multiphysics: DEFINED / NOT PERFORMED.** Verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/Quantum-Wave-Capture/GR-Horizon-Sink-Architektur mit expliziten Transport-, QED-/Pair-/Nuklear-Zeitskalen.
 
-**Stage 3.70 – Experimental H0 Falsification: DEFINED / NOT PERFORMED.** Dedizierter Real-Data-/Likelihood-Test einer quantitativen H0-Signatur, die erst aus Stage 3.69 stammen darf.
+**Stage 3.70 – Experimental H0 Falsification: DEFINED / NOT PERFORMED.** Dedizierter Real-Data-/Likelihood-Test einer quantitativen H0-Signatur, die erst aus Stage 3.69 stammen darf. Seismik ist nur bei einer makroskopisch gekoppelten Signatur ein aussichtsreicher Kanal.
 
-Der letzte tatsaechlich bearbeitete Teststand bleibt Stage 3.68. Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
+Der letzte tatsaechlich bearbeitete interne Teststand bleibt Stage 3.68. Stage 3.68E dokumentiert die Integration externen Fachfeedbacks und ist keine neue experimentelle Validierung.
 
-Vollstaendige Endmatrix der bearbeiteten Stages: [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md).
+Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md), [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md) und [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md).
