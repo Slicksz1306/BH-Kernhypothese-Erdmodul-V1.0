@@ -2,6 +2,52 @@
 
 Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls.
 
+## V1.5 / Stage 3.68E Feedback-Integration - 26.08.2026
+
+Externes Fachfeedback aus Numerical Relativity/HPC und globaler Seismologie wurde technisch ausgewertet und ohne private Mailtexte in den Modellstand integriert. Dies ist **keine neue experimentelle Validierung** und keine externe Bestaetigung der H0-Hypothese.
+
+### Neue Modellhaertung
+
+- Der fuer Bondi-/Supply-Proxies verwendete zentrale PREM-Sound-Speed wird explizit dokumentiert:
+
+```text
+V_P = 11.2622 km/s
+V_S = 3.6678 km/s
+c_eff = sqrt(V_P^2 - 4/3 V_S^2) = 10.4355 km/s.
+```
+
+- Bei `M_BH~1e11 kg` folgt `r_B~61 nm`; `c_eff` ist nur ein aeusserer PREM-/Supply-Proxy.
+- Bondi/Michel werden nicht mehr automatisch als finale Horizont-Capture-Rate interpretiert.
+- **Quantum/Wave-Capture** wurde als neuer Pflichtblock in Stage 3.69 aufgenommen, weil bei `M~1e11 kg` der Schwarzschildradius `r_s~1.5e-16 m` betraegt und der geometrisch-optische Grenzfall fuer alle Materiekomponenten nicht vorausgesetzt werden darf.
+- Die Stage-3.69-Architektur lautet nun:
+
+```text
+PREM global
+ -> Elastoplastik/Rheologie
+ -> Mikro-Hydrodynamik
+ -> kinetische GR-Zone
+ -> Quantum/Wave-Capture
+ -> GR-Horizon-Sink / Capture-Randbedingung.
+```
+
+- Ein expliziter globaler Waerme-Sanity-Check gegen `47 +/- 2 TW` wurde hinzugefuegt. Fuer `eta=1` folgt `Mdot_max~1.65e4 kg/year`. Der obere bisherige kleine Michel-Benchmark bei `5e11 kg` liegt bei etwa `115 kg/year` bzw. `0.328 TW`, also rund Faktor `143` darunter. Das liefert keinen globalen Waermeausschluss, ersetzt aber keine lokale Multiphysikrechnung.
+- Der Seismikkanal in Stage 3.70 wurde herabgestuft: eine reine Nano-/Mikrometer-Near-Zone ist nicht direkt global-seismisch aufloesbar. 3-D-Full-Wave-Seismik wird nur dann priorisiert, wenn Stage 3.69 eine makroskopisch gekoppelte `Delta rho`, `Delta V_P`, `Delta V_S`-Struktur oder koharente Normalmoden-/Streusignatur erzeugt.
+- Neue Datei: `EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`.
+
+### Status bleibt konservativ
+
+```text
+H+ Standard-Hawking: FAIL im getesteten Projekt-Reinterpretationsmodell.
+H0: OPEN / nicht nachgewiesen.
+H0 exakte Netto-Akkretionsrate: OPEN; Quantum/Wave-Capture nicht geloest.
+Formation: stark negativ / unaufgeloest.
+Stage 3.69: DEFINED / NOT PERFORMED.
+Stage 3.70: DEFINED / NOT PERFORMED.
+Empirischer Nachweis: keiner.
+```
+
+---
+
 ## V1.5 / Definition Stage 3.69-3.70 - 25.08.2026
 
 V1.5 aendert den physikalischen Endbefund von Stage 3.68 nicht. Neu ist die formale Definition der zwei verbleibenden Validierungsprotokolle.
@@ -29,7 +75,7 @@ Abschluss und Konsolidierung der Stage-3-Haertetestserie.
 - **H+** verwendet Standard-Hawking-Strahlung.
 - **H0** setzt als nichtstandardmaessige Gegenhypothese `P_Hawking=0` und ist damit kein Standard-GR/QFT-Zweig.
 - Stage 3.28 korrigierte die fruehere Hawking-Normierung; der relevante H+-Bereich verschob sich auf etwa `4.82e11 ... 5.49e11 kg`.
-- Stage 3.30 verwendete Greybody-Primärneutrinos und publizierte spektrumsunabhaengige Super-Kamiokande-Grenzen. Der H+-Projektfluss im Band `25.29-31.29 MeV` liegt ueber dem publizierten SK-IV-90%-CL-Limit. **H+ wird deshalb innerhalb des getesteten Modells als FAIL markiert.**
+- Stage 3.30 verwendete Greybody-Primaerneutrinos und publizierte spektrumsunabhaengige Super-Kamiokande-Grenzen. Der H+-Projektfluss im Band `25.29-31.29 MeV` liegt ueber dem publizierten SK-IV-90%-CL-Limit. **H+ wird deshalb innerhalb des getesteten Modells als FAIL markiert.**
 - Der kleine H0-Branch wurde durch Langzeitakkretion, Festigkeit/Yield, radialen Supply, Rotation, Knudsen-/kinetische Transition, Loss-Cone-Recycling, reduzierten Fokker-Planck/Reservoir-Closure und radiatives/QED-Feedback gehaertet. Keine robuste vollstaendige Akkretionssperre wurde gefunden; die exakte Multiphysik-Rate bleibt OPEN.
 - Die physische starke Near Zone wurde von der `~100 m`-Buchhaltungszone getrennt; starke Materialaenderungen liegen im kleinen Branch auf mikro-/nanoskopischen Skalen. Fruehere zu grosse Seismikproxies wurden entsprechend korrigiert.
 - Formation wurde separat abgeschlossen: In-situ-Kollaps, spaeter Earth-Capture, Proto-Earth-/Planetesimal-Capture und normale Halo-to-disk Delivery scheitern unter den getesteten Standardbedingungen. Ein extrem cold/co-moving Zustand bleibt nur als unhergeleitete Anfangsbedingung.
