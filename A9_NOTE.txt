@@ -1,1 +1,0 @@
-A9 is defined in STAGE3_69E_A9_PLAN.md. This placeholder exists only to mark the next closure block after the A4-A8 merge cycle.
