@@ -2,295 +2,249 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul V1.5  
 **Stand:** 26.08.2026  
-**Gesamtstatus:** Stage 3.69 Full-Multiphysics NOT PERFORMED; Stage 3.69A/3.69A-1 und Stage 3.69A-3 Quantum/Wave-Capture-Teilmodule numerisch bearbeitet; Stage 3.70 NOT PERFORMED
+**Gesamtstatus:** Stage 3.69 Full-Multiphysics OPEN; Teilmodule bis A8 numerisch bearbeitet; Stage 3.70 NOT PERFORMED
 
-Diese Datei definiert die verbleibenden Endtests. Es wurde **kein vollstaendiger Stage-3.69-Multiphysik/HPC-Lauf und keine dedizierte Stage-3.70-Real-Data-Likelihood-Analyse** durchgefuehrt.
-
-Projektbranches:
+## Branches
 
 ```text
 H+ = mit Standard-Hawking-Strahlung
 H0 = ohne Hawking-Strahlung
 ```
 
-Beide Branches bleiben parallel. Gemeinsame Materie-/Capture-Module werden fuer beide gerechnet; H+ besitzt zusaetzliche Hawking-Quell-/Emissionskanaele.
+Beide Branches bleiben parallel. Gemeinsame Materie-/Capture-Module gelten fuer beide; H+ besitzt zusaetzliche Hawking-Quell-/Emissionskanaele.
 
 ## Stage 3.69 – High-Fidelity Multiphysics
 
-**Gesamtstatus:** FULL STACK NOT PERFORMED  
-**Teilstatus:** `3.69A/3.69A-1` und `3.69A-3` numerisch bearbeitet  
-**Typ:** Validierungsprotokoll
-
-### Ziel
-
-Ein reproduzierbarer Multiphysik-Stack fuer den kleinen smooth BH-Branch um `M_BH ~1e10...5e11 kg`, der die bisher getrennt geprueften Regime selbstkonsistent koppelt und quantitative branch-spezifische Signaturen fuer Stage 3.70 erzeugt.
-
-### PREM-basierter aeusserer Supply-Proxy
+Ziel ist eine selbstkonsistente Verbindung
 
 ```text
-rho_c = 13.0885 g/cm^3
-V_P   = 11.2622 km/s
-V_S   = 3.6678 km/s
-c_eff = sqrt(V_P^2 - 4/3 V_S^2)
-      = 10.4355 km/s.
-```
-
-Bei `M_BH~1e11 kg` folgt `r_B~61 nm`. `c_eff` ist ein aeusserer PREM-/Supply-Proxy und keine mikroskopische Protonen-/Elektronendispersionsrelation.
-
-### Verschachtelte Architektur
-
-```text
-PREM global
- -> Elastoplastik/Rheologie
- -> Mikro-Hydrodynamik
- -> kinetische GR-Zone
+PREM/global supply
+ -> Rheologie / Dense Fe-Ni EOS
+ -> collisional transport
+ -> kinetic/recycling transition
  -> species/composition closure
- -> Quantum/Wave-Capture
- -> charge/nuclear feedback
- -> GR-Horizon-Sink
- -> branch-specific Hawking terms for H+ only.
+ -> wave capture
+ -> charge feedback
+ -> nuclear/reaction timescales
+ -> horizon sink
+ -> net Mdot_BH(t), Q(t)
 ```
 
-### Physikalische Mindestmodule
+### Bereits bearbeitete Teilmodule
 
-1. **Innere GR-Hydro/Kinetik:** `nabla_mu T^{mu nu}=Q^nu` auf praktisch Schwarzschild-Hintergrund; RN-Kontrollrechnung falls noetig.
-2. **Aeussere Elastoplastik:** dichte Fe/Ni-Materie.
-3. **Dense-Matter-EOS:** `p(rho,T,Y_e,...)`, Energie, Kompressibilitaet, Yield/Phase.
-4. **Transport:** Waermeleitung, Diffusion/Konvektion, Elektron-Ion-Kopplung, Strahlung.
-5. **QED/Nuklear:** Bremsstrahlung, Compton, Pair- und Nuklearprozesse nach Zeitskalencheck.
-6. **Loss Cone / Recycling:** Winkelimpulsdiffusion, Geodaeten, Capture.
-7. **Quantum/Wave-Capture:** spin-/energie-/ladungs-/kompositionsabhaengige Absorptionsquerschnitte.
-8. **Charge feedback:** `sigma_p,e(Q)` und selbstkonsistentes `Q(t)`.
-9. **Composite nuclei:** dominante `Fe-56`/`Ni-58`-Kerne haben `0+`; solange kohärent, scalar/Klein-Gordon-artige Composite-Capture statt Spin-1/2-Dirac.
-10. **Nuclear state transition:** bei Dissociation/Neutronisierung Umschaltung auf Nukleonen-/Elektronenkanäle.
-11. **H+ only:** Hawking-Emission, Greybody-Spektren, branch-spezifische Energie-/Ladungsquellen.
-12. **Aeussere Seismik:** nur falls die gekoppelte Loesung eine makroskopisch relevante Stoerung erzeugt.
+#### A1 – Schwarzschild-Dirac
 
-## Stage 3.69A / 3.69A-1 – bereits bearbeitet
+- massiver Schwarzschild-Dirac-Radialsolver: IMPLEMENTED
+- regular horizon branch: IMPLEMENTED
+- current/Wronskian self-check: PASS
+- in/out partial-wave matching: IMPLEMENTED
+- low-alpha externe Regression: PASS
+- intermediate-alpha Doran-Struktur: PASS qualitativ/numerisch
+
+#### A3 – Earth-speed Protonen-Capture
+
+Bei `M_BH=1e11 kg`, `v=10.4355 km/s`:
 
 ```text
-Schroedinger-Regimecheck: DONE
-Schwarzschild-Dirac radial solver: IMPLEMENTED
-regular horizon branch: IMPLEMENTED
-current/Wronskian self-check: PASS numerically
-in/out partial-wave matching: IMPLEMENTED
-matching-radius convergence: PASS at tested benchmark points
-low-alpha external regression: PASS
-intermediate-alpha Doran structure: PASS qualitatively/numerically
+sigma_p ~2.1741e-22 m^2
+sigma_p/sigma_classical ~0.9503
 ```
 
-Benchmark `alpha=0.2`:
+Keine starke Protonen-Wellenunterdrueckung an diesem Referenzpunkt.
+
+#### A4 – Charged Proton Dirac + Charge Feedback
+
+Schwarzschild + Test-Coulombfeld als kontrollierter erster charged-capture Proxy.
+
+Bei `M_BH=1e11 kg`:
 
 ```text
-E/m=1.5: sigma_A/M^2 ~123.259 ; classical ~128.680
-E/m=2.0: sigma_A/M^2 ~103.965 ; classical ~103.380
-E/m=5.0: sigma_A/M^2 ~89.682  ; classical ~87.174
-geometric-optics target: 27*pi ~84.823
+Q=0 e      -> sigma_p ~0.949...0.950 classical
+Q=3.67 e   -> sigma_p ~0.889 classical
+Q=10 e     -> sigma_p ~0.765 classical
+Q=24.18 e  -> sigma_p ~0.517 classical
 ```
 
-Ein vollstaendiger datenpunktgenauer Regressionstest gegen eine digitalisierte Publikationskurve bleibt offen.
-
-## Stage 3.69A-3 – Earth-speed Proton Dirac Capture
-
-Referenz:
+Interpretation:
 
 ```text
-v = 10.4355 km/s
-u = 3.4809081e-5.
+charge feedback: relevant
+orders-of-magnitude proton stop: not found in tested Q range
+charged electron far-field Coulomb matching: OPEN
 ```
 
-Fuer schwach absorbierte Partialwellen wird die Absorption zusaetzlich flux-stabil aus
+#### A5 – Fe/Ni 0+ Composite Wave Capture
+
+Fe-56 und Ni-58 werden im kohärenten ersten Proxy als massive skalare/Klein-Gordon-Zustaende behandelt.
+
+Bei `M_BH=1e11 kg`, `v=10.4355 km/s`:
 
 ```text
-P_abs = (-W_H)/(2 q |A_in|^2)
-q = p/(E+m), W_H=-1
+Fe-56: sigma/sigma_classical ~0.9975
+Ni-58: sigma/sigma_classical ~0.9965
 ```
 
-bestimmt, um Catastrophic Cancellation in `1-|S|^2` zu vermeiden.
+Damit wird auch fuer ganze dominante 0+-Kerne keine starke Wellenunterdrueckung gefunden.
 
-### Protonen-Massenscan
-
-| `M_BH` | `alpha_p` | `kmax` | `x_match` | `sigma_D/sigma_classical` | `sigma_D` [m^2] |
-|---:|---:|---:|---:|---:|---:|
-| `1e10 kg` | `0.0353107` | 3 | `5e6` | `0.0326735` | `7.47496e-26` |
-| `1e11 kg` | `0.353107` | 3 | `5e6` | `0.950295` | `2.17406e-22` |
-| `2e11 kg` | `0.706215` | 5 | `2e6` | `1.008071` | `9.22496e-22` |
-| `5e11 kg` | `1.76554` | 9 | `1e6` | `0.996621` | `5.70011e-21` |
-
-Partialwellen-Konvergenz beim oberen Punkt:
+Dense-screening Proxy:
 
 ```text
-kmax=5 -> 0.6015 classical
-kmax=6 -> 0.8420
-kmax=7 -> 0.99630
-kmax=8 -> 0.99662110
-kmax=9 -> 0.99662113.
+r_B ~6.13e-8 m
+lambda_TF ~2.95e-11 m
+r_B/lambda_TF ~2.08e3
 ```
 
-Matchingradius-Spotcheck `M=1e11 kg`:
+Eine nackte Zentralcharge ist damit kein ungescreenter `r_B`-weiter Supply-Blocker.
+
+#### A6 – Reduced Recycling Closure
+
+Die naive Identifikation
 
 ```text
-x_match=1e6 -> 0.95024543 classical
-x_match=5e6 -> 0.95029487 classical
-x_match=1e7 -> 0.95035969 classical.
+small single-pass capture fraction -> equally small stationary Mdot
 ```
 
-### Konsequenz fuer die fruehere Unruh-Protonennaeherung
+ist nicht selbstkonsistent, wenn nicht eingefangene Teilchen lokal verbleiben und erneut gestreut/rethermalisiert werden.
 
-Frueherer analytischer Benchmark bei `M=1e11 kg`:
+Bei wiederholten Encounter-Zyklen mit Einzelpass-Capture `p` und permanentem Escape `e` gilt
 
 ```text
-sigma_Unruh,p ~6.3447e-23 m^2.
+chi_capture = p / (p + e).
 ```
 
-Voller Dirac-Matcher:
+Mit `p~8.8e-6` ist eine stationaere Gesamtunterdrueckung bis fast auf `p` nur moeglich, wenn fast alle verfehlten Teilchen permanent entkommen.
+
+#### A7 – Collision-Regime + 1-D Bondi Backpressure
+
+Wichtige Korrektur zu frueheren Knudsen-Proxies:
 
 ```text
-sigma_Dirac,p ~2.1741e-22 m^2
-             ~0.9503 sigma_classical.
+strong-coupling / roughly geometric collisions:
+  lambda_mfp ~ rho^-1 ~ r^(3/2)
+  Kn ~ lambda/r ~ r^(1/2)
+  -> Kn decreases inward
+
+weak-coupling Coulomb / Spitzer-like:
+  lambda_C ~ T^2/n ~ r^(-1/2)
+  Kn ~ r^(-3/2)
+  -> Kn increases inward
 ```
 
-Die Unruh-Naeherung bleibt als Low-E-/Low-Coupling-Benchmark erhalten, wird bei `alpha_p~0.353` aber nicht mehr als finale Earth-speed Protonen-Cross-Section verwendet.
+Welche Richtung realisiert wird, ist eine Dense-Matter-/Ionisationsfrage und darf nicht vorweggenommen werden.
 
-## Stage 3.69A-3 – Charge-Feedback-Skalen
+Kontrollierter 1-D-sphaerischer Bondi-Euler-Benchmark (`Gamma=1.5`): numerische dimensionslose Akkretionsrate reproduziert den analytischen transsonischen Wert `lambda_B~0.5` auf Prozentniveau.
 
-Bei `M_BH=1e11 kg` und `|Q|=e`:
+Ein reflektierender innerer Grenzfall baut Backpressure auf und kann einen Schock nach aussen schicken. Daher ist die fruehere pauschale Aussage `innerhalb sonic point -> keine Rueckwirkung` korrigiert: fuer kleine lineare Stoerungen gilt sonic shielding, langfristige Akkumulation kann aber global rueckwirken.
+
+#### A8 – Dense Fe Regime + Electron-Capture Timescales
+
+Adiabatischer Reduced Proxy ab `r_B`:
 
 ```text
-|F_C/F_G| proton   = 0.0206661
-|F_C/F_G| electron = 37.9461.
+rho ~ r^(-3/2)
+T ~ r^(-1)
+E_F grows strongly inward
 ```
 
-Klassische Fernfeld-Kraftgrenzen:
+Elektronendegeneration bleibt stark; relativistische Degeneration setzt im Reduced Proxy tief innerhalb `r_B` ein.
+
+Energetische Electron-Capture-Kanaele fuer Ni/Fe koennen in der inneren Zone aufgehen. Aber:
 
 ```text
-Q_max,p   = +48.3884 e = 7.75268e-18 C
-|Q_max,e| =   0.026353 e = 4.22224e-21 C.
+reaction threshold open != reaction equilibrium
 ```
 
-Stationaerer Equal-T-Plasma-Benchmark nach Zajacek et al.:
+Publizierte starke stellar-nukleare EC-Raten liegen selbst bei viel hoeheren Dichten/Temperaturen viele Groessenordnungen langsamer als die lokale dynamische Transitzeit des aktuellen inneren Reduced Proxy.
+
+Daraus folgt fuer Stage 3.69:
 
 ```text
-Q_eq ~ +24.1810 e = 3.87423e-18 C.
+instantaneous full neutronization before horizon: NOT ESTABLISHED
+weak-rate equilibrium: NOT ESTABLISHED
+strong-coupling / degenerate transport remains plausible in reduced map
 ```
 
-RN-Extremalladungsskala:
+## Aktuelle entscheidende Unbekannte
+
+Der isolierte Wellenquerschnitt ist nicht mehr der Hauptunsicherheitsfaktor. Entscheidend ist nun
 
 ```text
-Q_extremal ~8.6175 C
-Q_eq/Q_extremal ~4.50e-19.
+Dense Fe/Ni EOS + ionization/coupling
+ -> Knudsen branch
+ -> recycling versus permanent escape/backpressure
+ -> charge-state redistribution
+ -> reaction/composition timescales
+ -> chi_transport
+ -> net Mdot_BH
 ```
 
-Damit kann Ladungsfeedback die Dynamik geladener Teilchen schon bei winziger Nettoladung stark veraendern, waehrend die Raumzeitmetrikkorrektur praktisch vernachlaessigbar bleibt.
+## Mindest-Meilenstein fuer Abschluss von Stage 3.69
 
-**Aussagegrenze:** Die Charge-Werte sind Referenzskalen, keine selbstkonsistente Erdkerngleichgewichtsloesung. Dense Fe/Ni-Screening, Kollisionen, Degeneration, Ionisation, Komposition und Transport bleiben offen.
-
-Details:
-
-- [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md)
-- [`STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`](STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md)
-- [`stage3_69a3_earth_proton_charge.py`](stage3_69a3_earth_proton_charge.py)
-
-## Naechster Teilblock: Stage 3.69A-4
+Ein gekoppelter 1-D/2-D-Prototyp muss mindestens liefern:
 
 ```text
-charged Dirac capture + self-consistent Q(t)
+Mdot_BH(t)
+Q(t)
+rho(r,t), T(r,t), Ye(r,t)
+charge-state / composition fractions
+transport/recycling efficiency chi_transport
+energy deposition / escaping luminosity
+branch-specific observables
 ```
 
-Schematisch:
+Bis dahin bleibt
 
 ```text
-dQ/dt = e [Gamma_p(Q)-Gamma_e(Q)] + branch-specific source/sink terms
-Mdot_BH = sum_i m_i Gamma_i(Q) + composite/nuclear channels.
+Stage 3.69 Full-Multiphysics: OPEN
+final species-resolved net Mdot_BH: OPEN
 ```
-
-Erst danach kann die Charge-Dynamik an dichte Fe/Ni-Materie und Transport gekoppelt werden.
-
-## Keine automatische MeV-Equilibrierung
-
-Eine viriale Ionenskala `kT_i~MeV` impliziert nicht automatisch `T_i=T_e=T_gamma`. Zu vergleichen sind `t_reaction`, `t_ei`, `t_gamma-e`, `t_pair`, `t_nuc` gegen Advektions-/Residenzzeiten.
-
-## Globaler Waerme-Sanity-Check
-
-Mit `P_Earth~47+/-2 TW` und `P_heat=eta Mdot c^2` folgt bei `eta=1`
-
-```text
-Mdot_max ~5.23e-4 kg/s ~1.65e4 kg/year.
-```
-
-Der obere bisherige kleine Michel-Benchmark bei `5e11 kg` (`~3.65e-6 kg/s`) entspraeche bei `eta=1` etwa `0.328 TW` bzw. `115 kg/year`. Das ist nur ein globaler Sanity-Check.
-
-## Mindest-Meilenstein vor 3-D-HPC
-
-Der Full-Stack-1-D/2-D-Prototyp muss mindestens liefern:
-
-- `Mdot(t)`,
-- `Q(t)`,
-- selbstkonsistentes Near-Zone-Profil,
-- Netto-Capture nach Supply + Kinetik + species-resolved Wave-Capture + Charge/Nuclear closure,
-- branch-spezifische quantitative beobachtbare Signatur oder obere Grenze.
-
-Dieser **Full-Stack-Meilenstein ist noch nicht erreicht**.
 
 ## Stage 3.70 – Experimental branch-specific falsification
 
 **Status:** DEFINED / NOT PERFORMED
 
-Stage 3.70 beginnt erst, wenn Stage 3.69 quantitative Endvorhersagen liefert.
+Stage 3.70 beginnt erst mit quantitativen Stage-3.69-Endvorhersagen.
 
-### Signaturkanaele
+Moegliche Kanaele:
 
-1. **H+ Hawking-spezifisch:** Neutrino-/Gamma-Spektren und weitere branch-spezifische Emissionen.
-2. **H0/H+ gemeinsame Materiesignaturen:** Waerme, Rotation/Magnetfeld, ggf. Material-/Transporteffekte.
-3. **3-D-Full-Wave-Seismik – konditional:** nur bei makroskopisch gekoppelter Struktur.
-4. **Flavor-spezifische Neutrinos aus Materieprozessen:** Detektorwahl nach Flavor/Energie/Reaktionskanal.
+1. H+ Hawking-spezifisch: Neutrino-/Gamma-Spektren.
+2. H+/H0 gemeinsame Materiesignaturen: Waerme, Rotation/Magnetfeld, Transportprodukte.
+3. 3-D-Seismik nur bei makroskopisch gekoppelter Struktur.
+4. Materieprozess-Neutrinos nur nach species-/reaction-resolved Vorhersage.
 
-### Statistik
-
-```text
-L(D | H_branch, theta, eta)
-q = -2 ln [ max_(theta,eta) L(D|H_branch,theta,eta)
-            / max_eta L(D|H_ref,eta) ].
-```
-
-Ein Gesamtparameterraum darf nur ausgeschlossen werden, wenn kein zulaessiger Punkt mit den Daten vereinbar bleibt und Systematik/Look-elsewhere/Modellunsicherheiten angemessen behandelt sind.
-
-## Offizielle Endmatrix V1.5
+## Konservativer Projektstatus
 
 ```text
-Stages 1-3.68:
-    bearbeitet und dokumentiert.
-
-Stage 3.68E:
-    externes Fachfeedback technisch integriert.
-
-Stage 3.69A/3.69A-1:
-    Schwarzschild-Dirac-Radialsolver + In/Out-Matching implementiert und benchmarkiert.
-
-Stage 3.69A-3:
-    Earth-speed neutral proton Dirac mass scan CALCULATED;
-    flux-stable weak-partial-wave extraction IMPLEMENTED;
-    charge-feedback reference scales CALCULATED.
-
-Stage 3.69A-4:
-    charged Dirac capture + Q(t) OPEN.
-
-Stage 3.69 Full-Multiphysics:
-    NOT PERFORMED / OPEN.
-
-Stage 3.70:
-    branch-specific experimental falsification NOT PERFORMED.
-
-H+:
-    FAIL im getesteten Standard-Hawking/SK-IV-Projekt-Reinterpretationsmodell;
+H+ Standard-Hawking:
+    FAIL im getesteten SK-IV-Projekt-Reinterpretationsmodell;
     Branch bleibt separat dokumentiert.
 
 H0:
     OPEN / nicht nachgewiesen.
 
-Formation:
-    stark negativ / unaufgeloest.
+A1/A3/A4/A5:
+    wave/capture Teilprobleme deutlich eingeengt.
 
-Positive eindeutige Erdzentrum-BH-Signatur:
-    keine nachgewiesen.
+A6/A7/A8:
+    transport/recycling/coupling/reaction closure deutlich eingeengt;
+    mehrere fruehere pauschale Suppressionsannahmen korrigiert.
+
+Formation:
+    stark negativ / kein Standardweg hergeleitet.
+
+Empirischer Nachweis eines Erdzentrum-BH:
+    keiner.
 ```
+
+## Reproduzierbare aktuelle Stage-Dateien
+
+- `STAGE3_69A4_CHARGED_DIRAC_FEEDBACK.md`
+- `stage3_69a4_charged_dirac_feedback.py`
+- `STAGE3_69A5_DENSE_FENI_CLOSURE.md`
+- `stage3_69a5_dense_feni_closure.py`
+- `STAGE3_69B_A6_KINETIC_RECYCLING_CLOSURE.md`
+- `stage3_69b_a6_reduced_closure.py`
+- `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
+- `stage3_69c_a7_collision_recycling_pde.py`
+- `STAGE3_69D_A8_DENSE_FE_REACTION_TIMESCALES.md`
+- `stage3_69d_a8_dense_fe_reaction_timescales.py`
