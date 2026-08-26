@@ -2,145 +2,169 @@
 
 Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls. Historische Zwischenwerte bleiben als Entwicklungsstand erhalten; spaetere haertere Tests ersetzen nur ihre aktuelle Interpretation.
 
+## V1.5 / Stage 3.69E/A-9 Residence + Backpressure + Reduced Transport Closure - 26.08.2026
+
+A9 verbindet die bisherigen Wave-Capture-, Screening-, Recycling- und Weak-Timescale-Teilmodule erstmals zu einer quantitativen Reduced Transportclosure.
+
+### Neue Closure
+
+Fuer repeated encounters gilt exakt:
+
+```text
+chi_capture = p/(p+e_perm)
+```
+
+mit Einzelpass-Capture `p` und permanentem Escape `e_perm`.
+
+Im aktuellen strong-coupling/geometrischen Sensitivitaetsbranch wird permanenter ballistischer Escape durch den kollisionalen optischen Tiefenfaktor unterdrueckt:
+
+```text
+e_perm ~ f(v>v_esc) exp(-tau_coll)
+
+tau_coll = 2 r_B/lambda_0 [x_t^-1/2 - 1].
+```
+
+An den getesteten atomaren Transition-Skalen ist `tau_coll>>1`; Misses werden deshalb im Reduced Branch rezykliert statt dauerhaft zu entkommen.
+
+### Processing-Capacity bei `M_BH=1e11 kg`
+
+| `r_t` | `Mdot_capacity` [kg/s] | `Xi_high=Mdot_supply,high/Mdot_capacity` |
+|---:|---:|---:|
+| `3e-11 m` | `1.85e-5` | `0.0079` |
+| `1e-10 m` | `9.13e-7` | `0.160` |
+| `2e-10 m` | `1.61e-7` | `0.905` |
+
+Damit ist der aktuelle `1e11 kg` Strong-Coupling/Recycling Reduced Branch fuer den gesamten historischen Supply-Benchmark processing-capable.
+
+Massenscan:
+
+```text
+1e10 kg: BACKPRESSURE-SENSITIVE / OPEN
+1e11 kg: supply-processing capable in tested strong-coupling bracket
+2e11 kg: clear capacity reserve
+5e11 kg: very large capacity reserve.
+```
+
+Kritischer Reduced-Massenbereich je nach Supply und atomarer Transition-Skala:
+
+```text
+Mcrit ~5.8e9 ... 9.6e10 kg.
+```
+
+### Weak-/Charge-Timescales
+
+Bei `M=1e11 kg` verlangt eine Reaktion vor der Reduced Capture ungefaehr
+
+```text
+Ni threshold: lambda_required ~1.10e13 s^-1
+Fe threshold: lambda_required ~6.69e16 s^-1.
+```
+
+Der publizierte schnelle `56Fe`-EC-Vergleich `~1.5916e4 s^-1` ist dafuer viele Groessenordnungen zu langsam. Promptes Weak-Equilibrium/one-pass-Neutronisierung wird im schnellen supply-processing Branch daher nicht gestuetzt.
+
+Die Elektronen-Plasmaantwort ist wesentlich schneller als die Reduced Residence-Zeit; bulk-quasineutraler Transport ist als Reduced Closure motiviert, ohne den diskreten BH-Charge-State exakt zu loesen.
+
+### Aussagegrenze
+
+```text
+A9 Reduced Strong-Coupling branch @M>=~1e11 kg:
+    supply-processing capable
+    chi_transport ~1 within this reduced closure
+
+M=1e10 kg:
+    backpressure-sensitive / OPEN
+
+first-principles WDM transport:
+    OPEN
+final species-resolved net Mdot_BH:
+    OPEN
+Stage 3.69 Full-Multiphysics:
+    OPEN
+```
+
+Neue/aktualisierte Dateien:
+
+- `STAGE3_69E_A9_RESIDENCE_BACKPRESSURE_NETWORK.md`
+- `stage3_69e_a9_residence_backpressure_network.py`
+- `STAGE3_69E_A9_PLAN.md`
+- `STAGE3_69F_A10_PLAN.md`
+- `README.md`
+- `TEST_STATUS.md`
+- `NUMERIK_STATUS.md`
+- `AKKRETION_STATUS.md`
+- `VALIDATION_PROTOCOL_STAGE3_69_70.md`
+
+H+ und H0 bleiben parallel. H+ bleibt im getesteten Standard-Hawking/SK-IV-Projekt-Reinterpretationsmodell FAIL; H0 bleibt OPEN / nicht nachgewiesen.
+
+---
+
 ## V1.5 / Stage 3.69A-4 bis 3.69D/A-8 - 26.08.2026
 
 ### A4 – Charged Dirac / Charge Feedback
 
-Der neutrale Earth-speed Protonenlauf wurde um ein Test-Coulombfeld erweitert.
-
-Bei `M_BH=1e11 kg`, `v=10.4355 km/s`:
+Bei `M_BH=1e11 kg`:
 
 ```text
 Q=0 e      -> sigma_p ~0.949...0.950 classical
-Q=3.67 e   -> sigma_p ~0.889 classical
-Q=10 e     -> sigma_p ~0.765 classical
-Q=24.18 e  -> sigma_p ~0.517 classical
+Q=3.67 e   -> ~0.889 classical
+Q=10 e     -> ~0.765 classical
+Q=24.18 e  -> ~0.517 classical
 ```
 
-Befund:
+Charge-Feedback ist relevant; ein Orders-of-Magnitude-Protonenstopper wurde im getesteten Q-Bereich nicht gefunden. Charged-electron far-field Coulomb matching bleibt OPEN.
+
+### A5 – Fe/Ni 0+ Klein-Gordon Capture
 
 ```text
-charge feedback: relevant
-orders-of-magnitude proton stop: not found in tested Q range
-charged-electron far-field Coulomb matching: OPEN
+Fe-56 @1e11 kg: sigma/sigma_classical ~0.9975
+Ni-58 @1e11 kg: sigma/sigma_classical ~0.9965
 ```
 
-Neue Dateien:
-
-- `STAGE3_69A4_CHARGED_DIRAC_FEEDBACK.md`
-- `stage3_69a4_charged_dirac_feedback.py`
-
-### A5 – Dense Fe/Ni + 0+ Klein-Gordon Capture
-
-Dominante Fe-56/Ni-58-Kerne werden im kohärenten ersten Proxy als massive skalare `0+`-Zustaende behandelt.
-
-Low-alpha KG-Regression: PASS (~0.2%).
-
-Earth-speed bei `M_BH=1e11 kg`:
-
-```text
-Fe-56: sigma/sigma_classical ~0.9975
-Ni-58: sigma/sigma_classical ~0.9965
-```
-
-Damit wird keine starke Composite-Wellenunterdrueckung gefunden.
-
-Dense-screening Referenz:
-
-```text
-r_B ~6.13e-8 m
-lambda_TF ~2.95e-11 m
-r_B/lambda_TF ~2.08e3
-```
-
-Eine kleine BH-Nettoladung kann lokal wichtig sein, ist aber im dichten Fe-Proxy kein ungescreenter `r_B`-weiter Supply-Blocker.
-
-Neue Dateien:
-
-- `STAGE3_69A5_DENSE_FENI_CLOSURE.md`
-- `stage3_69a5_dense_feni_closure.py`
+Keine starke kohärente Composite-Wellenunterdrueckung gefunden. Dense-Screening liegt im Reduced Proxy auf atomaren/sub-nm Skalen, nicht ueber `r_B`.
 
 ### A6 – Kinetic Recycling Closure
 
-Die fruehere Idee, eine kleine Einzelpass-Capture-Fraktion direkt als dauerhaften `Mdot`-Suppressionsfaktor zu verwenden, wurde weiter gehaertet.
-
-Fuer Capture `p`, permanenten Escape `e` und sonstiges Recycling gilt exakt:
+Die Identifikation
 
 ```text
-chi_capture = p/(p+e).
+small p_single -> equally small stationary Mdot
 ```
 
-Bei `p~8.8e-6` erfordert eine stationaere Gesamtunterdrueckung bis nahe an den Single-pass-Wert, dass fast alle verfehlten Teilchen permanent aus dem lokalen System entfernt werden. Recycling allein liefert daher keine dauerhafte 5-6-OOM-Suppression.
-
-Neue Dateien:
-
-- `STAGE3_69B_A6_KINETIC_RECYCLING_CLOSURE.md`
-- `stage3_69b_a6_reduced_closure.py`
+wurde verworfen. Repeated encounters verlangen eine explizite Escape-/Recycling-Closure.
 
 ### A7 – Collision Regime + Bondi Backpressure
 
-Wichtige Korrektur der Knudsen-Skalierung:
+Korrigierte Knudsen-Trends:
 
 ```text
-strong-coupling/geometric collisions:
-  Kn ~ r^(1/2) -> nach innen kleiner
-
-weak-coupling Coulomb/Spitzer:
-  Kn ~ r^(-3/2) -> nach innen groesser
+strong-coupling/geometric: Kn ~ r^(1/2) -> nach innen kleiner
+weak-Coulomb/Spitzer:     Kn ~ r^(-3/2) -> nach innen groesser.
 ```
 
-Welche Richtung realisiert wird, ist eine Dense-Matter-/Ionisationsfrage.
-
-Ein kontrollierter 1-D-sphaerischer Bondi-Euler-Prototyp reproduziert fuer `Gamma=1.5` die analytische dimensionslose Rate `lambda_B~0.5` auf Prozentniveau.
-
-Ein reflektierender innerer Grenzfall kann Backpressure und einen nach aussen laufenden Schock erzeugen. Die fruehere pauschale Aussage `innerhalb des sonic point -> keine globale Rueckwirkung` wurde deshalb korrigiert.
-
-Neue Dateien:
-
-- `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
-- `stage3_69c_a7_collision_recycling_pde.py`
+Der 1-D-Bondi-Euler-Prototyp reproduziert den absorbierenden transsonischen Benchmark auf Prozentniveau. Ein reflektierender Innenrand erzeugt Backpressure und einen outward shock.
 
 ### A8 – Dense Fe / Degeneration / Reaktionszeitskalen
 
-Der adiabatische Reduced Proxy zeigt starke Elektronendegeneration und eine innerwaerts steigende Fermi-Energie. Electron-Capture-Schwellen fuer Ni/Fe koennen energetisch aufgehen, aber die lokale dynamische Transitzeit wird in der inneren Zone extrem kurz.
-
-Daher gilt:
+Electron-Capture-Schwellen koennen energetisch aufgehen, aber
 
 ```text
-reaction threshold open != reaction equilibrium
-instantaneous full neutronization: NOT ESTABLISHED
-weak-rate equilibrium before horizon: NOT ESTABLISHED
+reaction threshold open != reaction equilibrium.
 ```
 
-Unter dem getesteten dichten Fe-Proxy bleibt der strong-coupling/degenerate Ast in relevanten Schwellenzonen selbstkonsistenter als ein vorschnell angenommener Spitzer-Weak-Coupling-Ast.
+Promptes Weak-Equilibrium/instantane Neutronisierung wurde im Reduced Transit-Zeitscale nicht etabliert.
 
-Neue Dateien:
+Aktuelle Dateien:
 
-- `STAGE3_69D_A8_DENSE_FE_REACTION_TIMESCALES.md`
-- `stage3_69d_a8_dense_fe_reaction_timescales.py`
-
-### Status nach A8
-
-```text
-isolierter Protonen-Wellenquerschnitt: stark eingeengt
-coherent Fe/Ni-Wellenquerschnitt: stark eingeengt
-charge feedback: relevant, aber kein getesteter OOM-Protonenstopper
-single-pass suppression as stationary Mdot: nicht selbstkonsistent ohne Escape/Backpressure
-Knudsen branch: Dense-Matter-abhaengig
-instant neutronization: nicht etabliert
-final species-resolved net Mdot_BH: OPEN
-Stage 3.69 Full-Multiphysics: OPEN
-Stage 3.70: NOT PERFORMED
-```
-
-H+ und H0 bleiben parallel:
-
-```text
-H+ = mit Standard-Hawking
-H0 = ohne Hawking
-```
-
-H+ bleibt im getesteten Standard-Hawking/SK-IV-Projekt-Reinterpretationsmodell FAIL; H0 bleibt OPEN / nicht nachgewiesen.
+- `STAGE3_69A4_CHARGED_DIRAC_FEEDBACK.md`
+- `stage3_69a4_charged_dirac_feedback.py`
+- `STAGE3_69A5_DENSE_FENI_CLOSURE.md`
+- `stage3_69a5_dense_feni_closure.py`
+- `STAGE3_69B_A6_KINETIC_RECYCLING_CLOSURE.md`
+- `stage3_69b_a6_reduced_closure.py`
+- `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
+- `stage3_69c_a7_collision_recycling_pde.py`
+- `STAGE3_69D_A8_WDM_WEAK_TIMESCALES.md`
+- `stage3_69d_a8_wdm_weak_timescales.py`
 
 ---
 
@@ -152,11 +176,6 @@ H+ bleibt im getesteten Standard-Hawking/SK-IV-Projekt-Reinterpretationsmodell F
 - frueherer Unruh-Protonenwert bleibt historischer Low-E-Benchmark, wird aber am Referenzpunkt durch den vollen Dirac-Matcher ersetzt;
 - erste Charge-Kraft-/Gleichgewichtsskalen berechnet;
 - H+/H0 weiterhin getrennt.
-
-Neue Dateien:
-
-- `STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`
-- `stage3_69a3_earth_proton_charge.py`
 
 ---
 
