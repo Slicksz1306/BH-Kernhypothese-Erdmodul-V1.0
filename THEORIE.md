@@ -9,7 +9,7 @@
 
 Die definierende Hypothese des Erdmoduls lautet:
 
-> Im Erdzentrum wird eine kleine zentrale kompakte Schwarzloch-Masse als theoretische Zusatzkomponente untersucht. Im aktiven Basismodell wird ihre Masse glatt gegen normale PREM-Masse bilanziert, so dass sie nicht zusaetzzlich zur gemessenen Erdmasse addiert wird.
+> Im Erdzentrum wird eine kleine zentrale kompakte Schwarzloch-Masse als theoretische Zusatzkomponente untersucht. Im aktiven Basismodell wird ihre Masse glatt gegen normale PREM-Masse bilanziert, so dass sie nicht zusaetzlich zur gemessenen Erdmasse addiert wird.
 
 Es wird **keine direkte Detektion** eines Schwarzen Lochs im Erdzentrum behauptet.
 
