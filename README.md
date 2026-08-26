@@ -1,49 +1,49 @@
 # SL/BH-Kernhypothese Erdmodul
 
-## Veröffentlichungsangaben
+## Veroeffentlichungsangaben
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Stage 3.69A-1/A-3/A-4/A-5, Stage 3.69B/A-6, Stage 3.69C/A-7, Stage 3.69D/A-8 und Stage 3.69E/A-9 numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
+**Aktueller numerischer Forschungsstand:** bis Stage 3.69G/A-11 bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
 **Stand:** 26.08.2026  
-**Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
+**Erstveroeffentlichung Erdmodul V1.0:** 23.08.2026
 
-> `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs-/Prioritätsarchiv. Der aktuelle Forschungsstand wird in Markdown + reproduzierbaren Python-Skripten fortgeschrieben.
+> `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unveraendert als Erstveroeffentlichungs-/Prioritaetsarchiv. Der aktuelle Forschungsstand wird in Markdown und reproduzierbaren Python-Skripten fortgeschrieben.
 
-## Wissenschaftlicher Status
+## Wissenschaftliche Aussagegrenze
 
-Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Untersucht wird, ob ein kleiner zentraler BH-Branch mit Erdbeobachtungen und etablierter GR/Quanten-/Materiephysik konsistent modelliert werden kann.
+Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Untersucht wird, ob ein kleiner zentraler BH-Branch mit Erdbeobachtungen und etablierter GR-, Quanten-, Plasma- und Materiephysik konsistent modelliert werden kann.
 
 ```text
 H+ = mit Standard-Hawking-Strahlung
 H0 = ohne Hawking-Strahlung
 ```
 
-Beide Branches bleiben parallel. Gemeinsame Materie-/Capture-/Transportmodule gelten fuer beide; Hawking-spezifische Emissionen nur fuer H+.
+Beide Branches werden getrennt und parallel gefuehrt. Gemeinsame Materie-/Capture-/Transportmodule gelten fuer beide; Hawking-spezifische Emissionen nur fuer H+.
 
 ## Branchstatus
 
 ### H+
 
-Der relevante Standard-Hawking-Bereich liegt im getesteten Projektmodell bei etwa
+Im getesteten Standard-Hawking-Projektbranch liegt der relevante Bereich bei etwa
 
 ```text
 M_BH ~4.82e11 ... 5.49e11 kg.
 ```
 
-Der Projekt-Greybody-/Neutrinofluss ueberschreitet im entscheidenden verwendeten SK-IV-Band den publizierten 90%-CL-Grenzwert.
+Der berechnete Projekt-Greybody-/Neutrinofluss ueberschreitet im verwendeten SK-IV-Vergleichsband den publizierten Grenzwert.
 
 ```text
 H+ Standard-Hawking: FAIL im getesteten Projekt-Reinterpretationsmodell.
 ```
 
-Dies ist keine offizielle Super-K-Erdzentrum-BH-Exklusion. H+ bleibt als separater Branch dokumentiert.
+Das ist keine offizielle Super-K-Erdzentrum-BH-Exklusion.
 
 ### H0
 
 ```text
-P_Hawking = 0
+P_Hawking = 0.
 ```
 
 H0 ist von Hawking-basierten Neutrino-/Gamma-Grenzen getrennt, muss aber Akkretion, Transport, Langzeitstabilitaet, Formation und Real-Data-Tests bestehen.
@@ -54,13 +54,13 @@ H0: OPEN / nicht nachgewiesen.
 
 ## Aktiver Erdbranch
 
-Die starke Zentralmassenvariante ist verworfen. Aktiv ist der kleine `smooth compensated` Branch.
+Die starke Zentralmassenvariante wurde verworfen. Aktiv ist der kleine `smooth compensated` Branch.
 
-Zentraler PREM-/Supply-Proxy:
+PREM-/Supply-Referenz:
 
 ```text
-rho_c = 13.0885 g/cm^3
-c_eff = 10.4355 km/s
+rho_c = 13.0885 g/cm3
+c_eff = 10.4355 km/s.
 ```
 
 Bei `M_BH=1e11 kg`:
@@ -70,46 +70,46 @@ r_B ~6.13e-8 m
 r_s ~1.49e-16 m.
 ```
 
-Die bisherigen reduzierten Makrotests liefern fuer diesen kleinen Branch keinen robusten Ausschluss durch Gesamtmasse/GM, Traegheitsmoment, reduzierte Hydrostatik, vereinfachte Seismik oder globale Waermeproxies. Das bedeutet Modellkompatibilitaet innerhalb der getesteten Proxies, nicht Evidenz fuer einen BH.
+Die bisherigen reduzierten Makrotests liefern fuer diesen kleinen Branch keinen robusten Ausschluss durch Gesamtmasse/GM, Traegheitsmoment, reduzierte Hydrostatik, vereinfachte Seismik oder globale Waermeproxies. Das ist Modellkompatibilitaet innerhalb der getesteten Proxies, **keine Evidenz** fuer einen BH.
 
-# Stage 3.69 – aktueller Capture-/Transportstack
+# Stage 3.69 – aktueller Materie-/Capture-/Transportstack
 
-## A-1/A-3 – Schwarzschild-Dirac und Earth-speed Protonen
+## A1/A3 – Schwarzschild-Dirac + Earth-speed Protonen
 
-Der massive Schwarzschild-Dirac-Solver mit regulaerem Horizon-Branch, konserviertem Strom und In/Out-Matching ist implementiert und benchmarkiert.
+Der massive Schwarzschild-Dirac-Solver besitzt regulaeren Horizon-Branch, konservierten Strom und In/Out-Partialwellenmatching.
 
-Bei `M_BH=1e11 kg`, `v=10.4355 km/s`:
+Bei `M=1e11 kg`, `v=10.4355 km/s`:
 
 ```text
-sigma_p ~2.174e-22 m^2
+sigma_p ~2.174e-22 m2
 sigma_p/sigma_classical ~0.9503.
 ```
 
-Die fruehere Unruh-Low-E-Protonenextrapolation wird bei `alpha_p~0.353` nicht mehr als finaler Earth-speed-Wert verwendet.
+Eine starke Protonen-Wellenunterdrueckung wird an diesem Referenzpunkt nicht gefunden.
 
-## A-4 – Charged Proton Dirac + Ladungsfeedback
+## A4 – Charged Proton Capture
 
 Bei `M=1e11 kg`:
 
 ```text
-Q=0 e       -> sigma_p/sigma_classical ~0.949
+Q=0 e       -> ~0.949 classical
 Q=3.67 e    -> ~0.889
 Q=10 e      -> ~0.765
 Q=24.18 e   -> ~0.517.
 ```
 
+Ladungsfeedback ist relevant, aber im getesteten Bereich kein Orders-of-Magnitude-Protonenstopper.
+
 ```text
-charged proton capture: kontrollierter Subtest PASS
-charged electron long-range Coulomb matching: OPEN.
+charged proton subtest: CALCULATED / benchmarked
+charged electron long-range Coulomb matcher: OPEN.
 ```
 
-Ladungsfeedback ist relevant, aber die getesteten positiven Ladungsskalen erzeugen keinen Orders-of-Magnitude-Protonenstopp.
+## A5 – Fe/Ni `0+` Composite-Wave-Capture
 
-## A-5 – Fe/Ni Spin-0 Composite-Capture
+Dominante Fe-56/Ni-58-Kerne werden im ersten kohaerenten Proxy als massive skalare/Klein-Gordon-Zustaende behandelt.
 
-Dominante `Fe-56`/`Ni-58`-Kerne haben `0+`; deshalb wird fuer den kohärenten Composite-Proxy ein massiver Klein-Gordon-Solver verwendet.
-
-Bei `M_BH=1e11 kg`:
+Bei `M=1e11 kg`:
 
 ```text
 Fe-56: sigma/sigma_classical ~0.99754
@@ -120,220 +120,185 @@ Ni-58: sigma/sigma_classical ~0.99646.
 large coherent Fe/Ni wave suppression: NOT FOUND.
 ```
 
-Dense-Fe Screening liegt im Reduced Proxy auf atomaren/sub-nm Skalen (`~few 1e-11 ... 1e-10 m`), also weit innerhalb `r_B`.
+## A6/A7 – Recycling, Kollisionalitaet und Backpressure
 
-## A-6 – Recycling statt Single-pass-Faktor
+Ein kleiner Einzelpass-Loss-Cone darf nicht als stationaerer Mdot-Faktor verwendet werden.
 
-Naiver Hintergrund-Single-pass-Proxy bei `1e11 kg`:
-
-```text
-Mdot_single ~3.1e-14 kg/s.
-```
-
-Historischer Michel-/Supply-Benchmark:
+Bei wiederholten Encountern:
 
 ```text
-Mdot_supply ~1.47e-8 ... 1.46e-7 kg/s.
+chi_capture = p/(p+e_perm).
 ```
 
-Der Unterschied darf nicht automatisch als Quantum-Suppression interpretiert werden.
-
-Bei repeated encounters mit Capture-Wahrscheinlichkeit `p` und permanentem Escape `e` gilt exakt
+A7 korrigierte ausserdem den Knudsen-Shortcut und zeigte mit einem kontrollierten 1-D-Bondi-Euler-Solver:
 
 ```text
-chi_capture = p/(p+e).
+absorbing inner boundary -> transsonischer Bondi-Flux
+reflecting inner boundary -> pressure pile-up + outward shock.
 ```
 
-## A-7 – korrigierte Kollisionalitaet + Backpressure-PDE
+Damit kann dauerhafter Backpressure den Supply beeinflussen; sonic shielding verhindert nicht jede langfristige Rueckwirkung.
 
-Fuer den strong-coupling/geometrischen Sensitivitaetsbranch und
+## A8 – Dense Fe / Degeneration / Weak Timescales
 
-```text
-rho ~ r^-3/2
-```
+Im Reduced-Inward-Proxy koennen Electron-Capture-Schwellen energetisch aufgehen, aber die lokalen dynamischen/Residence-Zeiten sind extrem kurz.
 
-gilt
-
-```text
-lambda_mfp ~ r^3/2
-Kn ~ r^1/2,
-```
-
-also abnehmendes `Kn` nach innen.
-
-Der entgegengesetzte Spitzer-Trend gilt nur im weak-coupling-Coulombplasma und darf nicht ohne expliziten Kopplungs-/Ionisationsuebergang eingesetzt werden.
-
-Ein 1-D-Bondi-Euler-Benchmark reproduziert den analytischen transsonischen Massenfluss auf Prozentniveau. Ein reflektierender Innenrand kann dagegen Backpressure und einen outward shock erzeugen.
-
-## A-8 – Warm-Dense Fe/Ni + Weak-Reaction-Timescales
-
-Im Reduced Scaling
-
-```text
-rho ~ x^-3/2
-T ~ x^-1
-x=r/r_B
-```
-
-bleibt die Ionenkomponente an den relevanten EC-Schwellen stark gekoppelt.
-
-Energetische Free-Fermi-Schwellen:
-
-```text
-58Ni -> 58Co:
-    x ~1.66e-4
-    r ~6.84e4 r_s
-
-56Fe -> 56Mn:
-    x ~5.08e-6
-    r ~2.09e3 r_s.
-```
-
-Publizierter schneller `56Fe`-EC-Vergleich bei `rho*Ye=1e11 g/cm^3`, `T9=3`:
+Ein aggressiver publizierter Fe-56-EC-Vergleich:
 
 ```text
 lambda_ec ~1.5916e4 s^-1
-tau_ec ~6.28e-5 s.
 ```
 
-Damit gilt bereits in A-8:
+liegt viele Groessenordnungen unter den fuer promptes Gleichgewicht erforderlichen Reduced-Raten.
 
 ```text
-energetically open EC != prompt weak equilibrium.
+energetically open EC != prompt weak equilibrium
+prompt one-pass neutronization: NOT SUPPORTED.
 ```
 
-## A-9 – Residence + Backpressure + Weak-Network Closure
+## A9 – Residence / Processing / Backpressure Closure
 
-A-9 verbindet erstmals die repeated-encounter-Zeit mit Reservoir-Kapazitaet, permanentem Escape, Plasmaantwort und Weak-Reaction-Gates.
+A9 koppelt repeated encounters, Reservoir-Masse, permanenten Escape, Plasmaresponse und Weak-Reaction-Gates.
 
-### Strong-coupling Escape
-
-Fuer
+Bei `M=1e11 kg` und atomaren Transition-Sensitivitaeten:
 
 ```text
-lambda_mfp = lambda_0 x^3/2
+Xi_high = Mdot_supply / Mdot_capacity
+        ~0.0079 ... 0.905.
 ```
 
-ist der Reduced collisional optical depth von `r_t` bis `r_B`
+Massensplit:
 
 ```text
-tau_coll = 2 r_B/lambda_0 [x_t^-1/2 - 1].
+1e10 kg: backpressure-/transition-sensitive
+1e11 kg: supply-processing capable im Reduced strong-coupling Branch
+2e11 kg: klare Processing-Reserve
+5e11 kg: sehr grosse Processing-Reserve.
 ```
 
-Bei den getesteten atomaren Skalen ist `tau_coll` riesig (`~1e3 ... >1e5` je nach Masse/Skala). Damit ist permanenter **ballistischer** Escape im strong-coupling Proxy praktisch null; Misses werden rezykliert.
+## A10 – First-Principles-Informed WDM Transport Envelope
 
-### `M=1e11 kg` Processing-Capacity
+A10 ersetzt den einzelnen geometrischen Mean-Free-Path-Proxy durch publiziert kalibrierte Fe-/Fe-Ni-Transportanker plus eine bewusst escape-freundliche innere Sensitivitaet.
 
-| `r_t` | `p` | `t_res` | `Mdot_capacity` | `Xi_high=Mdot_high/Mdot_capacity` |
-|---:|---:|---:|---:|---:|
-| `3e-11 m` | `3.30e-5` | `1.36e-12 s` | `1.85e-5 kg/s` | `0.0079` |
-| `1e-10 m` | `9.90e-6` | `2.76e-11 s` | `9.13e-7 kg/s` | `0.160` |
-| `2e-10 m` | `4.95e-6` | `1.56e-10 s` | `1.61e-7 kg/s` | `0.905` |
-
-Damit kann das vorhandene Reduced Reservoir bei `1e11 kg` den gesamten historischen Supply-Benchmark fuer alle getesteten atomaren Transition-Skalen verarbeiten, ohne zusaetzlichen Capture-Pile-up zu benoetigen.
+Direkte Literaturabdeckung:
 
 ```text
-M>=~1e11 kg strong-coupling/recycling reduced branch:
-    SUPPLY-PROCESSING CAPABLE
-    chi_transport ~1 within this reduced closure.
+WDM Fe QMD transport:
+    rho ~12.5 ... 25 g/cm3
+    T   ~0.5 ... 15 eV
+
+2025 first-principles Fe EOS:
+    rho ~7.874 ... 47.2 g/cm3
+    T   ~5500 K ... 1e9 K.
 ```
 
-Dies ist keine Full-WDM-Endvorhersage.
+Selbst im schnellsten/escape-freundlichsten Envelope:
 
-### Massenscan
+| M_BH | tau_total | Xi_high |
+|---:|---:|---:|
+| `1e10 kg` | `~1.92e2` | `~1.47` |
+| `1e11 kg` | `~1.93e3` | `~2.81e-3` |
+| `2e11 kg` | `~3.86e3` | `~4.28e-4` |
+| `5e11 kg` | `~9.66e3` | `~3.54e-5` |
+
+Damit gilt im Reduced Envelope:
 
 ```text
-M=1e10 kg:
-    transition-scale/backpressure sensitive; OPEN
-
-M=1e11 kg:
-    tested strong-coupling transition bracket processing-capable
-
-M=2e11 kg:
-    clear processing-capacity reserve
-
-M=5e11 kg:
-    very large processing-capacity reserve.
+local Kn~1 != permanent escape through the outer Fe/WDM reservoir.
 ```
 
-Kritischer Reduced-Transport-Uebergang fuer `Xi=1`:
+A10 reproduziert den A9-Massensplit, ist aber **PARTIAL first-principles-informed**, weil die tiefste Zone nicht direkt tabelliert ist.
+
+## A11 – Time-Dependent Partial-Sink PDE
+
+A11 testet diesen Massensplit erstmals dynamisch.
+
+Der sphaerische Finite-Volume-HLL-Solver verwendet eine kontinuierliche innere Randbedingung
 
 ```text
-x_crit low supply  ~8.507e-3
-x_crit high supply ~3.397e-3.
+F_inner = A F_absorb + (1-A) F_reflect.
 ```
 
-Fuer physikalische Transition-Skalen `3e-11 ... 2e-10 m` entspricht das einem kritischen BH-Massenbereich von grob
+`A` ist eine PDE-Sensitivitaet und nicht automatisch identisch mit einer mikroskopischen Capture-Cross-Section.
+
+### Numerische Regressionen
 
 ```text
-~5.8e9 ... 9.6e10 kg.
+absorbing Bondi: PASS auf Prozentniveau
+reflecting boundary: outward Backpressure/Shock reproduziert
+finite-volume mass residual: ~1e-16 ... few 1e-15
+energy audit residual: ~1e-16 ... few 1e-15.
 ```
 
-Damit ist `1e10 kg` der sensitive Unterrand, waehrend `~1e11 kg` und darueber im aktuellen Reduced Strong-Coupling-Branch keine riesige Loss-Cone-Unterdrueckung benoetigen.
+### Fe-like Sensitivitaet
 
-### Quasineutralitaet
+Der A5-Wert `0.99754 classical` wird nur als Sensitivitaet `A=0.99754` getestet, nicht gleichgesetzt.
 
-Der Elektronen-Plasmaresponse ist an den getesteten Skalen wesentlich schneller als die Residence-Zeit. Beispiel `M=1e11 kg, r_t=1e-10 m`:
+Bei `gamma=1.5` bleibt der Lauf praktisch auf dem voll absorbierenden Ast.
+
+### Dynamische A10-Capacity-Closure
+
+Als Transport-Capacity-Sensitivitaet:
 
 ```text
-t_plasma/t_res ~2.7e-9.
+A_cap=min(1,1/Xi_high).
 ```
 
-Das motiviert bulk-quasineutrales Transportverhalten, ohne den offenen diskreten BH-Charge-State exakt zu loesen.
-
-### Weak-Reaction Gate
-
-Bei `M=1e11 kg`:
+Damit im schnellsten A10-Envelope:
 
 ```text
-Ni-threshold:
-    t_res ~9.13e-14 s
-    lambda_required ~1.10e13 s^-1
+1e10 kg:
+    Xi_high~1.468 -> A_cap~0.681
+    -> dynamischer Backpressure-Zweig entsteht
+    -> innerer Flux stark reduziert
 
-Fe-threshold:
-    t_res ~1.50e-17 s
-    lambda_required ~6.69e16 s^-1.
+>=1e11 kg:
+    Xi_high<<1 -> A_cap=1
+    -> dynamischer Lauf bleibt absorbing/supply-processing.
 ```
 
-Der publizierte `56Fe`-Vergleichswert `1.5916e4 s^-1` ist damit viele Groessenordnungen zu langsam fuer promptes Weak-Equilibrium innerhalb dieser Reduced Residence-Zeiten.
+Der A9/A10-Massensplit wird damit dynamisch reproduziert.
+
+### Noch offene A11-Konvergenz
+
+Der `1e10 kg` Shockbranch ist in der Regimeentscheidung stabil, aber seine exakte Endrate noch nicht gitterkonvergiert.
+
+Bei `gamma=1.5`, `t=0.6 r_B/c_inf`:
 
 ```text
-prompt one-pass neutronization: NOT SUPPORTED in the supply-processing strong-coupling branch.
+N=80  -> inner flux ~0.027
+N=120 -> ~0.025
+N=160 -> ~0.023
+N=200 -> ~0.021
+N=240 -> ~0.019.
 ```
 
-Ein lang lebender makroskopischer Backpressure-Stau koennte die Residence-Zeit verlaengern; deshalb bleibt der `1e10 kg`-Branch offen.
-
-# Aktueller physikalischer Status
+Daher:
 
 ```text
-Schwarzschild-Dirac Solver: PASS als numerischer/literaturbasierter Solver-Test
-Earth-speed neutral proton capture: CALCULATED
-charged proton feedback: CALCULATED fuer kontrollierte Q-Skalen
-charged electron Coulomb matcher: OPEN
-coherent Fe/Ni scalar capture: CALCULATED, nahezu klassisch
-large wave suppression at 1e11 kg: NOT FOUND
-long-range unscreened Coulomb supply blocking: NOT SUPPORTED by dense-screening proxy
-single-pass factor as automatic net-Mdot suppression: REJECTED
-strong-coupling inward collisionality branch: internally consistent Reduced Proxy
-A9 repeated-residence/processing closure: CALCULATED
-M>=~1e11 kg Reduced Strong-Coupling branch: supply-processing capable
-M=1e10 kg: backpressure-sensitive / OPEN
-prompt weak equilibrium/neutronization: NOT SUPPORTED in fast-transit branch
-final first-principles WDM species-resolved Mdot: OPEN.
+A11 dynamic regime split: CALCULATED
+exact 1e10 shock-branch Mdot: OPEN
+full tabulated WDM EOS/Zbar PDE: OPEN.
 ```
 
-## Konsequenz fuer die aktuelle Mdot
+# Aktueller Status
 
-Fuer den `M=1e11 kg` Strong-Coupling/Recycling Reduced Branch folgt derzeit
-
-```text
-Mdot_BH,reduced ~ Mdot_supply
-                ~1.47e-8 ... 1.46e-7 kg/s.
-```
-
-Das ist eine reduzierte Modellvorhersage, keine Messung und noch kein Full-Multiphysics-Ergebnis.
-
-Die bisherigen Erdalter-/globalen Waerme-Stressproxies hatten diese Supply-Skala bereits nicht ausgeschlossen; daher falsifiziert A-9 H0 nicht automatisch.
+| Bereich | H+ | H0 |
+|---|---|---|
+| starke Zentralmassenvariante | FAIL | FAIL |
+| kleiner smooth Erdbranch | kein eigener Makro-Ausschluss | kein eigener Makro-Ausschluss |
+| Standard-Hawking-Neutrinos | **FAIL im getesteten Projektmodell** | nicht anwendbar |
+| Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
+| Charge-/Screening | teilweise berechnet | teilweise berechnet |
+| A9 Residence/Recycling | CALCULATED Reduced Closure | CALCULATED Reduced Closure |
+| A10 WDM transport envelope | PARTIAL CALCULATED | PARTIAL CALCULATED |
+| A11 dynamic PDE | PARTIAL CALCULATED | PARTIAL CALCULATED |
+| `>=1e11 kg` aktueller Reduced Matter-Branch | absorbing / supply-processing | absorbing / supply-processing |
+| `1e10 kg` aktueller Reduced Matter-Branch | dynamic backpressure moeglich; exact Mdot OPEN | dynamic backpressure moeglich; exact Mdot OPEN |
+| Full-WDM species-resolved Mdot | OPEN | OPEN |
+| Formation/Delivery | stark negativ | stark negativ |
+| direkte experimentelle Detektion | keine | keine |
+| eindeutige positive Signatur | keine | keine |
 
 ## Formation
 
@@ -347,33 +312,15 @@ normaler Halo -> protoplanetare cold disk: FAIL unter getesteten Bedingungen
 cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunft nicht hergeleitet.
 ```
 
-## Aktuelle Endmatrix
-
-| Bereich | H+ | H0 |
-|---|---|---|
-| starke Zentralmassenvariante | FAIL | FAIL |
-| kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
-| Standard-Hawking-Neutrinos | **FAIL im getesteten Projektmodell** | nicht anwendbar |
-| Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
-| Charge-/Screening-Subtests | teilweise berechnet | teilweise berechnet |
-| A9 Residence/Recycling Closure | **CALCULATED als Reduced Common-Matter-Block** | **CALCULATED als Reduced Common-Matter-Block** |
-| `>=~1e11 kg` Strong-Coupling Transport | supply-processing capable im Reduced Branch | supply-processing capable im Reduced Branch |
-| `1e10 kg` Transport | OPEN / backpressure-sensitive | OPEN / backpressure-sensitive |
-| finale First-Principles Dense-Matter-Netto-Mdot | **OPEN** | **OPEN** |
-| Formation/Delivery | stark negativ | stark negativ |
-| direkte experimentelle Detektion | keine | keine |
-| eindeutige positive Signatur | keine | keine |
-
 ## Naechster Pflichtblock
 
 ```text
-Stage 3.69F / A-10:
-first-principles-informed WDM transport closure
-+ time-dependent hydro/kinetic sink coupling
-+ A4/A5 absorptive inner boundary
--> replace geometric lambda_mfp proxy
--> e_perm(r,E,species)
--> final reduced species-resolved Mdot band.
+Stage 3.69H / A12:
+tabulated Fe/Ni EOS + Zbar
++ thermal conductivity / viscosity / relaxation
++ species/charge advection
++ high-resolution shock convergence
+-> dynamic Mdot band with explicit EOS uncertainty.
 ```
 
 ## Zentrale aktuelle Dateien
@@ -390,6 +337,11 @@ first-principles-informed WDM transport closure
 - `stage3_69d_a8_wdm_weak_timescales.py`
 - `STAGE3_69E_A9_RESIDENCE_BACKPRESSURE_NETWORK.md`
 - `stage3_69e_a9_residence_backpressure_network.py`
+- `STAGE3_69F_A10_WDM_TRANSPORT_ENVELOPE.md`
+- `stage3_69f_a10_wdm_transport_envelope.py`
+- `STAGE3_69G_A11_DYNAMIC_PARTIAL_SINK_PDE.md`
+- `stage3_69g_a11_dynamic_partial_sink_pde.py`
+- `STAGE3_69H_A12_PLAN.md`
 - `TEST_STATUS.md`
 - `NUMERIK_STATUS.md`
 - `AKKRETION_STATUS.md`
@@ -398,4 +350,4 @@ first-principles-informed WDM transport closure
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69E/A-9, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69G/A-11, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
