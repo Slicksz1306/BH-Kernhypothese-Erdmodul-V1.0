@@ -4,54 +4,43 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
-**Aktueller Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69A/3.69A-1 und Stage 3.69A-3 Quantum/Wave-Capture-Teilmodule numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
+**Theorie-Textstand:** Erdmodul V1.5  
+**Aktueller Forschungsstand:** Stage 3.69A-1/A-3/A-4/A-5, Stage 3.69B/A-6, Stage 3.69C/A-7 und Stage 3.69D/A-8 numerisch bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
 **Stand:** 26.08.2026  
-**Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
+**Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
-Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
-
-> **Archivhinweis:** `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs- und Prioritätsnachweis erhalten. Der aktuelle Forschungsstand wird in den Markdown-Dateien und reproduzierbaren Python-Skripten dokumentiert.
+> `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs-/Prioritätsarchiv. Der aktuelle Forschungsstand wird in Markdown + reproduzierbaren Python-Skripten fortgeschrieben.
 
 ## Wissenschaftlicher Status
 
-Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Untersucht wird, ob ein kleiner zentraler BH-Branch mit bekannten Erdbeobachtungen und etablierter GR/Teilchen-/Materiephysik konsistent modelliert werden kann.
-
-Der aktuelle Stand trennt zwei Branches strikt:
+Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Untersucht wird, ob ein kleiner zentraler BH-Branch mit Erdbeobachtungen und etablierter GR/Quanten-/Materiephysik konsistent modelliert werden kann.
 
 ```text
 H+ = mit Standard-Hawking-Strahlung
 H0 = ohne Hawking-Strahlung
 ```
 
-Beide Branches bleiben parallel erhalten. Gemeinsame Capture-/Materietests werden fuer beide verwendet; Hawking-spezifische Emissionstests gelten nur fuer H+.
+Beide Branches bleiben parallel. Gemeinsame Materie-/Capture-Module gelten fuer beide; Hawking-spezifische Emissionen nur fuer H+.
 
-## H+ – Standard-Hawking
+## Branchstatus
 
-Nach korrigierter Hawking-Normierung und Greybody-/Neutrino-Haertung liegt der relevante Projektbereich im getesteten Modell bei ungefaehr
+### H+
 
-```text
-M_BH = 4.82e11 ... 5.49e11 kg
-T_H  = 21.99 ... 19.31 MeV.
-```
-
-Der konservative Projektfluss im SK-IV-Band `25.29-31.29 MeV` liegt ueber dem verwendeten publizierten spektrumsunabhaengigen beobachteten 90%-CL-Grenzwert.
+Im getesteten Projekt-Reinterpretationsmodell liegt der relevante Standard-Hawking-Bereich bei etwa `4.82e11 ... 5.49e11 kg`. Der berechnete Greybody-/Neutrinofluss ueberschreitet im entscheidenden SK-IV-Band den verwendeten publizierten 90%-CL-Grenzwert.
 
 ```text
-H+ Standard-Hawking: FAIL im getesteten Projekt-Reinterpretationsmodell.
+H+ Standard-Hawking: FAIL im getesteten Projektmodell.
 ```
 
-Dies ist eine Projekt-Reinterpretation eines Super-Kamiokande-Limits, keine offizielle Super-K-Erdzentrum-BH-Analyse.
+Dies ist keine offizielle Super-K-Erdzentrum-BH-Exklusion.
 
-## H0 – ohne Hawking
-
-H0 setzt als nichtstandardmaessige Gegenhypothese
+### H0
 
 ```text
-P_Hawking = 0.
+P_Hawking = 0
 ```
 
-Hawking-basierte Neutrino-/Gamma-Grenzen sind fuer H0 definitionsgemaess nicht anwendbar. H0 bleibt jedoch voll an Akkretion, Ladungsfeedback, Dense-Matter-Transport, Langzeitstabilitaet, Formation und direkte Beobachtungen gebunden.
+H0 ist dadurch von Hawking-basierten Neutrino-/Gamma-Grenzen getrennt, muss aber Akkretion, Transport, Langzeitstabilitaet, Formation und Real-Data-Tests bestehen.
 
 ```text
 H0: OPEN / nicht nachgewiesen.
@@ -59,176 +48,215 @@ H0: OPEN / nicht nachgewiesen.
 
 ## Aktiver Erdbranch
 
-Die starke Variante mit einem wesentlichen Anteil der Erdmasse im zentralen BH ist verworfen. Der aktive kleine Branch ist `smooth compensated`:
+Die starke Zentralmassenvariante ist verworfen. Aktiv ist der kleine `smooth compensated` Branch. Fuer den PREM-Supply-Proxy:
 
 ```text
-rho_new(r) = rho_PREM(r) - M_BH w(r)
-Integral 4 pi r^2 w(r) dr = 1.
+c_eff = 10.4355 km/s
+M_BH = 1e11 kg -> r_B ~6.13e-8 m
+r_s ~1.49e-16 m
 ```
 
-Eine harte leere Ersatzkugel ist mechanisch verworfen. Drei Skalen werden getrennt behandelt:
+Die bisherigen reduzierten Makrotests liefern fuer diesen kleinen Branch keinen robusten Ausschluss durch Gesamtmasse/GM, Traegheitsmoment, reduzierte Hydrostatik, vereinfachte Seismik oder globale Waermeproxies. Das ist Modellkompatibilitaet, keine Evidenz.
+
+# Stage 3.69 – aktueller Capture-/Transportstack
+
+## A-1/A-3 – Schwarzschild-Dirac und Earth-speed Protonen
+
+Der massive Schwarzschild-Dirac-Solver mit regulaerem Horizon-Branch, konserviertem Strom und In/Out-Matching ist implementiert und extern benchmarkiert.
+
+Am Erd-Referenzpunkt `M_BH=1e11 kg`, `v=10.4355 km/s`:
 
 ```text
-r_s = 2 G M_BH / c^2
-r_B = G M_BH / c_eff^2
-M_PREM(<r_rep) = M_BH.
+sigma_p ~2.174e-22 m^2
+sigma_p/sigma_classical ~0.9503
 ```
 
-Fuer den zentralen PREM-Supply-Proxy:
+Die fruehere Unruh-Low-E-Protonenextrapolation wird bei `alpha_p~0.353` nicht mehr als Endwert verwendet.
+
+## A-4 – Charged Proton Dirac + Ladungsfeedback
+
+Der stabilisierte charged-Proton-Subtest zeigt bei `M=1e11 kg`:
 
 ```text
-c_eff = sqrt(V_P^2 - 4/3 V_S^2)
-      = 10.4355 km/s.
+Q=0 e       -> sigma_p/sigma_classical ~0.949
+Q=3.67 e    -> ~0.889
+Q=10 e      -> ~0.765
+Q=24.18 e   -> ~0.517
 ```
 
-Bei `M_BH~1e11 kg` folgt `r_B~61 nm`.
-
-## Bisherige Erdtests
-
-Der kleine smooth Branch liefert in den bisher ausgefuehrten reduzierten Modellen keinen robusten Ausschluss durch
-
-- Gesamtmasse / `GM`,
-- Traegheitsmoment und Rotation,
-- smooth PREM-Massenbuchhaltung,
-- reduzierte Hydrostatik,
-- vereinfachte Seismik/Normalmoden,
-- globale Langzeitwaerme-Proxies,
-- Yield/plastischen Supply,
-- Knudsen-/kinetische Uebergaenge,
-- Loss-Cone-/Recycling-Proxies.
-
-Das bedeutet **Kompatibilitaet innerhalb der getesteten Modelle**, nicht Evidenz fuer ein BH im Erdzentrum.
-
-## Stage 3.69A-1 – Schwarzschild-Dirac-Capture
-
-Implementiert sind
+Damit ist Ladungsfeedback relevant, aber in den getesteten positiven Ladungsskalen kein Orders-of-Magnitude-Protonenstopper.
 
 ```text
-massive Schwarzschild-Dirac radial equation
-regular horizon branch
-conserved-current/Wronskian diagnostics
-asymptotic in/out partial-wave matching
+charged proton capture: kontrollierter Subtest PASS
+charged electron long-range Coulomb matching: OPEN
 ```
 
-Der Solver reproduziert externe Low-`alpha`-Benchmarks und die qualitative Doran-Struktur aus Wellenoszillationen um den klassischen Capture-Wert.
+## A-5 – korrekter Fe/Ni-Spin-0-Composite-Proxy
 
-Beispiel `alpha=0.2`:
+Dominante `Fe-56`/`Ni-58`-Kerne haben `0+`; deshalb wurde ein massiver Klein-Gordon-Solver statt des Spin-1/2-Dirac-Solvers verwendet.
+
+Low-coupling externe Regression: `~0.2%` Abweichung.
+
+Bei `M_BH=1e11 kg`:
 
 ```text
-E/m=1.5: sigma/M^2 ~123.259  (classical ~128.680)
-E/m=2.0: sigma/M^2 ~103.965  (classical ~103.380)
-E/m=5.0: sigma/M^2 ~89.682   (classical ~87.174)
+Fe-56: sigma/sigma_classical ~0.99754
+Ni-58: sigma/sigma_classical ~0.99646
 ```
-
-Details: [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md).
-
-## Stage 3.69A-3 – Earth-speed Proton Dirac Capture
-
-Der entscheidende neue Protonentest verwendet direkt
 
 ```text
-v = 10.4355 km/s
-u = 3.4809081e-5
+large coherent Fe/Ni wave suppression: NOT FOUND
 ```
 
-und den vollen Dirac-Matcher statt einer Extrapolation der analytischen Unruh-Low-Energy-Naeherung.
+Dense-Fe Screening liegt im freien Elektronenproxy auf atomaren/sub-nm Skalen (`~few 1e-11 ... 1e-10 m`), also weit innerhalb `r_B`; nackte BH-Ladung ist damit kein ungescreenter `r_B`-weiter Supply-Stopper.
 
-Zur Stabilisierung sehr schwacher Partialwellen wird die Absorption zusaetzlich direkt aus dem konservierten eingehenden/Horizon-Fluss bestimmt:
+## A-6 – Recycling statt Single-pass-Faktor
+
+Ein direkter Single-pass-Proxy liefert nur etwa
 
 ```text
-P_abs = (-W_H)/(2 q |A_in|^2),
-q = p/(E+m), W_H=-1.
+Mdot_single ~3.1e-14 kg/s
 ```
 
-### Protonen-Massenscan
-
-| `M_BH` | `alpha_p` | `kmax` | `sigma_Dirac/sigma_classical` | `sigma_Dirac` [m^2] |
-|---:|---:|---:|---:|---:|
-| `1e10 kg` | `0.0353107` | 3 | `0.0326735` | `7.47496e-26` |
-| `1e11 kg` | `0.353107` | 3 | `0.950295` | `2.17406e-22` |
-| `2e11 kg` | `0.706215` | 5 | `1.008071` | `9.22496e-22` |
-| `5e11 kg` | `1.76554` | 9 | `0.996621` | `5.70011e-21` |
-
-Am wichtigen `1e11 kg`-Referenzpunkt ergibt der volle Dirac-Lauf damit
+gegenueber dem historischen Michel-Supply-Benchmark bei `1e11 kg`:
 
 ```text
-sigma_p ~2.1741e-22 m^2
-        ~0.9503 sigma_classical.
+Mdot_Michel ~1.47e-8 ... 1.46e-7 kg/s.
 ```
 
-Der fruehere Unruh-Low-Energy-Protonenwert
+Die Luecke `~4.7e5 ... 4.7e6` darf nicht automatisch als Quantum-Suppression interpretiert werden.
+
+Bei repeated encounters mit Capture-Wahrscheinlichkeit `p` und permanentem Escape `e` gilt exakt
 
 ```text
-~6.3447e-23 m^2
+chi_capture = p/(p+e).
 ```
 
-bleibt als asymptotischer Benchmark dokumentiert, wird bei `alpha_p~0.353` aber nicht mehr als finaler Earth-speed Protonenwert verwendet.
+Damit ist ein kleiner Einzelpass-Capture nicht automatisch eine kleine Gesamtakkretion; ohne permanenten Escape koennen Misses recycelt werden.
 
-Details: [`STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`](STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md).
+## A-7 – korrigierte Kollisionalitaet + Backpressure-PDE
 
-## Stage 3.69A-3 – Charge Feedback
+Eine wichtige A-6-Sensitivitaet wurde korrigiert.
 
-Bei `M_BH=1e11 kg` erzeugt bereits eine Elementarladung folgende Kraftverhaeltnisse:
+Fuer strong-coupling/geometrische Kollisionen und
 
 ```text
-|F_C/F_G| proton   = 0.0206661
-|F_C/F_G| electron = 37.9461.
+rho ~ r^-3/2
 ```
 
-Klassische Kraftgrenzen:
+folgt
 
 ```text
-Q_max,p   = +48.3884 e
-|Q_max,e| =   0.026353 e.
+lambda_mfp ~ r^3/2
+Kn ~ r^1/2,
 ```
 
-Stationaerer Equal-T-Plasma-Benchmark nach Zajacek et al.:
+also **abnehmendes Kn nach innen**. Ein innerer collisionless switch entsteht in diesem Branch nicht automatisch.
+
+Der entgegengesetzte Spitzer-Trend `Kn~r^-3/2` gilt nur im weak-coupling-Coulombplasma und darf nicht ohne Kopplungs-/Ionisationsnachweis eingesetzt werden.
+
+Ein kontrollierter 1-D-Bondi-Euler-Test reproduziert den analytischen Transsonik-Massenfluss auf Prozentniveau. Ein reflektierender innerer Rand baut dagegen Backpressure auf und treibt einen outward shock. Damit gilt:
 
 ```text
-Q_eq ~ +24.1810 e
-     ~ 3.87423e-18 C.
+sonic shielding blockiert kleine lineare Rueckmeldungen,
+aber nicht dauerhaftes Aufstauen mit Schockbildung.
 ```
 
-Zum Vergleich:
+## A-8 – Warm-Dense Fe/Ni + Weak-Reaction-Timescales
+
+Mit dem reduzierten Sensitivitaetsbranch
 
 ```text
-Q_extremal,RN ~8.6175 C
-Q_eq/Q_extremal ~4.50e-19.
+rho ~ x^-3/2
+T ~ x^-1
+x=r/r_B
 ```
 
-Damit kann Ladungsfeedback die Teilchendynamik stark veraendern, waehrend die Raumzeit auf diesen Skalen praktisch Schwarzschild bleibt.
+bleibt die Ionenkomponente an den relevanten Electron-Capture-Schwellen stark gekoppelt.
 
-Diese Charge-Werte sind **keine** selbstkonsistente Erdkerngleichgewichtsloesung. Dense Fe/Ni-Screening, Kollisionen, Degeneration, Ionisation und Transport bleiben offen.
-
-## Was Stage 3.69A-3 veraendert
+Elektronen werden relativistisch degeneriert bei etwa
 
 ```text
-Earth-speed neutral proton Dirac capture: CALCULATED
-Proton mass scan 1e10...5e11 kg: CALCULATED
-flux-stable weak partial-wave extraction: IMPLEMENTED
-Unruh proton extrapolation at alpha~0.35: REPLACED by full Dirac result
-charge force scales: CALCULATED
-stationary equal-T plasma charge benchmark: CALCULATED
-charged Dirac sigma_p,e(Q): OPEN
-Dense Fe/Ni charge/screening closure: OPEN
-species-resolved net Mdot: OPEN
+x ~3.39e-4
+r ~1.4e5 r_s.
 ```
 
-Insbesondere zeigt der `1e11 kg`-Punkt **keine starke Protonen-Wellenunterdrueckung**; die entscheidende Akkretionsunsicherheit verschiebt sich damit auf Ladungsfeedback, Screening, Fe/Ni-Zustand, Transport und Reaktionsclosure.
+Energetische continuum-EC-Schwellen im freien Fermi-Proxy:
+
+```text
+58Ni -> 58Co: Q_kin ~0.381 MeV
+x ~1.66e-4
+r ~6.84e4 r_s
+rho ~6.14e6 g/cm^3
+T ~3.62e7 K
+Gamma_i(Zeff=26) ~203
+
+56Fe -> 56Mn: Q_kin ~3.696 MeV
+x ~5.08e-6
+r ~2.09e3 r_s
+rho ~1.14e9 g/cm^3
+T ~1.18e9 K
+Gamma_i(Zeff=26) ~35.6
+```
+
+Im selben reduzierten vollionisierten Fe-Scaling waere `Gamma_i=1` erst bei etwa `1.66 r_s`. Das ist keine EOS-Extrapolation bis zum Horizont, sondern eine Konsistenzwarnung gegen einen frueh angesetzten Spitzer-Branch.
+
+Publizierter schneller Fe-56-EC-Vergleich bei `rho*Ye=1e11 g/cm^3`, `T9=3`:
+
+```text
+lambda_ec ~1.59e4 s^-1
+tau_ec ~6.3e-5 s.
+```
+
+Die lokale dynamische Zeit am Fe-Schwellenradius liegt im Reduced-Proxy nur bei `~4.7e-20 s`. Daher:
+
+```text
+energetically open EC != prompt weak equilibrium.
+prompt one-pass neutronization/NSE: NOT SUPPORTED.
+```
+
+Lange Residence-/Recyclingzeiten koennen weak reactions wieder relevant machen und muessen mit Transport gemeinsam gerechnet werden.
+
+# Was jetzt tatsaechlich entschieden ist
+
+```text
+Schwarzschild-Dirac Solver: PASS als numerischer/literaturbasierter Solver-Test
+Earth-speed neutral proton capture: CALCULATED
+charged proton feedback: CALCULATED fuer kontrollierte Q-Skalen
+charged electron Coulomb matcher: OPEN
+coherent Fe/Ni scalar capture: CALCULATED, nahezu klassisch
+large wave suppression at 1e11 kg: NOT FOUND
+long-range unscreened Coulomb supply blocking: NOT SUPPORTED by dense-screening proxy
+single-pass factor as automatic net-Mdot suppression: REJECTED
+strong-coupling inward collisionality branch: SELF-CONSISTENT reduced proxy
+prompt one-pass weak equilibrium/neutronization: NOT SUPPORTED
+final residence/backpressure + reaction-network net Mdot: OPEN
+```
+
+## Naechster entscheidender Block
+
+```text
+Stage 3.69E / A-9:
+residence-time + backpressure transport
++ charge neutrality
++ minimal Fe/Ni weak network
+-> chi_transport
+-> species-resolved net Mdot_BH.
+```
+
+Das ist jetzt der zentrale offene Erd-Akkretionsblock.
 
 ## Formation
 
-Die bisher getesteten Standardwege sind stark negativ:
+Die bisher getesteten Standardwege bleiben stark negativ:
 
 ```text
-In-situ-Kollaps normaler Erdmaterie: FAIL
+in-situ Kollaps normaler Erdmaterie: FAIL
 spaeter direkter Earth-Capture: FAIL
 Proto-Earth-/Planetesimal-Standardcapture: FAIL
-normaler Halo -> kalte protoplanetare Scheibe: FAIL unter getesteten Bedingungen
+normaler Halo -> protoplanetare cold disk: FAIL unter getesteten Bedingungen
 cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunft nicht hergeleitet
 ```
-
-Formation bleibt einer der groessten negativen Punkte des Gesamtmodells.
 
 ## Aktuelle Endmatrix
 
@@ -237,56 +265,32 @@ Formation bleibt einer der groessten negativen Punkte des Gesamtmodells.
 | starke Zentralmassenvariante | FAIL | FAIL |
 | kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
 | Standard-Hawking-Neutrinos | **FAIL im getesteten Projektmodell** | nicht anwendbar |
-| neutraler Earth-speed Proton Dirac Capture | CALCULATED | CALCULATED |
-| Charge-Feedback-Kraftskalen | CALCULATED | CALCULATED |
-| charged Dirac `sigma_p,e(Q)` | OPEN | OPEN |
-| Dense Fe/Ni-Netto-Akkretion | OPEN | OPEN |
-| Seismik | kein positiver Nachweis | kein positiver Nachweis |
-| Standard-Formation/Delivery | stark negativ | stark negativ |
-| direkte Detektion | keine | keine |
-| positive eindeutige Signatur | keine | keine |
+| Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
+| Charge-/Screening-Subtests | teilweise berechnet | teilweise berechnet |
+| Residence/Backpressure + Weak Network | **OPEN** | **OPEN** |
+| finale Dense-Matter-Netto-Mdot | **OPEN** | **OPEN** |
+| Formation/Delivery | stark negativ | stark negativ |
+| direkte experimentelle Detektion | keine | keine |
+| eindeutige positive Signatur | keine | keine |
 
-## Naechste Schritte
+## Zentrale aktuelle Dateien
 
-```text
-Stage 3.69A-4:
-charged Dirac capture + self-consistent Q(t)
-```
-
-anschliessend
-
-```text
-Dense Fe/Ni state + screening + transport
- -> coherent/composite or dissociated capture
- -> charge/nuclear feedback
- -> species-resolved net Mdot_BH
-```
-
-Erst danach kann Stage 3.69 Full-Multiphysics eine belastbare Endvorhersage fuer Stage 3.70 liefern.
-
-## Zentrale Dateien
-
-- [`STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`](STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md) - aktueller Earth-speed Proton-/Charge-Block.
-- [`stage3_69a3_earth_proton_charge.py`](stage3_69a3_earth_proton_charge.py) - reproduzierbarer Stage-3.69A-3-Scan.
-- [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md) - Schwarzschild-Dirac-Solver und Benchmarks.
-- [`stage3_69a1_dirac_prototype.py`](stage3_69a1_dirac_prototype.py) - Basis-Solver.
-- [`NUMERIK_STATUS.md`](NUMERIK_STATUS.md) - aktueller numerischer Status.
-- [`TEST_STATUS.md`](TEST_STATUS.md) - Test- und Falsifikationsmatrix.
-- [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) - verbleibende Full-Stack-/Experimentprotokolle.
-- [`THEORIE.md`](THEORIE.md) - Theorierahmen.
-- [`CHANGELOG.md`](CHANGELOG.md) - Versionshistorie.
-- `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` - unveraenderte Erstveroeffentlichung.
-
-## Literatur-Kernreferenzen
-
-- Dziewonski, A. M. & Anderson, D. L. (1981), *Preliminary Reference Earth Model*.
-- Doran, C., Lasenby, A., Dolan, S. & Hinder, I. (2005), *Fermion absorption cross section of a Schwarzschild black hole*, arXiv:gr-qc/0503019.
-- Dolan, S., Doran, C. & Lasenby, A. (2006), *Fermion scattering by a Schwarzschild black hole*, arXiv:gr-qc/0605031.
-- Unruh, W. G. (1976), *Absorption cross section of small black holes*.
-- Zajaček, M. et al. (2018), *On the charge of the Galactic centre black hole*, MNRAS 480, 4408-4423.
-- Nakao, K. et al. (2024), *Electrification of a non-rotating black hole*, arXiv:2409.17639.
-- Super-Kamiokande Collaboration, arXiv:2305.05135, Tabelle 2.
+- `STAGE3_69A4_CHARGED_DIRAC_FEEDBACK.md`
+- `stage3_69a4_charged_dirac_feedback.py`
+- `STAGE3_69A5_DENSE_FENI_CLOSURE.md`
+- `stage3_69a5_dense_feni_closure.py`
+- `STAGE3_69B_A6_KINETIC_RECYCLING_CLOSURE.md`
+- `stage3_69b_a6_reduced_closure.py`
+- `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
+- `stage3_69c_a7_collision_recycling_pde.py`
+- `STAGE3_69D_A8_WDM_WEAK_TIMESCALES.md`
+- `stage3_69d_a8_wdm_weak_timescales.py`
+- `TEST_STATUS.md`
+- `NUMERIK_STATUS.md`
+- `AKKRETION_STATUS.md`
+- `VALIDATION_PROTOCOL_STAGE3_69_70.md`
+- `CHANGELOG.md`
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; aktueller numerischer Stand bis Stage 3.69A-3, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69D/A-8, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
