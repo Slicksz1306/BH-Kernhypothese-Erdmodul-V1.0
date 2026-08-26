@@ -6,7 +6,7 @@ single-particle solver against published analytic/asymptotic results:
 
 - Unruh low-energy absorption formula, quoted as Eq. (31) by Doran et al. (2005)
 - matching-radius convergence in the true far zone p*r >> 1
-- current/Wronskian conservation inherited from Stage 3.69A-1
+- current/Wronskian conservation over very long low-momentum integrations
 
 The purpose is deliberately adversarial: a benchmark that does not converge or
 misses the published limit is a solver FAIL, not a physics result for H0.
@@ -19,9 +19,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 from math import pi, sqrt
 
+import numpy as np
+from scipy.integrate import solve_ivp
+
 from stage3_69a1_dirac_prototype import (
-    scattering_ratio,
+    local_flux_modes,
+    normalized_horizon_initial,
+    rhs,
     unruh_low_energy_dimensionless,
+    wronskian,
 )
 
 
@@ -35,7 +41,7 @@ class RegressionPoint:
 
 
 def momentum_dimensionless(alpha: float, E_over_m: float) -> float:
-    """p M for M=1, with particle rest mass mM=alpha."""
+    """pM for M=1, with particle rest mass mM=alpha."""
     if E_over_m <= 1.0:
         raise ValueError("E/m must be > 1 for an unbound state")
     return alpha * sqrt(E_over_m * E_over_m - 1.0)
@@ -43,6 +49,102 @@ def momentum_dimensionless(alpha: float, E_over_m: float) -> float:
 
 def speed_from_E_over_m(E_over_m: float) -> float:
     return sqrt(1.0 - 1.0 / (E_over_m * E_over_m))
+
+
+def integrate_horizon_mode_segmented(
+    alpha: float,
+    speed_u: float,
+    kappa: int,
+    x_max: float,
+    *,
+    phase_chunk: float = 10.0,
+    rtol: float = 5.0e-13,
+    atol: float = 5.0e-15,
+) -> tuple[np.ndarray, dict[str, float]]:
+    """Integrate to a very large matching radius without cumulative flux drift.
+
+    At small alpha and low momentum the physically required far zone can sit at
+    x >> 1e5.  A single integration over that entire interval accumulates a
+    small normalization error in the conserved Wronskian.  Because the radial
+    equation is linear, multiplying the two-component solution by one common
+    scalar changes neither its direction nor S=A_out/A_in.  We therefore split
+    the far-zone integration into finite phase intervals and restore W=-1 after
+    each segment.
+
+    Crucially, the *raw pre-renormalization drift of every segment* is retained
+    as the accuracy diagnostic.  Renormalization is not counted as evidence of
+    current conservation by itself.
+    """
+    x, U, energy, mass = normalized_horizon_initial(alpha, speed_u, kappa)
+    p = alpha * speed_u / sqrt(1.0 - speed_u * speed_u)
+
+    max_segment_W_drift = 0.0
+    n_segments = 0
+    nfev = 0
+
+    while x < x_max:
+        dx_phase = phase_chunk / max(p, 1.0e-300)
+        # Limit geometric growth close to the horizon; in the far zone the
+        # phase interval controls the segment length.
+        x_next = min(x_max, max(x + 10.0, min(1.5 * x, x + dx_phase)))
+
+        W_before = wronskian(U, x)
+        sol = solve_ivp(
+            lambda xx, y: rhs(xx, y, kappa, energy, mass),
+            (x, x_next),
+            U,
+            method="DOP853",
+            rtol=rtol,
+            atol=atol,
+        )
+        if not sol.success:
+            raise RuntimeError(sol.message)
+
+        U = sol.y[:, -1]
+        nfev += sol.nfev
+        W_after = wronskian(U, x_next)
+        if W_after >= 0.0:
+            raise RuntimeError("Inward-current solution changed current sign")
+
+        segment_drift = abs((W_after - W_before) / W_before)
+        max_segment_W_drift = max(max_segment_W_drift, segment_drift)
+
+        # Restore the chosen W=-1 normalization.  S=Aout/Ain is invariant under
+        # this common real rescaling.
+        U = U / sqrt(-W_after)
+        x = x_next
+        n_segments += 1
+
+    return U, {
+        "max_segment_W_drift": max_segment_W_drift,
+        "W_final": wronskian(U, x_max),
+        "n_segments": float(n_segments),
+        "nfev": float(nfev),
+    }
+
+
+def scattering_ratio_segmented(
+    alpha: float,
+    speed_u: float,
+    kappa: int,
+    x_match: float,
+) -> tuple[complex, dict[str, float]]:
+    Uh, integ_diag = integrate_horizon_mode_segmented(
+        alpha,
+        speed_u,
+        kappa,
+        x_match,
+    )
+    Uin, Uout = local_flux_modes(alpha, speed_u, kappa, x_match)
+    Ain, Aout = np.linalg.solve(np.column_stack([Uin, Uout]), Uh)
+    S = Aout / Ain
+
+    return S, {
+        **integ_diag,
+        "Ain_abs2": float(abs(Ain) ** 2),
+        "Aout_abs2": float(abs(Aout) ** 2),
+        "absorption_probability": float(1.0 - abs(S) ** 2),
+    }
 
 
 def lowest_j_half_sigma(
@@ -63,9 +165,8 @@ def lowest_j_half_sigma(
     total = 0.0
     diagnostics: list[dict[str, float]] = []
     for kappa in (-1, +1):
-        S, diag = scattering_ratio(alpha, u, kappa, x_match=x_match)
+        S, diag = scattering_ratio_segmented(alpha, u, kappa, x_match=x_match)
         p_abs = 1.0 - abs(S) ** 2
-        # Tiny negative values may occur from floating-point roundoff only.
         if p_abs < -1.0e-8:
             raise RuntimeError(
                 f"Unphysical absorption probability for kappa={kappa}: {p_abs}"
@@ -76,7 +177,7 @@ def lowest_j_half_sigma(
             {
                 "kappa": float(kappa),
                 "P_abs": p_abs,
-                "relative_W_drift": float(diag["relative_W_drift"]),
+                "max_segment_W_drift": float(diag["max_segment_W_drift"]),
             }
         )
 
@@ -99,7 +200,7 @@ def run_point(point: RegressionPoint) -> dict[str, object]:
         )
         max_w_drift = max(
             max_w_drift,
-            *(d["relative_W_drift"] for d in diagnostics),
+            *(d["max_segment_W_drift"] for d in diagnostics),
         )
         rows.append(
             {
@@ -122,7 +223,7 @@ def run_point(point: RegressionPoint) -> dict[str, object]:
     return {
         "point": point,
         "rows": rows,
-        "max_W_drift": max_w_drift,
+        "max_segment_W_drift": max_w_drift,
         "radius_rel_last_two": radius_rel,
         "pass_W": pass_w,
         "pass_unruh": pass_unruh,
@@ -147,22 +248,21 @@ def print_result(result: dict[str, object]) -> None:
             f"{row['rel_to_unruh']:9.3e}"
         )
 
-    print(f"max relative W drift : {result['max_W_drift']:.3e}")
-    print(f"last-radius change   : {result['radius_rel_last_two']:.3e}")
-    print(f"Wronskian check      : {'PASS' if result['pass_W'] else 'FAIL'}")
-    print(f"Unruh check          : {'PASS' if result['pass_unruh'] else 'FAIL'}")
-    print(f"radius convergence   : {'PASS' if result['pass_radius'] else 'FAIL'}")
-    print(f"POINT STATUS         : {'PASS' if result['PASS'] else 'FAIL'}")
+    print(f"max segment W drift : {result['max_segment_W_drift']:.3e}")
+    print(f"last-radius change  : {result['radius_rel_last_two']:.3e}")
+    print(f"Wronskian check     : {'PASS' if result['pass_W'] else 'FAIL'}")
+    print(f"Unruh check         : {'PASS' if result['pass_unruh'] else 'FAIL'}")
+    print(f"radius convergence  : {'PASS' if result['pass_radius'] else 'FAIL'}")
+    print(f"POINT STATUS        : {'PASS' if result['PASS'] else 'FAIL'}")
 
 
 def main() -> None:
     print("Stage 3.69A-2 Schwarzschild-Dirac external regression")
     print("A failed benchmark is a solver failure, not evidence for H0.")
+    print("Note: this is deliberately a slow, high-accuracy regression run.")
 
-    # These points are intentionally in the low-energy / long-wavelength regime
-    # shown by Doran et al. to follow Unruh's approximation.  The far-zone
-    # requirement is expressed as p*x_match rather than a fixed coordinate radius;
-    # this is essential when alpha and therefore p become small.
+    # The far-zone requirement is expressed as p*x_match rather than a fixed
+    # coordinate radius.  This becomes essential as alpha and p decrease.
     points = (
         RegressionPoint(
             alpha=0.01,
