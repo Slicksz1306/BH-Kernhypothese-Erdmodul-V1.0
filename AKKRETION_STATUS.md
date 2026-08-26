@@ -2,7 +2,7 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 26.08.2026  
-**Forschungsstand:** Matter-/Capture-/Transportstack bis A12c partiell bearbeitet; general-EOS Netto-`Mdot` offen
+**Forschungsstand:** Materie-/Capture-/Transportstack bis A13 partiell bearbeitet; reale tabellierte Fe/Ni-Supply und finale Netto-`Mdot` offen
 
 ## Aussagegrenze
 
@@ -16,31 +16,26 @@ outer relativistic supply(EOS)
 -> net Mdot_BH.
 ```
 
-Daher gilt weiterhin:
+Daher gilt:
 
 ```text
 Mdot_net != automatisch Mdot_Michel
-Mdot_net != automatisch p_single * Mdot_supply.
-```
-
-Neu seit A12c gilt zusaetzlich:
-
-```text
+Mdot_net != automatisch p_single * Mdot_supply
 historical Michel benchmark != universal supply rate.
 ```
 
-Der historische Projektbereich wird ab jetzt nur noch als **LEGACY / EOS-SENSITIVE BENCHMARK** gefuehrt.
+Der historische Projektbereich bleibt **LEGACY / EOS-SENSITIVE**.
 
-# 1. Referenzzustand Erde
+# 1. PREM outer boundary
 
-PREM-Zentrum:
+Am Erdzentrum:
 
 ```text
-rho_c      ~13.08848 g/cm3
-c_eff      ~10.4355 km/s
-Kappa_S    ~1.4253 TPa
-Pressure   ~363.852 GPa
-dK/dP      ~2.356.
+rho_inf ~13.08848 g/cm3
+P_inf   ~363.8521 GPa
+K_S     ~1.4253 TPa
+dK/dP   ~2.356
+c_s     ~10.4355 km/s.
 ```
 
 Bei `M=1e11 kg`:
@@ -50,18 +45,17 @@ r_B ~6.13e-8 m
 r_s ~1.49e-16 m.
 ```
 
-# 2. Innerer Wave-/Capture-Sink
+# 2. Innerer Capture-Sink
 
-## Proton
-
-Bei Earth-speed `10.4355 km/s`, `M=1e11 kg`:
+Bei `M=1e11 kg`, Earth-speed:
 
 ```text
-sigma_p ~2.174e-22 m2
-sigma_p/sigma_classical ~0.9503.
+proton: sigma/sigma_classical ~0.9503
+Fe-56:  ~0.99754
+Ni-58:  ~0.99646.
 ```
 
-Keine Orders-of-Magnitude-Wellenunterdrueckung.
+Eine grosse Wellenunterdrueckung wurde nicht gefunden.
 
 Charged-Proton-Sensitivitaet:
 
@@ -74,108 +68,40 @@ Q=24.18 e  -> ~0.517.
 
 Charged-electron long-range Coulomb matching bleibt OPEN.
 
-## Fe/Ni
+# 3. Recycling / permanenter Escape
 
-Dominante `Fe-56`/`Ni-58`-Kerne haben `0+`; kohärenter erster Composite-Proxy ist scalar/Klein-Gordon.
-
-Bei `M=1e11 kg`:
+Ein kleiner one-pass Loss-Cone ist kein stationaerer Unterdrueckungsfaktor. Fuer wiederholte Encounters:
 
 ```text
-Fe-56 ~0.99754 classical
-Ni-58 ~0.99646 classical.
+chi_capture = p/(p+e_perm).
 ```
+
+A10 zeigt zusaetzlich:
 
 ```text
-large coherent Fe/Ni wave suppression: NOT FOUND.
+local Kn~1 != permanent escape through the outer dense Fe/WDM reservoir.
 ```
 
-# 3. Recycling statt Single-pass-Faktor
+# 4. A9-A12 Processing Capacity
 
-Direkter Single-pass-Hintergrundproxy bei `1e11 kg` lag bei etwa
+Unter dem historischen hohen Supply lieferte A10-fast:
 
 ```text
-Mdot_single ~3.1e-14 kg/s.
+M=1e10 kg: Xi_high~1.468
+M=1e11 kg: Xi_high~2.81e-3
+M=2e11 kg: Xi_high~4.28e-4
+M=5e11 kg: Xi_high~3.54e-5.
 ```
 
-Ein kleiner one-pass Loss-Cone ist aber kein stationaerer Unterdrueckungsfaktor. Fuer wiederholte Encounters gilt exakt
+Damit war nur der `1e10 kg`-Unterrand capacity-overloaded.
 
-```text
-chi_capture = p/(p+e_perm)
-```
+A11/A12 zeigten fuer diesen historischen `1e10 kg` Capacity-Limiter einen nach aussen laufenden Backpressure-Shock. Die Shockposition konvergierte, eine stationaere endliche `Mdot` aber nicht.
 
-mit permanentem Escape `e_perm`.
+A12b zeigte, dass literaturgebundene Fe-Viskositaet/Waermeleitung den Backpressure-Ast unter dieser historischen Randbedingung qualitativ nicht entfernen.
 
-A10 zeigte, dass selbst ein lokaler `Kn~1`-Uebergang nicht automatisch permanenten Escape bedeutet, weil die aeussere Fe/WDM-Zone kollisionsoptisch dick bleibt.
+# 5. A12b Ionisation
 
-# 4. A9-A12 inner processing capacity
-
-A9 definierte
-
-```text
-Xi = Mdot_supply / Mdot_capacity.
-```
-
-Bei Verwendung des **historischen** Supply-Benchmarks war:
-
-```text
-M=1e10 kg: supply-/transition-sensitive, teils Xi>1
-M=1e11 kg: Xi_high~0.0079...0.905 je nach transition proxy
-M=2e11 kg: klare Processing-Reserve
-M=5e11 kg: grosse Processing-Reserve.
-```
-
-A10s first-principles-informierter Transportenvelope verengte den Vergleich weiter. Im schnellsten/escape-freundlichsten Envelope:
-
-```text
-1e10 kg: Xi_high~1.468
-1e11 kg: Xi_high~2.81e-3
-2e11 kg: Xi_high~4.28e-4
-5e11 kg: Xi_high~3.54e-5.
-```
-
-Damit war unter dem historischen hohen Supply nur der `1e10 kg`-Unterrand capacity-overloaded.
-
-# 5. A11/A12 dynamischer Backpressure
-
-Mit dem aus dem historischen A10-Supply abgeleiteten `1e10 kg` Capacity-Limiter
-
-```text
-A_cap~0.681
-```
-
-bildet der zeitabhaengige sphaerische PDE-Solver einen nach aussen laufenden Backpressure-/Shock-Zweig.
-
-A12 Hochaufloesung bei `t=0.8 r_B/c_inf`:
-
-```text
-N=128  shock~1.269 r_B, inner mdot~2.10e-2
-N=256  shock~1.254 r_B, inner mdot~1.63e-2
-N=512  shock~1.233 r_B, inner mdot~1.12e-2
-N=1024 shock~1.229 r_B, inner mdot~6.94e-3.
-```
-
-Long-domain:
-
-```text
-t=0.8 -> shock~1.26 r_B
-t=1.2 -> ~1.74 r_B
-t=1.6 -> ~2.22 r_B
-t=2.0 -> ~2.68 r_B.
-```
-
-Daher:
-
-```text
-stationary 1e10 shock-regulated Mdot: NOT ESTABLISHED.
-```
-
-A12b koppelte literaturgebundene Fe-Viskositaet/Waermeleitung als Reduced Sensitivitaet in die PDE. Diese Terme entfernten den Backpressure-Ast unter der historischen Capacity-Randbedingung nicht.
-
-# 6. A12b Ionisation
-
-A12b implementiert einen More/Thomas-Fermi-`Zbar(rho,T)`-Fit mit Fe-Korrekturfaktor `0.270`.
-
-Erdkernreferenz:
+More/Thomas-Fermi Fe-Closure am Erdkernreferenzpunkt:
 
 ```text
 rho=13.0885 g/cm3
@@ -183,31 +109,17 @@ T=6000 K
 Zbar~2.76.
 ```
 
-Gegen eine publizierte solid-density Average-Atom-Definition liegt dieser Fit im Bereich `0.1...10 eV` etwa `12...16 %` niedriger. `Zbar` wird deshalb als Modell-/Definitionsband und nicht als exakte Observable verwendet.
+Gegen eine publizierte solid-density Average-Atom-Definition liegt der korrigierte Fit bei `0.1...10 eV` etwa `12...16 %` niedriger. `Zbar` bleibt ein Modell-/Definitionsband.
 
-# 7. A12c – historischer Supply wird korrigiert
+# 6. A12c – Supply-Korrektur
 
-## 7.1 Herkunft des Legacy-Benchmarks
-
-Der historische Projekt-Supply war bei `M=1e16 kg` mit einer phenomenologischen Dense-Matter-Michel-EOS zu
-
-```text
-147 ... 1460 kg/s
-```
-
-berechnet und mit `Mdot~M^2` auf `M=1e11 kg` skaliert:
+Historischer Benchmark bei `M=1e11 kg`:
 
 ```text
 1.47e-8 ... 1.46e-7 kg/s.
 ```
 
-Dieser Bereich wird weiterhin als Regressions-/Legacy-Benchmark archiviert, aber nicht mehr als feste aeussere Rate verwendet.
-
-## 7.2 Relativistischer stiff-EOS Michel-Test
-
-Fuer `Gamma>5/3` ist die Newton-Bondi-Lösung nicht die richtige kritische Loesung; A12c verwendet deshalb die relativistische Michel-Kritikalitaet.
-
-Bei gleicher PREM-Aussenbedingung und `M=1e11 kg` ergibt der **konstante-Gamma Sensitivitaetsscan**:
+Dieser Bereich ist nicht universell. Im relativistischen constant-Gamma Sensitivitaetstest:
 
 | Gamma | Mdot [kg/s] |
 |---:|---:|
@@ -218,100 +130,126 @@ Bei gleicher PREM-Aussenbedingung und `M=1e11 kg` ergibt der **konstante-Gamma S
 | `2.20` | `1.50e-11` |
 | `2.356` local PREM proxy | `2.40e-12` |
 
-Der historische Projektbereich entspricht in diesem einfachen konstanten-Gamma-GR-Surrogat etwa
+`Gamma=2.356` darf nicht unveraendert bis zum Horizon fortgesetzt werden. Die letzte Zahl ist ein **constant-stiffness Stresslimit**, keine bevorzugte Endrate.
+
+# 7. A13 – general-EOS relativistischer Supply
+
+A13 implementiert die Michel-Kritikalitaet fuer eine allgemeine thermodynamisch konsistente barotrope/isentrope EOS.
 
 ```text
-Gamma~1.743...1.826.
+4 pi r^2 rho0 u = Mdot
+h sqrt(1 - 2M/r + u^2) = h_inf
 ```
 
-PREM besitzt am Zentrum lokal
+Am kritischen Punkt:
 
 ```text
-dK/dP~2.356.
+u_s^2 = a_s^2/(1+3 a_s^2)
+r_s/M = (1+3 a_s^2)/(2 a_s^2)
+h_s/sqrt(1+3 a_s^2) = h_inf.
 ```
 
-Fuer einen reinen lokalen Polytropen ist `dK/dP=Gamma`. **Das ist nur ein lokaler stiffness proxy**. Er darf nicht unveraendert bis zum Horizon fortgesetzt werden, weil Fe/Ni vorher ionisiert, degeneriert und sein EOS-Regime wechselt.
-
-Damit ist die Zahl `2.40e-12 kg/s` **keine neue Endrate**.
-
-## 7.3 Korrigierter 1e10-Status
-
-Der fruehere Satz
+Der Solver reproduziert die A12c constant-Gamma-Werte mit relativen Drifts von etwa `1e-5...1e-4`:
 
 ```text
-1e10 kg -> dynamic backpressure
+general-EOS solver regression: PASS.
 ```
 
-war zu allgemein. Er galt fuer den historischen hohen/soft-EOS Supply.
+## Kontrolliertes variable-EOS Surrogat
 
-Mit dem A10-fast Processing-Capacity-Denominator ergibt der stiff-EOS Supply-Test etwa:
+A13 matched PREM `P`, `K_S` und `dK/dP` am Aussenrand. Die lokale PREM-Steifigkeit wird nur bis
 
 ```text
-Gamma=1.80  -> Xi~0.29
-Gamma=1.85  -> Xi~0.081
-Gamma=2.00  -> Xi~0.0034
-Gamma=2.356 -> Xi~2.4e-5.
+rho_soft=30 ... 47.2 g/cm3
 ```
 
-Im konstanten-Gamma Vergleich liegt der Capacity-Uebergang bei ungefaehr
+gehalten. Danach wird transparent
 
 ```text
-Xi=1 -> Gamma~1.756.
+beta_mid=1.4 ... 1.8
 ```
 
-Daher lautet der aktuelle Status:
+variiert; tief innen geht der Surrogatast um den Elektronen-Relativitaetsmarker mit Sensitivitaet `1e5...1e7 g/cm3` gegen `beta=4/3`.
+
+Dies ist kein statistisches Konfidenzintervall und keine finale Fe/Ni-EOS.
+
+Bei `M=1e11 kg` ergibt dieser kontrollierte Scan:
 
 ```text
-M=1e10 kg:
-BACKPRESSURE CONDITIONAL ON SUPPLY EOS.
-
-soft/high supply -> capacity overload and dynamic backpressure possible
-stiff/lower supply -> no capacity overload required.
+Mdot_supply,surrogate ~4.64e-8 ... 1.37e-6 kg/s.
 ```
 
-## 7.4 >=1e11 kg
+Damit gilt:
 
-Eine niedrigere stiff-EOS Supply-Rate verschlechtert den inneren Processing-Befund nicht. Sie vergroessert die Processing-Reserve.
+```text
+constant PREM stiffness to horizon -> stress limit only
+variable EOS softening -> supply can return to historical range or above.
+```
+
+# 8. Neue Capacity-Reklassifikation
+
+A13-Surrogat gekoppelt an die bereits berechneten A10-fast Processing-Capacities:
+
+| M_BH | Mdot_min [kg/s] | Mdot_max [kg/s] | Xi_min | Xi_max |
+|---:|---:|---:|---:|---:|
+| `1e10` | `4.64e-10` | `1.37e-8` | `0.467` | `13.76` |
+| `1e11` | `4.64e-8` | `1.37e-6` | `8.94e-4` | `2.64e-2` |
+| `2e11` | `1.86e-7` | `5.47e-6` | `1.36e-4` | `4.01e-3` |
+| `5e11` | `1.16e-6` | `3.42e-5` | `1.12e-5` | `3.32e-4` |
+
+Daraus folgt fuer das **getestete A13-Surrogat**:
 
 ```text
 M>=1e11 kg:
-inner A9-A12 processing-capable result survives,
-but the actual supply/net Mdot is reopened and EOS-dependent.
+Xi_max <<1 -> inner processing-capable result survives robustly.
+
+M=1e10 kg:
+Xi crosses 1 -> Backpressure remains supply/EOS conditional.
 ```
 
-# 8. Aktueller Netto-Mdot-Status
+Der fruehere Satz `1e10 kg -> Backpressure` bleibt damit korrigiert: nur ausreichend weiche/high-supply EOS-Aeste ueberlasten die aktuelle innere Capacity.
 
-Es gibt derzeit **keine belastbare einzelne finale Mdot-Zahl**.
+# 9. Realer Liquid-Fe-Anker fuer A13b
+
+Grant et al. (2021) messen eine elevated liquid-Fe isentrope von etwa `275...400 GPa` und berichten sehr gute Uebereinstimmung mit SESAME 92141.
+
+Publizierte Fitparameter bei der 7000-K-Referenz:
+
+```text
+K0     = 25.3 +/- 4.0 GPa
+K0'    = 6.60 +/- 0.33
+gamma0 = 2.42 +/- 0.12
+rho0   = 5.187 g/cm3 reference.
+```
+
+Die Arbeit verweist auf einen oeffentlichen Datensatz unter Zenodo DOI `10.5281/zenodo.4464112`. Der Datensatz konnte in der aktuellen Tool-Session nicht stabil maschinenlesbar abgerufen werden; es wurden daher **keine Punkte aus Figuren erfunden oder per Hand digitalisiert**.
+
+# 10. Aktueller Netto-Mdot-Status
 
 ```text
 historical Michel supply: LEGACY / EOS-SENSITIVE
-single-pass wave sink: not the net rate
-inner processing capacity: quantitatively constrained
-1e10 backpressure: conditional on outer supply EOS
->=1e11 processing: robust within current inner-transport models
-final outer supply: OPEN
-final net Mdot: OPEN.
+A13 general-EOS machinery: PASS regression
+A13 variable-EOS surrogate: CALCULATED
+M>=1e11 inner processing: robust in tested surrogate
+M=1e10 backpressure: supply/EOS conditional
+real tabulated Fe/Ni outer supply: OPEN
+charged-electron capture: OPEN
+final species-resolved net Mdot: OPEN.
 ```
 
-Der aktuell wichtigste fehlende Schritt ist nicht mehr ein weiterer freier Unterdrueckungsfaktor, sondern ein **general-EOS relativistischer Michel-Eigenwert**.
+# 11. Langzeit-/Waerme-Tests
 
-# 9. Langzeit-/Waerme-Kontext
+Fruehere Langzeit-/Waermechecks wurden mit dem historischen Supply ausgefuehrt. Sie muessen nach A13b mit einem realeren tabellierten `Mdot_supply`-Band neu gerechnet werden.
 
-Fruehere globale Waerme-/Erdalter-Proxies wurden gegen historische Supply-Raten getestet. Da A12c die reale Supply-Spanne wieder oeffnet, muessen diese Langzeittests nach A13 mit dem neuen `Mdot_supply(EOS)`-Band erneut ausgefuehrt werden.
-
-Keine alte Waerme-Kompatibilitaet wird als positiver Nachweis interpretiert.
-
-# 10. Naechster Pflichtblock
+# 12. Naechster Pflichtblock – A13b
 
 ```text
-Stage 3.69I / A13:
-PREM outer state
--> general/piecewise Fe/Ni EOS
--> relativistic variable-EOS critical point
--> Mdot_supply(EOS) band
--> A9-A12 transport/capture coupling
--> revised net Mdot_BH band
--> rerun long-term/heat constraints.
+public liquid-Fe isentrope / SESAME-consistent data ingestion
+-> thermodynamic h(rho) reconstruction
+-> general-EOS Michel directly on tabulated/interpolated data
+-> final defensible outer-supply bracket
+-> recouple A9-A12
+-> rerun heat/age constraints.
 ```
 
-H+ und H0 bleiben parallel. Diese Materieclosure ist gemeinsam; H+ besitzt zusaetzliche Hawking-Terme und den bereits dokumentierten H+-Neutrinobefund.
+H+ und H0 bleiben parallel. Diese Matter-Closure ist gemeinsam; H+ besitzt zusaetzliche Hawking-Terme und den bereits dokumentierten H+-Neutrinobefund.
