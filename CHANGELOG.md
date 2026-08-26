@@ -2,6 +2,102 @@
 
 Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls.
 
+## V1.5 / Stage 3.69A-3 Earth-speed Proton Capture + Charge Feedback - 26.08.2026
+
+Stage 3.69A-3 erweitert den Quantum/Wave-Capture-Block um einen reproduzierbaren Earth-speed Protonen-Massenscan und erste quantitative Charge-Feedback-Skalen. Dies ist **keine abgeschlossene Stage 3.69**, keine fertige Dense-Matter-Akkretionsrate und kein experimenteller Nachweis eines Erdzentrum-BH.
+
+### Numerische Neuerungen
+
+- flux-stabile Absorptionsauswertung fuer sehr schwach absorbierte Partialwellen:
+
+```text
+P_abs = (-W_H)/(2 q |A_in|^2),
+q=p/(E+m), W_H=-1
+```
+
+- Earth-speed Referenz:
+
+```text
+v = 10.4355 km/s
+u = 3.4809081e-5
+```
+
+- Protonen-Massenscan:
+
+```text
+M=1e10 kg: alpha_p=0.0353107, sigma/sigma_classical=0.0326735
+M=1e11 kg: alpha_p=0.353107,  sigma/sigma_classical=0.950295
+M=2e11 kg: alpha_p=0.706215,  sigma/sigma_classical=1.008071
+M=5e11 kg: alpha_p=1.76554,   sigma/sigma_classical=0.996621
+```
+
+- Der `5e11 kg`-Punkt benoetigt `kmax~8...9`; mit zu kleinem Partialwellenschnitt ist die Cross-Section sichtbar unterkonvergiert.
+- Matchingradius-Spotcheck bei `1e11 kg`:
+
+```text
+x_match=1e6 -> 0.95024543 classical
+x_match=5e6 -> 0.95029487 classical
+x_match=1e7 -> 0.95035969 classical
+```
+
+### Korrektur des Protonenbenchmarks
+
+Der fruehere Unruh-Low-Energy-Wert bei `M=1e11 kg`
+
+```text
+sigma_Unruh,p ~6.3447e-23 m^2
+```
+
+bleibt als asymptotischer Benchmark erhalten, wird bei `alpha_p~0.353` aber nicht mehr als finaler Earth-speed Protonenwert verwendet. Der volle Dirac-Matcher liefert
+
+```text
+sigma_Dirac,p ~2.1741e-22 m^2
+             ~0.9503 sigma_classical.
+```
+
+### Charge-Feedback-Skalen bei `M=1e11 kg`
+
+```text
+|F_C/F_G| proton   = 0.0206661  fuer |Q|=e
+|F_C/F_G| electron = 37.9461    fuer |Q|=e
+Q_max,p   = +48.3884 e
+|Q_max,e| =   0.026353 e
+Q_eq(equal-T stationary plasma benchmark) ~+24.1810 e
+Q_extremal,RN ~8.6175 C
+Q_eq/Q_extremal ~4.50e-19
+```
+
+Damit kann elektrostatisches Feedback die Bewegung geladener Teilchen stark beeinflussen, waehrend die Metrik auf diesen Ladungsskalen praktisch Schwarzschild bleibt. Eine selbstkonsistente Dense-Fe/Ni-Charge-/Screening-Loesung ist noch offen.
+
+### Branch-Status
+
+```text
+H+ = mit Standard-Hawking-Strahlung
+H0 = ohne Hawking-Strahlung
+```
+
+Beide Branches bleiben parallel. Stage 3.69A-3 ist zunaechst ein gemeinsamer Materie-/Capture-Baustein und entscheidet keinen Branch allein.
+
+### Neue/aktualisierte Dateien
+
+- `STAGE3_69A3_EARTH_PROTON_CHARGE_FEEDBACK.md`
+- `stage3_69a3_earth_proton_charge.py`
+- `README.md`
+- `NUMERIK_STATUS.md`
+- `TEST_STATUS.md`
+- `VALIDATION_PROTOCOL_STAGE3_69_70.md`
+
+### Naechster Block
+
+```text
+Stage 3.69A-4:
+charged Dirac capture + self-consistent Q(t)
+```
+
+Danach bleiben Dense Fe/Ni Screening/Transport, coherent scalar/composite capture bzw. Dissociation und die species-resolved Netto-`Mdot`-Closure.
+
+---
+
 ## V1.5 / Stage 3.69A-1 Quantum-Capture-Prototyp - 26.08.2026
 
 Der Quantum/Wave-Capture-Block von Stage 3.69 wurde erstmals als reales numerisches Teilmodul bearbeitet. Dies ist **keine abgeschlossene Stage 3.69**, kein experimenteller Nachweis und keine fertige Dense-Matter-Akkretionsrate.
@@ -49,7 +145,7 @@ proton   sigma ~6.34e-23 m^2
 classical collisionless low-v proxy ~2.29e-22 m^2
 ```
 
-Diese Werte sind isolierte Einzelteilchen-Benchmarks und **keine** Netto-Akkretionsrate dichter Erdkernmaterie.
+Diese Werte sind isolierte Einzelteilchen-Benchmarks und **keine** Netto-Akkretionsrate dichter Erdkernmaterie. Der Protonenwert wird durch Stage 3.69A-3 bei `alpha_p~0.353` als finaler Earth-speed Wert ersetzt; er bleibt hier als historischer A-1-Benchmark dokumentiert.
 
 ### Spezieskorrektur
 
