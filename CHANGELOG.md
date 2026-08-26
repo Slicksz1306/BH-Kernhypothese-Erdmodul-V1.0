@@ -2,6 +2,96 @@
 
 Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls. Historische Zwischenwerte bleiben als Entwicklungsstand erhalten; spaetere haertere Tests ersetzen nur ihre aktuelle Interpretation.
 
+## V1.5 / Stage 3.69I/A13 General-EOS Michel Supply - 26.08.2026
+
+A13 ersetzt den konstanten-`Gamma`-Supply-Test durch einen relativistischen general-EOS Michel-Solver.
+
+### Neue Mathematik
+
+```text
+4 pi r^2 rho0 u = Mdot
+h sqrt(1-2M/r+u^2)=h_inf
+
+u_s^2=a_s^2/(1+3a_s^2)
+r_s/M=(1+3a_s^2)/(2a_s^2)
+h_s/sqrt(1+3a_s^2)=h_inf.
+```
+
+Der general-EOS Solver reproduziert die A12c constant-stiffness Werte mit relativen Abweichungen `~1e-5...1e-4`.
+
+```text
+A13 general-EOS regression: PASS
+```
+
+### Variable-EOS Surrogat
+
+PREM `P`, `K_S` und `dK/dP` werden gleichzeitig gematched. Die lokale PREM-Steifigkeit wird nur bis `30...47.2 g/cm3` gehalten. Danach wird `beta_mid=1.4...1.8` getestet; tief innen geht der kontrollierte Surrogatast gegen `beta=4/3`.
+
+Bei `M=1e11 kg`:
+
+```text
+Mdot_supply,surrogate ~4.64e-8 ... 1.37e-6 kg/s.
+```
+
+Dies ist ein Sensitivitaetsenvelop, kein statistisches Konfidenzintervall und keine finale Fe/Ni-EOS.
+
+### Processing-Capacity neu klassifiziert
+
+```text
+1e10 kg: Xi~0.467...13.76 -> EOS/supply conditional
+1e11 kg: Xi~8.94e-4...2.64e-2 -> processing-capable
+2e11 kg: Xi~1.36e-4...4.01e-3 -> processing-capable
+5e11 kg: Xi~1.12e-5...3.32e-4 -> processing-capable.
+```
+
+Damit wird `>=1e11 kg` im gesamten kontrollierten A13-Surrogat deutlich processing-capable. `1e10 kg` bleibt der EOS-/Supply-sensitive Uebergangsbereich.
+
+### A12c praezisiert
+
+```text
+constant PREM stiffness to horizon -> stress limit only
+historical Michel range -> LEGACY / EOS-SENSITIVE
+variable EOS softening -> supply can return to historical range or above.
+```
+
+### Real-data A13b
+
+Grant et al. (2021) liefern liquid-Fe-Isentropenmessungen bei `~275...400 GPa`, gute Uebereinstimmung mit SESAME 92141 und einen oeffentlichen Zenodo-Datensatz. Der Datensatz konnte in der aktuellen Tool-Session nicht stabil maschinenlesbar abgerufen werden; es wurden keine Figure-Punkte erfunden.
+
+Naechster Block:
+
+```text
+A13b real liquid-Fe isentrope ingestion
+-> h(rho) reconstruction
+-> direct general-EOS Michel solve
+-> final outer-supply bracket
+-> recouple A9-A12
+-> rerun heat/age constraints.
+```
+
+Neue/aktualisierte Dateien:
+
+- `STAGE3_69I_A13_GENERAL_EOS_MICHEL.md`
+- `stage3_69i_a13_general_eos_michel.py`
+- `STAGE3_69I_A13_PLAN.md`
+- `README.md`
+- `TEST_STATUS.md`
+- `NUMERIK_STATUS.md`
+- `AKKRETION_STATUS.md`
+- `CHANGELOG.md`
+
+---
+
+## V1.5 / Stage 3.69H/A12-A12c - 26.08.2026
+
+- A12: Shock-Konvergenz bis N=1024; `1e10 kg` historical-capacity branch ist outward-propagating, nicht stationaer nachgewiesen.
+- A12b: More/TF Fe-`Zbar` und literaturgebundene eta/k Reduced-PDE-Sensitivitaet.
+- A12c: historischer Michel-Supply als **LEGACY / EOS-SENSITIVE** korrigiert; constant PREM-stiffness to horizon nur Stresslimit.
+- `1e10 kg` Backpressure zu EOS-/Supply-conditional korrigiert.
+- `>=1e11 kg` inner processing-capable blieb bestehen.
+
+---
+
 ## V1.5 / Stage 3.69E/A-9 Residence + Backpressure + Reduced Transport Closure - 26.08.2026
 
 A9 verbindet die bisherigen Wave-Capture-, Screening-, Recycling- und Weak-Timescale-Teilmodule erstmals zu einer quantitativen Reduced Transportclosure.
@@ -82,20 +172,6 @@ Stage 3.69 Full-Multiphysics:
     OPEN
 ```
 
-Neue/aktualisierte Dateien:
-
-- `STAGE3_69E_A9_RESIDENCE_BACKPRESSURE_NETWORK.md`
-- `stage3_69e_a9_residence_backpressure_network.py`
-- `STAGE3_69E_A9_PLAN.md`
-- `STAGE3_69F_A10_PLAN.md`
-- `README.md`
-- `TEST_STATUS.md`
-- `NUMERIK_STATUS.md`
-- `AKKRETION_STATUS.md`
-- `VALIDATION_PROTOCOL_STAGE3_69_70.md`
-
-H+ und H0 bleiben parallel. H+ bleibt im getesteten Standard-Hawking/SK-IV-Projekt-Reinterpretationsmodell FAIL; H0 bleibt OPEN / nicht nachgewiesen.
-
 ---
 
 ## V1.5 / Stage 3.69A-4 bis 3.69D/A-8 - 26.08.2026
@@ -152,19 +228,6 @@ reaction threshold open != reaction equilibrium.
 ```
 
 Promptes Weak-Equilibrium/instantane Neutronisierung wurde im Reduced Transit-Zeitscale nicht etabliert.
-
-Aktuelle Dateien:
-
-- `STAGE3_69A4_CHARGED_DIRAC_FEEDBACK.md`
-- `stage3_69a4_charged_dirac_feedback.py`
-- `STAGE3_69A5_DENSE_FENI_CLOSURE.md`
-- `stage3_69a5_dense_feni_closure.py`
-- `STAGE3_69B_A6_KINETIC_RECYCLING_CLOSURE.md`
-- `stage3_69b_a6_reduced_closure.py`
-- `STAGE3_69C_A7_COLLISION_RECYCLING_PDE.md`
-- `stage3_69c_a7_collision_recycling_pde.py`
-- `STAGE3_69D_A8_WDM_WEAK_TIMESCALES.md`
-- `stage3_69d_a8_wdm_weak_timescales.py`
 
 ---
 
