@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Aktueller Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69/3.70 definiert, nicht durchgefuehrt  
+**Aktueller Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69A/3.69A-1 Quantum-Capture-Teilmodul teilweise durchgefuehrt; Stage 3.69 Full-Multiphysics und Stage 3.70 nicht durchgefuehrt  
 **Stand:** 26.08.2026  
 **Erstveröffentlichung des Erdmoduls V1.0:** 23.08.2026
 
@@ -15,7 +15,7 @@ Copyright 2026 Daniel Marcel Schlicksupp. Alle Rechte vorbehalten.
 
 ## Wissenschaftlicher Status in einem Satz
 
-Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Der Standard-Hawking-Zweig H+ faellt im aktuellen Projekt-Reinterpretationstest gegen ein publiziertes Super-Kamiokande-`anti-nu_e`-Limit; der nichtstandardmaessige H0-Zweig ohne Hawking-Strahlung wird durch die bisherigen reduzierten Erdtests nicht ausgeschlossen, besitzt aber weder eine positive Detektion noch einen hergeleiteten Standard-Formationweg. Die exakte H0-Netto-Akkretionsrate bleibt offen und muss in Stage 3.69 inklusive Quantum/Wave-Capture geschlossen werden.
+Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Der Standard-Hawking-Zweig H+ faellt im aktuellen Projekt-Reinterpretationstest gegen ein publiziertes Super-Kamiokande-`anti-nu_e`-Limit; der nichtstandardmaessige H0-Zweig ohne Hawking-Strahlung wird durch die bisherigen reduzierten Erdtests nicht ausgeschlossen, besitzt aber weder eine positive Detektion noch einen hergeleiteten Standard-Formationweg. Ein Schwarzschild-Dirac-Teilsolver fuer isolierte Spin-1/2-Capture ist inzwischen implementiert und numerisch selbstgeprueft; die exakte H0-Netto-Akkretionsrate in dichter Fe/Ni-Materie bleibt offen.
 
 ## Zwei getrennte Hypothesen
 
@@ -109,6 +109,45 @@ Diese Integration ist **Modellhaertung, keine externe Bestaetigung der Hypothese
 
 Details: [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md).
 
+## Stage 3.69A / 3.69A-1 – Quantum/Wave-Capture-Teilmodul
+
+Der zuvor nur definierte Quantum-Capture-Block wurde teilweise umgesetzt.
+
+Aktueller reproduzierbarer Stand:
+
+```text
+Schroedinger-Regimecheck: DONE
+Schwarzschild-Dirac radial solver: IMPLEMENTED
+regular horizon branch: IMPLEMENTED
+Dirac-current/Wronskian self-check: PASS numerically
+in/out partial-wave matching: IMPLEMENTED
+matching-radius convergence: PASS at tested alpha=0.2 benchmark points
+full dense-core species-resolved net Mdot: OPEN
+```
+
+Fuer `alpha=0.2` liefert der Matching-Test beispielsweise
+
+```text
+E/m=1.5: sigma_A/M^2 ~123.259   (klassisch ~128.680)
+E/m=2.0: sigma_A/M^2 ~103.965   (klassisch ~103.380)
+E/m=5.0: sigma_A/M^2 ~89.682    (klassisch ~87.174)
+```
+
+und zeigt die erwartete Annaeherung an den geometrisch-optischen Grenzwert `27*pi ~84.823` bei steigender Energie. Dies ist ein Solver-/Literaturstruktur-Benchmark, kein Erdzentrum-Nachweis.
+
+Am Erd-Referenzpunkt `M_BH=1e11 kg`, `v=10.4355 km/s` liefert die publizierte Unruh-Low-Energy-Naeherung als **isolierten Einzelteilchenbenchmark** ungefaehr
+
+```text
+electron sigma ~3.46e-26 m^2
+proton   sigma ~6.34e-23 m^2
+```
+
+gegenueber einem klassischen collisionless Low-velocity-Benchmark von Groessenordnung `2.29e-22 m^2`.
+
+Wichtig: dominante `Fe-56`- und `Ni-58`-Kerne haben Grundzustandspin `0+`; solange sie kohärent bleiben, ist fuer sie ein skalares/Klein-Gordon-artiges Composite-Capture-Modell statt des Spin-1/2-Dirac-Solvers erforderlich. Unterschiedliche Elektronen-/Ionen-Capture-Raten muessen zudem durch elektrostatisches Ladungsfeedback gekoppelt werden.
+
+Details: [`STAGE3_69A_QUANTUM_WAVE_CAPTURE.md`](STAGE3_69A_QUANTUM_WAVE_CAPTURE.md) und [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md).
+
 ## Formation
 
 Formation wurde separat getestet.
@@ -123,14 +162,14 @@ cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunftsmechanismus nic
 
 Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
 
-## Endstatus Stage 3.68 / 3.68E
+## Endstatus Stage 3.68 / 3.68E / 3.69A-1
 
 | Bereich | H+ Standard-Hawking | H0 ohne Hawking |
 |---|---|---|
 | starke Zentralmassenvariante | FAIL | FAIL |
 | kleiner smooth Erdbranch | kein eigener Erdstruktur-Ausschluss | kein eigener Erdstruktur-Ausschluss |
 | Super-K / Hawking-Neutrinos | **FAIL im Projekt-Reinterpretationstest** | nicht anwendbar |
-| Akkretion / Waerme | gekoppelte H+-Probleme | exakte Netto-Rate OPEN; Quantum/Wave-Capture ausstehend |
+| Akkretion / Waerme | gekoppelte H+-Probleme | isoliertes Dirac-Capture-Teilmodul teilweise geloest; exakte dichte Netto-Rate OPEN |
 | Seismik | kein positiver Nachweis | direkter Mikrobereich nicht aufloesbar; makroskopische Kopplung OPEN |
 | spaetere Earth-Capture-Formation | FAIL | FAIL |
 | Standard-Formation/Delivery | stark negativ | stark negativ |
@@ -142,7 +181,8 @@ Formation ist damit der groesste negative Punkt des H0-Gesamtmodells.
 ```text
 H+ Standard-Hawking: FAIL im getesteten Modell.
 H0 als heutige versteckte Zentralmasse: OPEN / durch bisherige Erdtests nicht ausgeschlossen.
-H0 exakte Netto-Akkretionsrate: OPEN; Quantum/Wave-Capture nicht geloest.
+H0 isolierte Spin-1/2-Wave-Capture: numerisch teilweise geloest/benchmarkiert.
+H0 exakte Dense-Matter-Netto-Akkretionsrate: OPEN.
 H0 fundamentale Begruendung fuer kein Hawking: OPEN.
 H0 Formation: stark negativ / kein Standardweg gefunden.
 Empirischer Nachweis: keiner.
@@ -150,18 +190,22 @@ Empirischer Nachweis: keiner.
 
 ## Verbleibende Validierungsprotokolle
 
-Die zwei Endstufen sind in V1.5 formal definiert, aber **nicht durchgefuehrt**:
+Die zwei Endstufen bleiben als Gesamtstufen offen:
 
-1. **Stage 3.69 – High-Fidelity Multiphysics:** verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/Quantum-Wave-Capture/GR-Horizon-Sink-Architektur; erster realistischer Meilenstein ist ein reproduzierbarer 1-D/2-D-Prototyp.
-2. **Stage 3.70 – Experimental H0 Falsification:** dedizierter Real-Data-/Likelihood-Test einer erst aus Stage 3.69 abgeleiteten Signatur. Seismik wird nur dann priorisiert, wenn eine makroskopisch gekoppelte Struktur vorhergesagt wird.
+1. **Stage 3.69 – High-Fidelity Multiphysics:** Full-Stack **nicht durchgefuehrt**. Ein Teilmodul (`3.69A/3.69A-1`, Quantum/Dirac-Capture) ist inzwischen teilweise implementiert und getestet. Offen bleiben insbesondere Dense-Matter-Komposition, coherent Fe/Ni scalar/composite capture, Ladungsfeedback, Transport und die selbstkonsistente Netto-`Mdot`-Closure.
+2. **Stage 3.70 – Experimental H0 Falsification:** **nicht durchgefuehrt**; dedizierter Real-Data-/Likelihood-Test einer erst aus dem vollstaendigen Stage-3.69-Output abgeleiteten Signatur.
 
 Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md).
 
 ## Dateien
 
-- [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) - Stage 3.69/3.70, definiert aber nicht durchgefuehrt.
+- [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) - Stage 3.69/3.70 Gesamtprotokolle.
+- [`STAGE3_69A_QUANTUM_WAVE_CAPTURE.md`](STAGE3_69A_QUANTUM_WAVE_CAPTURE.md) - Regimeklassifikation fuer Quantum/Wave-Capture.
+- [`STAGE3_69A1_DIRAC_PROTOTYPE.md`](STAGE3_69A1_DIRAC_PROTOTYPE.md) - Schwarzschild-Dirac-Teilsolver und Matching-Benchmarks.
+- [`stage3_69a_quantum_capture_regime.py`](stage3_69a_quantum_capture_regime.py) - reproduzierbarer Regimecheck.
+- [`stage3_69a1_dirac_prototype.py`](stage3_69a1_dirac_prototype.py) - reproduzierbarer Dirac-/Matching-Prototyp.
 - [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md) - technische Integration externen Fachfeedbacks.
-- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - Endmatrix der tatsaechlich bearbeiteten internen Stages bis 3.68.
+- [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md) - Endmatrix der internen Stages bis 3.68.
 - [`PUBLIC_UPDATE_V1_5.md`](PUBLIC_UPDATE_V1_5.md) - Definition der verbleibenden Endtests.
 - [`PUBLIC_UPDATE_V1_4.md`](PUBLIC_UPDATE_V1_4.md) - Abschlusszusammenfassung Stage 3.68.
 - [`THEORIE.md`](THEORIE.md) - aktueller Theorierahmen.
@@ -179,10 +223,11 @@ Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_7
 - Dziewonski, A. M. & Anderson, D. L. (1981), *Preliminary Reference Earth Model*.
 - Davies, J. H. & Davies, D. R. (2010), *Earth's surface heat flux*, `47 +/- 2 TW`.
 - Doran, C., Lasenby, A., Dolan, S. & Hinder, I. (2005), *Fermion absorption cross section of a Schwarzschild black hole*, arXiv:gr-qc/0503019.
+- Dolan, S., Doran, C. & Lasenby, A. (2006), *Fermion scattering by a Schwarzschild black hole*, arXiv:gr-qc/0605031.
 - Super-Kamiokande Collaboration, arXiv:2305.05135, Tabelle 2.
 - Arbey & Auffinger, BlackHawk, arXiv:1905.04268; BlackHawk v3.0, arXiv:2606.06355.
 - Cantiello et al. (2026), *Accretion of Primordial Black Holes in Stellar Interiors*, arXiv:2606.02726.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Stages 1-3.68 bearbeitet und dokumentiert, Stage 3.68E externes Fachfeedback integriert, Stage 3.69/3.70 als Validierungsprotokolle definiert und nicht durchgefuehrt, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Stages 1-3.68 bearbeitet und dokumentiert, Stage 3.68E externes Fachfeedback integriert, Stage 3.69A/3.69A-1 als Quantum-Capture-Teilmodul teilweise durchgefuehrt, Stage 3.69 Full-Multiphysics und Stage 3.70 nicht durchgefuehrt, Rheinland-Pfalz, Deutschland.
