@@ -1,203 +1,247 @@
-# Akkretions- und Langzeitstatus - Abschluss Stage 3.68
+# Akkretions- und Langzeitstatus – V1.5
 
-**Projekt:** SL/BH-Kernhypothese Erdmodul V1.5  
-**Stand:** 26.08.2026
+**Projekt:** SL/BH-Kernhypothese Erdmodul  
+**Stand:** 26.08.2026  
+**Forschungsstand:** Materie-/Capture-Closure bis Stage 3.69D/A-8 bearbeitet; finale Netto-`Mdot` offen
 
-## 1. Aussagegrenze
+## Aussagegrenze
 
-Bondi- und Michel-Raten sind Modellkapazitaeten innerhalb ihrer Annahmen. Eine reproduzierte Akkretionsformel ist kein Nachweis eines BH im Erdzentrum. Seit Stage 3.68E werden Bondi/Michel zudem ausdruecklich nur als aeussere Supply-/Benchmarkmodelle behandelt; die finale Netto-Capture-Rate kann im kleinen-Horizont-Regime quanten-/wellenmechanisch abweichen.
+Bondi-/Michel-Raten bleiben aeussere Supply-/Kapazitaetsbenchmarks. Einzelteilchen-/Wellenquerschnitte sind innere Sink-Benchmarks. Die reale Rate muss beide ueber Transport, Recycling, Backpressure, Charge und Reaktionen koppeln.
 
-## 2. PREM-Sound-Speed-Proxy und Bondi-Skala
+```text
+Mdot_net != automatisch Mdot_Michel
+Mdot_net != automatisch p_single * Mdot_Michel
+```
 
-Die Bondi-Skala und klassische Bondi-Raten haengen kritisch von der verwendeten effektiven Schallgeschwindigkeit ab. Fuer den zentralen PREM-Proxy werden
+## Referenzskalen bei `M_BH=1e11 kg`
 
 ```text
 rho_c = 13.0885 g/cm^3
-V_P   = 11.2622 km/s
-V_S   = 3.6678 km/s
+c_eff = 10.4355 km/s
+r_B ~6.13e-8 m
+r_s ~1.49e-16 m
 ```
 
-verwendet. Daraus folgt fuer den fluidartigen Bulk-Sound-Speed-Proxy
+Historischer Michel-Supply-Benchmark:
 
 ```text
-c_eff = sqrt(V_P^2 - 4/3 V_S^2)
-      = 10.4355 km/s
-      ~ 10.44 km/s.
+Mdot_Michel ~1.47e-8 ... 1.46e-7 kg/s
+             ~0.46 ... 4.61 kg/year.
 ```
 
-Damit gilt bei `M_BH=1e11 kg` grob
+## Wave-Sink-Ergebnisse
+
+### Protonen
 
 ```text
-r_B = G M_BH / c_eff^2 ~ 61 nm.
+neutral Earth-speed proton @1e11 kg:
+sigma_p ~2.174e-22 m^2
+~0.9503 sigma_classical
 ```
 
-`c_eff` ist ein aeusserer PREM-/Supply-Proxy und keine mikroskopische Dispersionsrelation der tiefen Capture-Zone.
+Keine starke Protonen-Wellenunterdrueckung.
 
-## 3. Michel-Benchmark
-
-Der relativistische Michel-Solver bestand den analytischen `Gamma=2`-Selfcheck. Fuer den historischen `M=1e16 kg`-Benchmark ergab die getestete phaenomenologische condensed-to-degenerate EOS
+Charged-Proton-Subtest:
 
 ```text
-Mdot_Michel ~147 ... 1460 kg/s.
+Q=0 e      -> ~0.949 classical
+Q=3.67 e   -> ~0.889
+Q=10 e     -> ~0.765
+Q=24.18 e  -> ~0.517
 ```
 
-Mit der verwendeten `Mdot proportional M^2`-Skalierung:
+Charge-Feedback ist relevant, aber im getesteten Bereich kein Orders-of-Magnitude-Protonenstopper.
+
+### Fe/Ni
+
+`Fe-56`/`Ni-58` sind `0+`; korrekter erster Composite-Proxy ist Klein-Gordon/scalar.
 
 ```text
-M=1e10 kg: ~1.47e-10 ... 1.46e-9 kg/s
-M=1e11 kg: ~1.47e-8  ... 1.46e-7 kg/s
-M=2e11 kg: ~5.88e-8  ... 5.84e-7 kg/s
-M=5e11 kg: ~3.68e-7  ... 3.65e-6 kg/s
+Fe-56 @1e11 kg: ~0.99754 classical
+Ni-58 @1e11 kg: ~0.99646 classical
 ```
 
-Diese Werte sind Supply-/Michel-Benchmarks, keine gemessenen oder finalen Netto-Capture-Raten.
+Keine grosse kohärente Fe/Ni-Wellenunterdrueckung gefunden.
 
-## 4. H+ versus H0
+## Screening
 
-### H+
-
-Standard-Hawking ist nicht mehr als moeglicher Akkretions-Balance-Retter zu behandeln. Nach der Greybody-/Super-K-Haertung faellt der relevante H+-Branch bereits am Neutrinotest.
-
-### H0
-
-Fuer H0 entfaellt Hawking-Strahlung definitionsgemaess. Der Akkretionsaudit muss deshalb allein durch Materietransport, Capture, Langzeitwachstum und Waerme bestanden werden.
-
-## 5. Yield und plastischer Supply
-
-Aktuelle dynamische Festigkeitsdaten von Eisen nahe inner-core-artigen Bedingungen zeigen, dass ein statischer starrer Kaefig keine robuste Near-Zone-Loesung ist. Der BH-induzierte Stress kann die verwendeten Yield-Skalen in der tiefen Zone uebersteigen.
+Dense-Fe Elektronenscreening liegt im reduzierten freien-Elektronenproxy auf atomaren/sub-nm Skalen:
 
 ```text
-statische Solid-Cage-Loesung: kein robuster Blocker.
+~few 1e-11 ... 1e-10 m << r_B.
 ```
 
-## 6. Rotation
+Daher ist eine kleine BH-Nettoladung lokal wichtig, aber kein ungescreenter Coulomb-Blocker ueber die gesamte `r_B`-Supply-Zone.
 
-Die fuer die Michel-Supply-Raten erforderlichen Winkelimpuls-Torques sind klein. Ein pauschales Argument
+## Single-pass versus Recycling
+
+Direkter Hintergrund-Single-pass-Proxy:
 
 ```text
-Erdrotation -> Circularization -> Michel blockiert
+Mdot_single ~3.1e-14 kg/s
 ```
 
-wurde deshalb zurueckgezogen.
+Luecke zum Michel-Supply:
 
 ```text
-Rotation als generischer Blocker: FAIL.
+factor ~4.7e5 ... 4.7e6.
 ```
 
-## 7. Radialer Supply
+Diese Luecke ist **kein** nachgewiesener Suppressionsfaktor.
 
-Ein bewusst pessimistischer Bruecken-Sensitivity-Test zwischen geophysikalischer Rheologie und Hochraten-Daten fand keinen Radius, an dem die Michel-Supply zwingend scheitern muss.
+Fuer repeated encounters:
 
 ```text
-voller Michel-Supply als aeussere Kapazitaet: plausibel, aber nicht bewiesen.
-exakte Rheologie: OPEN.
+chi_capture = p/(p+e)
 ```
 
-## 8. Kinetischer Uebergang
+mit Einzelpass-Capture `p` und permanentem Escape `e`.
 
-Knudsen-/Kollisionsproxies verschieben den kinetischen Uebergang in eine extrem kleine Zone. Eine naive Multiplikation der Michel-Rate mit einer einmaligen geometrischen Capture-Cone-Fraktion wurde spaeter zurueckgezogen, weil nicht sofort eingefangene Partikel in der kollisionalen Umgebung recycelt werden koennen.
+Ohne permanenten Escape kann ein sehr kleines `p` durch Recycling zu hoher eventual capture fuehren. Eine Netto-Unterdrueckung nahe dem Single-pass-Wert erfordert dagegen fast vollstaendigen permanenten Escape der Misses.
 
-## 9. Loss Cone und Reservoir
+## Kollisionalitaet – A7-Korrektur
 
-Der reduzierte Loss-Cone-Test deutet auf ein **full-loss-cone**-Regime statt auf einen leeren Loss Cone. Ein Reservoir-/Fokker-Planck-Closure benoetigt nur lokale Dichteverstaerkung, um die innere Sink-Kapazitaet an den aeusseren Supply anzupassen.
+Eine fruehere A6-Sensitivitaet `r_coll~lambda_geom` wurde korrigiert.
+
+Strong-coupling/geometrischer Branch:
 
 ```text
-permanenter 1e-4-One-pass-Suppressionsfaktor: zurueckgezogen.
-exakte gekoppelte kinetische Loesung: OPEN.
+rho~r^-3/2
+lambda_geom~r^3/2
+Kn~r^1/2
 ```
 
-## 10. Quantum/Wave-Capture – neuer offener Pflichtblock
+=> Kn sinkt nach innen; kein automatischer collisionless transition.
 
-Bei `M_BH ~ 1e11 kg` liegt
+Weak-Coulomb/Spitzer:
 
 ```text
-r_s ~ 1.5e-16 m.
+lambda_C~T^2/n
+Kn_C~r^-3/2
 ```
 
-Damit ist nicht garantiert, dass der geometrisch-optische bzw. klassische Teilchengrenzfall bis zum Horizont gilt. Wenn relevante de-Broglie-/Compton-/Streuskalen groesser oder vergleichbar zur Horizontskala sind, muessen Absorptionsquerschnitte quanten-/wellenmechanisch bestimmt werden.
+=> collisionless transition moeglich, aber nur falls die Materie tatsaechlich `Gamma<<1` erreicht.
+
+## Backpressure-PDE
+
+Ein eigener sphärischer 1-D-Bondi-Euler-Prototyp reproduziert den analytischen transsonischen Massenfluss auf Prozentniveau.
+
+- absorbierender Innenrand: stationaerer Bondi-Flux bleibt erhalten;
+- reflektierender Innenrand: Druckaufbau + outward shock.
+
+Daraus folgt:
 
 ```text
-Bondi/Michel -> aeusserer Supply-Benchmark
-kinetische Zone -> Phasenraumzufuhr
-Quantum/Wave-Capture -> tatsaechliche Absorptionswahrscheinlichkeit
-GR-Horizon-Sink -> innere Randbedingung
+sonic shielding != Schutz gegen langfristiges Massestauen.
 ```
 
-Die finale H0-Netto-Akkretionsrate ist daher bis zur Kopplung dieses Blocks **OPEN**.
+Ein echter reflektierender/Backpressure-Mechanismus kann Supply reduzieren; Recycling ohne permanenten Escape ist physikalisch ein anderer Grenzfall.
 
-## 11. MeV-/QED-/Strahlungsfeedback
+## A8 – Strong Coupling und Weak-Reaction-Zeitskalen
 
-Der viriale Ionen-Energiescale darf nicht automatisch als einthermische Elektronen-/Photonentemperatur interpretiert werden. Pair- und Nuklearprozesse koennen relevant werden, ihre Gleichgewichtseinstellung ist in der extrem schnellen Mikrozone aber nicht garantiert.
-
-Selbst die extreme Obergrenze, die gesamte `Mdot c^2`-Leistung als outward radiation behandelt, bleibt im untersuchten kleinen Massenbereich unter einer Fe-artigen Eddington-Skala. Eine 2026 publizierte sphaerische PBH-Akkretionsstudie findet zudem fuer kleine PBHs ein Hot-Bondi-Regime ohne generischen radiativen Stopp (arXiv:2606.02726).
+Reduzierter inward-Branch:
 
 ```text
-radiativer/QED-Stopp: kein robuster Blocker gefunden.
-exakte MeV-Mikrophysik: OPEN.
+rho~x^-3/2
+T~x^-1
+Gamma_i~x^1/2
+Kn_geom~x^1/2
 ```
 
-## 12. Langzeitwachstum
-
-Bei rueckwaertiger Integration eines `dM/dt=kM^2`-Stressmodells muss zwischen **heutiger Masse** und **Anfangsmasse** unterschieden werden. Eine heutige Masse von z.B. `5e11 kg` bedeutet nicht automatisch einen vergangenen Runaway; die Anfangsmasse kann entsprechend kleiner gewesen sein.
-
-Im getesteten kleinen H0-Bereich bleibt der ueber 4.54 Gyr akkretierte Anteil der gesamten Erdmasse global winzig, sofern die verwendete Supply-/Capture-Rate in dieser Groessenordnung liegt.
-
-## 13. Globaler Waerme-Sanity-Check
-
-Als konservative globale Vergleichsskala wird der terrestrische Oberflaechen-Waermefluss `~47 +/- 2 TW` verwendet (Davies & Davies 2010).
-
-Fuer
+EC-Energieschwellen im freien Fermi-Proxy:
 
 ```text
-P_heat = eta Mdot c^2
+58Ni -> 58Co:
+Qkin~0.381 MeV
+x~1.66e-4
+r~6.84e4 r_s
+Gamma_i(Zeff=26)~203
+
+56Fe -> 56Mn:
+Qkin~3.696 MeV
+x~5.08e-6
+r~2.09e3 r_s
+Gamma_i(Zeff=26)~35.6
 ```
 
-folgt
+Der weak-Spitzer-Branch ist dort ohne expliziten EOS-/Ionisationsnachweis nicht selbstkonsistent.
+
+Publizierter schneller `56Fe`-EC-Vergleich:
 
 ```text
-Mdot_max = P_Earth/(eta c^2).
+lambda_ec~1.59e4 s^-1
+tau_ec~6.3e-5 s
 ```
+
+Lokale Reduced-Dynamik am Fe-Schwellenradius:
+
+```text
+t_dyn~4.7e-20 s
+```
+
+Damit wird eine **prompt one-pass Neutronisierung/NSE nicht gestuetzt**. Energetische Schwelle und Reaktionsgleichgewicht sind getrennte Fragen.
+
+Bei sehr langen Residence-/Recyclingzeiten koennen weak reactions wieder relevant werden.
+
+## Globaler Waerme-Sanity-Check
 
 Bei `eta=1`:
 
 ```text
-Mdot_max ~5.23e-4 kg/s
-         ~1.65e4 kg/year.
+Mdot_max aus 47 TW ~5.23e-4 kg/s.
 ```
 
-Der obere bisherige Michel-Benchmark des kleinen Branches bei `M=5e11 kg` ist
+Der obere historische kleine Michel-Benchmark bei `5e11 kg` bleibt mit etwa `3.65e-6 kg/s` deutlich darunter. Das ist nur ein globaler Vergleich; lokale Energieablagerung bleibt offen.
+
+## Was die finale Rate jetzt bestimmt
+
+Der dominante offene Block ist nicht mehr ein unbekannter isolierter Wellenquerschnitt, sondern
 
 ```text
-Mdot ~3.65e-6 kg/s
-     ~115 kg/year
-P_heat(eta=1) ~0.328 TW.
+residence/recycling time
+vs.
+permanent escape/backpressure time
++
+charge-neutrality/screening
++
+minimal Fe/Ni weak network
++
+EOS/transport
 ```
 
-Damit liegt dieser Benchmark um etwa Faktor `143` unter der globalen 47-TW-Vergleichsskala.
+Formal:
 
 ```text
-47-TW global heat sanity check:
-    kein Ausschluss des getesteten kleinen H0-Michel-Benchmarks.
+Mdot_BH = chi_transport * Mdot_supply
 ```
 
-Dies ist keine vollstaendige thermische Simulation. Lokale Energieablagerung, Transport und die reale Effizienz `eta` bleiben Stage-3.69-Outputs. Kleinere `eta` lockern die globale Massenraten-Obergrenze proportional zu `1/eta`.
+wobei `chi_transport` nicht mehr als freier Einmalfaktor behandelt werden darf.
 
-## 14. Endstatus Akkretion
+## Status
 
 ```text
-H+:
-    durch Standard-Hawking-Neutrinotest bereits FAIL; Akkretionsbalance rettet H+ nicht.
-
-H0:
-    exakte Netto-Akkretionsrate OPEN.
-    kein bisher getesteter Solid-, Rotation-, Loss-Cone- oder radiativer Mechanismus
-    liefert eine robuste vollstaendige Sperre.
-    Quantum/Wave-Capture ist als zusaetzlicher Pflichtblock noch nicht geloest.
-    reduzierte Erdalter-Massen-/Waermetests schliessen den kleinen Branch nicht aus.
+outer supply capacity: benchmarked, not final
+proton wave sink: calculated
+charged proton feedback: partially calculated
+Fe/Ni scalar wave sink: calculated, near classical
+long-range Coulomb blocking: not supported by screening proxy
+single-pass suppression as net Mdot: rejected
+strong-coupling inward branch: reduced self-consistent proxy
+backpressure suppression: demonstrated as reflecting PDE extreme
+prompt weak equilibrium: not supported
+final chi_transport: OPEN
+final species-resolved Mdot_BH: OPEN
 ```
 
-## 15. Stage 3.69 – ausstehende High-Fidelity-Schliessung
+## Naechster Block
 
-Die exakte H0-Akkretionsrate bleibt eine offene Multiphysikfrage. V1.5 definiert Stage 3.69 als `DEFINED / NOT PERFORMED`: GR-Hydro/Kinetik, Elastoplastik, Dense-Matter-EOS, Transport, QED-/Nuklear-Zeitskalen, Quantum/Wave-Capture und Horizon-Sink muessen in einem reproduzierbaren verschachtelten Solver gekoppelt werden. Der erste realistische Meilenstein ist ein 1-D/2-D-Prototyp.
+```text
+Stage 3.69E / A-9:
+residence/backpressure transport
++ charge neutrality
++ minimal Fe/Ni weak network
+-> chi_transport
+-> net Mdot_BH
+```
 
-Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md) und [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md).
+H+ und H0 bleiben parallel; diese Materieclosure ist gemeinsam, H+ besitzt zusaetzliche Hawking-Terme.
