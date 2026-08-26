@@ -2,6 +2,80 @@
 
 Dieses Changelog dokumentiert die oeffentlich sichtbaren Entwicklungsstaende des Erdmoduls.
 
+## V1.5 / Stage 3.69A-1 Quantum-Capture-Prototyp - 26.08.2026
+
+Der Quantum/Wave-Capture-Block von Stage 3.69 wurde erstmals als reales numerisches Teilmodul bearbeitet. Dies ist **keine abgeschlossene Stage 3.69**, kein experimenteller Nachweis und keine fertige Dense-Matter-Akkretionsrate.
+
+### Numerischer Fortschritt
+
+- Schwarzschild-Dirac-Radialgleichung in horizon-regulaeren Painleve-Gullstrand-Koordinaten implementiert.
+- Regulaerer `s=0`-Horizon-Branch implementiert.
+- Radialer Dirac-Strom/Wronskian als Solver-Selfcheck:
+
+```text
+alpha=0.2, u=0.5
+kappa=-1: relative drift ~3.68e-10
+kappa=+1: relative drift ~1.45e-11
+```
+
+- In/Out-Partialwellen-Matching ueber `S_kappa=A_out/A_in` implementiert.
+- Matchingradius-Konvergenz fuer `alpha=0.2`:
+
+```text
+E/m=1.5: sigma/M^2 = 123.2562, 123.2594, 123.2587
+           fuer x_match = 500, 1000, 2000
+E/m=2.0: sigma/M^2 = 103.9639, 103.9655, 103.9650
+           fuer x_match = 500, 1000, 2000
+```
+
+- Benchmarkstruktur:
+
+```text
+E/m=1.5: Dirac ~123.259 ; classical ~128.680
+E/m=2.0: Dirac ~103.965 ; classical ~103.380
+E/m=5.0: Dirac ~89.682  ; classical ~87.174
+high-energy geometric-optics target: 27*pi ~84.823
+```
+
+Das reproduziert qualitativ die in der Literatur erwarteten energieabhaengigen Unter-/Ueberschwingungen um die klassische Kurve und die Hochenergie-Annaeherung. Ein datenpunktgenauer Regressionstest gegen eine digitalisierte Publikationskurve bleibt offen.
+
+### Erd-Referenzpunkt
+
+Fuer `M_BH=1e11 kg`, `v=10.4355 km/s` liefert die publizierte Low-Energy-Einzelteilchennaeherung:
+
+```text
+electron sigma ~3.46e-26 m^2
+proton   sigma ~6.34e-23 m^2
+classical collisionless low-v proxy ~2.29e-22 m^2
+```
+
+Diese Werte sind isolierte Einzelteilchen-Benchmarks und **keine** Netto-Akkretionsrate dichter Erdkernmaterie.
+
+### Spezieskorrektur
+
+- `Fe-56` und `Ni-58` haben im Grundzustand `0+`; solange ein Kern kohärent bleibt, wird er nicht mit dem Spin-1/2-Dirac-Solver behandelt.
+- Offener Pfad: scalar/Klein-Gordon-artige Composite-Capture plus Kernstruktur/Finite-Size; bei Dissoziation Umschaltung auf Nukleonen-/Elektronenkomponenten.
+- Elektrostatisches Ladungsfeedback zwischen unterschiedlich eingefangenen geladenen Spezies bleibt Pflichtteil der Netto-Capture-Closure.
+
+Neue/aktualisierte Dateien:
+
+- `STAGE3_69A_QUANTUM_WAVE_CAPTURE.md`
+- `STAGE3_69A1_DIRAC_PROTOTYPE.md`
+- `stage3_69a_quantum_capture_regime.py`
+- `stage3_69a1_dirac_prototype.py`
+
+### Status
+
+```text
+Stage 3.69A/3.69A-1: teilweise durchgefuehrt.
+Stage 3.69 Full-Multiphysics: OPEN / NOT PERFORMED.
+Stage 3.70: NOT PERFORMED.
+H0 exakte Dense-Matter-Netto-Mdot: OPEN.
+Empirischer Nachweis: keiner.
+```
+
+---
+
 ## V1.5 / Stage 3.68E Feedback-Integration - 26.08.2026
 
 Externes Fachfeedback aus Numerical Relativity/HPC und globaler Seismologie wurde technisch ausgewertet und ohne private Mailtexte in den Modellstand integriert. Dies ist **keine neue experimentelle Validierung** und keine externe Bestaetigung der H0-Hypothese.
