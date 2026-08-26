@@ -1,10 +1,11 @@
 # Stage 3.69H / A12 – Tabulated WDM EOS/Zbar + Dissipative Transport + Shock Convergence
 
-**Status:** NEXT BLOCK / DEFINED / NOT YET CALCULATED
+**Stand:** 26.08.2026  
+**Status:** PARTIAL CALCULATED / SHOCK+TRANSPORT AUDIT DONE / TABULATED EOS+ZBAR DISSIPATIVE CLOSURE OPEN
 
 ## Ziel
 
-A12 soll die beiden wichtigsten A11-Restunsicherheiten gemeinsam angreifen:
+A12 greift die zwei wichtigsten A11-Restunsicherheiten an:
 
 ```text
 real/tabulated Fe-Ni EOS + ionization
@@ -13,96 +14,125 @@ real/tabulated Fe-Ni EOS + ionization
 -> dynamic species-aware Mdot_BH band.
 ```
 
-## Pflichtmodule
+## Bereits in A12 gerechnet
+
+- Literaturkorrektur Wang 2014 -> Sjostrom/Crockett 2018 high-pressure EOS revision;
+- Fe/FeNi-Transportanker aus outer-core QMD/first-principles Literatur;
+- Bondi-scale Reynolds-/Peclet-Massenscan `1e10...5e11 kg`;
+- `1e10 kg` Shock-Konvergenz `N=128,256,512,1024`;
+- long-domain Shock-Propagation bis `t=2 r_B/c_inf`;
+- Mass-/Energieaudit weiterhin auf Rundungsniveau.
+
+Zentrale neue Aussage:
+
+```text
+1e10 kg capacity-limited branch:
+    outward-propagating backpressure shock
+    NOT a demonstrated stationary shock-regulated Mdot.
+
+>=1e11 kg:
+    A10/A11 supply-processing branch survives the new transport-timescale audit.
+```
+
+## Pflichtmodule – Status
 
 ### 1. EOS / Ionization
 
-Mindestens tabellierte/interpolierte bzw. explizit markiert extrapolierte Felder
-
-```text
-P(rho,T)
-E(rho,T)
-Zbar(rho,T)
-mu_e(rho,T)
-```
-
-mit first-principles-Daten wo verfuegbar.
-
 Direkte Datenanker:
 
-- Fe QMD / five-phase EOS;
-- Blanchet et al. PRE 111, 015206 (2025), bis 47.2 g/cm3 und 1e9 K;
-- pressure-ionization / dense-plasma average-ionization Literatur.
+- Sjostrom & Crockett 2018 five-phase/QMD Fe EOS;
+- Blanchet et al. PRE 111, 015206 (2025), bis `47.2 g/cm3` und `1e9 K`;
+- liquid-Fe thermodynamic data/`Cp` near core conditions.
+
+```text
+P(rho,T): PARTIAL literature domain known; numerical table not yet imported
+E(rho,T): PARTIAL literature domain known; numerical table not yet imported
+Zbar(rho,T): OPEN as a reusable numerical table
+mu_e(rho,T): OPEN as a reusable numerical table
+```
+
+Keine erfundene `Zbar`-Tabelle wird eingesetzt.
 
 ### 2. Dissipative PDE-Terme
+
+Literaturgebundene Transportzahlen sind gerechnet. Physikalische
 
 ```text
 thermal conductivity
 viscosity
-ion diffusion
 electron-ion relaxation
-ion-ion relaxation
 ```
 
-sollen als explizite Energie-/Impuls-/Species-Terme eingehen.
+werden aber noch nicht direkt an die A11-Gamma-Energiegleichung gekoppelt, weil dort keine thermodynamisch konsistente physische `T(rho,e)`-Variable existiert.
+
+```text
+consistent dissipative PDE: OPEN
+```
 
 ### 3. Species / Charge
 
-Reduced advection mindestens fuer
-
 ```text
-Fe/Ni ions
-electrons
-proton/nucleon sensitivity
-Ye / charge-neutrality proxy.
+Fe/Ni/e-/p reduced advection: OPEN
+charged-electron far-field capture: OPEN
 ```
-
-Charged-electron far-field capture bleibt separat als Unsicherheitsband, falls der volle Coulomb-Matcher bis dahin nicht geloest ist.
 
 ### 4. Shock-Branch Konvergenz
 
-Besonderer Fokus `M=1e10 kg` / fast-envelope high-supply.
+Erledigt bis `N=1024` fuer den zentralen `1e10 kg` Capacity-Limit-Test.
 
-Pflicht:
+Bei `t=0.8 r_B/c_inf`:
 
 ```text
-N >= 128, 256, 512, 1024 sensitivity
-longer t_end
-shock position convergence
-inner Mdot convergence
-mass/energy residual audit.
+N=128  shock~1.269 r_B, inner mdot~2.1e-2
+N=256  shock~1.254 r_B, inner mdot~1.63e-2
+N=512  shock~1.233 r_B, inner mdot~1.12e-2
+N=1024 shock~1.229 r_B, inner mdot~6.94e-3
 ```
+
+Shock-Lage konvergiert; stationaere endliche innere `Mdot` nicht.
+
+Long-domain:
+
+```text
+t=0.8 -> rshock~1.26 r_B
+t=1.2 -> ~1.74 r_B
+t=1.6 -> ~2.22 r_B
+t=2.0 -> ~2.68 r_B
+```
+
+=> outward-propagating Backpressure, nicht stationaerer Shock.
 
 ### 5. Massenscan
 
-```text
-1e10 kg
-1e11 kg
-2e11 kg
-5e11 kg.
-```
-
-## Acceptance Criteria
-
-A12 gilt nur als numerisch geschlossen, wenn:
-
-1. EOS/Zbar-Datenquellen und Extrapolationsbereiche explizit sichtbar sind;
-2. dissipative Koeffizienten nicht als freie unbeschraenkte Faktoren eingesetzt werden;
-3. `1e10 kg` Shock-Branch-Mdot mit Gitter/Zeitschritt konvergiert oder als nichtkonvergent falsifiziert wird;
-4. `>=1e11 kg` supply-processing branch unter EOS-/Transportvariationen getestet ist;
-5. Massenerhaltung und Energieaudit dokumentiert bleiben;
-6. resultierendes `Mdot_BH` als Unsicherheitsband statt Einzelzahl ausgegeben wird;
-7. keine numerische Kompatibilitaet als experimenteller Nachweis bezeichnet wird.
-
-## Entscheidungslogik
+Transportzahlen:
 
 ```text
-if A12 keeps >=1e11 kg on stable absorbing/supply-processing branch:
-    A9-A11 matter-transport result is substantially hardened.
-
-if realistic EOS/dissipation creates sustained backpressure there:
-    Mdot must be revised downward.
-
-if 1e10 kg converges to a stable shock-regulated solution:
-    report its dynamic Mdot band rather than classifying it merely OPEN.
+M=1e10 kg: Re~32...98, Pe~8...11
+M=1e11 kg: Re~322...985, Pe~82...106
+M=2e11 kg: Re~644...1970, Pe~164...212
+M=5e11 kg: Re~1610...4924, Pe~409...531
 ```
+
+Dissipation ist relativ am wichtigsten am `1e10 kg`-Unterrand.
+
+## Acceptance Criteria – aktueller Stand
+
+1. EOS/Zbar Quellen/Extrapolation sichtbar: **PARTIAL PASS**
+2. Dissipative Koeffizienten nicht frei: **PASS fuer Audit / PDE-Einbau OPEN**
+3. `1e10 kg` Shock-Mdot konvergiert oder Nichtkonvergenz gezeigt: **PASS – stationaere Endrate nicht etabliert**
+4. `>=1e11 kg` unter Transportvariationen getestet: **PARTIAL PASS**
+5. Mass-/Energieaudit: **PASS im aktuellen Euler-PDE**
+6. Mdot als Unsicherheitsband: **OPEN fuer Full dissipative closure**
+7. keine Kompatibilitaet als Nachweis: **PASS**
+
+## Naechster Unterblock: A12b
+
+```text
+thermodynamically consistent Fe EOS table
++ T(rho,e) inversion
++ bounded Zbar(rho,T)
++ physical viscosity / conduction / e-i relaxation
++ repeat dynamic 1e10 and >=1e11 scans
+```
+
+A12 bleibt bis dahin PARTIAL; Stage 3.69 Full-Multiphysics bleibt OPEN.
