@@ -2,7 +2,7 @@
 
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Stand:** 26.08.2026  
-**Forschungsstand:** Materie-/Capture-Closure bis Stage 3.69D/A-8 bearbeitet; finale Netto-`Mdot` offen
+**Forschungsstand:** Materie-/Capture-/Transport-Closure bis Stage 3.69E/A-9 bearbeitet; first-principles Netto-`Mdot` offen
 
 ## Aussagegrenze
 
@@ -12,6 +12,8 @@ Bondi-/Michel-Raten bleiben aeussere Supply-/Kapazitaetsbenchmarks. Einzelteilch
 Mdot_net != automatisch Mdot_Michel
 Mdot_net != automatisch p_single * Mdot_Michel
 ```
+
+A9 liefert jetzt erstmals eine reduzierte Residence-/Processing-Closure zwischen diesen beiden Extremen.
 
 ## Referenzskalen bei `M_BH=1e11 kg`
 
@@ -54,7 +56,7 @@ Charge-Feedback ist relevant, aber im getesteten Bereich kein Orders-of-Magnitud
 
 ### Fe/Ni
 
-`Fe-56`/`Ni-58` sind `0+`; korrekter erster Composite-Proxy ist Klein-Gordon/scalar.
+`Fe-56`/`Ni-58` sind `0+`; erster kohärenter Composite-Proxy ist Klein-Gordon/scalar.
 
 ```text
 Fe-56 @1e11 kg: ~0.99754 classical
@@ -92,16 +94,14 @@ Diese Luecke ist **kein** nachgewiesener Suppressionsfaktor.
 Fuer repeated encounters:
 
 ```text
-chi_capture = p/(p+e)
+chi_capture = p/(p+e_perm)
 ```
 
-mit Einzelpass-Capture `p` und permanentem Escape `e`.
+mit Einzelpass-Capture `p` und permanentem Escape `e_perm`.
 
-Ohne permanenten Escape kann ein sehr kleines `p` durch Recycling zu hoher eventual capture fuehren. Eine Netto-Unterdrueckung nahe dem Single-pass-Wert erfordert dagegen fast vollstaendigen permanenten Escape der Misses.
+Ohne permanenten Escape kann ein sehr kleines `p` durch Recycling zu hoher eventual capture fuehren. Eine Netto-Unterdrueckung nahe dem Single-pass-Wert erfordert dagegen einen physikalischen dauerhaften Escape-/Backpressure-Kanal.
 
 ## Kollisionalitaet – A7-Korrektur
-
-Eine fruehere A6-Sensitivitaet `r_coll~lambda_geom` wurde korrigiert.
 
 Strong-coupling/geometrischer Branch:
 
@@ -111,7 +111,7 @@ lambda_geom~r^3/2
 Kn~r^1/2
 ```
 
-=> Kn sinkt nach innen; kein automatischer collisionless transition.
+=> `Kn` sinkt nach innen; kein automatischer collisionless transition.
 
 Weak-Coulomb/Spitzer:
 
@@ -129,36 +129,23 @@ Ein eigener sphärischer 1-D-Bondi-Euler-Prototyp reproduziert den analytischen 
 - absorbierender Innenrand: stationaerer Bondi-Flux bleibt erhalten;
 - reflektierender Innenrand: Druckaufbau + outward shock.
 
-Daraus folgt:
-
 ```text
 sonic shielding != Schutz gegen langfristiges Massestauen.
 ```
 
-Ein echter reflektierender/Backpressure-Mechanismus kann Supply reduzieren; Recycling ohne permanenten Escape ist physikalisch ein anderer Grenzfall.
+Ein echter reflektierender/Backpressure-Mechanismus kann Supply reduzieren; Recycling mit endlicher Capture ist physikalisch ein anderer Grenzfall.
 
 ## A8 – Strong Coupling und Weak-Reaction-Zeitskalen
-
-Reduzierter inward-Branch:
-
-```text
-rho~x^-3/2
-T~x^-1
-Gamma_i~x^1/2
-Kn_geom~x^1/2
-```
 
 EC-Energieschwellen im freien Fermi-Proxy:
 
 ```text
 58Ni -> 58Co:
-Qkin~0.381 MeV
 x~1.66e-4
 r~6.84e4 r_s
 Gamma_i(Zeff=26)~203
 
 56Fe -> 56Mn:
-Qkin~3.696 MeV
 x~5.08e-6
 r~2.09e3 r_s
 Gamma_i(Zeff=26)~35.6
@@ -169,21 +156,218 @@ Der weak-Spitzer-Branch ist dort ohne expliziten EOS-/Ionisationsnachweis nicht 
 Publizierter schneller `56Fe`-EC-Vergleich:
 
 ```text
-lambda_ec~1.59e4 s^-1
-tau_ec~6.3e-5 s
+lambda_ec~1.5916e4 s^-1
+tau_ec~6.28e-5 s.
 ```
 
-Lokale Reduced-Dynamik am Fe-Schwellenradius:
+Energetische Schwelle und Reaktionsgleichgewicht sind getrennte Fragen.
+
+# A9 – Residence / Processing / Backpressure Closure
+
+## A9.1 Exact repeated-encounter closure
 
 ```text
-t_dyn~4.7e-20 s
+p       = capture per encounter
+e_perm  = permanent escape per encounter
+recycle = 1-p-e_perm
+
+chi_capture = p/(p+e_perm).
 ```
 
-Damit wird eine **prompt one-pass Neutronisierung/NSE nicht gestuetzt**. Energetische Schwelle und Reaktionsgleichgewicht sind getrennte Fragen.
+Bei `e_perm~0`:
 
-Bei sehr langen Residence-/Recyclingzeiten koennen weak reactions wieder relevant werden.
+```text
+t_res = t_cycle/p.
+```
 
-## Globaler Waerme-Sanity-Check
+## A9.2 Strong-coupling permanent escape
+
+Im A7 strong-coupling/geometrischen Sensitivitaetsbranch
+
+```text
+lambda=lambda_0 x^3/2
+```
+
+ist der collisional optical depth bis `r_B`
+
+```text
+tau_coll = 2 r_B/lambda_0 [x_t^-1/2 - 1].
+```
+
+Die instantane Maxwell-Fraktion oberhalb `v_esc` ist im Scaling etwa `0.343`, aber permanenter **ballistischer** Escape wird durch
+
+```text
+exp(-tau_coll)
+```
+
+unterdrueckt.
+
+An den getesteten atomaren Transition-Skalen gilt typischerweise
+
+```text
+tau_coll ~1e3 ... >1e5.
+```
+
+Damit ist `e_perm` im Reduced Strong-Coupling-Branch praktisch null und `chi_capture~1`.
+
+Der collisionless Gegenbranch (`e_perm~0.343`) liefert dagegen `chi~1e-6...1e-4`; genau dieser Kontrast zeigt, dass first-principles WDM-Transport der entscheidende Discriminator ist.
+
+## A9.3 Reservoir processing capacity
+
+Fuer
+
+```text
+rho=rho_0 x^-3/2
+```
+
+ist die Reduced Reservoir-Masse zwischen `r_t` und `r_B`
+
+```text
+M_res=(8 pi/3) rho_0 r_B^3 [1-x_t^3/2].
+```
+
+Processing capacity:
+
+```text
+Mdot_capacity=M_res/t_res.
+```
+
+Definiert wird
+
+```text
+Xi_required=Mdot_supply/Mdot_capacity.
+```
+
+```text
+Xi<=1:
+    vorhandenes Reduced Reservoir kann den Supply ohne zusaetzlichen Capture-Pile-up verarbeiten.
+
+Xi>1:
+    Backpressure/Pile-up/Supply-Rueckkopplung wird relevant; exakte Mdot bleibt offen.
+```
+
+## A9.4 `M=1e11 kg`
+
+| `r_t` | `p` | `t_res` [s] | `Mdot_capacity` [kg/s] | `Xi_low` | `Xi_high` |
+|---:|---:|---:|---:|---:|---:|
+| `3e-11 m` | `3.30e-5` | `1.36e-12` | `1.85e-5` | `7.94e-4` | `7.88e-3` |
+| `1e-10 m` | `9.90e-6` | `2.76e-11` | `9.13e-7` | `1.61e-2` | `1.60e-1` |
+| `2e-10 m` | `4.95e-6` | `1.56e-10` | `1.61e-7` | `9.11e-2` | `9.05e-1` |
+
+**Befund:** Der gesamte historische Supply-Benchmark ist fuer alle drei getesteten Transition-Skalen im Reduced Strong-Coupling/Recycling-Branch processing-capable.
+
+Damit wird bei `1e11 kg` eine permanente `1e5...1e6`-Gesamtunterdrueckung durch den kleinen Einmal-Loss-Cone nicht gestuetzt, solange die aktuelle strong-coupling-Recyclingclosure gilt.
+
+## A9.5 Massenscan
+
+```text
+M=1e10 kg:
+    r_t=3e-11 m -> Xi_low~0.25, Xi_high~2.49
+    r_t=1e-10 m -> Xi_low~5.10, Xi_high~50.7
+    r_t=2e-10 m -> Xi_low~29, Xi_high~288
+    => BACKPRESSURE-SENSITIVE / OPEN
+
+M=1e11 kg:
+    Xi_high~0.0079 ... 0.905
+    => supply-processing capable
+
+M=2e11 kg:
+    Xi_high~0.00139 ... 0.160
+    => clear capacity reserve
+
+M=5e11 kg:
+    Xi_high~1.4e-4 ... 1.62e-2
+    => very large capacity reserve.
+```
+
+## A9.6 Kritischer Reduced-Transport-Uebergang
+
+```text
+xcrit low supply  ~8.507e-3
+xcrit high supply ~3.397e-3.
+```
+
+Bei `1e11 kg`:
+
+```text
+rcrit,low  ~5.21e-10 m
+rcrit,high ~2.08e-10 m.
+```
+
+Fuer feste physikalische Transition-Skalen:
+
+| `r_t` | `Mcrit` low | `Mcrit` high |
+|---:|---:|---:|
+| `3e-11 m` | `5.75e9 kg` | `1.44e10 kg` |
+| `1e-10 m` | `1.92e10 kg` | `4.80e10 kg` |
+| `2e-10 m` | `3.84e10 kg` | `9.61e10 kg` |
+
+Die genaue Schwelle ist transport-/EOS-abhaengig; sie ist keine Fundamentalkonstante.
+
+## A9.7 Charge-neutrality timescale
+
+Elektronen-Plasmaresponse:
+
+```text
+omega_pe=sqrt(n_e e^2/(m_e epsilon_0))
+t_plasma=1/omega_pe.
+```
+
+Beispiel `M=1e11 kg, r_t=1e-10 m`:
+
+```text
+t_plasma/t_res~2.7e-9.
+```
+
+Bulk-quasineutraler Transport ist damit im Reduced Model gut motiviert. Der diskrete BH-Charge-State bleibt trotzdem nicht exakt geloest.
+
+## A9.8 Minimal Weak-Network Gate
+
+Bei `M=1e11 kg`:
+
+```text
+Ni-threshold:
+t_res~9.13e-14 s
+lambda_required~1.10e13 s^-1
+
+Fe-threshold:
+t_res~1.50e-17 s
+lambda_required~6.69e16 s^-1.
+```
+
+Der publizierte `56Fe`-Vergleichswert
+
+```text
+lambda_ec~1.5916e4 s^-1
+```
+
+liegt viele Groessenordnungen darunter.
+
+```text
+prompt weak equilibrium / one-pass neutronization:
+NOT SUPPORTED in the fast supply-processing branch.
+```
+
+Ein langlebiger makroskopischer Backpressure-Stau kann Residence-Zeiten vergroessern und Weak-Reaktionen wieder relevant machen; das betrifft vor allem den offenen `1e10 kg`-Unterrand.
+
+## Reduced Netto-Mdot consequence
+
+Fuer `M>=~1e11 kg` im aktuellen Strong-Coupling/Recycling Reduced Branch gilt
+
+```text
+chi_transport~1.
+```
+
+Damit am `1e11 kg`-Referenzpunkt:
+
+```text
+Mdot_BH,reduced ~1.47e-8 ... 1.46e-7 kg/s
+                ~0.46 ... 4.61 kg/year.
+```
+
+Dies ist **keine Messung und keine first-principles WDM-Endrate**. Es ist die Konsequenz der aktuell miteinander konsistenten Reduced Closures A5-A9.
+
+## Globaler Waerme-/Langzeit-Kontext
 
 Bei `eta=1`:
 
@@ -191,33 +375,11 @@ Bei `eta=1`:
 Mdot_max aus 47 TW ~5.23e-4 kg/s.
 ```
 
-Der obere historische kleine Michel-Benchmark bei `5e11 kg` bleibt mit etwa `3.65e-6 kg/s` deutlich darunter. Das ist nur ein globaler Vergleich; lokale Energieablagerung bleibt offen.
+Der obere historische kleine Michel-Benchmark bei `5e11 kg` bleibt mit etwa `3.65e-6 kg/s` deutlich darunter. Die frueheren Erdalter-/Massen-Stressproxies hatten die Supply-Skalen ebenfalls nicht automatisch ausgeschlossen.
 
-## Was die finale Rate jetzt bestimmt
+Damit falsifiziert die A9-Nahe-Supply-Rate H0 im bisherigen reduzierten Langzeit-/Waermerahmen nicht automatisch. Lokale Energieablagerung und echte Effizienz bleiben Full-Stack-Fragen.
 
-Der dominante offene Block ist nicht mehr ein unbekannter isolierter Wellenquerschnitt, sondern
-
-```text
-residence/recycling time
-vs.
-permanent escape/backpressure time
-+
-charge-neutrality/screening
-+
-minimal Fe/Ni weak network
-+
-EOS/transport
-```
-
-Formal:
-
-```text
-Mdot_BH = chi_transport * Mdot_supply
-```
-
-wobei `chi_transport` nicht mehr als freier Einmalfaktor behandelt werden darf.
-
-## Status
+## Aktueller Status
 
 ```text
 outer supply capacity: benchmarked, not final
@@ -228,20 +390,24 @@ long-range Coulomb blocking: not supported by screening proxy
 single-pass suppression as net Mdot: rejected
 strong-coupling inward branch: reduced self-consistent proxy
 backpressure suppression: demonstrated as reflecting PDE extreme
-prompt weak equilibrium: not supported
-final chi_transport: OPEN
+A9 repeated-encounter/processing closure: calculated
+M>=~1e11 strong-coupling branch: supply-processing capable
+M=1e10: backpressure-sensitive / OPEN
+prompt weak equilibrium: not supported in fast branch
+final first-principles chi_transport: OPEN
 final species-resolved Mdot_BH: OPEN
 ```
 
 ## Naechster Block
 
 ```text
-Stage 3.69E / A-9:
-residence/backpressure transport
-+ charge neutrality
-+ minimal Fe/Ni weak network
--> chi_transport
--> net Mdot_BH
+Stage 3.69F / A-10:
+first-principles-informed WDM transport
++ time-dependent hydro/kinetic sink coupling
++ A4/A5 absorptive inner boundary
+-> replace geometric mean-free-path proxy
+-> determine e_perm(r,E,species)
+-> final reduced species-resolved Mdot band.
 ```
 
 H+ und H0 bleiben parallel; diese Materieclosure ist gemeinsam, H+ besitzt zusaetzliche Hawking-Terme.
