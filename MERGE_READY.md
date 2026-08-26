@@ -1,0 +1,1 @@
+A4-A8 synchronization branch prepared for merge. See README.md, VALIDATION_PROTOCOL_STAGE3_69_70.md and PUBLIC_UPDATE_V1_6_STAGE3_69_A4_A8.md.
