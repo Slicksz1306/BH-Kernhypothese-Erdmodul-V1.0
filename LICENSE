@@ -1,20 +1,70 @@
 Copyright (c) 2026 Daniel Marcel Schlicksupp
-All rights reserved.
 
-This repository and its original textual and graphical contents are publicly
-accessible for reading, scientific discussion, citation, and review. Public
-access does not grant permission to reproduce, redistribute, modify, publish,
-sublicense, or commercially exploit the copyrighted work except where such use
-is permitted by applicable law or by prior written permission from the
-copyright holder.
+# Open-science dual licensing
 
-Scientific citation, linking to the public repository, and quotation within the
-limits of applicable copyright law remain permitted.
+This repository uses two licenses so that the work can be checked, cited,
+reproduced and extended scientifically while preserving clear attribution.
 
-The archived publication file
-`BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` is preserved as the original
-V1.0 publication record. Its integrity record is documented separately in
-`SHA256SUMS.txt`.
+## 1. Scientific text, documentation and original graphics — CC BY 4.0
 
-For permission requests, contact the copyright holder through the public GitHub
-repository/account associated with this work.
+Except where otherwise noted, original non-software content in this repository
+is licensed under the Creative Commons Attribution 4.0 International License
+(CC BY 4.0).
+
+CC BY 4.0 permits sharing and adaptation, including scientific and commercial
+reuse, provided that appropriate credit is given, the license is identified,
+and changes are indicated. Attribution must not imply endorsement by the
+original author.
+
+See: `LICENSE-CONTENT.md`
+Official license: https://creativecommons.org/licenses/by/4.0/
+
+Recommended attribution:
+
+Daniel Marcel Schlicksupp (2026), "SL/BH-Kernhypothese Erdmodul",
+https://github.com/Slicksz1306/SL-BH-Kernhypothese-Erdmodul,
+CC BY 4.0.
+
+## 2. Source code — MIT License
+
+Unless a source file states otherwise, original source code in this repository,
+including the Python solver/prototype files, is licensed under the MIT License.
+The copyright and permission notice must be retained in copies or substantial
+portions of the software.
+
+See: `LICENSE-CODE`
+SPDX identifier: MIT
+
+## 3. Attribution and modified versions
+
+Scientific verification, mathematical recalculation, replication, criticism
+and further development are welcome.
+
+When this project's licensed material is reused, the original authorship must
+be credited according to the applicable license. Modified/adapted versions
+must be identified as modified and must not be represented as an unchanged
+original work by Daniel Marcel Schlicksupp.
+
+See: `ATTRIBUTION.md`
+
+## 4. Scientific ideas, facts and equations
+
+These licenses govern copyrightable expression and software. They do not claim
+exclusive copyright ownership over scientific facts, natural laws, equations,
+mathematical methods, or independently developed scientific ideas. Normal
+scientific priority and citation practices remain important when this project
+is actually used as a source.
+
+## 5. Third-party material
+
+Third-party quotations, references, datasets, figures or other material retain
+their own rights and licenses. Nothing in this repository relicenses material
+that Daniel Marcel Schlicksupp does not own or have authority to license.
+
+## 6. Archived V1.0 publication record
+
+`BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` remains preserved in this
+repository as the original V1.0 publication record. Repository history and
+`SHA256SUMS.txt` document provenance/integrity. CC BY 4.0 permits adaptations
+of original project content, but altered copies must be identified as changed
+and must not be passed off as the unchanged archived original.
