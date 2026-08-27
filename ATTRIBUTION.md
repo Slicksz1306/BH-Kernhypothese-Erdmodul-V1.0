@@ -43,6 +43,20 @@ that clearly. Example:
 A modified version must not be presented as an unchanged original version by
 Daniel Marcel Schlicksupp, and attribution must not imply endorsement by him.
 
+## Offizieller Projektstand versus unabhaengige Weiterentwicklung
+
+Forks, alternative Solver, Erweiterungen und eigene Hypothesen/Theorien duerfen
+unter den geltenden Lizenzen erstellt werden. Solche Arbeiten sind jedoch
+**eigenstaendige oder abgeleitete Arbeiten**, solange sie nicht vom
+Projektinhaber in das offizielle Repository uebernommen wurden.
+
+Sie duerfen nicht als offizieller neuer Stage-, Versions- oder Release-Stand der
+**SL/BH-Kernhypothese Erdmodul** dargestellt werden, wenn sie nicht tatsaechlich
+im offiziellen Repository freigegeben wurden.
+
+Der offizielle Projektstand wird von **Daniel Marcel Schlicksupp** kontrolliert.
+Siehe `OFFICIAL_PROJECT_POLICY.md`.
+
 ## Wissenschaftliche Ideen und unabhaengige Arbeiten
 
 Copyright licenses govern the project's concrete text, graphics and software;

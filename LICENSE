@@ -47,7 +47,30 @@ original work by Daniel Marcel Schlicksupp.
 
 See: `ATTRIBUTION.md`
 
-## 4. Scientific ideas, facts and equations
+## 4. Official project governance
+
+The licenses above permit users to modify and extend **their own copies, forks
+and derivative projects** under the applicable license terms.
+
+They do not grant write access to the official repository and do not authorize
+third parties to define or represent an independent derivative as the official
+current version, Stage or release of the **SL/BH-Kernhypothese Erdmodul**.
+
+The official repository, `main` branch, releases, project stages and official
+scientific project history are maintained under the control of the original
+project author, **Daniel Marcel Schlicksupp**.
+
+External pull requests, calculations or proposed extensions remain proposals or
+independent derivatives unless and until the project owner explicitly accepts
+them into the official repository.
+
+This project-governance statement does not reduce the modification or reuse
+rights granted by CC BY 4.0 or MIT for independently maintained copies and
+derivatives.
+
+See: `OFFICIAL_PROJECT_POLICY.md` and `CONTRIBUTING.md`.
+
+## 5. Scientific ideas, facts and equations
 
 These licenses govern copyrightable expression and software. They do not claim
 exclusive copyright ownership over scientific facts, natural laws, equations,
@@ -55,13 +78,13 @@ mathematical methods, or independently developed scientific ideas. Normal
 scientific priority and citation practices remain important when this project
 is actually used as a source.
 
-## 5. Third-party material
+## 6. Third-party material
 
 Third-party quotations, references, datasets, figures or other material retain
 their own rights and licenses. Nothing in this repository relicenses material
 that Daniel Marcel Schlicksupp does not own or have authority to license.
 
-## 6. Archived V1.0 publication record
+## 7. Archived V1.0 publication record
 
 `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` remains preserved in this
 repository as the original V1.0 publication record. Repository history and
