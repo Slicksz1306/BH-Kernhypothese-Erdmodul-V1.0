@@ -1,63 +1,73 @@
 # SL/BH-Kernhypothese Erdmodul
 
-## Veroeffentlichungsangaben
+## Veröffentlichungsangaben
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller numerischer Forschungsstand:** Stage 3.69 bis A13 partiell bearbeitet; Stage 3.69 Full-Multiphysics und Stage 3.70 offen  
-**Stand:** 26.08.2026  
-**Erstveroeffentlichung Erdmodul V1.0:** 23.08.2026
+**Aktueller numerischer Forschungsstand:** Reduced/partial Stack bis A19; Stage 3.70B Real-Data-Audit partiell durchgeführt  
+**Stand:** 29.08.2026  
+**Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
-> `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unveraendert als Erstveroeffentlichungs-/Prioritaetsarchiv. Neue Tests werden in Markdown und reproduzierbaren Python-Skripten fortgeschrieben.
+> `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs-/Prioritätsarchiv. Neue Rechnungen werden versioniert in Markdown und reproduzierbaren Python-Skripten fortgeschrieben.
 
 ## Wissenschaftliche Aussagegrenze
 
-Die SL/BH-Kernhypothese Erdmodul ist ein **theoretischer Forschungsentwurf, kein experimenteller Nachweis**. Es gibt derzeit keine direkte Detektion und keine eindeutige positive Signatur eines schwarzen Lochs im Erdzentrum.
+Die **SL/BH-Kernhypothese Erdmodul** ist ein quantitativer, reproduzierbarer und falsifizierbarer **theoretischer Forschungsentwurf**. Sie ist **kein experimenteller Nachweis** und derzeit **keine etablierte physikalische Theorie**.
+
+Es gibt aktuell:
+
+```text
+keine direkte Detektion eines Erdzentrum-BH
+keine eindeutige positive H0-Signatur
+mehrere bestandene interne Solver-/Regressionstests
+mehrere korrigierte/verwarfene frühere Annahmen
+mehrere noch offene physische Closures.
+```
+
+## Branches
 
 ```text
 H+ = mit Standard-Hawking-Strahlung
 H0 = ohne Hawking-Strahlung
 ```
 
-Beide Branches bleiben getrennt und parallel.
-
-## Branchstatus
+Die beiden Branches werden strikt getrennt.
 
 ### H+
 
-Im getesteten Projektmodell liegt der Standard-Hawking-H+-Bereich etwa bei
+Der Projekt-Hawking/Greybody-Proxy im Band `25.29...31.29 MeV` liegt bei ungefähr
 
 ```text
-M_BH ~4.82e11 ... 5.49e11 kg.
+0.098 ... 0.122 cm^-2 s^-1 MeV^-1.
 ```
 
-Der Projekt-Greybody-/Neutrinofluss ueberschreitet im verwendeten SK-IV-Reinterpretationsband den publizierten Grenzwert.
+Die 2026 SK-Gd-Publikation listet im selben Band:
 
 ```text
-H+ Standard-Hawking:
-FAIL im getesteten Projekt-Reinterpretationsmodell.
+SK-IV observed 90% CL        0.04 cm^-2 s^-1 MeV^-1
+SK-VI+VII NN observed        0.13
+SK-VI+VII BDT observed       0.16.
 ```
 
-Dies ist keine offizielle Super-K-Erdzentrum-BH-Exklusion.
+Damit bleibt H+ in der **projektinternen Reinterpretation gegen den stärksten publizierten SK-IV-Binconstraint FAIL**. Die standalone SK-Gd-2026-Daten allein sind in diesem Bin schwächer und würden den Projektproxy nicht ausschließen.
+
+Dies ist **keine offizielle Super-K-Erdzentrum-BH-Exklusion**.
 
 ### H0
 
 ```text
-P_Hawking = 0.
+P_Hawking = 0
+H0 = OPEN / nicht nachgewiesen.
 ```
 
-H0 ist von Hawking-basierten Emissionsgrenzen getrennt, muss aber Materieakkretion, Langzeitstabilitaet, Formation und Real-Data-Tests bestehen.
+H0 ist von Hawking-Emissionsgrenzen getrennt, muss aber Full-WDM-Akkretion, Formation und eine eindeutige Real-Data-Signatur bestehen.
 
-```text
-H0: OPEN / nicht nachgewiesen.
-```
+# Aktiver Erdbranch
 
-# Aktiver kleiner Erdbranch
+Die starke Zentralmassen-/Hard-Cavity-Variante ist verworfen. Aktiv ist nur der kleine **smooth-compensated Branch**.
 
-Die starke Zentralmassen-/Hard-Cavity-Variante ist verworfen. Aktiv bleibt der kleine smooth-compensated Branch.
-
-PREM-Referenz am Zentrum:
+PREM-Zentrumsreferenz:
 
 ```text
 rho_c      ~13.08848 g/cm3
@@ -74,268 +84,258 @@ r_B ~6.13e-8 m
 r_s ~1.49e-16 m.
 ```
 
-Die bisherigen reduzierten Makro-/PREM-/Seismiktests liefern fuer diesen kleinen Branch keinen robusten eigenen Ausschluss. Das ist **Modellkompatibilitaet innerhalb der getesteten Proxies, keine Evidenz fuer einen BH**.
+Die bisherigen reduzierten Makrotests liefern für diesen kleinen Branch keinen eigenen robusten Struktur-Ausschluss. Das ist **Modellkompatibilität innerhalb der getesteten Proxies, keine Evidenz für einen BH**.
 
-# Stage 3.69 – Materie-/Capture-/Transportstack
+# Numerischer Stack – aktueller Kurzstand
 
-## A1/A3 – Schwarzschild-Dirac Protonen
-
-Bei Earth-speed `10.4355 km/s` und `M=1e11 kg`:
+## A1-A5 Wave/Capture
 
 ```text
-sigma_p ~2.174e-22 m2
-sigma_p/sigma_classical ~0.9503.
-```
-
-Keine grosse Protonen-Wellenunterdrueckung.
-
-## A4 – Charged Proton Capture
-
-Bei `M=1e11 kg`:
-
-```text
-Q=0 e      -> ~0.949 classical
-Q=3.67 e   -> ~0.889
-Q=10 e     -> ~0.765
-Q=24.18 e  -> ~0.517.
-```
-
-Charged-electron long-range Coulomb matching bleibt OPEN.
-
-## A5 – Fe/Ni `0+` Composite-Capture
-
-```text
-Fe-56 @1e11 kg ~0.99754 classical
-Ni-58 @1e11 kg ~0.99646 classical.
-```
-
-```text
+Schwarzschild-Dirac Regressionen: PASS
+Proton @1e11 kg: ~0.9503 classical
+Fe-56 @1e11 kg: ~0.99754 classical
+Ni-58 @1e11 kg: ~0.99646 classical
 large coherent Fe/Ni wave suppression: NOT FOUND.
 ```
 
-## A6-A10 – Recycling und WDM-Transport
+## A6-A12 Recycling / WDM / Backpressure
 
-Ein kleiner Single-pass-Loss-Cone ist nicht automatisch die stationaere Nettoakkretionsfraktion.
+Repeated encounters:
 
 ```text
 chi_capture = p/(p+e_perm).
 ```
 
-A10 zeigt ausserdem:
+Ein kleiner single-pass capture factor darf daher nicht direkt als stationäre Nettoakkretions-Unterdrückung interpretiert werden.
+
+A10 zeigte in den getesteten WDM-Transporthüllen große äußere optische Tiefen; `local Kn~1` ist nicht gleich permanenter Escape.
+
+A11/A12 zeigte bei Capacity-Überlastung einen nach außen laufenden Backpressure-Shock. Für `1e10 kg` wurde keine stationäre endliche Innenrate etabliert.
+
+## A13 – General-EOS relativistischer Michel-Solver
+
+A13 löst die stationäre Michel-Kritikalität für eine allgemeine thermodynamisch konsistente EOS:
 
 ```text
-local Kn~1 != permanent escape through the outer dense Fe/WDM reservoir.
-```
+4 pi r^2 rho0 u = Mdot
+h sqrt(1 - 2M/r + u^2) = h_inf
 
-Unter dem **historischen** hohen Michel-Supply war der innere Reduced Processing-Stack ab etwa `1e11 kg` klar processing-capable; `1e10 kg` lag nahe/ueber der Capacity-Grenze.
-
-## A11/A12 – Dynamic Backpressure
-
-Ein sphärischer Finite-Volume/HLL-PDE-Solver reproduziert den absorbierenden Bondi-Grenzfall und erzeugt bei reflektierender/kapazitaetslimitierter innerer Randbedingung einen nach aussen laufenden Backpressure-Shock.
-
-Unter dem historischen `1e10 kg` Capacity-Limiter:
-
-```text
-N=128  shock~1.269 r_B
-N=256  shock~1.254 r_B
-N=512  shock~1.233 r_B
-N=1024 shock~1.229 r_B
-```
-
-Die Shock-Lage konvergiert; eine stationaere endliche innere `Mdot` wurde nicht nachgewiesen. Im Long-domain-Test wandert die Front weiter nach aussen.
-
-## A12b – Zbar + dissipative Sensitivitaet
-
-More/Thomas-Fermi Fe-Closure:
-
-```text
-rho=13.0885 g/cm3
-T=6000 K
-Zbar~2.76.
-```
-
-Gegen eine publizierte solid-density Average-Atom-Definition liegt der korrigierte Fit bei `0.1...10 eV` etwa `12...16 %` niedriger; `Zbar` bleibt daher ein Modellband.
-
-Literaturgebundene Bereiche
-
-```text
-eta=8.5...26 mPa s
-k=67...87 W/m/K
-Cp~850 J/kg/K
-```
-
-wurden in einen Reduced dissipativen PDE-Test eingebaut. Unter der historischen hohen Supply-Randbedingung entfernen diese Terme den `1e10 kg` Backpressure-Ast nicht.
-
-# A12c – Supply ist EOS-abhaengig
-
-Der fruehere Michelbereich
-
-```text
-M=1e11 kg:
-1.47e-8 ... 1.46e-7 kg/s
-```
-
-wird ab A12c **nicht mehr als feste aeussere Supply-Rate** verwendet.
-
-Er stammt aus einem frueheren phenomenologischen Dense-Matter-Michel-Solver und ist ein
-
-```text
-LEGACY / EOS-SENSITIVE BENCHMARK.
-```
-
-Fuer `Gamma>5/3` verwendet A12c die relativistische Michel-Kritikalitaet. Bei gleicher PREM-Aussenbedingung liefert der konstante-Gamma Sensitivitaetsscan bei `M=1e11 kg`:
-
-| Gamma | Mdot [kg/s] |
-|---:|---:|
-| `1.75` | `1.19e-7` |
-| `1.80` | `2.89e-8` |
-| `1.85` | `8.02e-9` |
-| `2.00` | `3.35e-10` |
-| `2.20` | `1.50e-11` |
-| `2.356` local PREM proxy | `2.40e-12` |
-
-Der historische Projektbereich entspricht in diesem einfachen konstanten-Gamma-GR-Surrogat etwa
-
-```text
-Gamma~1.743...1.826.
-```
-
-**Wichtig:** Der lokale PREM-Stiffness-Wert `dK/dP~2.356` darf nicht als konstantes globales Gamma bis zum Horizon fortgesetzt werden. Reales Fe/Ni ionisiert, degeneriert und wechselt sein EOS-Regime. `2.40e-12 kg/s` ist daher **keine finale Endrate**.
-
-# A13 – General-EOS relativistischer Supply
-
-A13 implementiert die Michel-Kritikalitaet jetzt fuer eine allgemeine thermodynamisch konsistente barotrope/isentrope EOS.
-
-Am kritischen Punkt gilt
-
-```text
 u_s^2 = a_s^2/(1+3 a_s^2)
 r_s/M = (1+3 a_s^2)/(2 a_s^2)
 h_s/sqrt(1+3 a_s^2) = h_inf.
 ```
 
-Der neue Solver regressiert A12c in konstanten-Steifigkeits-Grenzfaellen auf etwa `1e-4` relativ oder besser.
+Constant-EOS Regression gegen A12c: **PASS** (`~1e-4` relativ oder besser).
 
-### Kontrolliertes variable-EOS Surrogat
-
-PREM `P`, `K_S` und `dK/dP` werden am Aussenrand gleichzeitig gematched. Die PREM-Steifigkeit wird nur bis
-
-```text
-rho_soft = 30 ... 47.2 g/cm3
-```
-
-gehalten, entsprechend den direkt untersuchten Fe-QMD/first-principles-Domaenen. Danach wird ein transparenter Sensitivitaetsscan
-
-```text
-beta_mid = 1.4 ... 1.8
-```
-
-verwendet. Tief innen geht der Surrogatast um den Elektronen-Relativitaetsmarker
-
-```text
-p_F=m_e c -> rho~2.10e6 g/cm3
-```
-
-mit Sensitivitaet `1e5...1e7 g/cm3` gegen `beta_inner=4/3`.
-
-**Dies ist kein statistisches Konfidenzintervall und keine finale Fe/Ni-EOS.**
-
-Im getesteten Surrogat ergibt sich bei `M=1e11 kg`:
+A13-Surrogat bei `1e11 kg`:
 
 ```text
 Mdot_supply ~4.64e-8 ... 1.37e-6 kg/s.
 ```
 
-Damit wird A12c weiter praezisiert:
+## A13b – Grant-2021 Liquid-Fe Fit-Anker
+
+Die publizierte Grant-2021 Liquid-Fe-EOS-Fitform wird als experimentell verankerter Outer-Abschnitt bis `400 GPa` benutzt.
+
+Nominal:
 
 ```text
-constant PREM stiffness to horizon -> STRESS LIMIT ONLY
-variable EOS softening -> supply can return to the historical range or above.
+B_Grant(PREM center) ~1.419 TPa
+K_PREM               ~1.425 TPa.
 ```
 
-### Rueckkopplung an die innere A10-Processing-Capacity
+Konservativer Fitparameter/T/Intermediate-EOS-Scan bei `1e11 kg`:
 
-| M_BH | Mdot_min [kg/s] | Mdot_max [kg/s] | Xi_min | Xi_max |
-|---:|---:|---:|---:|---:|
-| `1e10` | `4.64e-10` | `1.37e-8` | `0.467` | `13.76` |
-| `1e11` | `4.64e-8` | `1.37e-6` | `8.94e-4` | `2.64e-2` |
-| `2e11` | `1.86e-7` | `5.47e-6` | `1.36e-4` | `4.01e-3` |
-| `5e11` | `1.16e-6` | `3.42e-5` | `1.12e-5` | `3.32e-4` |
+```text
+Mdot_supply ~8.27e-8 ... 6.13e-6 kg/s.
+```
 
-Daraus folgt im **getesteten A13-Surrogat**:
+Status:
+
+```text
+empirical-fit outer anchor: PARTIAL CALCULATED
+raw Zenodo traces: OPEN
+direct SESAME-92141 ingestion: OPEN
+final physical supply band: OPEN.
+```
+
+## A14 – Dense-core Electron Screening
+
+Diffuse equal-T Plasmaformel:
+
+```text
+Q_eq,diffuse ~+24.18e @1e11 kg.
+```
+
+Dense Thomas-Fermi-Screening ergibt dagegen grob
+
+```text
+lambda_TF ~2.95e-11 ... 4.29e-11 m
+E_F       ~19.4 ... 86.6 eV
+preferred response scale ~O(1...5e).
+```
+
+Der vorhandene Proton-Dirac-Solver bleibt in diesem charge bracket nur order-unity unterdrückt:
+
+```text
+Q~+1.6e -> ~0.925 classical
+Q~+4.9e -> ~0.867 classical.
+```
+
+```text
+large electrostatic proton blocker: NOT FOUND
+exact screened Coulomb-Dirac electron S-matrix: OPEN refinement.
+```
+
+## A15 – Integrated Reduced Net-Throughput
+
+A13b Supply gegen A10 Processing-Capacity:
+
+| M_BH | Xi_min | Xi_max | Status |
+|---:|---:|---:|---|
+| `1e10` | `0.832` | `61.60` | **supply/EOS/backpressure conditional** |
+| `1e11` | `1.59e-3` | `1.18e-1` | **processing-capable in tested stack** |
+| `2e11` | `2.42e-4` | `1.80e-2` | **processing-capable** |
+| `5e11` | `2.00e-5` | `1.48e-3` | **processing-capable** |
 
 ```text
 M>=1e11 kg:
-inner processing-capable bleibt robust; Xi_max<<1.
+inner reduced processing is not the current bottleneck.
 
 M=1e10 kg:
-Xi kreuzt 1 -> Backpressure bleibt supply/EOS-conditional.
+time-dependent backpressure remains decisive.
+
+final Full-WDM species-resolved Mdot_BH:
+OPEN.
 ```
 
-Der echte tabellierte Fe/Ni-Isentropen-Supply bleibt OPEN.
+## A16 – Wärme / 4.54-Gyr-Sensitivität
 
-# Aktuelle Statusmatrix
+`eta=1` Restmassenleistung im A13b-Band:
 
-| Bereich | H+ | H0 |
-|---|---|---|
-| starke Zentralmassenvariante | FAIL | FAIL |
-| kleiner smooth Erdbranch | kein eigener Makro-Ausschluss | kein eigener Makro-Ausschluss |
-| Standard-Hawking-Neutrinos | **FAIL im getesteten Projektmodell** | nicht anwendbar |
-| Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
-| Charge-/Screening | teilweise berechnet | teilweise berechnet |
-| A9-A12 inner processing/transport | stark gehaertet / PARTIAL | stark gehaertet / PARTIAL |
-| historical Michel supply | **LEGACY / EOS-SENSITIVE** | **LEGACY / EOS-SENSITIVE** |
-| A13 general-EOS machinery | **PASS regression / PARTIAL physical closure** | **PASS regression / PARTIAL physical closure** |
-| A13 variable-EOS surrogate supply | **CALCULATED** | **CALCULATED** |
-| `1e10 kg` Backpressure | supply/EOS-conditional | supply/EOS-conditional |
-| `>=1e11 kg` inner processing | robust processing-capable im getesteten A13-Surrogat | robust processing-capable im getesteten A13-Surrogat |
-| real tabulated Fe/Ni outer supply | OPEN | OPEN |
-| final net `Mdot_BH` | OPEN | OPEN |
-| Formation/Delivery | stark negativ | stark negativ |
-| direkte Detektion | keine | keine |
-| eindeutige positive Signatur | keine | keine |
+| M_BH | P_min [TW] | P_max [TW] |
+|---:|---:|---:|
+| `1e10` | `7.43e-5` | `5.51e-3` |
+| `1e11` | `7.43e-3` | `0.551` |
+| `2e11` | `2.97e-2` | `2.20` |
+| `5e11` | `0.186` | `13.76` |
 
-# Formation
-
-Die getesteten Standardwege bleiben stark negativ:
+Verglichen mit `47 +/-2 TW` globalem Erdoberflächen-Wärmefluss:
 
 ```text
-in-situ Kollaps normaler Erdmaterie: FAIL
-spaeter direkter Earth-Capture: FAIL
-Proto-Earth-/Planetesimal-Standardcapture: FAIL
-normaler Halo -> protoplanetare cold disk: FAIL unter getesteten Bedingungen
-cold/co-moving Anfangsbedingung: mathematisch moeglich, Herkunft nicht hergeleitet.
+hard total-budget pre-test: NO EXCLUSION.
 ```
 
-# Naechster Pflichtblock – A13b
+Dies ist kein kompletter geothermischer Quellenfit.
+
+Beim analytischen `dM/dt=kM^2`-Rückwärtstest über `4.54 Gyr` bleiben die Anfangsmassen positiv; hohe Supply-Aeste besitzen jedoch kurze heutige `M/Mdot`-Zeiten und erzeugen starken Evolutions-/Fine-Tuning-Druck.
+
+# Stage 3.70 – Beobachtung / Falsifikation
+
+## A17 – Observational Pre-Falsification Gate
+
+Direkte Seismik der mikroskopischen `r_B`-Near-Zone ist extrem sub-wavelength. Bei `lambda=1 km`:
 
 ```text
-public liquid-Fe isentrope / SESAME-consistent data ingestion
--> interpolate rho-P-(T where available)
--> thermodynamic h(rho) reconstruction
--> general-EOS Michel critical solve directly on data
--> compare against A13 surrogate family
--> final outer-supply bracket
--> recouple A9-A12
--> rerun long-term/heat constraints.
+ka ~3.9e-11 ... 1.9e-9
+(ka)^4 proxy ~2e-42 ... 1e-35.
 ```
 
-Grant et al. (2021) berichten oeffentlich verfuegbare Daten fuer liquid-Fe Ramp-/Isentropenmessungen und gute Uebereinstimmung mit SESAME 92141 im Erdkernbereich. Diese Daten sind der bevorzugte naechste reale Isentropenanker.
+Ein sinnvoller H0-Seismiktest benötigt daher eine **makroskopisch gekoppelte**, vom Full-Multiphysics-Modell vorhergesagte Struktur:
+
+```text
+delta rho(r)
+delta Vp(r)
+delta Vs(r)
+mode shifts / waveform amplitudes.
+```
+
+## A18 – Current Real-Data Audit
+
+```text
+H+:
+negative in strongest published SK-IV project comparison.
+
+H0:
+REAL-DATA LIKELIHOOD NOT YET IDENTIFIABLE.
+```
+
+Der Engpass ist nicht das Fehlen von PREM/Seismik/Heat/Neutrinodaten, sondern die noch fehlende eindeutige H0-Makrovorhersage.
+
+# A19 – Formation / Delivery
+
+Ein capture-freundlicher direct-Earth Dynamical-Friction-Proxy bei `v_inf=220 km/s` liefert:
+
+```text
+DeltaE/E_inf ~1e-18 ... 5e-17
+```
+
+für `1e10...5e11 kg`.
+
+Die asymptotische Ein-Durchgang-Capture-Schwelle im selben optimistischen Proxy liegt nur bei
+
+```text
+~0.004 ... 0.031 m/s.
+```
+
+Damit:
+
+```text
+normal halo -> direct Earth capture: VERY STRONG FAIL
+Proto-Earth/planetesimal standard capture: FAIL under tested conditions
+cold/co-moving primordial seed: OPEN initial condition; origin not derived.
+```
+
+Neuere Drei-Körper-PBH-Star-Capture-Arbeiten zeigen reale Mechanismen in anderen Massen-/Hostregimen, liefern aber keinen Earth-delivery Rescue für den Projektbereich.
+
+# Was noch wirklich fehlt
+
+Die reduzierte Testsequenz bis A19 ist abgearbeitet. Die verbleibenden Entscheidungsblöcke sind fehlende physische Daten/Closures:
+
+```text
+1. raw Zenodo / direct SESAME-92141 Fe-isentrope ingestion
+2. full Fe/Ni/light-element mixture + two-temperature WDM transport
+3. exact screened electron scattering refinement
+4. species/reaction-resolved final Mdot_BH(t), Q(t)
+5. unique macroscopic H0 observable amplitude/profile
+6. real PREM/seismic/heat/neutrino likelihood on that prediction
+7. physically motivated formation/delivery mechanism.
+```
 
 # Zentrale aktuelle Dateien
 
-- `STAGE3_69H_A12_SHOCK_TRANSPORT_AUDIT.md`
-- `stage3_69h_a12_shock_transport_audit.py`
-- `STAGE3_69H_A12B_ZBAR_DISSIPATIVE_CLOSURE.md`
-- `stage3_69h_a12b_zbar_dissipative_closure.py`
-- `STAGE3_69H_A12C_STIFF_EOS_GR_SUPPLY.md`
-- `stage3_69h_a12c_stiff_eos_gr_supply.py`
+- `TEST_STATUS.md`
+- `VALIDATION_PROTOCOL_STAGE3_69_70.md`
 - `STAGE3_69I_A13_GENERAL_EOS_MICHEL.md`
 - `stage3_69i_a13_general_eos_michel.py`
-- `STAGE3_69I_A13_PLAN.md`
-- `AKKRETION_STATUS.md`
-- `TEST_STATUS.md`
+- `STAGE3_69I_A13B_GRANT_FIT_ANCHOR.md`
+- `stage3_69i_a13b_grant_fit_anchor.py`
+- `STAGE3_69J_A14_ELECTRON_SCREENING.md`
+- `stage3_69j_a14_electron_screening.py`
+- `STAGE3_69K_A15_NET_THROUGHPUT.md`
+- `stage3_69k_a15_net_throughput.py`
+- `STAGE3_69L_A16_HEAT_AGE.md`
+- `stage3_69l_a16_heat_age.py`
+- `STAGE3_70A_A17_PRE_FALSIFICATION.md`
+- `stage3_70a_a17_prefalsification.py`
+- `STAGE3_70B_A18_REALDATA_AUDIT.md`
+- `stage3_70b_a18_realdata_audit.py`
+- `STAGE3_71_A19_FORMATION_RECHECK.md`
+- `stage3_71_a19_formation_recheck.py`
+
+# Open Science / Projekt-Governance
+
+Originale Texte/Dokumentation/Grafiken stehen – soweit nicht anders gekennzeichnet – unter **CC BY 4.0**; originaler Quellcode unter **MIT**.
+
+Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten sind ausdrücklich erlaubt. Der **offizielle Projektstand** (`main`, Stages, Releases) wird jedoch nur über dieses Repository und die Freigabe des Projektinhabers definiert.
+
+Siehe:
+
+- `LICENSE`
+- `ATTRIBUTION.md`
+- `OPEN_SCIENCE.md`
+- `OFFICIAL_PROJECT_POLICY.md`
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Forschungsstand bis Stage 3.69I/A13 partiell, Stage 3.69 Full-Multiphysics und Stage 3.70 offen, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced/partial numerischer Forschungsstand bis A19 / Stage 3.70B, Rheinland-Pfalz, Deutschland.
