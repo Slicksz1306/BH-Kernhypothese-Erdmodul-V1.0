@@ -90,6 +90,8 @@ v_inf,max = sqrt(2 G delta M_p / (f r_H))
 
 Wichtig: Die Seed-/PBH-Masse kürzt sich aus dieser spezifischen Energiebedingung heraus. Der F2-Gate gilt daher gleichermaßen für den Projektbereich `1e10...5e11 kg`, solange der Seed als Testmasse gegenüber dem Embryo behandelt werden kann.
 
+Dies ist bewusst ein lokaler, capture-freundlicher Instantaneous-Potential-Proxy. Ein realer Giant Impact verändert zusätzlich Schwerpunkt, Impuls, Geometrie und zeitabhängiges Mehrkörperpotential; diese Effekte müssen in F3 explizit integriert werden.
+
 ## Numerischer Giant-Impact-Gate am Hill-Rand
 
 Für `f=1`:
@@ -177,7 +179,7 @@ Dies ist ausdrücklich **keine Capture-Wahrscheinlichkeit**: wiederholte Hill-Be
 ## Literaturkontext
 
 - Temporäre Hill-Capture-Orbits helioszentrischer Kleinkörper in Drei-Körper-Dynamik sind etabliert; niedrige Relativenergien nahe den Lagrangepunkten sind dabei zentral (Suetsugu et al., MNRAS 431, 1709, 2013).
-- Pull-down capture durch schnelles Planetenwachstum ist als realer Mechanismus untersucht worden; seine Effizienz fällt stark, wenn das Wachstum gegenüber der relevanten orbitalen Dynamik zu langsam ist (Hamers & Portegies Zwart / related pull-down satellite literature, 2019 context).
+- Pull-down capture durch schnelles Planetenwachstum ist als realer Mechanismus numerisch demonstriert worden; Hansen (Science Advances 5, eaaw8665, 2019) findet stark sinkende Effizienz, wenn das Wachstum gegenüber der relevanten orbitalen Dynamik zu langsam wird, in seinem Modell insbesondere für Wachstumszeiten >~30 Orbitalzeiten.
 - Terrestrische Planeten wachsen über eine Giant-Impact-Phase von grob `10...100 Myr`; moderne Reviews setzen die Mond-formende Endphase der Erdentstehung in den Bereich vieler zehn Myr (Morbidelli et al. 2012; Halliday & Canup 2023; Marchi & Korenaga 2025).
 
 ## F2 Statusmatrix
