@@ -2,10 +2,11 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
-**Stand:** 26.08.2026  
-**Forschungsstand:** Stage 3.68 bearbeitet; Stage 3.68E externes Fachfeedback integriert; Stage 3.69/3.70 definiert, nicht durchgefuehrt
+**Stand:** 29.08.2026
 
-## 1. Gegenstand
+**Forschungsstand:** Reduced Stack bis A31, Formation/Delivery bis F8a und Multi-Gate Closure bis Stage 3.94 bearbeitet; High-Fidelity Stage 3.69 und Experimental Stage 3.70 definiert, nicht durchgefuehrt
+
+## 1. Gegenstand und Aussageebenen
 
 Die definierende Hypothese des Erdmoduls lautet:
 
@@ -13,12 +14,21 @@ Die definierende Hypothese des Erdmoduls lautet:
 
 Es wird **keine direkte Detektion** eines Schwarzen Lochs im Erdzentrum behauptet.
 
+Dieses Dokument trennt vier Aussageebenen:
+
+| Ebene | Bedeutung im Erdmodul |
+|---|---|
+| Referenzphysik und externe Daten | Standard-GR, PREM-Referenzwerte und publizierte Messgrenzen werden als externe Grundlagen verwendet; sie werden durch dieses Projekt nicht neu bestaetigt. |
+| Modellannahme | Zentralmasse, smooth compensation und insbesondere `P_Hawking=0` im H0-Zweig werden gesetzt und nicht aus den Rechnungen bewiesen. |
+| Mathematisches/numerisches Ergebnis | Ein `PASS` gilt nur fuer die angegebene Gleichung, Parameterwahl, Randbedingung und Regression. |
+| Spekulation / offene Physik | Physische Existenz, Entstehung, finales `Q_eq`, eindeutige H0-Signatur und experimenteller Nachweis bleiben offen, sofern nicht anders belegt. |
+
 ## 2. Abgrenzung der starken Variante
 
-Eine Variante mit einem wesentlichen Anteil der Erdmasse im zentralen BH ist mit der beobachteten radialen Erdstruktur, dem Traegheitsmoment und der Seismologie nicht vereinbar.
+Im verwendeten PREM-/Traegheitsmoment-/Seismikvergleich ist eine Variante mit einem wesentlichen Anteil der Erdmasse im zentralen BH nicht vereinbar.
 
 ```text
-starke Zentralmassenvariante: verworfen.
+starke Zentralmassenvariante: im Projektmodell verworfen.
 ```
 
 Gegenstand der weiteren Tests ist nur ein kleiner zentraler Branch.
@@ -27,7 +37,7 @@ Gegenstand der weiteren Tests ist nur ein kleiner zentraler Branch.
 
 ### H+
 
-H+ nimmt Standard-Hawking-Strahlung an.
+H+ verwendet die standardmaessige semiklassische Hawking-Vorhersage als Modellinput. Das Projekt liefert keinen eigenen experimentellen Nachweis der Hawking-Strahlung.
 
 ### H0
 
@@ -37,7 +47,7 @@ H0 setzt
 P_Hawking = 0.
 ```
 
-H0 ist eine bewusst nichtstandardmaessige Gegenhypothese und kein etablierter GR/QFT-Zweig. Die Theorie dieses Erdmoduls liefert keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung.
+H0 ist eine bewusst nichtstandardmaessige Modellannahme und kein etablierter GR/QFT-Zweig. Die Theorie dieses Erdmoduls liefert keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung. Ein offener H0-Branch widerlegt daher weder die Hawking-Vorhersage noch Standard-GR/QFT.
 
 ## 4. Smooth-compensated Massenbuchhaltung
 
@@ -50,7 +60,7 @@ Integral 4 pi r^2 w(r) dr = 1.
 
 Damit bleibt die Gesamtmasse im ideal kugelsymmetrischen Buchhaltungsgrenzfall unveraendert.
 
-Der historische Hard-Cavity-/Hard-Replacement-Branch ist mechanisch verworfen.
+Der historische Hard-Cavity-/Hard-Replacement-Branch ist innerhalb der bisherigen Projektpruefungen mechanisch verworfen.
 
 ## 5. Drei verschiedene Radien und expliziter Sound-Speed-Proxy
 
@@ -88,7 +98,7 @@ Damit liegt bei `M_BH~1e11 kg` die Bondi-Skala bei Groessenordnung `~61 nm`. Die
 
 ## 6. Minimaler Gravitationsrahmen
 
-Fuer die Endtests des kleinen Branches genuegt als Minimalrahmen Standard-GR ausserhalb des Horizonts plus eine zentrale kompakte Masse und die smooth-compensated Materieverteilung. Fruehere Skalar-Tensor-Erweiterungen bleiben als Modellvarianten archiviert, sind aber fuer die zentrale Stage-3.68-Aussage nicht erforderlich.
+Als Minimalrahmen der reduzierten Tests wird Standard-GR ausserhalb des Horizonts plus eine zentrale kompakte Masse und die smooth-compensated Materieverteilung verwendet. Fruehere Skalar-Tensor-Erweiterungen bleiben als Modellvarianten archiviert, sind aber fuer die hier dokumentierten reduzierten Aussagen nicht erforderlich.
 
 ## 7. H+ und Hawking-Neutrinos
 
@@ -99,7 +109,7 @@ M_BH = 4.82e11 ... 5.49e11 kg
 T_H  = 21.99 ... 19.31 MeV.
 ```
 
-Ein Greybody-Primaerneutrino-Test wurde gegen publizierte spektrumsunabhaengige Super-Kamiokande-`anti-nu_e`-Grenzen verglichen.
+Ein projektinterner Greybody-Primaerneutrino-Proxy wurde gegen publizierte spektrumsunabhaengige Super-Kamiokande-`anti-nu_e`-Grenzen verglichen.
 
 Im Energieband 25.29-31.29 MeV:
 
@@ -111,10 +121,10 @@ SK-IV beobachtetes 90%-CL-Limit: 0.04 cm^-2 s^-1 MeV^-1
 Daraus folgt innerhalb der verwendeten H+-Annahmen:
 
 ```text
-H+ Standard-Hawking: FAIL.
+getesteter H+-Greybody/Super-K-Parameterbranch: FAIL im Projektvergleich.
 ```
 
-Dies ist eine Projekt-Reinterpretation und keine offizielle Super-Kamiokande-Suche nach einem Erdzentrum-BH.
+Dies ist eine Projekt-Reinterpretation und keine offizielle Super-Kamiokande-Suche nach einem Erdzentrum-BH. Das Ergebnis verwirft nur den getesteten H+-Parameterbranch innerhalb der verwendeten Emissions-, Greybody- und Vergleichsannahmen; es widerlegt die Hawking-Strahlung nicht allgemein.
 
 ## 8. H0-Akkretion
 
@@ -142,7 +152,7 @@ Die folgenden moeglichen Blockaden wurden als reduzierte Grenz-/Sensitivity-Test
 - reduzierter Reservoir-/Fokker-Planck-Closure,
 - Bremsstrahlung, Strahlungsdruck und Pair-/QED-Sensitivitaet.
 
-Keiner dieser reduzierten Tests liefert derzeit eine robuste vollstaendige Akkretionssperre. Die exakte nichtstationaere MeV-Mikrophysik bleibt jedoch offen.
+Keiner dieser reduzierten Tests liefert derzeit innerhalb seiner Annahmen eine robuste vollstaendige Akkretionssperre. Daraus folgt nicht, dass die reale Akkretion mit einer der berechneten Raten stattfindet. Die exakte nichtstationaere MeV-Mikrophysik bleibt offen.
 
 Seit Stage 3.68E wird zusaetzlich festgehalten, dass Bondi/Michel nicht automatisch bis zur Horizontabsorption extrapoliert werden duerfen. Bei `M~1e11 kg` liegt `r_s~1.5e-16 m`; deshalb ist ein separater **Quantum/Wave-Capture**-Block erforderlich, falls relevante Teilchenwellenlaengen bzw. Streuskalen den geometrisch-optischen Grenzfall nicht rechtfertigen.
 
@@ -154,7 +164,7 @@ finale Netto-Mdot = OPEN bis zur Kopplung in Stage 3.69
 
 ## 9. H0-Langzeit- und Waermevertraeglichkeit
 
-Fuer den kleinen H0-Zweig fuehren die getesteten Michel-Skalierungen ueber ein Erdalter zu sehr kleinen globalen Massenanteilen. Selbst sehr konservative lokale Energieobergrenzen bleiben gegen die gesamte Erdwaerme klein.
+Fuer den kleinen H0-Zweig fuehren die getesteten Michel-Skalierungen ueber ein Erdalter zu sehr kleinen globalen Massenanteilen. In der verwendeten Parameterisierung bleiben auch konservativ angesetzte Energieproxies klein gegen die globale Erdwaerme-Referenz.
 
 Ein zusaetzlicher globaler Sanity-Check verwendet `P_Earth ~47 +/- 2 TW`. Fuer
 
@@ -180,11 +190,11 @@ Es folgt nicht, dass die exakte Akkretionsrate gemessen oder bewiesen waere. Lok
 
 ## 10. Erdstruktur und Seismik
 
-Im smooth-compensated Branch ist die aeussere eingeschlossene Masse nahezu PREM-identisch. Bei `M~1e11 kg` ist die Bondi-/Kompressionsskala nur Groessenordnung `~61 nm`, waehrend der Buchhaltungsradius Groessenordnung `~100 m` besitzt.
+Im smooth-compensated Branch ist die aeussere eingeschlossene Masse durch die Modellkonstruktion nahezu PREM-identisch. Bei `M~1e11 kg` ist die Bondi-/Kompressionsskala nur Groessenordnung `~61 nm`, waehrend der Buchhaltungsradius Groessenordnung `~100 m` besitzt.
 
 Daraus folgt, dass starke lokale Materialaenderungen nicht ueber die ganze `~100 m`-Zone angenommen werden duerfen. Fruehere Millisekunden-Proxies, die die gesamte Buchhaltungszone als stark veraendert behandelten, wurden entsprechend abgeschaerft.
 
-Externes Fachfeedback aus globaler Seismologie bestaerkt die bereits interne Einschaetzung, dass eine reine Nano-/Mikrometer-Near-Zone nicht direkt seismisch raeumlich aufloesbar ist. Seismik wird fuer Stage 3.70 deshalb nur dann als aussichtsreicher Kanal behandelt, wenn Stage 3.69 eine **makroskopisch gekoppelte** `Delta rho`, `Delta V_P`, `Delta V_S`-Struktur oder eine koharente Normalmoden-/Streusignatur oberhalb realer Datenempfindlichkeit erzeugt.
+Externes Fachfeedback aus globaler Seismologie stuetzt die qualitative Einschaetzung, dass eine reine Nano-/Mikrometer-Near-Zone nicht direkt seismisch raeumlich aufloesbar ist; dies ist keine H0-Detektion oder -Validierung. Seismik wird fuer Stage 3.70 deshalb nur dann als aussichtsreicher Kanal behandelt, wenn Stage 3.69 eine **makroskopisch gekoppelte** `Delta rho`, `Delta V_P`, `Delta V_S`-Struktur oder eine koharente Normalmoden-/Streusignatur oberhalb realer Datenempfindlichkeit erzeugt.
 
 Die bisher ausgefuehrten reduzierten Laufzeit-, Streu- und Normalmodenproxies liefern keinen robusten Ausschluss des kleinen smooth H0-Zweigs und auch keine positive Detektion.
 
@@ -216,45 +226,79 @@ FAIL unter den getesteten Standardbedingungen.
 
 ### 11.4 Cold/co-moving
 
-Ein bereits extrem kalter und co-moving Zustand kann als Anfangsbedingung gesetzt werden. Ein Standardmechanismus, der einen normalen collisionless PBH in diesen engen Phasenraum bringt, wurde nicht gefunden.
+Ein bereits extrem kalter und co-moving Zustand kann als spekulative Anfangsbedingung gesetzt werden. Ein hergeleiteter Standardmechanismus, der einen normalen collisionless PBH in diesen engen Phasenraum bringt, wurde im Projekt nicht gefunden.
 
 ```text
-OPEN als gesetzte Anfangsbedingung; Formationmechanismus stark unmotiviert.
+OPEN als gesetzte Anfangsbedingung; physischer Formationmechanismus nicht hergeleitet.
 ```
 
-## 12. Endstatus
+## 12. Stage 3.94 – reduzierte Multi-Gate Closure
+
+Stage 3.94 behandelt drei mathematisch/numerisch getrennte Bloecke. Die Stufenbezeichnung ist ein Projektlabel und bedeutet nicht, dass die High-Fidelity-Stages 3.69 und 3.70 ausgefuehrt wurden.
+
+| Gate | Modellannahme | Rechnungsergebnis | Offene Physik |
+|---|---|---|---|
+| F12 | Poisson-Seedzahl und definierte Amplifikations-Proxies | Proxy-Arithmetik und Sweep **PASS** | keine hergeleitete Abbildung auf ein physikalisches `P_zeta(k)` oder echtes `f_NL` |
+| A34 | stationaere Ein-Spezies-Drift-Diffusion mit vorgegebenem `D`, `T`, `c_inf` und Randwerten | Profil, ODE-Residuum und radiale Flusserhaltung **PASS** | reales Speziesgemisch, Ladungsrueckkopplung und finales `Q_eq` **OPEN** |
+| H0 | frei angesetztes, massenkompensiertes Dichteprofil | Massenkompensation und Laufzeit-Sensitivitaetsproxy **PASS** | eindeutige `Delta rho`, `Delta V_P`, `Delta V_S`-Vorhersage und direkte Detektion **OPEN** |
+
+Insbesondere gilt:
 
 ```text
-H+ Standard-Hawking:
-    FAIL im getesteten Greybody/Super-K-Reinterpretationsmodell.
+F12 PASS != physikalische Primordial-Closure
+A34 PASS != finale Akkretionsrate oder elektrisches Q_eq
+H0  PASS != eindeutige Seismikvorhersage oder Detektion
+```
+
+Keines dieser drei reduzierten Ergebnisse ist experimentelle Evidenz fuer ein Schwarzes Loch im Erdzentrum.
+
+## 13. Endstatus
+
+```text
+H+ Greybody/Super-K-Projektbranch:
+    FAIL im getesteten projektinternen Reinterpretationsmodell;
+    keine allgemeine Widerlegung der Hawking-Strahlung.
 
 H0 heutige versteckte Zentralmasse:
-    OPEN / durch die bisherigen reduzierten Erdtests nicht ausgeschlossen.
+    OPEN / in den bisherigen reduzierten Erdtests weder nachgewiesen
+    noch durch einen eindeutigen H0-Test ausgeschlossen.
 
 H0 fundamentale Grundlage fuer P_Hawking=0:
     OPEN / nicht geliefert.
 
 H0 Formation:
-    stark negativ; kein getesteter Standard-Delivery-Pfad erfolgreich.
+    OPEN; alle bisher getesteten Standard-Delivery-Pfade im Projektmodell FAIL.
+
+F12 physikalische Primordial-Closure:
+    OPEN; bisher nur Proxy-Arithmetik.
+
+A34 reduzierte Ein-Spezies-Mathematik:
+    PASS fuer ODE, Randbedingungen und Flusserhaltung.
+
+A34 finales multikomponentiges Q_eq:
+    OPEN.
+
+H0 eindeutige seismische Vorhersage:
+    OPEN; bisher nur kompensierter Sensitivitaetsproxy.
 
 Empirischer Nachweis:
     keiner.
 ```
 
-## 13. Aussagegrenze
+## 14. Aussagegrenze
 
 Die korrekte wissenschaftliche Aussage lautet nicht „die Theorie ist bewiesen“ und nicht „alle Tests bestanden“.
 
 Die korrekte Aussage lautet:
 
-> Der Standard-Hawking-Zweig H+ faellt innerhalb des aktuellen Projektmodells. Ein nichtstandardmaessiger kleiner H0-Zweig kann in den bisherigen reduzierten heutigen Erdtests verborgen bleiben, besitzt aber keine positive Detektion, keine fundamentale Ableitung fuer das Ausbleiben der Hawking-Strahlung und keinen hergeleiteten Standard-Formationweg. Die finale H0-Akkretionsrate bleibt zudem offen, bis Supply, Kinetik und Quantum/Wave-Capture in Stage 3.69 gekoppelt wurden.
+> Der getestete H+-Parameterbranch scheitert in der projektinternen Greybody/Super-K-Reinterpretation; dies ist keine allgemeine Widerlegung der Hawking-Strahlung. Fuer den nichtstandardmaessigen H0-Zweig liefern die bisherigen reduzierten Erdtests weder einen eindeutigen Ausschluss noch eine positive Detektion. H0 besitzt keine fundamentale Ableitung fuer `P_Hawking=0` und keinen hergeleiteten Standard-Formationweg. F12 bleibt Proxy-Arithmetik, A34 bleibt trotz mathematischer Ein-Spezies-Closure ohne finales `Q_eq`, und H0 besitzt noch keine eindeutige seismische Vorhersage. Eine experimentelle BH-Evidenz folgt aus keinem dieser Resultate.
 
-## 14. Verbleibende Endstufen – formal definiert
+## 15. Verbleibende Endstufen – formal definiert
 
 **Stage 3.69 – High-Fidelity Multiphysics: DEFINED / NOT PERFORMED.** Verschachtelte PREM/Elastoplastik/Mikro-Hydro/kinetische-GR/Quantum-Wave-Capture/GR-Horizon-Sink-Architektur mit expliziten Transport-, QED-/Pair-/Nuklear-Zeitskalen.
 
 **Stage 3.70 – Experimental H0 Falsification: DEFINED / NOT PERFORMED.** Dedizierter Real-Data-/Likelihood-Test einer quantitativen H0-Signatur, die erst aus Stage 3.69 stammen darf. Seismik ist nur bei einer makroskopisch gekoppelten Signatur ein aussichtsreicher Kanal.
 
-Der letzte tatsaechlich bearbeitete interne Teststand bleibt Stage 3.68. Stage 3.68E dokumentiert die Integration externen Fachfeedbacks und ist keine neue experimentelle Validierung.
+Stage 3.94 ist der letzte bearbeitete numerische Reduktionsstand. Die dortigen F12-, A34- und H0-Ergebnisse sind Solver-/Proxyresultate und keine neue experimentelle Validierung. Stage 3.69 und 3.70 bleiben fuer die High-Fidelity-Kopplung bzw. einen Real-Data-Likelihood-Test offen.
 
 Details: [`VALIDATION_PROTOCOL_STAGE3_69_70.md`](VALIDATION_PROTOCOL_STAGE3_69_70.md), [`EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md`](EXTERNAL_FEEDBACK_INTEGRATION_STAGE3_68E.md) und [`FINAL_STATUS_STAGE3_68.md`](FINAL_STATUS_STAGE3_68.md).
