@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage 3.95B Agent Harness Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "task_id",
+    "model",
+    "harness_version",
+    "context_policy",
+    "toolset",
+    "repo_commit",
+    "claim_scope"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "claim_scope": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "model": {"type": "string", "minLength": 1},
+    "reasoning_mode": {"type": ["string", "null"]},
+    "harness_version": {"type": "string", "minLength": 1},
+    "context_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retention", "compaction", "rolling_truncation"],
+      "properties": {
+        "retention": {"type": "string"},
+        "compaction": {"type": "string"},
+        "rolling_truncation": {"type": "boolean"},
+        "state_signature_version": {"type": ["string", "null"]}
+      }
+    },
+    "toolset": {"type": "array", "items": {"type": "string"}},
+    "repo_commit": {"type": "string", "minLength": 7},
+    "solver_version": {"type": ["string", "null"]},
+    "parameter_file": {"type": ["string", "null"]},
+    "random_seed": {"type": ["integer", "null"]},
+    "source_snapshot": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
