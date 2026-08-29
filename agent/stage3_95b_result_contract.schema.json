@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Slicksz1306/SL-BH-Kernhypothese-Erdmodul/agent/stage3_95b_result_contract.schema.json",
+  "title": "Stage 3.95B Research Agent Result Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task",
+    "searched",
+    "sources",
+    "equations_checked",
+    "tests_run",
+    "failures",
+    "result",
+    "confidence",
+    "limitations"
+  ],
+  "properties": {
+    "task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "searched": {
+      "type": "boolean",
+      "description": "True only if the requested source/code search was actually executed."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "origin", "supports"],
+        "properties": {
+          "id": {"type": "string"},
+          "origin": {"type": "string"},
+          "locator": {"type": ["string", "null"]},
+          "supports": {"type": "string"}
+        }
+      }
+    },
+    "equations_checked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["equation", "check", "status"],
+        "properties": {
+          "equation": {"type": "string"},
+          "check": {"type": "string"},
+          "status": {"enum": ["PASS", "FAIL", "PARTIAL", "NOT_RUN"]}
+        }
+      }
+    },
+    "tests_run": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status"],
+        "properties": {
+          "name": {"type": "string"},
+          "command": {"type": ["string", "null"]},
+          "status": {"enum": ["PASS", "FAIL", "SKIP", "NOT_RUN"]},
+          "artifact": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "failures": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary", "claim_level"],
+      "properties": {
+        "status": {"enum": ["PASS", "FAIL", "PARTIAL", "OPEN", "CALCULATED"]},
+        "summary": {"type": "string"},
+        "claim_level": {
+          "enum": [
+            "TOY_MODEL",
+            "ANALYTICAL",
+            "SOLVER",
+            "CONDITIONAL_PHYSICAL",
+            "OBSERVATIONAL_CONSTRAINT",
+            "EXPERIMENTAL_EVIDENCE"
+          ]
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "basis"],
+      "properties": {
+        "level": {"enum": ["low", "medium", "high"]},
+        "basis": {"type": "string"}
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    }
+  }
+}
