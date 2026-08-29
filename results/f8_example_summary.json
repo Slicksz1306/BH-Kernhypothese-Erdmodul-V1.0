@@ -1,0 +1,12 @@
+{
+  "example_grid_rows": 25920,
+  "mini_stage1": 390,
+  "mini_retained_today_stage1": 0,
+  "stream_stage1_collapse_overlap_only": 692,
+  "q_required_Msun_pc3_per_kms3": {
+    "10000000000": 0.1467943221,
+    "100000000000": 1.4679432207,
+    "200000000000": 2.9358864415,
+    "500000000000": 7.3397161037
+  }
+}
