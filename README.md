@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.77 / F5  
+**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.78 / F6  
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -114,6 +114,11 @@ multicomponent Onsager / Maxwell-Stefan mobility matrix
 + sink-boundary coupling.
 ```
 
+Zentrale Dateien:
+
+- `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
+- `stage3_72_a31_ambipolar_mobility_gate.py`
+
 # Formation / Delivery
 
 ## A19 – normaler Halo → fertige Erde
@@ -174,14 +179,14 @@ absolute delivery: OPEN.
 
 ## Stage 3.76 / F4 – Early permanent embryo-bound Seed
 
-Collisionless terrestrischer Exchange-Capture ist physikalisch möglich. F4s analytischer Gate ergibt für einen Seed bei `f=0.3 r_H`:
+Für einen Seed bei `f=0.3 r_H`:
 
 ```text
-prograde stable-capture kick  ~0.748 v_H
+prograde stable-capture kick   ~0.748 v_H
 retrograde stable-capture kick ~0.376 v_H.
 ```
 
-Ein enger Embryo–Embryo-Stressproxy kann diese Größenordnung erreichen.
+Ein enger Embryo–Embryo-Stressproxy erreicht diese Größenordnung.
 
 Im adiabatischen Wachstumsgrenzfall:
 
@@ -193,8 +198,6 @@ R_p    ∝ M_p^(1/3)
 
 Damit kann ein früh gebundener Seed durch Wachstum später body-crossing werden.
 
-F4:
-
 ```text
 collisionless early permanent binding: PASS kinematic existence
 stable embryo-bound phase space: PASS
@@ -205,59 +208,20 @@ absolute probability: OPEN.
 
 ## Stage 3.77 / F5 – Direct restricted 4-body Exchange Monte-Carlo
 
-F5 integriert direkt
+Direkte Newtonsche Integration:
 
 ```text
 Sun + Proto-Earth M1 + second embryo M2 + massless seed.
 ```
 
-Jeder Lauf besitzt einen gepaarten Nullkontrolllauf mit identischem M1+Seed-Zustand aber `M2=0`.
+Jeder Lauf besitzt einen gepaarten `M2=0`-Kontrolllauf.
 
 ### Kritische Korrektur
 
-Ein Pilot mit `V~Omega R_H,mut` **am Perizentrum** wurde verworfen, weil er bei kleinen `b` unterhalb der gegenseitigen Escape-Speed liegen und künstlich embryo-bound Encounters erzeugen kann.
-
-Final:
+Ein capture-freundlicher Pilot mit `V~Omega R_H,mut` direkt am Perizentrum wurde **verworfen**. Final werden echte hyperbolische Flybys benutzt:
 
 ```text
-V_p^2 = V_inf^2 + 2 G (M1+M2)/b
-```
-
-mit echten hyperbolischen Flybys.
-
-### Ensembles
-
-```text
-M1 = 1e-3 ... 1e-1 M_E
-seed r = 0.1 ... 1.0 r_H,1
-seed beta=v/v_esc(local) = 1.00 ... 1.15
-```
-
-STRONG:
-
-```text
-q=0.3...1
-kappa=b/R_H,mut=0.3...0.8
-u_inf=V_inf/(Omega R_H,mut)=0.5...1.5
-N=300.
-```
-
-BROAD:
-
-```text
-q=0.03...1
-kappa=0.3...1.5
-u_inf=0.5...3
-N=300.
-```
-
-WEAK:
-
-```text
-q=0.03...0.1
-kappa=0.9...1.5
-u_inf=1.5...3
-N=300.
+V_p^2 = V_inf^2 + 2 G (M1+M2)/b.
 ```
 
 ### Persistenz bis 20 Omega^-1
@@ -270,29 +234,15 @@ N=300.
 | BROAD | `3/300 = 1.00%` | **PASS conditional** |
 | WEAK | `0/300` | **not found persistent** |
 
-95%-Wilson-Brackets:
-
-```text
-STRONG ~0.71...3.84%
-BROAD  ~0.34...2.90%
-WEAK   0...~1.26% upper.
-```
-
-Alle zunächst nur `bound_unstable` exchange-attributable Zustände entkoppeln bis `20 Omega^-1` wieder.
-
-Persistente Captures besitzen beispielsweise
+Persistente Captures besitzen etwa
 
 ```text
 a_seed/r_H ~0.21 ... 0.58
 ```
 
-während M2 nach dem Lauf bereits typischerweise `~55...150` mutual Hill radii entfernt ist.
+während M2 nach dem Lauf typischerweise bereits `~55...150` mutual Hill radii entfernt ist.
 
-Damit ist der lokale Exchange-Mechanismus nicht nur ein momentaner Perizentrum-Artefakt.
-
-### Exchange-induced Body Crossings
-
-FULL-only body crossings:
+Exchange-induced FULL-only body crossings:
 
 ```text
 STRONG 4/300
@@ -307,57 +257,142 @@ STRONG 2/4
 BROAD  3/3.
 ```
 
-Die zwei positiven STRONG-crossings besitzen `v_inf~129...140 m/s`; selbst der absichtlich optimistische A19-Dragproxy mit `I=30` erreicht für `M_BH<=5e11 kg` nur etwa
+Positive-E one-pass crossings bleiben trotz capture-freundlichem A19-Drag klar ungebunden.
 
 ```text
-DeltaE_drag/E_inf <=~3e-7.
+F5 local collisionless exchange mechanism: PASS conditionally
+absolute formation probability: OPEN.
+```
+
+Zentrale Dateien:
+
+- `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
+- `stage3_77_f5_restricted_4body_exchange_mc.py`
+
+## Stage 3.78 / F6 – Population-weighted Formation Gate
+
+F6 faltet den F5-Kernel mit einer expliziten lokalen Seed-Population.
+
+Da die primordial solar-bound Seed-Verteilung unbekannt ist, wird kein erfundener absoluter Wert benutzt. Stattdessen:
+
+```text
+lambda = N_enc K_F5 S_post n_seed V_H
+P_delivery = 1 - exp(-lambda).
+```
+
+Für ein Ziel `P_*`:
+
+```text
+mu_H,req = n_seed V_H
+         = -ln(1-P_*)/(N_enc K_F5 S_post).
+```
+
+### Referenz
+
+```text
+M1       = 0.03 M_E
+K_F5     = 5/300 = 1.6667%
+N_enc    = 10 relevant strong encounters
+S_post   = 0.5 nuisance reference
+P_*      = 0.5
+r_H      = 465,012 km
+V_H      = 4.212e26 m^3.
 ```
 
 Damit:
 
 ```text
-positive-E one-pass crossing + ordinary drag: FAIL
-already exchange-bound body crossing: PASS existence.
+mu_H,50 = 8.318 eligible seeds per Hill volume.
 ```
 
-### F5 Schluss
+Sensitivität:
+
+| N_enc | mu_H,50 |
+|---:|---:|
+| `1` | `83.18` |
+| `3` | `27.73` |
+| `10` | `8.318` |
+| `30` | `2.773` |
+| `100` | `0.832` |
+
+### Benötigte lokale Dichte
+
+Bei `M1=0.03 M_E`:
+
+| M_BH | rho_seed,50 [kg/m^3] | vs canonical Galactic DM |
+|---:|---:|---:|
+| `1e10 kg` | `1.975e-16` | `3.69e5 x` |
+| `1e11 kg` | `1.975e-15` | `3.69e6 x` |
+| `2e11 kg` | `3.950e-15` | `7.39e6 x` |
+| `5e11 kg` | `9.874e-15` | `1.85e7 x` |
+
+Damit:
 
 ```text
-direct Newtonian restricted 4-body solver: PASS
-hyperbolic encounter correction: PASS
-paired M2=0 counterfactual: PASS
-persistent collisionless embryo-exchange capture: FOUND
-conditional strong/broad capture fraction: O(1%) in defined ensemble
-weak encounter persistent capture: not found in N=300
-absolute Earth-delivery probability: OPEN.
+normal Galactic-halo abundance: FAIL for F5/F6 delivery.
 ```
 
-F5 ist **keine Evidenz für einen Erdzentrum-BH**. Es zeigt nur, dass F4s lokaler Formation-Spezialkanal eine direkte Newtonsche Mehrkörperrechnung überlebt.
+Der überlebende Branch verlangt eine stark solar gebundene primordial overdense Seed-Population.
 
-Der verbleibende Formation-Engpass ist nun:
+### Geometrische globale Seed-Abundance
+
+Phase-mixed Referenzproxies bei `M1=0.03 M_E`, `N_enc=10`, `S_post=0.5`:
+
+| Seed population | Hill duty proxy | N_seed,50 |
+|---|---:|---:|
+| razor-cold co-orbital band | `7.77e-4` | `1.07e4` |
+| ultra-cold annulus | `2.42e-4` | `3.44e4` |
+| cold inner disk | `1.15e-5` | `7.25e5` |
+| warm broad disk | `5.74e-7` | `1.45e7` |
+
+Bei `M_BH=1e11 kg` entspricht das Gesamtmassen von ungefähr
 
 ```text
-solar-bound seed phase-space density
-x probability of Hill occupancy at embryo encounter
-x realistic terrestrial embryo encounter history
-x later survival/engulfment.
+1.07e15 ... 1.45e18 kg
 ```
 
-Zentrale F5-Dateien:
+und damit deutlich weniger als eine Millionstel Erdmasse. **Die rohe Gesamtmasse ist nicht der Hauptengpass.**
 
-- `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
-- `stage3_77_f5_restricted_4body_exchange_mc.py`
+Der Engpass ist die Produktion von `~10^4...10^7` bereits solar gebundenen kompakten Seeds im richtigen terrestrischen Phasenraum.
+
+### Present-day density benchmark
+
+OSIRIS-REx/Bennu-Trajektoriendaten liefern für eine verteilte DM-Komponente bei `~1.1 AU` ungefähr
+
+```text
+rho_DM <~3.3e-15 kg/m^3.
+```
+
+Der F6-Referenzbedarf liegt damit bei `1e11 kg` unter, bei `2e11 kg` ungefähr auf und bei `5e11 kg` darüber.
+
+Das ist **kein direkter primordialer Ausschluss**, weil F6 die frühe Solar-System-Population benötigt und heutige ephemeridenbasierte Dichtelimits nicht exakt auf eine frühe anisotrope kompakte Population abbilden.
+
+F6 Schluss:
+
+```text
+population folding: CALCULATED
+normal halo abundance: FAIL
+one isolated seed as generic solution: FAIL
+primordial solar-bound overdense population: OPEN but quantitatively demanding
+absolute delivery probability: OPEN.
+```
+
+Zentrale F6-Dateien:
+
+- `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
+- `stage3_78_f6_population_weighted_formation_gate.py`
 
 Nächster Formationstest:
 
 ```text
-F6 = population-weighted formation gate
--> seed heliocentric a,e,i distribution
--> embryo encounter-rate distribution
--> Hill-occupancy duty cycle
--> F5 conditional capture kernel
--> later survival / engulfment
--> absolute P_delivery or required seed abundance.
+F7 = physical origin / retention of the required solar-bound seed population
+-> pre-solar PBH/seed phase space
+-> molecular-cloud / stellar-cluster capture
+-> binary/multi-star exchange
+-> adiabatic Solar-potential growth
+-> retention through disk/embryo epoch
+-> present-day survivor fraction
+-> ephemeris / asteroid-tracking consistency.
 ```
 
 # Aktuelle Endmatrix
@@ -375,18 +410,15 @@ F6 = population-weighted formation gate
 | normal halo -> Earth delivery | **VERY STRONG FAIL** |
 | normal halo -> protostellar cloud | **strongly negative** |
 | naked-seed disk gas drag | **FAIL / insufficient** |
-| solar-bound cold seed | **OPEN initial condition** |
-| smooth Hill pull-down | **FAIL as generic mechanism** |
-| F3 small GI <=3% | **FAIL in sampled outer gate** |
-| F3 ~10% GI | **PASS existence / inefficient** |
-| F3 ~30% GI | **PASS conditional few-percent channel** |
+| random/smooth GI pull-down | **strongly negative / inefficient** |
 | F3b generic multi-pass timing rescue | **FAIL** |
-| F4 correlated embryo-exchange energy gate | **PASS kinematic** |
-| F4 growth-assisted engulfment | **PASS conditional / history OPEN** |
+| F4 correlated embryo exchange | **PASS kinematic** |
+| F4 growth-assisted engulfment | **PASS conditional** |
 | F5 direct restricted 4-body exchange | **PASS conditional** |
-| F5 strong persistent stable fraction | **1.67% in defined encounter-conditioned ensemble** |
-| F5 broad persistent stable fraction | **1.00% in defined encounter-conditioned ensemble** |
-| F5 weak persistent stable fraction | **0/300 found** |
+| F5 Strong persistent stable | **1.67% in defined encounter-conditioned ensemble** |
+| F6 normal Galactic seed density | **FAIL by abundance** |
+| F6 required solar-bound population | **~1e4...1e7 seeds in reference geometries** |
+| F6 primordial overdense solar-bound population | **OPEN / origin unexplained** |
 | full formation/delivery probability | **OPEN** |
 | direkte experimentelle BH-Detektion | **NONE** |
 | eindeutige positive Signatur | **NONE** |
@@ -398,9 +430,9 @@ F6 = population-weighted formation gate
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F6 population-weighted formation/delivery probability
-6. realistic post-capture growth/engulfment survival
-7. physical origin / abundance / phase-space density of solar-bound cold seeds.
+5. F7 physical origin/retention of the F6-required solar-bound seed population
+6. realistic long-term post-capture survival / engulfment / settling
+7. absolute formation/delivery probability.
 ```
 
 # Zentrale Statusdateien
@@ -412,6 +444,7 @@ F6 = population-weighted formation gate
 - `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
 - `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
 - `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
+- `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
 - `STAGE3_71_A19_FORMATION_RECHECK.md`
 - `STAGE3_70B_A18_REALDATA_AUDIT.md`
 
@@ -423,4 +456,4 @@ Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.77/F5, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.78/F6, Rheinland-Pfalz, Deutschland.
