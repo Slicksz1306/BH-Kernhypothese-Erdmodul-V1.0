@@ -12,6 +12,24 @@ from stage3_94_multi_gate_closure import (
 )
 
 
+def _a34_profile_and_numerical_derivative(result, radii):
+    """Evaluate the A34 profile and an independent central derivative."""
+    step = radii * 1.0e-6
+
+    def profile(points):
+        return a34_concentration_profile(
+            points,
+            alpha_m=result.alpha_m,
+            r_sink_m=result.r_sink_m,
+            R_outer_m=result.R_outer_m,
+            c_inf_m3=result.c_inf_m3,
+        )
+
+    concentration = profile(radii)
+    derivative = (profile(radii + step) - profile(radii - step)) / (2.0 * step)
+    return concentration, derivative
+
+
 class TestStage394(unittest.TestCase):
     def test_01_f12_poisson(self):
         r = solve_f12_primordial()
@@ -54,16 +72,71 @@ class TestStage394(unittest.TestCase):
         b = solve_a34_drift_diffusion(c_inf_m3=10.0)
         self.assertAlmostEqual(b.particle_rate_s / a.particle_rate_s, 10.0, places=12)
 
-    def test_09_h0_shell_density(self):
+    def test_09_a34_ode_residual(self):
+        result = solve_a34_drift_diffusion()
+        radii = np.geomspace(result.r_sink_m * 1.001, result.R_outer_m / 1.001, 400)
+        concentration, derivative = _a34_profile_and_numerical_derivative(result, radii)
+
+        drift = result.alpha_m * concentration / radii**2
+        source = result.particle_rate_s / (
+            4.0 * math.pi * result.D_eff * result.thermo_factor * radii**2
+        )
+        residual = derivative + drift - source
+        scale = np.abs(derivative) + np.abs(drift) + np.abs(source) + np.finfo(float).tiny
+        relative_residual = np.abs(residual) / scale
+
+        self.assertLess(float(np.max(relative_residual)), 1.0e-6)
+
+    def test_10_a34_flux_is_conserved(self):
+        result = solve_a34_drift_diffusion()
+        radii = np.geomspace(result.r_sink_m * 1.001, result.R_outer_m / 1.001, 400)
+        concentration, derivative = _a34_profile_and_numerical_derivative(result, radii)
+
+        flux_density = -result.D_eff * result.thermo_factor * (
+            derivative + result.alpha_m * concentration / radii**2
+        )
+        particle_rate = -4.0 * math.pi * radii**2 * flux_density
+        relative_spread = (np.max(particle_rate) - np.min(particle_rate)) / abs(
+            np.mean(particle_rate)
+        )
+
+        self.assertLess(float(relative_spread), 1.0e-6)
+        np.testing.assert_allclose(
+            particle_rate,
+            result.particle_rate_s,
+            rtol=1.0e-6,
+            atol=0.0,
+        )
+
+    def test_11_a34_inner_profile_has_no_exponential_overshoot(self):
+        result = solve_a34_drift_diffusion()
+        radius = 2.0 * result.r_sink_m
+        concentration = float(
+            a34_concentration_profile(
+                radius,
+                alpha_m=result.alpha_m,
+                r_sink_m=result.r_sink_m,
+                R_outer_m=result.R_outer_m,
+                c_inf_m3=result.c_inf_m3,
+            )
+        )
+        expected = result.c_inf_m3 * (
+            -np.expm1(-result.alpha_m * (1.0 / result.r_sink_m - 1.0 / radius))
+        ) / (-np.expm1(-result.exponent_span))
+
+        self.assertAlmostEqual(concentration, float(expected), places=12)
+        self.assertLessEqual(concentration, result.c_inf_m3)
+
+    def test_12_h0_shell_density(self):
         r = solve_h0_seismic_anomaly()
         self.assertAlmostEqual(r.delta_rho_shell_kg_m3, -5.714285714285714, places=12)
 
-    def test_10_h0_mass_compensation(self):
+    def test_13_h0_mass_compensation(self):
         r = solve_h0_seismic_anomaly()
         positive_mass_scale = 4.0 * math.pi * 100.0 * 1000.0**3
         self.assertLess(abs(r.compensated_mass_kg), positive_mass_scale * 1e-11)
 
-    def test_11_full_50_point_sweep(self):
+    def test_14_full_50_point_sweep(self):
         s = run_sweep(50)
         self.assertEqual({k: len(v) for k, v in s.items()}, {"F12": 50, "A34": 50, "H0": 50})
 

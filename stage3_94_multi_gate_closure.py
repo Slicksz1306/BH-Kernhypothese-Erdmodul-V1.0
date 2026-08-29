@@ -104,6 +104,10 @@ def a34_concentration_profile(
     """Exact stationary concentration profile for the reduced spherical sink.
 
     Boundary conditions: c(r_sink)=0, c(R_outer)=c_inf.
+
+    For J_r = -D*Phi*(dc/dr + alpha*c/r**2), the stationary solution is
+        c(r) = c_inf * [1 - exp(-alpha*(1/r_sink - 1/r))]
+                         / [1 - exp(-alpha*(1/r_sink - 1/R_outer))].
     """
     r = np.asarray(r_m, dtype=float)
     if np.any(r < r_sink_m) or np.any(r > R_outer_m):
@@ -113,12 +117,7 @@ def a34_concentration_profile(
     denom = -np.expm1(-span)
     local = alpha_m * (1.0 / r_sink_m - 1.0 / r)
 
-    return (
-        c_inf_m3
-        * np.exp(alpha_m * (1.0 / r - 1.0 / R_outer_m))
-        * (-np.expm1(-local))
-        / denom
-    )
+    return c_inf_m3 * (-np.expm1(-local)) / denom
 
 
 def solve_a34_drift_diffusion(
