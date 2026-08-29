@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 29.08.2026  
-**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a; Multi-Gate Closure bis Stage 3.94
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a; Multi-Gate Closure bis Stage 3.94; Toy-A35-Diagnostik bis Stage 3.95A
 
 ## Statusbegriffe
 
@@ -131,10 +131,63 @@ Aktueller reproduzierter Teststand:
 ```text
 Stage 3.94 regression suite: 14/14 PASS
 F8a regression suite:        12/12 PASS
-unittest discovery gesamt:   26/26 PASS
+Stage 3.95A diagnostic suite: 16/16 PASS
+unittest discovery gesamt:   42/42 PASS
 ```
 
 Dieser PASS bestätigt die mathematische Konsistenz der reduzierten stationären A34-Lösung innerhalb ihrer Eingaben und Randbedingungen. Er bestätigt weder eine vollständige multikomponentige Ladungs-Closure noch die SL/BH-Kernhypothese experimentell.
+
+# 5a. Stage 3.95A – A35 Diagnostic Charge Theorem
+
+Stage 3.95A untersucht zunaechst nur das ungeschirmte diagonale Zwei-Spezies-Toy-Modell
+
+```text
+h(x) = x/[1-exp(-x)]
+f(N) = Z dotN_i(N) - dotN_e(N)
+N    = Q/e.
+```
+
+Analytisch und numerisch regressionsgesichert gilt innerhalb dieses Modells:
+
+```text
+h'(x) > 0
+f'(N) < 0
+genau ein kontinuierlicher stabiler Toy-Nullpunkt.
+```
+
+Der Root ist keine physikalische Ladungsvorhersage. Bereits der freie Scan ueber `D_e/D_i`, `Z` und `T_e/T_i` zeigt seine starke Transportabhaengigkeit. Elektrische Leitfaehigkeit wird dabei nicht als vollstaendige Elektronen-Diffusionsclosure interpretiert.
+
+Bei aeusserer Quasineutralitaet und gleichen Transportfaktoren wird der kritische neutrale Root unabhaengig vom Rootfinder durch
+
+```text
+(D_e/D_i)_crit = h(x_i)/h(x_e) = 132.876774528
+```
+
+reproduziert.
+
+Die diskrete Ergaenzung verwendet
+
+```text
+N -> N-1 durch Elektronencapture
+N -> N+Z durch Ionencapture
+G^T P = 0 im stationaeren endlichen Zustandsraum.
+```
+
+Der Test prueft Normierung, Nichtnegativitaet, Generatorvorzeichen, Mastergleichungsresiduum und kleine Randwahrscheinlichkeit. Zusaetzlich schliessen die ersten beiden stationaeren Sprungmomente relativ mit etwa `1.58e-15` und `2.22e-14`. Mittelwert, Varianz und Modus sind fuer `N_max=100,150,200` konvergent. Die Kramers-Moyal/OU-Varianz `77.2372` liegt im Referenzfall etwa `0.286%` von der diskreten Varianz `77.4585` entfernt. Nichtganzzahlige mittlere Ionisation wird nicht als diskrete Sprungweite zugelassen.
+
+`r_match=6.13e-8 m` ist in diesem Block der bisherige Bondi-/Materialradius als effektive A34-Matchingflaeche. Er ist bei `M=1e11 kg` etwa `4.13e8` Schwarzschildradien gross und wird nicht als Ereignishorizont oder mikroskopisch hergeleitete Capture-Flaeche bezeichnet.
+
+Status:
+
+```text
+stabiler Driftfaktor und Monotonietheorem: PASS
+kontinuierliche Toy-Root-Stabilitaet:       PASS
+diskrete Markov-Diagnostik:                PASS
+Generator-/Momenten-/Trunkierungschecks:    PASS
+Stage-3.95A Tests:                          16/16 PASS
+reales WDM-/Screening-/Sink-Q_eq:           OPEN
+experimenteller BH-Nachweis:                NONE
+```
 
 # 6. Formation / Delivery
 
@@ -460,6 +513,8 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | electron sink | stabilized |
 | nonlinear TF screening | calculated / recoupled |
 | A34 reduced stationary ODE + residual/flux regressions | **14/14 Stage-3.94 suite PASS** |
+| A35 diagonal Toy-Monotonietheorem | **PASS in Stage 3.95A reference model** |
+| A35 diskrete Ladungsdiagnostik | **16/16 Stage-3.95A suite PASS** |
 | exact multicomponent Q_eq | **OPEN** |
 | final Full-WDM species-resolved Mdot_BH(t) | **OPEN** |
 | normal halo -> Earth delivery | **VERY STRONG FAIL** |
@@ -474,7 +529,7 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | F7 standard giant-planet halo capture | **FAIL** |
 | F8a virialized cold-substructure phase-space | **PASS existence screen / candidates found** |
 | F8a regression suite | **12/12 PASS** |
-| complete unittest discovery | **26/26 PASS** |
+| complete unittest discovery | **42/42 PASS** |
 | F8a cluster survival | **PARTIAL reduced proxy** |
 | F8 stream long-term solar retention | **OPEN** |
 | F8 present-day compatibility | **OPEN / evolution required** |
@@ -486,7 +541,7 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 # 8. Open hard problems
 
 ```text
-1. exact multicomponent Onsager/Maxwell-Stefan charge closure -> Q_eq
+1. Stage 3.95B: ionischer Stofftransport + elektronischer WDM-Transport + Screening + Sink-Capture -> reales Q_eq
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
@@ -503,6 +558,9 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 - `STAGE3_94_MULTI_GATE_CLOSURE.md`
 - `stage3_94_multi_gate_closure.py`
 - `test_stage3_94_multi_gate_closure.py`
+- `STAGE3_95A_A35_DIAGNOSTIC_CHARGE_THEOREM.md`
+- `stage3_95a_a35_diagnostic_charge_theorem.py`
+- `test_stage3_95a_a35_diagnostic_charge_theorem.py`
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
 - `STAGE3_74_F3_HILL_MONTE_CARLO.md`

@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A31; Formation/Delivery F1–F8a; Multi-Gate Closure bis Stage 3.94 (F12 / A34 / H0)  
+**Aktueller Forschungsstand:** Reduced Stack A1–A31; Formation/Delivery F1–F8a; Multi-Gate Closure bis Stage 3.94 (F12 / A34 / H0); Toy-A35-Diagnostik bis Stage 3.95A
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -220,6 +220,63 @@ ohne Solverfehler.
 
 ---
 
+# Stage 3.95A – A35 Diagnostic Charge Theorem
+
+Stage 3.95A schliesst noch nicht das reale multikomponentige `Q_eq`. Der neue Block beweist und testet zunaechst die Mathematik des absichtlich ungeschirmten diagonalen Elektron-Ion-Toy-Modells.
+
+Mit
+
+```text
+h(x) = x/[1-exp(-x)]
+f(N) = dN/dt = Z dotN_i(N) - dotN_e(N)
+N    = Q/e
+```
+
+gilt innerhalb dieses Modells analytisch:
+
+```text
+h'(x) > 0
+f'(N) < 0
+```
+
+Zusammen mit dem Vorzeichenwechsel fuer `N -> +/-infinity` folgt genau ein stabiler kontinuierlicher Toy-Nullpunkt. Eine Scan-Regression zeigt zugleich, dass dessen Wert stark von den freien Transportannahmen abhaengt; beispielsweise verschiebt er sich fuer `Zbar=2.76` beim Scan von `D_e/D_i=1...2335.3` von etwa `+713.5 e` nach `-85.6 e`.
+
+Bei aeusserer Quasineutralitaet und gleichen Transportfaktoren wird der neutrale Toy-Root unabhaengig vom Rootfinder durch
+
+```text
+(D_e/D_i)_crit = h(x_i)/h(x_e) = 132.876774528
+```
+
+reproduziert.
+
+Ergaenzt wurde eine diskrete Ladungskette:
+
+```text
+Elektronencapture: N -> N-1
+Ionencapture:      N -> N+Z
+stationaer:        G^T P = 0
+```
+
+Sie liefert `P_N`, `<N>`, Varianz, Modus, Mastergleichungsresiduum und Randmasse. Generatorvorzeichen, erste und zweite Sprungmomentbilanz sowie die Trunkierung `N_max=100,150,200` sind separat getestet. Eine Kramers-Moyal/OU-Naeherung ergibt `Var(N)=77.2372` gegen diskret `77.4585` und dient nur als Toy-Crosscheck. Damit wird bei kleinen Ladungszahlen kein kuenstlich kontinuierlicher Zustand erzwungen.
+
+Der verwendete Wert `r_match=6.13e-8 m` ist der bisherige projektinterne Bondi-/Materialradius als effektive A34-Randflaeche, nicht der Ereignishorizont. Die Abbildung auf Screening, innere Kinetik und Horizon-Capture bleibt offen.
+
+```text
+Toy-A35 Mathematik:                       PASS
+Stage-3.95A Regressionen:                 16/16 PASS
+unittest discovery gesamt:                42/42 PASS
+reales WDM-/Screening-/Sink-Q_eq:         OPEN
+experimenteller BH-Nachweis:              NONE
+```
+
+Zentrale Dateien:
+
+- `STAGE3_95A_A35_DIAGNOSTIC_CHARGE_THEOREM.md`
+- `stage3_95a_a35_diagnostic_charge_theorem.py`
+- `test_stage3_95a_a35_diagnostic_charge_theorem.py`
+
+---
+
 # Reduced Stack A1–A31
 
 Wichtige bisherige Resultate:
@@ -334,6 +391,13 @@ python stage3_94_multi_gate_closure.py
 python -m unittest -v test_stage3_94_multi_gate_closure.py
 ```
 
+Stage 3.95A:
+
+```bash
+python stage3_95a_a35_diagnostic_charge_theorem.py
+python -m unittest -v test_stage3_95a_a35_diagnostic_charge_theorem.py
+```
+
 F8a:
 
 ```bash
@@ -345,8 +409,9 @@ python -m unittest -v test_stage3_80_f8_substructure_scan.py
 # Projektstruktur / zentrale Statusdateien
 
 - `THEORIE.md` – theoretischer Rahmen.
-- `TEST_STATUS.md` – historischer Test-/Validierungsstand bis F8a.
+- `TEST_STATUS.md` – historischer Test-/Validierungsstand bis Stage 3.95A.
 - `STAGE3_94_MULTI_GATE_CLOSURE.md` – aktueller Multi-Gate-Closure-Stand.
+- `STAGE3_95A_A35_DIAGNOSTIC_CHARGE_THEOREM.md` – kontrollierte kontinuierliche und diskrete Toy-A35-Ladungsdiagnostik.
 - `AKKRETION_STATUS.md` – Akkretions-/Transportstatus.
 - `REDUCED_STACK_CLOSURE_A19.md` – A1–A19 Reduced Stack.
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md` – verbleibende multikomponentige Charge-Closure.
@@ -356,4 +421,4 @@ python -m unittest -v test_stage3_80_f8_substructure_scan.py
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; aktueller Rechenstand bis Stage 3.94, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; aktueller Rechenstand bis Stage 3.95A, Rheinland-Pfalz, Deutschland.
