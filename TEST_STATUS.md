@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 29.08.2026  
-**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a; Multi-Gate Closure bis Stage 3.94
 
 ## Statusbegriffe
 
@@ -100,7 +100,43 @@ A31 hält ausdrücklich fest:
 self diffusion != mutual diffusion != charge mobility.
 ```
 
-# 5. Formation / Delivery
+# 5. Stage 3.94 – Multi-Gate Closure F12 / A34 / H0
+
+Stage 3.94 bündelt drei reduzierte, klar begrenzte Solverblöcke:
+
+| Gate | Numerischer Status | Physische Aussagegrenze |
+|---|---|---|
+| F12 | Proxy-Arithmetik + Sweep **PASS** | physikalisches `P_zeta(k)` und echtes `f_NL` **OPEN** |
+| A34 | stationäre Ein-Spezies-ODE **PASS** | finales multikomponentiges `Q_eq` **OPEN** |
+| H0 | Massenkompensation + Sensitivitätsproxy **PASS** | eindeutige seismische H0-Vorhersage **OPEN** |
+
+Die A34-Konzentrationslösung wurde gegen die Differentialgleichung selbst geprüft. Die Regressionen umfassen:
+
+```text
+Randbedingungen c(r_sink)=0 und c(R)=c_inf
+normiertes ODE-Residuum auf 400 logarithmischen Radialpunkten
+radiale Flusserhaltung dotN(r)=const.
+Innenprofil-Regressionsschutz gegen die frühere exponentielle Überhöhung
+```
+
+Defaultlauf:
+
+```text
+maximales normiertes ODE-Residuum = 1.30e-9  (<1e-6)
+relative Streuung von dotN(r)     = 2.61e-9  (<1e-6)
+```
+
+Aktueller reproduzierter Teststand:
+
+```text
+Stage 3.94 regression suite: 14/14 PASS
+F8a regression suite:        12/12 PASS
+unittest discovery gesamt:   26/26 PASS
+```
+
+Dieser PASS bestätigt die mathematische Konsistenz der reduzierten stationären A34-Lösung innerhalb ihrer Eingaben und Randbedingungen. Er bestätigt weder eine vollständige multikomponentige Ladungs-Closure noch die SL/BH-Kernhypothese experimentell.
+
+# 6. Formation / Delivery
 
 ## F1 – Protosolar / co-moving Seed
 
@@ -353,7 +389,7 @@ Bulk co-motion is explicit. Over `0.06 Myr`, `1 km/s` corresponds to a displacem
 `test_stage3_80_f8_substructure_scan.py`:
 
 ```text
-7/7 PASS.
+12/12 PASS.
 ```
 
 Tests:
@@ -414,7 +450,7 @@ experimental BH evidence: NONE.
 
 The F7 origin rescue is therefore **not immediately empty in parameter space**, but F8a does not establish that such a substructure forms, survives the natal cluster/Solar collapse, or remains observationally allowed.
 
-# 6. Current end matrix
+# 7. Current end matrix
 
 | Bereich | Status |
 |---|---|
@@ -423,6 +459,7 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | smooth-compensated Earth macro branch | no Reduced structure exclusion |
 | electron sink | stabilized |
 | nonlinear TF screening | calculated / recoupled |
+| A34 reduced stationary ODE + residual/flux regressions | **14/14 Stage-3.94 suite PASS** |
 | exact multicomponent Q_eq | **OPEN** |
 | final Full-WDM species-resolved Mdot_BH(t) | **OPEN** |
 | normal halo -> Earth delivery | **VERY STRONG FAIL** |
@@ -436,7 +473,8 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | F7 protostellar wide PBH capture | **PASS existence / insufficient terrestrially** |
 | F7 standard giant-planet halo capture | **FAIL** |
 | F8a virialized cold-substructure phase-space | **PASS existence screen / candidates found** |
-| F8a regression suite | **7/7 PASS** |
+| F8a regression suite | **12/12 PASS** |
+| complete unittest discovery | **26/26 PASS** |
 | F8a cluster survival | **PARTIAL reduced proxy** |
 | F8 stream long-term solar retention | **OPEN** |
 | F8 present-day compatibility | **OPEN / evolution required** |
@@ -445,7 +483,7 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | experimental BH detection | **NONE** |
 | unique positive signature | **NONE** |
 
-# 7. Open hard problems
+# 8. Open hard problems
 
 ```text
 1. exact multicomponent Onsager/Maxwell-Stefan charge closure -> Q_eq
@@ -458,10 +496,13 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 8. absolute formation/delivery probability.
 ```
 
-# 8. Central files
+# 9. Central files
 
 - `README.md`
 - `TEST_STATUS.md`
+- `STAGE3_94_MULTI_GATE_CLOSURE.md`
+- `stage3_94_multi_gate_closure.py`
+- `test_stage3_94_multi_gate_closure.py`
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
 - `STAGE3_74_F3_HILL_MONTE_CARLO.md`
