@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.79 / F7  
+**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.80 / F8a  
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -24,7 +24,8 @@ H+ negativ im stärksten projektintern verwendeten SK-IV-Hochenergievergleich
 H0 OPEN / nicht nachgewiesen
 mehrere interne Solver-/Regressionstests bestanden
 mehrere frühere Annahmen korrigiert oder verworfen
-Formation/Delivery weiterhin OPEN und inzwischen stark origin-fine-tuned.
+Formation/Delivery weiterhin OPEN und stark origin-fine-tuned
+F8a findet nur konditionale cold-substructure Kandidaten, keinen Formation-Nachweis.
 ```
 
 ## Branches
@@ -126,7 +127,7 @@ Zentrale Dateien:
 ```text
 normal halo -> direct Earth: VERY STRONG FAIL
 protoplanetary gas drag: insufficient
-normal halo -> protostellar cloud: strongly negative as generic delivery
+normal halo -> protostellar cloud: strongly negative as generic terrestrial delivery
 already solar-bound, dynamically cold seed: OPEN initial condition.
 ```
 
@@ -156,6 +157,8 @@ Konservativer zeitgewichteter Pull-down-Anteil bei `r>=0.1 r_H`:
 | `0.10` | `0.0352%` | `0.0725%` | `0.0722%` | **PASS existence / inefficient** |
 | `0.30` | `6.806%` | `6.302%` | `5.653%` | **PASS conditional channel** |
 
+Ein früher fixed-step-RK4-Resultat bei tiefen Encounters wurde wegen Jacobi-Drift verworfen. Finaler DOP853-Solver: PASS an den definierten Regressionen.
+
 ## Stage 3.75 / F3b – Multi-Pass / Residence Timing
 
 ```text
@@ -176,8 +179,8 @@ absolute delivery: OPEN.
 Bei `f=0.3 r_H`:
 
 ```text
-prograde stable-capture kick   ~0.748 v_H
-retrograde stable-capture kick ~0.376 v_H.
+prograde stable-capture kick    ~0.748 v_H
+retrograde stable-capture kick  ~0.376 v_H.
 ```
 
 Enge Embryo–Embryo-Begegnungen besitzen ausreichend differential impulse als kinematischen Capture-Gate.
@@ -303,22 +306,13 @@ Zentrale Dateien:
 
 F7 testet, ob Standard-Galactic channels die F6-Anfangsbedingung tatsächlich erzeugen können.
 
-### Adiabatische Solar-Inheritance aus dem kanonischen Halo
+### Canonical-halo adiabatic inheritance
 
-Mit Oncins et al. (2022), capture-freundlich `f_PBH=f_s=1`,
-
-```text
-rho_h = 0.3 GeV/cm^3
-sigma_h = 200 km/s
-```
-
-folgt bei 1 AU:
+Mit capture-freundlich `f_PBH=f_s=1`, `rho_h=0.3 GeV/cm^3`, `sigma_h=200 km/s` folgt bei 1 AU:
 
 ```text
 rho_bd(1 AU) = 1.329e-24 kg/m^3.
 ```
-
-F6-Hill-Occupancy:
 
 | M_PBH | mu_H,adiabatic | shortfall vs 8.318 |
 |---:|---:|---:|
@@ -327,17 +321,13 @@ F6-Hill-Occupancy:
 | `2e11 kg` | `2.80e-9` | `2.97e9 x` |
 | `5e11 kg` | `1.12e-9` | `7.43e9 x` |
 
-Damit:
-
 ```text
 standard Galactic-halo adiabatic inheritance @1 AU: FAIL.
 ```
 
-### Protostellar-cloud Upper Bound
+### Protostellar-cloud generous upper bound
 
-Mit Eroshenko-Referenz `R_i=7500 AU`, `t_d=6e4 yr`, `v_cap=0.5 km/s`, `sigma=200 km/s` kann wegen `n_PBH~1/M` die Gesamtzahl **weit** gebundener low-mass PBHs groß sein.
-
-Aber selbst wenn jeder langsame Cloud-Entrant eingefangen wird und zusätzlich jeder durch eine fertige Punkt-Sonne auf `q<1 AU` fokussierte Fall als perfekter terrestrial candidate zählt:
+Selbst wenn jeder langsame Cloud-Entrant eingefangen wird und zusätzlich jeder durch eine fertige Punkt-Sonne auf `q<1 AU` fokussierte Fall als perfekter terrestrial candidate zählt:
 
 | M_PBH | maximaler inner-1-AU candidate upper bound |
 |---:|---:|
@@ -346,68 +336,28 @@ Aber selbst wenn jeder langsame Cloud-Entrant eingefangen wird und zusätzlich j
 | `2e11 kg` | `7.87` |
 | `5e11 kg` | `3.15` |
 
-gegen F6s günstigstes globales Minimum
-
-```text
-N_seed,min ~1.07e4.
-```
+gegen F6s günstigstes globales Minimum `N_seed,min ~1.07e4`.
 
 ```text
 wide cloud capture: possible
 terrestrial cold-seed supply: FAIL even in generous upper bound.
 ```
 
-### Giant-planet Capture aus dem Standard-Halo
+### Giant-planet capture from standard halo
 
-Mit dem phase-space-mixed Jupiter/Saturn-Modell von Dehnen, Hands & Schoenrich (2022) ergibt sich für Maxwell `sigma=200 km/s` bei 1 AU:
+Für den phase-space-mixed Jupiter/Saturn-Pfad bei `sigma=200 km/s`:
 
 ```text
-n_bound/n_halo ~4.50e-4.
+n_bound(1 AU)/n_halo ~4.50e-4.
 ```
 
-Daraus:
-
-| M_PBH | mu_H,planetary | shortfall vs F6 |
-|---:|---:|---:|
-| `1e10 kg` | `1.01e-8` | `8.20e8 x` |
-| `1e11 kg` | `1.01e-9` | `8.20e9 x` |
-| `2e11 kg` | `5.07e-10` | `1.64e10 x` |
-| `5e11 kg` | `2.03e-10` | `4.10e10 x` |
-
-Damit kann ein großer integrierter Capture-Count über Gyr nicht mit einer großen **instantanen kalten 1-AU-Population** gleichgesetzt werden.
+F6 Hill occupancy bleibt um ungefähr `1e9...1e10` zu klein.
 
 ```text
 standard-halo giant-planet capture as F6 source: FAIL.
 ```
 
-### Letzter offener Origin-Rescue
-
-Der F6/F7 Bedarf lässt sich als phase-space merit schreiben:
-
-```text
-(rho_DM/sigma_DM^3)_required
-/
-(rho_halo/sigma_halo^3)
-~1.5e8 ... 7.4e9.
-```
-
-Bei kanonischer Dichte müsste eine bereits co-moving Dark-Komponente nur etwa
-
-```text
-sigma_DM ~378 ... 102 m/s
-```
-
-haben. Bei `sigma_DM=1 km/s` wären stattdessen ungefähr
-
-```text
-rho_DM ~0.147 ... 7.34 M_sun/pc^3
-```
-
-für `1e10...5e11 kg` nötig.
-
-Das ist keine Standard-Halo-Population und wird durch einen gewöhnlichen Solar-Birth-Cluster nicht automatisch erzeugt: die niedrige **stellar** cluster dispersion kühlt hot halo PBHs nicht dissipativ herunter.
-
-F7 Schluss:
+### F7-Schluss
 
 ```text
 standard Galactic origin channels: FAIL for terrestrial F6 phase space
@@ -421,16 +371,123 @@ Zentrale F7-Dateien:
 - `STAGE3_79_F7_SEED_ORIGIN_PHASE_SPACE_GATE.md`
 - `stage3_79_f7_seed_origin_phase_space_gate.py`
 
+## Stage 3.80 / F8a – Co-moving cold substructure scan
+
+F8 testet den letzten F7-Origin-Rescue. Eine zentrale Korrektur ist eingebaut:
+
+```text
+self-bound virialized mini-halo:
+M_sub and r_core free; sigma derived from the profile
+
+unbound cold stream/clump:
+M_sub, r_core, sigma_sub and v_rel may be independent,
+but ballistic expansion and bulk drift are explicit.
+```
+
+Für einen Plummer-Mini-Halo:
+
+```text
+rho(r) = 3M/(4 pi a^3) [1+r^2/a^2]^(-5/2)
+sigma_1D^2(r) = GM/(6a) [1+r^2/a^2]^(-1/2).
+```
+
+Damit gilt bei festem `a`:
+
+```text
+rho ~ M
+sigma ~ M^(1/2)
+Q = rho/sigma^3 ~ M^(-1/2).
+```
+
+Ein unabhängiger Scan von `M_sub`, `r_core` und `sigma_sub` für einen selbstgebundenen Halo wurde deshalb verworfen.
+
+### Low-velocity phase-space Gate
+
+```text
+Q_eff = rho/sigma^3 * exp[-v_rel^2/(2 sigma^2)]
+
+rho_bound(1 AU)
+= [4/(3 sqrt(pi))] Q_eff (G M_sun/AU)^(3/2)
+
+mu_H = rho_bound V_H / M_seed.
+```
+
+F6-PASS-Schwelle:
+
+```text
+mu_H >= 8.318.
+```
+
+Erforderliche `Q`-Werte:
+
+| Seedmasse | Q_req [M_sun pc^-3 (km/s)^-3] |
+|---:|---:|
+| `1e10 kg` | `0.146794` |
+| `1e11 kg` | `1.46794` |
+| `2e11 kg` | `2.93589` |
+| `5e11 kg` | `7.33972` |
+
+Der Bulk-Offset ist explizit: über `0.06 Myr` verschiebt `v_rel=1 km/s` eine Substruktur um ungefähr `12,650 AU`. Hohe Dichte allein genügt daher nicht; echte Co-Motion ist erforderlich.
+
+### Canonical F8a example grid
+
+```text
+25,920 rows
+M_sub = 1e-15 ... 1e-4 M_sun
+r_core = 1e-3 ... 1e3 AU
+stream sigma = 0.01 ... 1 km/s
+hybrid v_rel grid
+4 seed masses
+medium cluster stress model.
+```
+
+Resultat:
+
+```text
+mini-halo phase-space pass rows: 702
+mini-halo Stage-1 candidate rows: 390
+mini-halo Stage-1 + unchanged present-day density benchmark: 0
+stream phase-space pass rows: 5391
+stream collapse-overlap Stage-1 candidate rows: 692.
+```
+
+Diese Zähler sind **Grid-Zellen, keine astrophysikalischen Wahrscheinlichkeiten**.
+
+`f_seed_required = mu_H,50/mu_H(f_seed=1)` ist explizit ausgegeben. Damit wird nicht mehr stillschweigend angenommen, dass 100% einer generischen Dark-Substructure aus kompakten Seeds bestehen.
+
+### F8a Status
+
+```text
+Plummer/Virial regression tests: 7/7 PASS
+self-consistent mini-halo phase-space candidates: FOUND
+finite stream collapse-overlap candidates: FOUND
+mini-halo cluster survival: PARTIAL reduced proxy
+stream solar-bound 1e6...1e7 yr retention: OPEN
+unchanged present-day retention: tension/model-dependent
+final F8: OPEN.
+```
+
+Der Parameterraum ist also **nicht schon im semi-analytischen Phase-Space-Screen leer**. Das ist aber noch kein physikalischer Ursprungserfolg. F8b/F8c müssen zeigen, ob die Kandidaten successive Cluster-Encounters, Sonnenbildung und spätere Entwicklung wirklich überleben.
+
+Zentrale F8a-Dateien:
+
+- `STAGE3_80_F8_SUBSTRUCTURE_SCAN.md`
+- `stage3_80_f8_substructure_scan.py`
+- `test_stage3_80_f8_substructure_scan.py`
+- `results/f8_example_candidates.csv`
+- `results/f8_example_summary.json`
+- GitHub Issue `#35`.
+
 Nächster Formationstest:
 
 ```text
-F8 = viability of the remaining co-moving cold dark-substructure rescue
--> required mass/size/sigma
--> Galactic + natal-cluster tidal survival
--> response to Sun formation
--> terrestrial-zone profile
--> required later depletion
--> present-day observational consistency.
+F8b = Monte-Carlo cluster disruption of the F8a candidate region
+-> successive stellar encounters
+-> evolving binding/profile
+-> low/med/high cluster histories
+-> P_survive(t=1e6...1e7 yr)
+
+F8c = Proto-Sun + time-dependent gas/Solar potential + candidate substructure N-body validation.
 ```
 
 # Aktuelle Endmatrix
@@ -455,11 +512,14 @@ F8 = viability of the remaining co-moving cold dark-substructure rescue
 | F5 Strong persistent stable | **1.67% in defined encounter-conditioned ensemble** |
 | F6 normal Galactic seed density | **FAIL by abundance** |
 | F6 required solar-bound population | **~1e4...1e7 seeds in reference geometries** |
-| F7 canonical-halo adiabatic inheritance @1 AU | **FAIL by ~1e8...1e10** |
+| F7 canonical-halo origin @1 AU | **FAIL by ~1e8...1e10 phase-space** |
 | F7 protostellar wide PBH capture | **PASS existence / insufficient terrestrially** |
-| F7 protostellar terrestrial supply | **FAIL generous upper bound** |
-| F7 standard giant-planet halo capture @1 AU | **FAIL by ~1e9...1e10** |
-| F7 primordial co-moving cold dark substructure | **OPEN exotic initial condition** |
+| F7 standard giant-planet halo capture @1 AU | **FAIL** |
+| F8a virialized cold-substructure phase-space screen | **PASS existence / candidates found** |
+| F8a mini-halo cluster survival | **PARTIAL reduced proxy** |
+| F8a stream long-term solar retention | **OPEN** |
+| F8 unchanged present-day compatibility | **OPEN / evolution required** |
+| final F8 physical origin/retention | **OPEN** |
 | full formation/delivery probability | **OPEN / strongly fine-tuned** |
 | direkte experimentelle BH-Detektion | **NONE** |
 | eindeutige positive Signatur | **NONE** |
@@ -471,9 +531,10 @@ F8 = viability of the remaining co-moving cold dark-substructure rescue
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F8 physical viability of a primordial co-moving cold dark substructure
-6. realistic long-term post-capture survival / engulfment / settling
-7. absolute formation/delivery probability.
+5. F8b successive cluster-encounter Monte-Carlo for candidate substructures
+6. F8c Proto-Sun + time-dependent gas/Solar-potential N-body validation
+7. realistic long-term post-capture survival / engulfment / settling
+8. absolute formation/delivery probability.
 ```
 
 # Zentrale Statusdateien
@@ -487,6 +548,7 @@ F8 = viability of the remaining co-moving cold dark-substructure rescue
 - `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
 - `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
 - `STAGE3_79_F7_SEED_ORIGIN_PHASE_SPACE_GATE.md`
+- `STAGE3_80_F8_SUBSTRUCTURE_SCAN.md`
 - `STAGE3_71_A19_FORMATION_RECHECK.md`
 - `STAGE3_70B_A18_REALDATA_AUDIT.md`
 
@@ -498,4 +560,4 @@ Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.79/F7, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.80/F8a, Rheinland-Pfalz, Deutschland.
