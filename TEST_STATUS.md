@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 29.08.2026  
-**Forschungsstand:** Reduced/partial numerischer Stack bis A19; Stage 3.69 Full-Multiphysics nicht final geschlossen; Stage 3.70 Real-Data-Audit partiell durchgeführt
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.78 / F6
 
 ## Statusbegriffe
 
@@ -10,21 +10,33 @@
 - **CALCULATED** = definierter Benchmark numerisch berechnet.
 - **PARTIAL** = kontrollierter Unterblock gerechnet, volle physische Closure fehlt.
 - **FAIL** = konkret getesteter Branch scheitert am verwendeten Test.
-- **OPEN** = mit vorhandener Closure nicht abschliessend entschieden.
-- **CORRECTED** = fruehere Zwischenannahme durch haerteren Test ersetzt.
+- **OPEN** = mit vorhandener Closure nicht abschließend entschieden.
+- **CORRECTED / REJECTED** = frühere Zwischenannahme durch härteren Test ersetzt.
 
-## Branches
+## Wissenschaftliche Aussagegrenze
+
+```text
+keine direkte Detektion eines Erdzentrum-BH
+keine eindeutige positive H0-Signatur
+H+ FAIL in projektinterner strongest-SK-IV reinterpretation
+H0 OPEN / nicht nachgewiesen
+Formation/Delivery OPEN
+```
+
+Die Projektresultate sind Modell-/Solverresultate und **keine experimentelle BH-Evidenz**.
+
+# 1. Branches
 
 ```text
 H+ = Standard-Hawking
 H0 = ohne Hawking
 ```
 
-H+ bleibt **FAIL in der projektinternen Reinterpretation des staerksten publizierten SK-IV-Hochenergie-Binlimits**. Die standalone SK-Gd-2026-Limits in demselben Bin sind schwaecher und wuerden den Projektproxy allein nicht ausschliessen. Es wird keine offizielle Super-K-Erdzentrum-BH-Exklusion behauptet.
+H+ bleibt **FAIL** in der projektinternen Reinterpretation des stärksten publizierten SK-IV-Hochenergie-Binlimits. Dies ist keine offizielle Super-K-Erdzentrum-BH-Exklusion.
 
 H0 bleibt **OPEN / nicht nachgewiesen**.
 
-# 1. Struktur / Makromodell
+# 2. Struktur / Makromodell
 
 | Test | Status |
 |---|---|
@@ -32,331 +44,331 @@ H0 bleibt **OPEN / nicht nachgewiesen**.
 | Hard-Cavity/Hard-Replacement | **FAIL / verworfen** |
 | kleiner smooth-compensated Branch | kein eigener Makro-Ausschluss in reduzierten Modellen |
 | direkte r_B-Skalen-Seismik | **kein sinnvoller Beobachtungskanal** |
-| makroskopische Seismik/Normalmoden | **OPEN – finaler delta-rho/delta-Vp/delta-Vs-Output fehlt** |
+| makroskopische Seismik/Normalmoden | **OPEN** |
 | direkte experimentelle Detektion | **keine** |
 | eindeutige positive Signatur | **keine** |
 
-# 2. Capture-/Transportstack A1-A12
+# 3. Reduced Capture-/Transportstack A1–A19
 
 | Teiltest | Status |
 |---|---|
 | Schwarzschild-Dirac solver / current / matching | **PASS an definierten Regressionen** |
 | Earth-speed Protonenscan `1e10...5e11 kg` | **CALCULATED** |
 | Proton @`1e11 kg` | `~0.9503 classical` |
-| charged Proton `Q=0...24e` | **PARTIAL / CALCULATED** |
-| Fe-56/Ni-58 `0+` scalar/KG | **PASS Regression / CALCULATED** |
 | Fe-56 @`1e11 kg` | `~0.99754 classical` |
 | Ni-58 @`1e11 kg` | `~0.99646 classical` |
-| grosse Wave-Suppression @`1e11 kg` | **NOT FOUND** |
-| repeated encounter `chi=p/(p+e_perm)` | **DONE** |
-| local `Kn~1` = permanent escape | **REJECTED by A10** |
-| prompt one-pass neutronization | **NOT SUPPORTED** |
+| große Wave-Suppression @`1e11 kg` | **NOT FOUND** |
+| repeated encounter recycling | **DONE** |
+| local `Kn~1` = permanent escape | **REJECTED** |
 | A11/A12 dynamic backpressure PDE | **PARTIAL CALCULATED** |
-| A12 shock-position convergence to N=1024 | **CALCULATED** |
-| stationary finite `1e10 kg` shock-Mdot | **NOT ESTABLISHED** |
-| A12b More/TF Fe `Zbar` | **PARTIAL CALCULATED** |
-| A12b physical eta/k sensitivity | **PARTIAL CALCULATED** |
+| A13/A13b relativistic/empirical outer supply | **PARTIAL CALCULATED** |
+| A14 dense-core screening | **PARTIAL CALCULATED** |
+| A15 reduced net throughput `>=1e11 kg` | **PROCESSING-CAPABLE in tested stack** |
+| A16 hard total heat-budget pretest | **NO EXCLUSION** |
+| A17 microscopic near-zone seismics | **not useful** |
+| A18 H+ strongest SK-IV project comparison | **FAIL** |
+| A19 normal halo -> Earth capture | **VERY STRONG FAIL** |
 
-# 3. A12c / A13 – relativistischer Outer Supply
-
-Der historische Projekt-Supply
-
-```text
-M=1e11 kg:
-1.47e-8 ... 1.46e-7 kg/s
-```
-
-ist **LEGACY / EOS-SENSITIVE**, keine universelle Rate.
-
-A13 implementiert die stationaere allgemeine EOS-Michel-Kritikalitaet:
+A19 capture-freundlicher direct-Earth Proxy bei `v_inf=220 km/s`:
 
 ```text
-4 pi r^2 rho0 u = Mdot
-h sqrt(1 - 2M/r + u^2) = h_inf
-
-u_s^2 = a_s^2/(1+3 a_s^2)
-r_s/M = (1+3 a_s^2)/(2 a_s^2)
-h_s/sqrt(1+3 a_s^2) = h_inf.
+DeltaE/E_inf ~1e-18 ... 5e-17
 ```
 
-Constant-stiffness Regression gegen A12c: **PASS**, relativer Drift `~1e-4` oder besser.
+# 4. Stage 3.72 – A20–A31 Charge / WDM Transport
 
-A13 variable-EOS Surrogat bei `M=1e11 kg`:
+Aktueller konsolidierter Stand:
 
 ```text
-Mdot_supply ~4.64e-8 ... 1.37e-6 kg/s.
+electron Dirac sink flux-direct: stabilized
+nonlinear Thomas-Fermi screening: calculated and recoupled
+collective charge response: much faster than hydro
+naive independent ion/electron current: REJECTED
+exact Q_eq: OPEN
 ```
 
-Dies war ein kontrollierter Sensitivitaetsscan, kein finales Fe/Ni-Konfidenzintervall.
-
-# 4. A13b – Grant-2021 experimentell gefitteter Fe-Outer-Anker
-
-A13b implementiert die publizierte analytische Liquid-Fe-EOS-Fitform von Grant et al. (2021) als experimentell verankerten Outer-Abschnitt bis `400 GPa`.
-
-Publizierte Fitparameter:
+Der verbleibende Charge-Engpass ist:
 
 ```text
-K0      = 25.3 +/-4.0 GPa
-K0'     = 6.60 +/-0.33
-rho0    = 5.187 g/cm3
-gamma0  = 2.42 +/-0.12.
+multicomponent Onsager / Maxwell-Stefan mobility matrix
++ chemical-potential derivatives
++ sink-boundary coupling.
 ```
 
-Am PREM-Zentrumsrand reproduziert der nominale Grant-Pfad den Bulkmodul auf etwa `0.4 %`:
+A31 hält ausdrücklich fest:
 
 ```text
-B_Grant ~1.419 TPa
-K_PREM  ~1.425 TPa.
+self diffusion != mutual diffusion != charge mobility.
 ```
 
-Nominaler Grant-fit-anchored Sensitivitaetsbereich bei `1e11 kg`:
+# 5. Formation / Delivery
+
+## F1 – Protosolar / co-moving Seed
 
 ```text
-Mdot_supply ~1.29e-7 ... 3.80e-6 kg/s.
+normal halo -> protostellar cloud: strongly negative
+protoplanetary gas drag for naked seed: insufficient / FAIL
+already solar-bound dynamically cold seed: OPEN initial condition.
 ```
 
-Konservativer Fitparameter/T/Intermediate-EOS-Corner-Scan:
+## F2 – Hill / Pull-down Energy Gate
 
 ```text
-Mdot_supply ~8.27e-8 ... 6.13e-6 kg/s.
+temporary Hill capture: PASS / dynamically allowed
+static permanent capture without potential evolution: FAIL
+smooth terrestrial pull-down: FAIL as generic channel
+giant-impact impulsive mass jump: PASS kinematic existence
+absolute delivery probability: OPEN.
 ```
+
+## F3 – Adaptive Hill-Monte-Carlo / Jacobi Closure
+
+Konservativer `r>=0.1 r_H` Pull-down-Anteil:
+
+| DeltaM/M | Ergebnis |
+|---:|---:|
+| `0.01` | `0` in sampled outer gate |
+| `0.03` | `0` in sampled outer gate |
+| `0.10` | `0.035...0.072%` |
+| `0.30` | `5.65...6.81%` |
+
+```text
+adaptive DOP853/Jacobi solver: PASS
+fixed-step deep-encounter RK4 result: REJECTED
+small GI <=3%: FAIL in sampled outer gate
+10% GI: PASS existence / inefficient
+30% GI: PASS conditional few-percent channel.
+```
+
+## F3b – Multi-Pass / Residence Timing
+
+Literatur-/Stressanker:
+
+```text
+F3 first passage ~35.3 d
+mean Earth TCO ~286 d
+2020 CD3 median ~4 yr
+extreme clone tail ~100 yr.
+```
+
+```text
+multi-pass residence amplification: PASS
+multi-pass as generic Myr random-impact timing rescue: FAIL.
+```
+
+## F4 – Early permanent embryo-bound Seed
+
+```text
+collisionless terrestrial exchange capture: physically allowed
+stable embryo-bound phase space: PASS
+embryo-scattering kick scale: PASS kinematic
+growth-assisted engulfment: PASS conditional in adiabatic limit
+post-engulfment damping: Myr-scale feasibility in optimistic proxy
+absolute probability: OPEN.
+```
+
+Für `a_seed~0.3 r_H` muss Capture im adiabatischen Proxy ungefähr vor
+
+```text
+M1 ~0.041 M_E
+```
+
+erfolgen, damit spätere Growth-assisted Engulfment bis `1 M_E` möglich bleibt.
+
+## F5 – Restricted 4-body Exchange Monte-Carlo
+
+Direkt integriert:
+
+```text
+Sun + Proto-Earth M1 + second embryo M2 + massless seed.
+```
+
+Kritische Korrektur:
+
+```text
+unphysical low-pericentre-speed pilot: REJECTED
+final hyperbolic flyby:
+V_p^2 = V_inf^2 + 2G(M1+M2)/b.
+```
+
+Gepaarter `M2=0` Counterfactual: **PASS**.
+
+Persistenz bis `20 Omega^-1 ~3.18 yr`:
+
+| Ensemble | persistent stable |
+|---|---:|
+| STRONG | `5/300 = 1.67%` |
+| BROAD | `3/300 = 1.00%` |
+| WEAK | `0/300` |
+
+Exchange-induced FULL-only body crossings:
+
+```text
+STRONG 4/300
+BROAD  3/300
+WEAK   0/300
+```
+
+Bereits gebunden beim Body-Eintritt:
+
+```text
+STRONG 2/4
+BROAD  3/3.
+```
+
+Positive-energy one-pass crossings bleiben trotz großzügigem A19-Drag ungebunden.
 
 Status:
 
 ```text
-A13b empirical-fit outer closure: PARTIAL CALCULATED
-raw Zenodo pressure-density traces: OPEN
-direct SESAME-92141 table ingestion: OPEN
-final physical Mdot_supply uncertainty band: OPEN.
+local collisionless embryo-exchange mechanism: PASS conditionally
+generic formation probability: NOT ESTABLISHED.
 ```
 
-# 5. A14 – Dense-core charged-electron screening
+## F6 – Population-weighted Formation Gate
 
-Diffuse equal-T Plasmaformel bei `1e11 kg`:
+Core model:
 
 ```text
-Q_eq,diffuse ~+24.18 e.
+lambda = N_enc K_F5 S_post n_seed V_H
+P_delivery = 1-exp(-lambda).
 ```
 
-Im dichten/entarteten Fe-Elektronengas ergibt der Thomas-Fermi-Screening-Proxy ueber `Zbar~2.76...26`:
+Reference:
 
 ```text
-E_F       ~19.4 ... 86.6 eV
-lambda_TF ~4.29e-11 ... 2.95e-11 m.
+M1=0.03 M_E
+K_F5=5/300
+N_enc=10
+S_post=0.5
+P_target=0.5
+r_H=465,012 km
+V_H=4.212e26 m^3.
 ```
 
-Ein screened Potential-Energie-Bracket liefert eine bevorzugte Dense-Core-Chargeskala von grob
+Required eligible Hill occupancy:
 
 ```text
-Q ~ O(1...5 e).
+mu_H,50 = 8.318 seeds per Hill volume.
 ```
 
-Recoupling an A4 Proton-Dirac:
+Encounter-count sensitivity:
 
-```text
-Q~+1.6e -> ~0.925 classical
-Q~+4.9e -> ~0.867 classical.
-```
-
-```text
-large electrostatic proton blocker: NOT FOUND
-full screened Coulomb-Dirac electron S-matrix: OPEN refinement.
-```
-
-# 6. A15 – Integrated Reduced Net-Throughput Audit
-
-A13b Grant-fit Supply recoupled an A10 fast-envelope Processing-Capacity:
-
-| M_BH | Xi_min | Xi_max | Status |
-|---:|---:|---:|---|
-| `1e10` | `0.832` | `61.60` | **SUPPLY/EOS + BACKPRESSURE CONDITIONAL** |
-| `1e11` | `1.59e-3` | `1.18e-1` | **PROCESSING-CAPABLE in tested stack** |
-| `2e11` | `2.42e-4` | `1.80e-2` | **PROCESSING-CAPABLE** |
-| `5e11` | `2.00e-5` | `1.48e-3` | **PROCESSING-CAPABLE** |
-
-Wichtig:
-
-```text
-single-pass capture != stationary throughput.
-```
-
-A6/A9 repeated encounters:
-
-```text
-chi_capture = p/(p+e_perm).
-```
-
-Bei optisch dickem Reservoir und kleinem permanenten Escape darf Fe/Ni single-pass capture nicht einfach einmal auf den Supply multipliziert werden.
-
-```text
-M>=1e11 kg:
-inner reduced processing is not the bottleneck in tested A13b stack.
-
-M=1e10 kg:
-time-dependent backpressure remains decisive.
-
-final Full-WDM species-resolved Mdot_BH:
-OPEN.
-```
-
-# 7. A16 – aktualisierter Waerme-/Alterstest
-
-Globale Oberflaechen-Waermefluss-Vergleichsskala:
-
-```text
-47 +/-2 TW.
-```
-
-A13b `eta=1` momentane Restmassenleistung:
-
-| M_BH | P_min [TW] | P_max [TW] |
-|---:|---:|---:|
-| `1e10` | `7.43e-5` | `5.51e-3` |
-| `1e11` | `7.43e-3` | `0.551` |
-| `2e11` | `2.97e-2` | `2.20` |
-| `5e11` | `0.186` | `13.76` |
-
-```text
-hard total heat-budget pre-test: NO EXCLUSION.
-```
-
-Ein kompletter geothermischer Quellenfit bleibt offen.
-
-Beim analytischen `dM/dt=kM^2`-4.54-Gyr-Rueckwaertstest bleiben alle Anfangsmassen positiv. Kein algebraischer Alterswiderspruch entsteht. Hohe Supply-Aeste besitzen jedoch kurze heutige `M/Mdot`-Zeiten (`~0.10...0.52 Gyr` fuer hohe `5e11...1e11`-Aeste) und erzeugen damit starken Evolutions-/Fine-Tuning-Druck.
-
-# 8. Stage 3.70A / A17 – Observational Pre-Falsification Gate
-
-Direkte r_B-Near-Zone-Seismik ist extrem sub-wavelength. Bei `lambda=1 km` liegt
-
-```text
-ka ~3.9e-11 ... 1.9e-9
-```
-
-und ein einfacher `(ka)^4`-Rayleigh-Groessenproxy bei etwa
-
-```text
-2e-42 ... 1e-35.
-```
-
-Daher ist die mikroskopische Near-Zone selbst kein sinnvoller Seismikkanal.
-
-Makroskopische Seismik bleibt nur dann testbar, wenn Full-Multiphysics ein Profil wie
-
-```text
-delta rho(r), delta Vp(r), delta Vs(r)
-```
-
-ueber seismologisch relevante Skalen erzeugt.
-
-# 9. Stage 3.70B / A18 – aktueller Real-Data Audit
-
-2026 SK-Gd Publikation, Band `25.29...31.29 MeV`:
-
-```text
-SK-IV observed 90% CL        0.04 cm^-2 s^-1 MeV^-1
-SK-VI+VII NN observed        0.13
-SK-VI+VII BDT observed       0.16.
-```
-
-Projekt-H+ Proxy:
-
-```text
-0.098 ... 0.122 cm^-2 s^-1 MeV^-1.
-```
-
-Damit:
-
-```text
-vs strongest SK-IV limit:
-project/limit ~2.45 ... 3.05 -> FAIL in project reinterpretation.
-
-vs standalone SK-Gd-2026 limits:
-project proxy below those weaker limits.
-```
-
-Die 2026 berichtete DSNB-Indikation ist kein Earth-BH-Signal und wird nicht als Unterstuetzung von H+ gewertet.
-
-H0:
-
-```text
-REAL-DATA LIKELIHOOD NOT YET IDENTIFIABLE
-```
-
-weil eine eindeutige makroskopische Observable-Amplitude noch fehlt.
-
-# 10. A19 – Formation / Delivery Recheck
-
-Optimistische direct-Earth dynamical-friction Rechnung mit `v_inf=220 km/s`, uniformer mittlerer Erddichte und grosszuegigem Reibungsfaktor:
-
-| M_BH | DeltaE/E_inf |
+| N_enc | mu_H,50 |
 |---:|---:|
-| `1e10` | `1.0e-18` |
-| `1e11` | `1.0e-17` |
-| `2e11` | `2.0e-17` |
-| `5e11` | `5.0e-17` |
+| `1` | `83.18` |
+| `3` | `27.73` |
+| `10` | `8.318` |
+| `30` | `2.773` |
+| `100` | `0.832` |
 
-Standard-Halo-Einfang verfehlt die benoetigte Bindungsenergie damit um etwa `16...18` Groessenordnungen.
+Required local density at the reference:
 
-Capture-freundliche asymptotische Geschwindigkeitsschwelle im selben Proxy:
+| M_BH | rho_seed,50 [kg/m^3] | overdensity vs canonical Galactic DM |
+|---:|---:|---:|
+| `1e10 kg` | `1.975e-16` | `3.69e5 x` |
+| `1e11 kg` | `1.975e-15` | `3.69e6 x` |
+| `2e11 kg` | `3.950e-15` | `7.39e6 x` |
+| `5e11 kg` | `9.874e-15` | `1.85e7 x` |
+
+Reference geometric abundance requirements:
+
+| population proxy | N_seed,50 |
+|---|---:|
+| razor-cold co-orbital band | `1.07e4` |
+| ultra-cold annulus | `3.44e4` |
+| cold inner disk | `7.25e5` |
+| warm broad disk | `1.45e7` |
+
+At `M_BH=1e11 kg`, total mass is only about
 
 ```text
-1e10 kg -> ~0.0043 m/s
-1e11 kg -> ~0.0137 m/s
-2e11 kg -> ~0.0194 m/s
-5e11 kg -> ~0.0307 m/s.
+1.07e15 ... 1.45e18 kg.
 ```
 
-Neuere Drei-Koerper-Sterncapture-Literatur liefert reale Capture-Mechanismen fuer deutlich schwerere PBHs, rettet aber den Projektbereich `1e13...5e14 g` nicht als Earth-delivery Mechanismus.
+Therefore:
 
-Formation matrix:
+```text
+raw total seed mass budget: NOT the main bottleneck
+normal Galactic halo abundance: FAIL
+one isolated solar-bound seed: FAIL as generic solution
+primordial solar-bound overdense seed population: OPEN but demanding.
+```
 
-| Mechanismus | Status |
+A current OSIRIS-REx/Bennu distributed-DM benchmark near `1.1 AU` is approximately
+
+```text
+rho_DM <~3.3e-15 kg/m^3.
+```
+
+This is **not** a direct primordial exclusion. It is only a present-day retention benchmark and depends on the distribution model.
+
+# 6. Current end matrix
+
+| Bereich | Status |
 |---|---|
-| In-situ-Kollaps normaler Erdmaterie | **FAIL** |
-| spaeter direkter Earth-Capture bei normalen Halo-Geschwindigkeiten | **VERY STRONG FAIL** |
-| Proto-Earth-/Planetesimal-Standardcapture | **FAIL unter getesteten Standardbedingungen** |
-| normaler Halo -> cold disk delivery | **stark negativ** |
-| three-body stellar/planetary capture | realer Mechanismus allgemein, aber **kein Rescue fuer Projektmasse/Earth delivery** |
-| cold/co-moving primordialer Seed | **OPEN initial condition; Ursprung/Wahrscheinlichkeit nicht hergeleitet** |
+| H+ strongest SK-IV project comparison | **FAIL** |
+| H0 | **OPEN / not detected** |
+| smooth-compensated Earth macro branch | no Reduced structure exclusion |
+| electron sink | stabilized |
+| nonlinear TF screening | calculated / recoupled |
+| exact multicomponent Q_eq | **OPEN** |
+| final Full-WDM species-resolved Mdot_BH(t) | **OPEN** |
+| normal halo -> Earth delivery | **VERY STRONG FAIL** |
+| normal halo -> protostellar cloud | **strongly negative** |
+| disk gas drag | **FAIL / insufficient** |
+| random/smooth GI pull-down | **strongly negative** |
+| F3b generic multi-pass timing rescue | **FAIL** |
+| F4 early embryo exchange | **PASS kinematic** |
+| F5 direct 4-body exchange | **PASS conditional** |
+| F6 normal Galactic seed abundance | **FAIL** |
+| F6 primordial solar-bound overdense population | **OPEN** |
+| full formation/delivery probability | **OPEN** |
+| experimental BH detection | **NONE** |
+| unique positive signature | **NONE** |
 
-# 11. Aktuelle Endmatrix
-
-| Bereich | H+ | H0 |
-|---|---|---|
-| kleiner smooth Erdbranch | kein eigener Struktur-Ausschluss | kein eigener Struktur-Ausschluss |
-| strongest SK-IV Hawking anti-nu_e project test | **FAIL** | n/a |
-| standalone SK-Gd 2026 high-energy limit | unter Limit im Projektproxy | n/a |
-| Proton/Fe/Ni Wave-Capture | weitgehend berechnet | weitgehend berechnet |
-| Dense-core Charge/Screening | **PARTIAL, stark eingeengt** | **PARTIAL, stark eingeengt** |
-| A13b empirical-fit outer supply | **PARTIAL CALCULATED** | **PARTIAL CALCULATED** |
-| `1e10 kg` capacity/backpressure | conditional | conditional |
-| `>=1e11 kg` reduced inner processing | processing-capable in tested A13b stack | processing-capable in tested A13b stack |
-| final raw-data Fe/Ni EOS supply | **OPEN** | **OPEN** |
-| final Full-WDM species net Mdot | **OPEN** | **OPEN** |
-| 47-TW hard heat budget | no exclusion | no exclusion |
-| real-data unique macro likelihood | branch already negative in tested neutrino proxy | **NOT IDENTIFIABLE YET** |
-| Formation | **strongly negative** | **strongly negative** |
-| direkte Detektion | keine | keine |
-| eindeutige positive Signatur | keine | keine |
-
-# 12. Was jetzt wirklich noch offen ist
-
-Die Reihenfolge wurde bis A19 abgearbeitet. Die verbleibenden Punkte sind keine weiteren frei waehlbaren Reduced-Tests, sondern fehlende physische Daten/Closures:
+# 7. Open hard problems
 
 ```text
-1. raw Zenodo / direct SESAME-92141 Fe-isentrope ingestion
-2. full screened Coulomb-Dirac electron S-matrix refinement
-3. real Fe/Ni/light-element mixture EOS + two-temperature WDM transport
-4. species/reaction-resolved final Mdot_BH(t), Q(t)
-5. unique macroscopic H0 observable profile/amplitude
-6. real PREM/seismic/heat/neutrino likelihood once item 5 exists
-7. physically motivated cold/co-moving formation mechanism, if one can be derived.
+1. exact multicomponent Onsager/Maxwell-Stefan charge closure -> Q_eq
+2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
+3. unique macroscopic H0 observable amplitude/profile
+4. real-data likelihood on that prediction
+5. F7 physical origin/retention of the F6-required solar-bound seed population
+6. realistic long-term post-capture survival / engulfment / settling
+7. absolute formation/delivery probability.
 ```
 
-Bis diese Punkte geschlossen sind, ist der korrekte Gesamtstatus:
+# 8. Central files
+
+- `README.md`
+- `TEST_STATUS.md`
+- `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
+- `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
+- `STAGE3_74_F3_HILL_MONTE_CARLO.md`
+- `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
+- `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
+- `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
+- `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
+
+## Schlussstatus
 
 ```text
-quantitative, reproducible, falsifiable research hypothesis;
-not experimentally detected;
-not an established physical theory.
+LOCAL FORMATION MECHANICS:
+conditional exchange capture survives through F5.
+
+POPULATION FOLDING:
+F6 calculated.
+
+NORMAL HALO POPULATION:
+FAIL.
+
+PRIMORDIAL SOLAR-BOUND OVERDENSE POPULATION:
+OPEN / origin unexplained.
+
+ABSOLUTE EARTH DELIVERY:
+OPEN.
+
+DIRECT BH EVIDENCE:
+NONE.
 ```
