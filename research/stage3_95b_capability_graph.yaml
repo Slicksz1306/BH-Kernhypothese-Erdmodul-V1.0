@@ -1,0 +1,105 @@
+version: 1
+stage: 3.95B
+purpose: "Track provides/requires dependencies between scientific closures."
+
+status_legend:
+  PASS: "Defined mathematical/numerical gate passed; not empirical evidence."
+  PARTIAL: "Controlled sub-block solved; physical closure incomplete."
+  OPEN: "Not closed with current assumptions/data."
+  FAIL: "Tested branch fails the defined gate."
+
+nodes:
+  F12_PHYSICAL_PRIMORDIAL_CLOSURE:
+    status: OPEN
+    requires:
+      - P_ZETA_K_PHYSICAL
+      - NON_GAUSSIANITY_CONVENTION
+      - CURRENT_PBH_CONSTRAINT_MATRIX
+      - FORMATION_COUPLING
+    provides:
+      - PRIMORDIAL_SEED_ABUNDANCE_MODEL
+      - FORMATION_PRIOR
+
+  A34_REDUCED_DRIFT_DIFFUSION:
+    status: PASS
+    requires:
+      - SINGLE_SPECIES_DIFFUSION
+      - EFFECTIVE_MATCH_RADIUS
+      - SINK_BOUNDARY
+    provides:
+      - REDUCED_STEADY_FLUX
+      - A35_TOY_INPUT
+    caveat: "Reduced single-species model only."
+
+  A35_TOY_CHARGE_THEOREM:
+    status: PASS
+    requires:
+      - A34_REDUCED_DRIFT_DIFFUSION
+      - DIAGONAL_TWO_SPECIES_TOY_MODEL
+    provides:
+      - TOY_ROOT_UNIQUENESS
+      - TOY_ROOT_STABILITY
+      - DISCRETE_MARKOV_CROSSCHECK
+    caveat: "Does not provide real WDM/screened Q_eq."
+
+  A35_REAL_QEQ:
+    status: OPEN
+    requires:
+      - MULTICOMPONENT_MOBILITY_MATRIX
+      - CHEMICAL_POTENTIAL_DERIVATIVES
+      - DENSE_CORE_SCREENING
+      - SINK_BOUNDARY_COUPLING
+      - INDEPENDENT_CROSS_SOLVER
+    provides:
+      - CHARGE_EQUILIBRIUM
+      - EFFECTIVE_CAPTURE_RATE
+      - ACCRETION_CHARGE_CLOSURE
+
+  H0_SEISMIC_SIGNATURE:
+    status: OPEN
+    requires:
+      - PREM_REFERENCE_STATE
+      - MASS_COMPENSATED_PERTURBATION
+      - DELTA_RHO_TO_VP_VS_CLOSURE
+      - TRAVEL_TIME_OR_NORMAL_MODE_SOLVER
+      - OBSERVATIONAL_UNCERTAINTY_MODEL
+    provides:
+      - H0_PREDICTED_OBSERVABLE
+      - H0_FALSIFICATION_TEST
+
+  H_PLUS_HAWKING_BRANCH:
+    status: FAIL
+    requires:
+      - STANDARD_HAWKING_ASSUMPTION
+      - PROJECT_SK_IV_COMPARISON
+    provides:
+      - H_PLUS_PROJECT_CONSTRAINT
+    caveat: "Project-internal reinterpretation; not an official Super-K Earth-center-BH exclusion."
+
+  FORMATION_DELIVERY:
+    status: OPEN
+    requires:
+      - PRIMORDIAL_SEED_ABUNDANCE_MODEL
+      - SOLAR_BOUND_PHASE_SPACE
+      - EMBRYO_EXCHANGE_DYNAMICS
+      - POPULATION_WEIGHTING
+      - RETENTION_MODEL
+    provides:
+      - EARTH_DELIVERY_PROBABILITY
+
+  EXPERIMENTAL_BH_EVIDENCE:
+    status: OPEN
+    requires:
+      - UNIQUE_OBSERVABLE
+      - DATA_MATCH
+      - SYSTEMATICS_EXCLUDED
+      - INDEPENDENT_REPLICATION
+    provides:
+      - EMPIRICAL_SUPPORT
+    caveat: "No current solver PASS alone satisfies this node."
+
+goals:
+  - A35_REAL_QEQ
+  - F12_PHYSICAL_PRIMORDIAL_CLOSURE
+  - H0_SEISMIC_SIGNATURE
+  - FORMATION_DELIVERY
