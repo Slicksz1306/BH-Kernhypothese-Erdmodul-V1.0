@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.76 / F4  
+**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.77 / F5  
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -78,8 +78,6 @@ Die reduzierten Makrotests liefern für diesen kleinen Branch keinen eigenen rob
 
 # Reduced Stack A1–A19
 
-A1–A19 sind im definierten Reduced/partial Umfang abgearbeitet.
-
 ```text
 Schwarzschild-Dirac Regressionen: PASS
 Proton @1e11 kg: ~0.9503 classical
@@ -99,11 +97,9 @@ A19 normal halo -> Earth capture: VERY STRONG FAIL.
 
 # Stage 3.72 – A20–A31 Charge / WDM-Transport
 
-Aktueller konsolidierter Stand:
-
 ```text
 electron Dirac sink flux-direct: stabilized
-nonlinear Thomas-Fermi screening: calculated and recoupled to Dirac solver
+nonlinear Thomas-Fermi screening: calculated and recoupled
 collective charge response: much faster than hydrodynamic evolution
 independent naive ion/electron n*v*sigma current model: REJECTED
 ambipolar/electronic transport hierarchy: strongly constrained
@@ -118,24 +114,12 @@ multicomponent Onsager / Maxwell-Stefan mobility matrix
 + sink-boundary coupling.
 ```
 
-Zentrale Dateien:
-
-- `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
-- `stage3_72_a31_ambipolar_mobility_gate.py`
-
 # Formation / Delivery
 
 ## A19 – normaler Halo → fertige Erde
 
-Capture-freundlicher direct-Earth Dynamical-Friction-Proxy bei `v_inf=220 km/s`:
-
 ```text
 DeltaE/E_inf ~1e-18 ... 5e-17
-```
-
-für `1e10...5e11 kg`.
-
-```text
 normal halo -> direct Earth capture: VERY STRONG FAIL.
 ```
 
@@ -148,8 +132,6 @@ already solar-bound, dynamically cold seed: OPEN initial condition.
 ```
 
 ## Stage 3.73 / F2 – Hill / Pull-down Energy Gate
-
-Für einen impulsiven Massensprung `delta=DeltaM/M_p` bei `r=f r_H`:
 
 ```text
 v_inf,max = sqrt(2 G DeltaM/r)
@@ -166,25 +148,6 @@ absolute probability: OPEN.
 
 ## Stage 3.74 / F3 – Adaptive Hill-Monte-Carlo + Jacobi Closure
 
-Planare Hill-Gleichungen plus Jacobi-Gate:
-
-```text
-x'' - 2 y' - 3x = -3x/r^3
-y'' + 2 x'      = -3y/r^3
-
-C = 3x^2 + 6m/r - v^2
-C_L1/L2 = 9 m^(2/3).
-```
-
-Numerik:
-
-```text
-DOP853
-rtol=3e-10
-atol=1e-12
-median Jacobi peak-to-peak drift ~1e-8
-```
-
 Konservativer zeitgewichteter Pull-down-Anteil bei `r>=0.1 r_H`:
 
 | DeltaM/M | sigma=0.0 | sigma=0.1 | sigma=0.3 | Status |
@@ -196,8 +159,6 @@ Konservativer zeitgewichteter Pull-down-Anteil bei `r>=0.1 r_H`:
 
 ## Stage 3.75 / F3b – Multi-Pass / Residence Timing
 
-Publizierte Earth-TCOs bestätigen echte Residence-Amplifikation:
-
 ```text
 F3 first passage ~35.3 d
 mean Earth TCO ~286 d
@@ -205,164 +166,198 @@ mean Earth TCO ~286 d
 extreme clone tail ~100 yr.
 ```
 
-Das reicht jedoch generisch nicht, um die Myr-breite zufällige Giant-Impact-Timing-Lücke zu schließen.
-
 ```text
 multi-pass residence enhancement: PASS
 multi-pass as generic random-impact timing rescue: FAIL
 absolute delivery: OPEN.
 ```
 
-Zentrale Dateien:
+## Stage 3.76 / F4 – Early permanent embryo-bound Seed
 
-- `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
-- `stage3_75_f3b_residence_timing_gate.py`
-
-## Stage 3.76 / F4 – Early permanent embryo-bound seed
-
-F4 testet einen qualitativ anderen Branch:
+Collisionless terrestrischer Exchange-Capture ist physikalisch möglich. F4s analytischer Gate ergibt für einen Seed bei `f=0.3 r_H`:
 
 ```text
-solar-bound cold seed
--> correlated embryo-embryo / exchange encounter
--> permanent early satellite-like binding
--> growth-assisted inward evolution
--> eventual body crossing / engulfment
--> repeated interior damping.
+prograde stable-capture kick  ~0.748 v_H
+retrograde stable-capture kick ~0.376 v_H.
 ```
 
-### Terrestrische collisionless capture
+Ein enger Embryo–Embryo-Stressproxy kann diese Größenordnung erreichen.
 
-Collisionless binary-exchange capture um Earth-sized terrestrische Planeten bei 1 AU ist in numerischen Arbeiten demonstriert worden. Das ist kein direkter Probability-Wert für den Projektseed, etabliert aber den Mechanismus als physikalisch möglich.
-
-Stabile zirkulare Referenzzonen:
+Im adiabatischen Wachstumsgrenzfall:
 
 ```text
-prograde  ~0.4895 r_H
-retrograde ~0.9309 r_H.
+a_seed ∝ 1/M_p
+R_p    ∝ M_p^(1/3)
+=> a_seed/R_p ∝ M_p^(-4/3).
 ```
 
-### Embryo-scattering kick gate
+Damit kann ein früh gebundener Seed durch Wachstum später body-crossing werden.
 
-Für einen Seed bei `r=f r_H` nahe lokal parabolischer Energie ist der best-case Kick in eine stabile Bahn `a=alpha r_H`:
+F4:
 
 ```text
-Delta v_req/v_H
-= sqrt(6/f) - sqrt(6/f - 3/alpha).
+collisionless early permanent binding: PASS kinematic existence
+stable embryo-bound phase space: PASS
+growth-assisted engulfment: PASS conditional
+post-engulfment damping: feasibility only
+absolute probability: OPEN.
 ```
 
-Bei `f=0.3`:
+## Stage 3.77 / F5 – Direct restricted 4-body Exchange Monte-Carlo
+
+F5 integriert direkt
 
 ```text
-prograde  ~0.748 v_H
-retrograde ~0.376 v_H.
+Sun + Proto-Earth M1 + second embryo M2 + massless seed.
 ```
 
-Ein differential tidal-impulse Proxy für einen zweiten Embryo `M2=q M1` mit `b=kappa R_H,mut` liefert
+Jeder Lauf besitzt einen gepaarten Nullkontrolllauf mit identischem M1+Seed-Zustand aber `M2=0`.
+
+### Kritische Korrektur
+
+Ein Pilot mit `V~Omega R_H,mut` **am Perizentrum** wurde verworfen, weil er bei kleinen `b` unterhalb der gegenseitigen Escape-Speed liegen und künstlich embryo-bound Encounters erzeugen kann.
+
+Final:
 
 ```text
-Delta v_rel/v_H
-~6 q f/[kappa^2(1+q)].
+V_p^2 = V_inf^2 + 2 G (M1+M2)/b
 ```
 
-Beispiele bei `f=0.3`:
+mit echten hyperbolischen Flybys.
+
+### Ensembles
 
 ```text
-q=0.30, kappa=0.70 -> 0.848 v_H
-q=1.00, kappa=1.00 -> 0.900 v_H.
+M1 = 1e-3 ... 1e-1 M_E
+seed r = 0.1 ... 1.0 r_H,1
+seed beta=v/v_esc(local) = 1.00 ... 1.15
+```
+
+STRONG:
+
+```text
+q=0.3...1
+kappa=b/R_H,mut=0.3...0.8
+u_inf=V_inf/(Omega R_H,mut)=0.5...1.5
+N=300.
+```
+
+BROAD:
+
+```text
+q=0.03...1
+kappa=0.3...1.5
+u_inf=0.5...3
+N=300.
+```
+
+WEAK:
+
+```text
+q=0.03...0.1
+kappa=0.9...1.5
+u_inf=1.5...3
+N=300.
+```
+
+### Persistenz bis 20 Omega^-1
+
+`20 Omega^-1 ~3.18 yr` bei 1 AU.
+
+| Ensemble | persistent stable | Status |
+|---|---:|---|
+| STRONG | `5/300 = 1.67%` | **PASS conditional** |
+| BROAD | `3/300 = 1.00%` | **PASS conditional** |
+| WEAK | `0/300` | **not found persistent** |
+
+95%-Wilson-Brackets:
+
+```text
+STRONG ~0.71...3.84%
+BROAD  ~0.34...2.90%
+WEAK   0...~1.26% upper.
+```
+
+Alle zunächst nur `bound_unstable` exchange-attributable Zustände entkoppeln bis `20 Omega^-1` wieder.
+
+Persistente Captures besitzen beispielsweise
+
+```text
+a_seed/r_H ~0.21 ... 0.58
+```
+
+während M2 nach dem Lauf bereits typischerweise `~55...150` mutual Hill radii entfernt ist.
+
+Damit ist der lokale Exchange-Mechanismus nicht nur ein momentaner Perizentrum-Artefakt.
+
+### Exchange-induced Body Crossings
+
+FULL-only body crossings:
+
+```text
+STRONG 4/300
+BROAD  3/300
+WEAK   0/300.
+```
+
+Bereits negative planetozentrische Energie beim Body-Eintritt:
+
+```text
+STRONG 2/4
+BROAD  3/3.
+```
+
+Die zwei positiven STRONG-crossings besitzen `v_inf~129...140 m/s`; selbst der absichtlich optimistische A19-Dragproxy mit `I=30` erreicht für `M_BH<=5e11 kg` nur etwa
+
+```text
+DeltaE_drag/E_inf <=~3e-7.
 ```
 
 Damit:
 
 ```text
-embryo-embryo scattering energy scale:
-PASS as kinematic permanent-capture gate.
+positive-E one-pass crossing + ordinary drag: FAIL
+already exchange-bound body crossing: PASS existence.
 ```
 
-Die echte single-seed N-body Capture-Fraktion bleibt **OPEN**.
-
-### Growth-assisted engulfment
-
-Im adiabatischen isotropen Wachstumsgrenzfall:
+### F5 Schluss
 
 ```text
-a_sat ∝ 1/M_p
-R_p   ∝ M_p^(1/3)
-=> a_sat/R_p ∝ M_p^(-4/3).
+direct Newtonian restricted 4-body solver: PASS
+hyperbolic encounter correction: PASS
+paired M2=0 counterfactual: PASS
+persistent collisionless embryo-exchange capture: FOUND
+conditional strong/broad capture fraction: O(1%) in defined ensemble
+weak encounter persistent capture: not found in N=300
+absolute Earth-delivery probability: OPEN.
 ```
 
-Späteste Anfangsmassen für Engulfment bis `1 M_E`:
+F5 ist **keine Evidenz für einen Erdzentrum-BH**. Es zeigt nur, dass F4s lokaler Formation-Spezialkanal eine direkte Newtonsche Mehrkörperrechnung überlebt.
 
-| a_i/r_H | max M_i/M_E |
-|---:|---:|
-| `0.05` | `0.158` |
-| `0.10` | `0.0937` |
-| `0.30` | `0.0411` |
-| `0.4895` | `0.0285` |
-| `0.9309` | `0.0176` |
-
-Beispiel `M_i=0.01 M_E`:
+Der verbleibende Formation-Engpass ist nun:
 
 ```text
-capture at 0.30 r_H
--> surface crossing at ~0.243 M_E
+solar-bound seed phase-space density
+x probability of Hill occupancy at embryo encounter
+x realistic terrestrial embryo encounter history
+x later survival/engulfment.
 ```
 
-Status:
+Zentrale F5-Dateien:
 
-```text
-adiabatic growth-assisted engulfment: PASS conditional
-single-late-jump equivalent shrinkage: NO
-real stochastic growth history: OPEN.
-```
-
-### Repeated interior damping
-
-A19s bewusst optimistischer Dynamical-Friction-Proxy wird auf einen bereits body-crossing Seed reskaliert.
-
-Bei `v~v_esc`:
-
-```text
-DeltaE/|E_orb| ~6 I M_BH/M_p
-I=30.
-```
-
-Optimistische Energie-e-folding-Zeit:
-
-| M_p | 1e10 kg | 1e11 kg | 2e11 kg | 5e11 kg |
-|---:|---:|---:|---:|---:|
-| `0.01 M_E` | `5.32 Myr` | `0.532 Myr` | `0.266 Myr` | `0.106 Myr` |
-| `0.03 M_E` | `15.96 Myr` | `1.60 Myr` | `0.798 Myr` | `0.319 Myr` |
-| `0.10 M_E` | `53.2 Myr` | `5.32 Myr` | `2.66 Myr` | `1.06 Myr` |
-
-Damit kann ein **bereits planet-bound und body-crossing** Seed im optimistischen Reduced-Proxy erstmals auf Myr-Skalen Energie verlieren. Die reale Proto-Earth Drag-/Settling-Closure bleibt offen.
-
-F4 Schluss:
-
-```text
-collisionless early permanent binding: PHYSICALLY ALLOWED
-stable embryo-bound phase space: PASS
-growth-assisted engulfment: PASS in adiabatic limit
-post-engulfment damping: Myr-scale feasibility in optimistic proxy
-absolute formation/delivery probability: OPEN.
-```
-
-Zentrale F4-Dateien:
-
-- `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
-- `stage3_76_f4_early_embryo_bound_seed.py`
+- `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
+- `stage3_77_f5_restricted_4body_exchange_mc.py`
 
 Nächster Formationstest:
 
 ```text
-F5 = Sun + two terrestrial embryos + cold test-seed N-body Monte Carlo
--> M1 ~1e-3...1e-1 M_E
--> q=M2/M1 ~0.03...1
--> encounter b,V distribution
--> permanent stable capture fraction
--> post-capture a,e,i
--> body-crossing / later-engulfed fraction
--> centre-delivery proxy.
+F6 = population-weighted formation gate
+-> seed heliocentric a,e,i distribution
+-> embryo encounter-rate distribution
+-> Hill-occupancy duty cycle
+-> F5 conditional capture kernel
+-> later survival / engulfment
+-> absolute P_delivery or required seed abundance.
 ```
 
 # Aktuelle Endmatrix
@@ -387,9 +382,11 @@ F5 = Sun + two terrestrial embryos + cold test-seed N-body Monte Carlo
 | F3 ~30% GI | **PASS conditional few-percent channel** |
 | F3b generic multi-pass timing rescue | **FAIL** |
 | F4 correlated embryo-exchange energy gate | **PASS kinematic** |
-| F4 stable early embryo binding | **PASS existence** |
 | F4 growth-assisted engulfment | **PASS conditional / history OPEN** |
-| F4 post-engulfment sinking | **PASS feasibility / closure OPEN** |
+| F5 direct restricted 4-body exchange | **PASS conditional** |
+| F5 strong persistent stable fraction | **1.67% in defined encounter-conditioned ensemble** |
+| F5 broad persistent stable fraction | **1.00% in defined encounter-conditioned ensemble** |
+| F5 weak persistent stable fraction | **0/300 found** |
 | full formation/delivery probability | **OPEN** |
 | direkte experimentelle BH-Detektion | **NONE** |
 | eindeutige positive Signatur | **NONE** |
@@ -401,9 +398,9 @@ F5 = Sun + two terrestrial embryos + cold test-seed N-body Monte Carlo
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F5 full correlated terrestrial-embryo exchange capture fraction
-6. realistic post-capture growth/engulfment history
-7. physical origin / phase-space density of the already solar-bound cold seed.
+5. F6 population-weighted formation/delivery probability
+6. realistic post-capture growth/engulfment survival
+7. physical origin / abundance / phase-space density of solar-bound cold seeds.
 ```
 
 # Zentrale Statusdateien
@@ -414,6 +411,7 @@ F5 = Sun + two terrestrial embryos + cold test-seed N-body Monte Carlo
 - `STAGE3_74_F3_HILL_MONTE_CARLO.md`
 - `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
 - `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
+- `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
 - `STAGE3_71_A19_FORMATION_RECHECK.md`
 - `STAGE3_70B_A18_REALDATA_AUDIT.md`
 
@@ -425,4 +423,4 @@ Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.76/F4, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.77/F5, Rheinland-Pfalz, Deutschland.
