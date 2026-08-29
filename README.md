@@ -5,8 +5,8 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A31; Formation/Delivery F1–F8a; Multi-Gate Closure bis Stage 3.94 (F12 / A34 / H0); Toy-A35-Diagnostik bis Stage 3.95A
-**Stand:** 29.08.2026  
+**Aktueller Forschungsstand:** Reduced Stack A1–A31; Formation/Delivery F1–F8a; Multi-Gate Closure bis Stage 3.94 (F12 / A34 / H0); Toy-A35-Diagnostik bis Stage 3.95A; Stage 3.95B WDM-Daten-Gate abgeschlossen; Stage 3.95C Architektur-Definitionsgate PASS AS SPECIFICATION / Physical Closure OPEN
+**Stand:** 30.08.2026
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
 > `BH_Kernhypothese_Erdmodul_V1_0_Publication.pdf` bleibt unverändert als Erstveröffentlichungs-/Prioritätsarchiv. Neue Rechnungen werden versioniert in Markdown und reproduzierbaren Python-Skripten fortgeschrieben.
@@ -277,6 +277,69 @@ Zentrale Dateien:
 
 ---
 
+# Stage 3.95B – A35 WDM Charge Closure Specification
+
+Stage 3.95B spezifiziert die spätere reale Ladungsclosure, implementiert sie aber noch nicht. Elektronen-WDM-Transport, multikomponentiger Ionentransport, Poisson/Screening und der `Q`-abhängige innere Sink bleiben strikt getrennte Teilmodelle.
+
+Zentral ist die Unterscheidung
+
+```text
+Q_bullet = tatsächliche Ladung des zentralen Sinks
+Q_m      = am Matchingradius effektiv eingeschlossene Ladung
+Q_m != Q_bullet im geschirmten Fall.
+```
+
+Damit gilt aktuell:
+
+```text
+Stage 3.95B mathematisch spezifiziert: PASS
+physikalische Datenidentifizierbarkeit: OPEN
+Implementierung reales Q_eq: BLOCKED BY MISSING CLOSURE DATA
+experimenteller BH-Nachweis: NONE
+```
+
+Die vier harten Datenblocker sind die multikomponentige ionische Transportmatrix, der elektronische WDM-Transportoperator, thermodynamisch konsistente Mischungsableitungen und die innere Sink-/Screening-Abbildung. Es wurden keine Stage-3.95B-Solverdateien angelegt; Stage 3.95A bleibt die analytische Referenz.
+
+Zentrale Datei:
+
+- `STAGE3_95B_A35_WDM_CHARGE_CLOSURE_SPEC.md`
+
+---
+
+# Stage 3.95C – A35 WDM Theoretical Closure Architecture
+
+Stage 3.95C friert die mathematische Schnittstellenarchitektur der realen A35-WDM-Ladungsclosure ein. Die Stufe implementiert **keinen** realen `Q_eq`-Solver und setzt keine offenen physikalischen Closures durch stille Defaults oder Proxies.
+
+Die Architektur trennt insbesondere:
+
+```text
+Thermodynamik != dynamischer Transport
+Interface vollständig definiert != Interface physikalisch geschlossen
+Q_bullet != Q_m im geschirmten Fall
+verteilungsabhängiger Capture-Operator benötigt kinetisches Boundary-Lifting B_s
+oder eine direkte Momentenclosure Ktilde_s
+```
+
+Der lokale fixed-`u`-Momentenbranch ist auf `2 S_count + 1` unabhängige differentielle Freiheitsgrade reduziert; die massengewichtete Capture-Bilanz ist dabei ein Kompatibilitätsresiduum und keine zusätzliche unabhängige Randbedingung. Nichtisothermer Transport benötigt den vollständigen Stoff-/Wärme-Onsagerblock. Nichtnegative Entropieproduktion, erwartete Nullräume, restricted coercivity und die spätere PDE-Well-posedness bleiben getrennte Operator-Gates.
+
+Aktueller Gate-Stand:
+
+```text
+Stage 3.95C Architecture Definition Gate: PASS AS SPECIFICATION
+Physical Closure Completeness:             OPEN
+Solver Release Gate:                       NOT PASSED
+Real Q_eq Implementation:                  NO-GO
+Experimental BH Evidence:                  NONE
+```
+
+Die bestehenden `42/42` Regressionen bleiben ein Rückwärtskompatibilitätscheck der früheren ausführbaren Stufen und sind **keine numerische Validierung von Stage 3.95C**.
+
+Zentrale Datei:
+
+- `STAGE3_95C_A35_WDM_THEORETICAL_CLOSURE_ARCHITECTURE.md`
+
+---
+
 # Reduced Stack A1–A31
 
 Wichtige bisherige Resultate:
@@ -409,9 +472,11 @@ python -m unittest -v test_stage3_80_f8_substructure_scan.py
 # Projektstruktur / zentrale Statusdateien
 
 - `THEORIE.md` – theoretischer Rahmen.
-- `TEST_STATUS.md` – historischer Test-/Validierungsstand bis Stage 3.95A.
+- `TEST_STATUS.md` – Test-/Validierungsstand bis Stage 3.95A sowie Spezifikations-/Gate-Status von Stage 3.95B und 3.95C.
 - `STAGE3_94_MULTI_GATE_CLOSURE.md` – aktueller Multi-Gate-Closure-Stand.
 - `STAGE3_95A_A35_DIAGNOSTIC_CHARGE_THEOREM.md` – kontrollierte kontinuierliche und diskrete Toy-A35-Ladungsdiagnostik.
+- `STAGE3_95B_A35_WDM_CHARGE_CLOSURE_SPEC.md` – mathematische Spezifikation, Daten-Gate und Falsifikationskriterien der realen A35-Closure.
+- `STAGE3_95C_A35_WDM_THEORETICAL_CLOSURE_ARCHITECTURE.md` – gefrorene Schnittstellenarchitektur; Architecture Definition Gate `PASS AS SPECIFICATION`, physikalische Closure `OPEN`, Solver `NO-GO`.
 - `AKKRETION_STATUS.md` – Akkretions-/Transportstatus.
 - `REDUCED_STACK_CLOSURE_A19.md` – A1–A19 Reduced Stack.
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md` – verbleibende multikomponentige Charge-Closure.
@@ -421,4 +486,4 @@ python -m unittest -v test_stage3_80_f8_substructure_scan.py
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; aktueller Rechenstand bis Stage 3.95A, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; numerischer Rechenstand bis Stage 3.95A, Daten-Gate bis Stage 3.95B und Architektur-Spezifikationsstand bis Stage 3.95C, Rheinland-Pfalz, Deutschland.
