@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen im definierten Umfang; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.75 / F3b  
+**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.76 / F4  
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -24,7 +24,7 @@ H+ negativ im stärksten projektintern verwendeten SK-IV-Hochenergievergleich
 H0 OPEN / nicht nachgewiesen
 mehrere interne Solver-/Regressionstests bestanden
 mehrere frühere Annahmen korrigiert oder verworfen
-Formation/Delivery weiterhin OPEN und stark eingeschränkt.
+Formation/Delivery weiterhin OPEN.
 ```
 
 ## Branches
@@ -34,14 +34,12 @@ H+ = mit Standard-Hawking-Strahlung
 H0 = ohne Hawking-Strahlung
 ```
 
-Die Branches werden strikt getrennt.
-
 ### H+
 
-Der Projekt-Hawking/Greybody-Proxy im Band `25.29...31.29 MeV` liegt bei ungefähr
+Projekt-Hawking/Greybody-Proxy im Band `25.29...31.29 MeV`:
 
 ```text
-0.098 ... 0.122 cm^-2 s^-1 MeV^-1.
+~0.098 ... 0.122 cm^-2 s^-1 MeV^-1.
 ```
 
 Gegen den stärksten publizierten SK-IV-Binconstraint bleibt H+ in der **projektinternen Reinterpretation FAIL**. Dies ist keine offizielle Super-K-Erdzentrum-BH-Exklusion.
@@ -53,7 +51,7 @@ P_Hawking = 0
 H0 = OPEN / nicht nachgewiesen.
 ```
 
-H0 ist von Hawking-Emissionsgrenzen getrennt und muss Full-WDM-Akkretion, Formation/Delivery und eine eindeutige Real-Data-Signatur bestehen.
+H0 muss Full-WDM-Akkretion, Formation/Delivery und eine eindeutige Real-Data-Signatur bestehen.
 
 # Aktiver Erdbranch
 
@@ -82,8 +80,6 @@ Die reduzierten Makrotests liefern für diesen kleinen Branch keinen eigenen rob
 
 A1–A19 sind im definierten Reduced/partial Umfang abgearbeitet.
 
-Wesentliche Resultate:
-
 ```text
 Schwarzschild-Dirac Regressionen: PASS
 Proton @1e11 kg: ~0.9503 classical
@@ -103,8 +99,6 @@ A19 normal halo -> Earth capture: VERY STRONG FAIL.
 
 # Stage 3.72 – A20–A31 Charge / WDM-Transport
 
-A20–A31 wurden nach dem ursprünglichen Reduced Stack weitergeführt.
-
 Aktueller konsolidierter Stand:
 
 ```text
@@ -116,7 +110,7 @@ ambipolar/electronic transport hierarchy: strongly constrained
 exact Q_eq: OPEN
 ```
 
-Der verbleibende Charge-Engpass ist jetzt präzise:
+Verbleibender Charge-Engpass:
 
 ```text
 multicomponent Onsager / Maxwell-Stefan mobility matrix
@@ -124,15 +118,7 @@ multicomponent Onsager / Maxwell-Stefan mobility matrix
 + sink-boundary coupling.
 ```
 
-A31 zeigt ausdrücklich:
-
-```text
-self diffusion != mutual diffusion != charge mobility
-```
-
-und verwirft einen naiven Nernst-Einstein-Ionenstrom als finale WDM-Closure.
-
-Zentrale Datei:
+Zentrale Dateien:
 
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
 - `stage3_72_a31_ambipolar_mobility_gate.py`
@@ -141,15 +127,13 @@ Zentrale Datei:
 
 ## A19 – normaler Halo → fertige Erde
 
-Ein capture-freundlicher direct-Earth Dynamical-Friction-Proxy bei `v_inf=220 km/s` liefert nur
+Capture-freundlicher direct-Earth Dynamical-Friction-Proxy bei `v_inf=220 km/s`:
 
 ```text
 DeltaE/E_inf ~1e-18 ... 5e-17
 ```
 
 für `1e10...5e11 kg`.
-
-Damit:
 
 ```text
 normal halo -> direct Earth capture: VERY STRONG FAIL.
@@ -160,23 +144,17 @@ normal halo -> direct Earth capture: VERY STRONG FAIL.
 ```text
 protoplanetary gas drag: insufficient
 normal halo -> protostellar cloud: strongly negative
-already solar-bound, dynamically cold seed: remains OPEN initial condition.
+already solar-bound, dynamically cold seed: OPEN initial condition.
 ```
 
-F1 rettet keinen normalen Halo-Delivery-Kanal. Offen bleibt nur ein Seed, der **bereits solar gebunden und relativ kalt** ist.
+## Stage 3.73 / F2 – Hill / Pull-down Energy Gate
 
-## Stage 3.73 / F2 – Hill-Sphäre / Pull-down Energy Gate
-
-F2 prüfte einen solchen Seed in der Hill-Sphäre eines wachsenden terrestrischen Embryos.
-
-Für einen impulsiven Massensprung `delta=DeltaM/M_p` bei `r=f r_H` gilt lokal
+Für einen impulsiven Massensprung `delta=DeltaM/M_p` bei `r=f r_H`:
 
 ```text
 v_inf,max = sqrt(2 G DeltaM/r)
           = sqrt(6 delta/f) v_H.
 ```
-
-Damit existiert ein kinematischer Pull-down-Bereich. F2-Status:
 
 ```text
 temporary Hill capture: dynamically allowed
@@ -188,7 +166,7 @@ absolute probability: OPEN.
 
 ## Stage 3.74 / F3 – Adaptive Hill-Monte-Carlo + Jacobi Closure
 
-F3 härtet F2 durch explizite Solartiden im planaren Hill-Modell.
+Planare Hill-Gleichungen plus Jacobi-Gate:
 
 ```text
 x'' - 2 y' - 3x = -3x/r^3
@@ -198,155 +176,194 @@ C = 3x^2 + 6m/r - v^2
 C_L1/L2 = 9 m^(2/3).
 ```
 
-Nach einem Massensprung `m=1+delta` gilt permanente topologische Einschließung im idealisierten post-impact Hill-System, wenn
-
-```text
-C_new > C_L1/L2,new.
-```
-
-Ein früher fixed-step RK4-Test wurde wegen künstlichem Jacobi-Drift bei tiefen Encounters verworfen.
-
-Final:
+Numerik:
 
 ```text
 DOP853
 rtol=3e-10
 atol=1e-12
 median Jacobi peak-to-peak drift ~1e-8
-maximum ~2.5e-7
-adaptive Hill/Jacobi solver: PASS.
 ```
 
-Konservativer zeitgewichteter Pull-down-Anteil für `r>=0.1 r_H`:
+Konservativer zeitgewichteter Pull-down-Anteil bei `r>=0.1 r_H`:
 
 | DeltaM/M | sigma=0.0 | sigma=0.1 | sigma=0.3 | Status |
 |---:|---:|---:|---:|---|
-| `0.01` | `0` | `0` | `0` | **FAIL in sampled outer gate** |
-| `0.03` | `0` | `0` | `0` | **FAIL in sampled outer gate** |
+| `0.01` | `0` | `0` | `0` | **FAIL in sampled gate** |
+| `0.03` | `0` | `0` | `0` | **FAIL in sampled gate** |
 | `0.10` | `0.0352%` | `0.0725%` | `0.0722%` | **PASS existence / inefficient** |
 | `0.30` | `6.806%` | `6.302%` | `5.653%` | **PASS conditional channel** |
 
-Ein zweiter unabhängiger `sigma=0.1`-Seed-Lauf reproduzierte die Größenordnung:
+## Stage 3.75 / F3b – Multi-Pass / Residence Timing
+
+Publizierte Earth-TCOs bestätigen echte Residence-Amplifikation:
 
 ```text
-DeltaM/M=0.10 -> 0.0624%
-DeltaM/M=0.30 -> 6.580%.
+F3 first passage ~35.3 d
+mean Earth TCO ~286 d
+2020 CD3 median ~4 yr
+extreme clone tail ~100 yr.
 ```
 
-Mean first Hill residence:
+Das reicht jedoch generisch nicht, um die Myr-breite zufällige Giant-Impact-Timing-Lücke zu schließen.
 
 ```text
-~35 d at 1 AU.
+multi-pass residence enhancement: PASS
+multi-pass as generic random-impact timing rescue: FAIL
+absolute delivery: OPEN.
 ```
 
-Damit war der offene F3-Hebel wiederholte / long-lived residence.
+Zentrale Dateien:
 
-## Stage 3.75 / F3b – Multi-Pass / Residence Timing Gate
-
-F3b koppelt F3 an publizierte Earth-temporary-capture-Zeitskalen.
-
-Literaturanker:
-
-```text
-Granvik et al. 2012:
-mean Earth TCO duration = 286 +/-18 d
-mean revolutions        = 2.88 +/-0.82
-
-2020 CD3 reconstruction:
-median capture ~4 yr
-some clone orbits nearly 100 yr
-
-Earth horseshoe examples:
-co-orbital states up to O(10^3 yr).
-```
-
-Wichtig:
-
-```text
-co-orbital lifetime != Hill-sphere occupancy.
-```
-
-Residence-Amplifikation gegenüber F3s `35.3 d`:
-
-| Zustand | cumulative residence proxy | Faktor |
-|---|---:|---:|
-| F3 first passage | `35.3 d` | `1x` |
-| mittlerer Earth TCO | `286 d` | `~8.1x` |
-| 2020-CD3-artig | `4 yr` | `~41.5x` |
-| extremer 100-yr Tail | `100 yr` | `~1.0e3x` |
-| 3300-yr co-orbital 100%-Hill Stress-U.B. | `3300 yr` | `~3.4e4x` |
-
-Für zufällige relevante Impactzeiten wird als Nullmodell verwendet:
-
-```text
-P_overlap = 1 - exp[-N_GI t_res/T_epoch].
-```
-
-Bei `T_epoch=10 Myr` und einem mittleren Earth-TCO:
-
-```text
-N_GI=1   -> P_overlap ~7.83e-8
-N_GI=10  -> P_overlap ~7.83e-7
-N_GI=100 -> P_overlap ~7.83e-6.
-```
-
-Für einen extremen `100 yr` Capture-Tail:
-
-```text
-N_GI=1   -> ~1.0e-5
-N_GI=10  -> ~1.0e-4
-N_GI=100 -> ~1.0e-3.
-```
-
-Das sind bereits capture-freundliche Timingwerte **vor** jedem zusätzlichen Jacobi-/Impact-Gate.
-
-Der `3300 yr` co-orbital Stressfall behandelt unrealistisch die gesamte co-orbitale Zeit als Hill-residence. Selbst diese obere Grenze liefert für `N_GI=10`, `T=10 Myr` nur
-
-```text
-P_overlap ~3.29e-3.
-```
-
-F3b Schluss:
-
-```text
-multi-pass / long-lived residence enhancement:
-PASS.
-
-mean enhancement:
-~8x gegenüber F3 first passage.
-
-extreme ~100 yr tail:
-~1e3x enhancement.
-
-multi-pass as generic cure of Myr random-impact timing:
-FAIL.
-
-absolute delivery probability:
-OPEN.
-```
-
-Damit bleibt Giant-Impact-Pull-down mathematisch möglich, wird aber auf zunehmend spezielle Szenarien beschränkt: sehr hohe cumulative Hill occupancy, Korrelation zwischen Seed- und Impact-Dynamik oder bereits frühe permanente Bindung an einen Embryo.
-
-Zentrale Formation-Dateien:
-
-- `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
-- `stage3_73_f2_hill_pulldown_capture.py`
-- `STAGE3_74_F3_HILL_MONTE_CARLO.md`
-- `stage3_74_f3_hill_monte_carlo.py`
 - `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
 - `stage3_75_f3b_residence_timing_gate.py`
+
+## Stage 3.76 / F4 – Early permanent embryo-bound seed
+
+F4 testet einen qualitativ anderen Branch:
+
+```text
+solar-bound cold seed
+-> correlated embryo-embryo / exchange encounter
+-> permanent early satellite-like binding
+-> growth-assisted inward evolution
+-> eventual body crossing / engulfment
+-> repeated interior damping.
+```
+
+### Terrestrische collisionless capture
+
+Collisionless binary-exchange capture um Earth-sized terrestrische Planeten bei 1 AU ist in numerischen Arbeiten demonstriert worden. Das ist kein direkter Probability-Wert für den Projektseed, etabliert aber den Mechanismus als physikalisch möglich.
+
+Stabile zirkulare Referenzzonen:
+
+```text
+prograde  ~0.4895 r_H
+retrograde ~0.9309 r_H.
+```
+
+### Embryo-scattering kick gate
+
+Für einen Seed bei `r=f r_H` nahe lokal parabolischer Energie ist der best-case Kick in eine stabile Bahn `a=alpha r_H`:
+
+```text
+Delta v_req/v_H
+= sqrt(6/f) - sqrt(6/f - 3/alpha).
+```
+
+Bei `f=0.3`:
+
+```text
+prograde  ~0.748 v_H
+retrograde ~0.376 v_H.
+```
+
+Ein differential tidal-impulse Proxy für einen zweiten Embryo `M2=q M1` mit `b=kappa R_H,mut` liefert
+
+```text
+Delta v_rel/v_H
+~6 q f/[kappa^2(1+q)].
+```
+
+Beispiele bei `f=0.3`:
+
+```text
+q=0.30, kappa=0.70 -> 0.848 v_H
+q=1.00, kappa=1.00 -> 0.900 v_H.
+```
+
+Damit:
+
+```text
+embryo-embryo scattering energy scale:
+PASS as kinematic permanent-capture gate.
+```
+
+Die echte single-seed N-body Capture-Fraktion bleibt **OPEN**.
+
+### Growth-assisted engulfment
+
+Im adiabatischen isotropen Wachstumsgrenzfall:
+
+```text
+a_sat ∝ 1/M_p
+R_p   ∝ M_p^(1/3)
+=> a_sat/R_p ∝ M_p^(-4/3).
+```
+
+Späteste Anfangsmassen für Engulfment bis `1 M_E`:
+
+| a_i/r_H | max M_i/M_E |
+|---:|---:|
+| `0.05` | `0.158` |
+| `0.10` | `0.0937` |
+| `0.30` | `0.0411` |
+| `0.4895` | `0.0285` |
+| `0.9309` | `0.0176` |
+
+Beispiel `M_i=0.01 M_E`:
+
+```text
+capture at 0.30 r_H
+-> surface crossing at ~0.243 M_E
+```
+
+Status:
+
+```text
+adiabatic growth-assisted engulfment: PASS conditional
+single-late-jump equivalent shrinkage: NO
+real stochastic growth history: OPEN.
+```
+
+### Repeated interior damping
+
+A19s bewusst optimistischer Dynamical-Friction-Proxy wird auf einen bereits body-crossing Seed reskaliert.
+
+Bei `v~v_esc`:
+
+```text
+DeltaE/|E_orb| ~6 I M_BH/M_p
+I=30.
+```
+
+Optimistische Energie-e-folding-Zeit:
+
+| M_p | 1e10 kg | 1e11 kg | 2e11 kg | 5e11 kg |
+|---:|---:|---:|---:|---:|
+| `0.01 M_E` | `5.32 Myr` | `0.532 Myr` | `0.266 Myr` | `0.106 Myr` |
+| `0.03 M_E` | `15.96 Myr` | `1.60 Myr` | `0.798 Myr` | `0.319 Myr` |
+| `0.10 M_E` | `53.2 Myr` | `5.32 Myr` | `2.66 Myr` | `1.06 Myr` |
+
+Damit kann ein **bereits planet-bound und body-crossing** Seed im optimistischen Reduced-Proxy erstmals auf Myr-Skalen Energie verlieren. Die reale Proto-Earth Drag-/Settling-Closure bleibt offen.
+
+F4 Schluss:
+
+```text
+collisionless early permanent binding: PHYSICALLY ALLOWED
+stable embryo-bound phase space: PASS
+growth-assisted engulfment: PASS in adiabatic limit
+post-engulfment damping: Myr-scale feasibility in optimistic proxy
+absolute formation/delivery probability: OPEN.
+```
+
+Zentrale F4-Dateien:
+
+- `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
+- `stage3_76_f4_early_embryo_bound_seed.py`
 
 Nächster Formationstest:
 
 ```text
-F4 = early permanent embryo-bound seed test
-
-Could a cold solar-bound seed become permanently bound to a small embryo
-before the late giant-impact epoch through early three-body exchange,
-embryo-embryo encounters or an early dissipative environment?
+F5 = Sun + two terrestrial embryos + cold test-seed N-body Monte Carlo
+-> M1 ~1e-3...1e-1 M_E
+-> q=M2/M1 ~0.03...1
+-> encounter b,V distribution
+-> permanent stable capture fraction
+-> post-capture a,e,i
+-> body-crossing / later-engulfed fraction
+-> centre-delivery proxy.
 ```
-
-Ein vollständiger globaler direct-N-body Formation-run bleibt ebenfalls sinnvoll, benötigt für eine absolute Wahrscheinlichkeit jedoch weiterhin eine physisch motivierte Seed-Anfangsverteilung.
 
 # Aktuelle Endmatrix
 
@@ -356,22 +373,23 @@ Ein vollständiger globaler direct-N-body Formation-run bleibt ebenfalls sinnvol
 | H0 | **OPEN / not detected** |
 | smooth-compensated Earth macro branch | kein eigener Reduced-Strukturausschluss |
 | Wave-Capture Proton/Fe/Ni | weitgehend berechnet |
-| electron sink | stabilisiert im Reduced Stack |
+| electron sink | stabilisiert |
 | nonlinear TF screening | berechnet / recoupled |
 | exact multicomponent Q_eq | **OPEN** |
 | final species-resolved Full-WDM Mdot_BH(t) | **OPEN** |
-| normal halo → Earth delivery | **VERY STRONG FAIL** |
-| normal halo → protostellar cloud | **strongly negative** |
-| gasdrag protoplanetary disk | **FAIL / insufficient** |
-| already solar-bound cold seed | **OPEN initial condition** |
+| normal halo -> Earth delivery | **VERY STRONG FAIL** |
+| normal halo -> protostellar cloud | **strongly negative** |
+| naked-seed disk gas drag | **FAIL / insufficient** |
+| solar-bound cold seed | **OPEN initial condition** |
 | smooth Hill pull-down | **FAIL as generic mechanism** |
-| F2 giant-impact local energy gate | **PASS kinematic existence** |
-| F3 DeltaM/M<=0.03 outer-Hill gate | **FAIL in sampled gate** |
-| F3 DeltaM/M~0.10 | **PASS existence / inefficient** |
-| F3 DeltaM/M~0.30 | **PASS conditional few-percent channel** |
-| F3b multi-pass residence | **PASS amplification** |
-| F3b generic random-impact timing rescue | **FAIL** |
-| early permanent embryo-bound seed | **OPEN / F4** |
+| F3 small GI <=3% | **FAIL in sampled outer gate** |
+| F3 ~10% GI | **PASS existence / inefficient** |
+| F3 ~30% GI | **PASS conditional few-percent channel** |
+| F3b generic multi-pass timing rescue | **FAIL** |
+| F4 correlated embryo-exchange energy gate | **PASS kinematic** |
+| F4 stable early embryo binding | **PASS existence** |
+| F4 growth-assisted engulfment | **PASS conditional / history OPEN** |
+| F4 post-engulfment sinking | **PASS feasibility / closure OPEN** |
 | full formation/delivery probability | **OPEN** |
 | direkte experimentelle BH-Detektion | **NONE** |
 | eindeutige positive Signatur | **NONE** |
@@ -383,8 +401,9 @@ Ein vollständiger globaler direct-N-body Formation-run bleibt ebenfalls sinnvol
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F4 early permanent embryo-bound seed / full global formation N-body
-6. physical origin / phase-space density of the already solar-bound cold seed.
+5. F5 full correlated terrestrial-embryo exchange capture fraction
+6. realistic post-capture growth/engulfment history
+7. physical origin / phase-space density of the already solar-bound cold seed.
 ```
 
 # Zentrale Statusdateien
@@ -394,6 +413,7 @@ Ein vollständiger globaler direct-N-body Formation-run bleibt ebenfalls sinnvol
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
 - `STAGE3_74_F3_HILL_MONTE_CARLO.md`
 - `STAGE3_75_F3B_RESIDENCE_TIMING_GATE.md`
+- `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
 - `STAGE3_71_A19_FORMATION_RECHECK.md`
 - `STAGE3_70B_A18_REALDATA_AUDIT.md`
 
@@ -401,15 +421,8 @@ Ein vollständiger globaler direct-N-body Formation-run bleibt ebenfalls sinnvol
 
 Originale Texte/Dokumentation/Grafiken stehen – soweit nicht anders gekennzeichnet – unter **CC BY 4.0**; originaler Quellcode unter **MIT**.
 
-Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten sind ausdrücklich erlaubt. Der **offizielle Projektstand** (`main`, Stages, Releases) wird jedoch nur über dieses Repository und die Freigabe des Projektinhabers definiert.
-
-Siehe:
-
-- `LICENSE`
-- `ATTRIBUTION.md`
-- `OPEN_SCIENCE.md`
-- `OFFICIAL_PROJECT_POLICY.md`
+Wissenschaftliche Prüfung, Reproduktion, Kritik und eigene abgeleitete Arbeiten sind ausdrücklich erlaubt. Der **offizielle Projektstand** (`main`, Stages, Releases) wird nur über dieses Repository und die Freigabe des Projektinhabers definiert.
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.75/F3b, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.76/F4, Rheinland-Pfalz, Deutschland.
