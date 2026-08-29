@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 29.08.2026  
-**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.79 / F7
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a
 
 ## Statusbegriffe
 
@@ -21,6 +21,7 @@ keine eindeutige positive H0-Signatur
 H+ FAIL in projektinterner strongest-SK-IV reinterpretation
 H0 OPEN / nicht nachgewiesen
 Formation/Delivery OPEN / stark origin-fine-tuned
+F8a candidate regions != formation proof.
 ```
 
 Die Projektresultate sind Modell-/Solverresultate und **keine experimentelle BH-Evidenz**.
@@ -163,13 +164,7 @@ post-engulfment damping: Myr-scale feasibility in optimistic proxy
 absolute probability: OPEN.
 ```
 
-Für `a_seed~0.3 r_H` muss Capture im adiabatischen Proxy ungefähr vor
-
-```text
-M1 ~0.041 M_E
-```
-
-erfolgen, damit spätere Growth-assisted Engulfment bis `1 M_E` möglich bleibt.
+Für `a_seed~0.3 r_H` muss Capture im adiabatischen Proxy ungefähr vor `M1~0.041 M_E` erfolgen, damit spätere Growth-assisted Engulfment bis `1 M_E` möglich bleibt.
 
 ## F5 – Restricted 4-body Exchange Monte-Carlo
 
@@ -263,26 +258,11 @@ primordial solar-bound overdense seed population: OPEN but demanding.
 
 ## F7 – Seed-Origin / Solar-Bound Phase-Space Gate
 
-F7 replaces the vague `solar-bound cold seed` origin assumption by an explicit phase-space test.
-
-### Canonical halo adiabatic inheritance
-
-Using the Oncins et al. low-velocity bound-DM formula with the maximally generous
-
-```text
-f_PBH=1
-f_s=1
-rho_h=0.3 GeV/cm^3
-sigma_h=200 km/s
-```
-
-at `1 AU`:
+Canonical-halo adiabatic inheritance using maximally generous `f_PBH=f_s=1`, `rho_h=0.3 GeV/cm^3`, `sigma_h=200 km/s` gives at 1 AU:
 
 ```text
 rho_bd(1 AU)=1.329e-24 kg/m^3.
 ```
-
-Resulting F6 Hill occupancy:
 
 | M_PBH | mu_H | shortfall vs 8.318 |
 |---:|---:|---:|
@@ -295,87 +275,144 @@ Resulting F6 Hill occupancy:
 canonical Galactic-halo adiabatic inheritance @1 AU: FAIL.
 ```
 
-### Protostellar cloud upper bound
-
-Using Eroshenko-like `R_i=7500 AU`, `t_d=6e4 yr`, `v_cap=0.5 km/s`, `sigma=200 km/s`, F7 deliberately counts every low-speed cloud entrant as captured.
-
-The total wide-orbit count can then be large for low PBH masses because `n_PBH~1/M`:
+A deliberately generous protostellar-cloud upper bound can produce wide captured low-mass PBHs, but after an already-overoptimistic point-Sun `q<1 AU` filter only about
 
 ```text
-~6.24e5 at 1e10 kg
-~6.24e4 at 1e11 kg
-~3.12e4 at 2e11 kg
-~1.25e4 at 5e11 kg.
+157, 15.7, 7.87, 3.15
 ```
 
-But after an additional already-overoptimistic point-Sun focusing requirement `q<1 AU`, the upper bound is only:
-
-| M_PBH | perfect inner-1-AU candidates max |
-|---:|---:|
-| `1e10 kg` | `157` |
-| `1e11 kg` | `15.7` |
-| `2e11 kg` | `7.87` |
-| `5e11 kg` | `3.15` |
-
-versus F6's most favorable global minimum
-
-```text
-N_seed,min ~1.07e4.
-```
+inner candidates remain for `1e10,1e11,2e11,5e11 kg`, versus F6's best global requirement `~1.07e4`.
 
 ```text
 wide protostellar PBH capture: PASS existence
 terrestrial cold-seed supply: FAIL generous upper bound.
 ```
 
-### Giant-planet capture from the standard halo
+Standard giant-planet capture from a 200-km/s halo likewise misses the required instantaneous cold 1-AU density by roughly `1e9...1e10`.
 
-Using the Dehnen/Hands/Schoenrich phase-space-mixed Jupiter/Saturn captive model with `sigma=200 km/s`:
-
-```text
-n_bound(1 AU)/n_halo ~4.50e-4.
-```
-
-F6 Hill occupancy:
-
-| M_PBH | mu_H | shortfall vs 8.318 |
-|---:|---:|---:|
-| `1e10 kg` | `1.01e-8` | `8.20e8 x` |
-| `1e11 kg` | `1.01e-9` | `8.20e9 x` |
-| `2e11 kg` | `5.07e-10` | `1.64e10 x` |
-| `5e11 kg` | `2.03e-10` | `4.10e10 x` |
-
-Thus a large integrated capture count over Gyr does not imply a large instantaneous cold 1-AU population.
+Remaining F7 rescue:
 
 ```text
-standard-halo giant-planet capture as F6 source: FAIL.
-```
-
-### Remaining origin rescue
-
-The required phase-space merit relative to the canonical halo is
-
-```text
-(rho/sigma^3)_required/(rho/sigma^3)_halo
-~1.5e8 ... 7.4e9.
-```
-
-Equivalent examples:
-
-```text
-at canonical rho:
-required sigma_DM ~378...102 m/s
-
-at sigma_DM=1 km/s:
-required rho_DM ~0.147...7.34 M_sun/pc^3
-```
-
-A normal Solar-birth stellar cluster does not automatically cool 100–200 km/s halo PBHs to the stellar cluster dispersion. Therefore:
-
-```text
-ordinary natal cluster as PBH cooler: FAIL
 pre-existing co-moving cold PBH mini-halo/stream: OPEN exotic initial condition.
 ```
+
+## F8a – Co-moving cold substructure semi-analytic scan
+
+### Critical model correction
+
+For a self-bound virialized mini-halo, `M_sub`, `r_core`, and `sigma_sub` are not independent. F8 therefore separates:
+
+```text
+mini:
+Plummer self-bound halo; sigma derived from M and r_core
+
+stream:
+unbound Gaussian clump/finite stream; independent sigma,
+with ballistic expansion + bulk drift during collapse.
+```
+
+For the Plummer reference:
+
+```text
+rho(r)=3M/(4 pi a^3) [1+r^2/a^2]^(-5/2)
+sigma_1D^2(r)=GM/(6a) [1+r^2/a^2]^(-1/2)
+```
+
+At fixed scale radius:
+
+```text
+rho ~ M
+sigma ~ M^(1/2)
+Q=rho/sigma^3 ~ M^(-1/2).
+```
+
+Thus the original independent-`sigma` mini-halo grid and the suggested monotonic-`mu_H(M)` test were **REJECTED/CORRECTED**.
+
+### F8 low-velocity gate
+
+```text
+Q_eff = rho/sigma^3 * exp[-v_rel^2/(2 sigma^2)]
+rho_bound(1 AU) = [4/(3 sqrt(pi))] Q_eff (G M_sun/AU)^(3/2)
+mu_H = rho_bound V_H/M_seed
+PASS threshold: mu_H >= 8.318.
+```
+
+Required Q:
+
+| Seedmass | Q_req [M_sun pc^-3 (km/s)^-3] |
+|---:|---:|
+| `1e10 kg` | `0.146794` |
+| `1e11 kg` | `1.46794` |
+| `2e11 kg` | `2.93589` |
+| `5e11 kg` | `7.33972` |
+
+Bulk co-motion is explicit. Over `0.06 Myr`, `1 km/s` corresponds to a displacement of about `12,650 AU`, so density alone cannot rescue a non-co-moving compact structure.
+
+### Regression suite
+
+`test_stage3_80_f8_substructure_scan.py`:
+
+```text
+7/7 PASS.
+```
+
+Tests:
+
+1. Plummer `rho proportional M`.
+2. virial `sigma^2 proportional M`.
+3. `Q proportional M^-1/2` at fixed scale radius.
+4. F6/F7 Q regression: `1e11 kg -> 1.46794 M_sun pc^-3 (km/s)^-3`.
+5. bulk-velocity suppression.
+6. stream expansion lowers local density.
+7. `rho_required -> mu_H` roundtrip reproduces `8.318`.
+
+### Canonical F8a example grid
+
+```text
+25,920 rows
+M_sub=1e-15...1e-4 M_sun
+r_core=1e-3...1e3 AU
+stream sigma=0.01...1 km/s
+hybrid v_rel grid
+4 seed masses
+medium cluster stress model.
+```
+
+Results:
+
+```text
+mini phase-space pass: 702 grid rows
+mini Stage-1 candidates: 390
+mini Stage-1 + unchanged present-day density benchmark: 0
+stream phase-space pass: 5391
+stream collapse-overlap Stage-1 candidates: 692.
+```
+
+These counts are grid cells, **not astrophysical probabilities**.
+
+The compact-seed mass fraction is explicit:
+
+```text
+f_seed_required = mu_H,50 / mu_H(f_seed=1).
+```
+
+Stage-1 requires `f_seed_required<=1`.
+
+### F8a conclusion
+
+```text
+semi-analytic phase-space existence screen: PASS / candidates found
+self-bound mini-halo candidate region: FOUND conditionally
+finite-stream collapse-overlap region: FOUND conditionally
+mini-halo cluster survival: PARTIAL stress proxy
+stream post-capture 1e6...1e7 yr retention: OPEN
+unchanged present-day retention: tension/model-dependent
+final F8 physical origin/retention: OPEN
+absolute Earth delivery: OPEN
+experimental BH evidence: NONE.
+```
+
+The F7 origin rescue is therefore **not immediately empty in parameter space**, but F8a does not establish that such a substructure forms, survives the natal cluster/Solar collapse, or remains observationally allowed.
 
 # 6. Current end matrix
 
@@ -395,11 +432,15 @@ pre-existing co-moving cold PBH mini-halo/stream: OPEN exotic initial condition.
 | F4 early embryo exchange | **PASS kinematic** |
 | F5 direct 4-body exchange | **PASS conditional** |
 | F6 normal Galactic seed abundance | **FAIL** |
-| F7 canonical-halo adiabatic inheritance @1 AU | **FAIL by ~1e8...1e10** |
+| F7 canonical-halo origin @1 AU | **FAIL by ~1e8...1e10** |
 | F7 protostellar wide PBH capture | **PASS existence / insufficient terrestrially** |
-| F7 inner-1-AU cloud supply | **FAIL generous upper bound** |
-| F7 standard giant-planet halo capture @1 AU | **FAIL by ~1e9...1e10** |
-| F7 co-moving cold dark mini-halo/stream | **OPEN exotic initial condition** |
+| F7 standard giant-planet halo capture | **FAIL** |
+| F8a virialized cold-substructure phase-space | **PASS existence screen / candidates found** |
+| F8a regression suite | **7/7 PASS** |
+| F8a cluster survival | **PARTIAL reduced proxy** |
+| F8 stream long-term solar retention | **OPEN** |
+| F8 present-day compatibility | **OPEN / evolution required** |
+| final F8 physical viability | **OPEN** |
 | full formation/delivery probability | **OPEN / strongly fine-tuned** |
 | experimental BH detection | **NONE** |
 | unique positive signature | **NONE** |
@@ -411,9 +452,10 @@ pre-existing co-moving cold PBH mini-halo/stream: OPEN exotic initial condition.
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F8 physical viability of the remaining co-moving cold dark substructure
-6. realistic long-term post-capture survival / engulfment / settling
-7. absolute formation/delivery probability.
+5. F8b successive stellar-encounter / cluster-disruption Monte-Carlo
+6. F8c Proto-Sun + time-dependent gas/Solar-potential N-body validation
+7. realistic long-term post-capture survival / engulfment / settling
+8. absolute formation/delivery probability.
 ```
 
 # 8. Central files
@@ -428,6 +470,11 @@ pre-existing co-moving cold PBH mini-halo/stream: OPEN exotic initial condition.
 - `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
 - `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
 - `STAGE3_79_F7_SEED_ORIGIN_PHASE_SPACE_GATE.md`
+- `STAGE3_80_F8_SUBSTRUCTURE_SCAN.md`
+- `stage3_80_f8_substructure_scan.py`
+- `test_stage3_80_f8_substructure_scan.py`
+- `results/f8_example_candidates.csv`
+- `results/f8_example_summary.json`
 
 ## Schlussstatus
 
@@ -439,13 +486,13 @@ POPULATION FOLDING:
 F6 calculated.
 
 STANDARD GALACTIC ORIGIN CHANNELS:
-FAIL for the required terrestrial 1-AU phase space.
+FAIL for required terrestrial phase space in F7.
 
-WIDE SOLAR CAPTURE OF VERY LOW-MASS PBHs:
-possible but insufficient for F6.
+F8a COLD-SUBSTRUCTURE PHASE-SPACE SCREEN:
+PASS as existence screen; candidate cells found.
 
-PRIMORDIAL CO-MOVING COLD DARK SUBSTRUCTURE:
-OPEN / nonstandard origin rescue.
+F8 CLUSTER/SOLAR-FORMATION SURVIVAL:
+OPEN.
 
 ABSOLUTE EARTH DELIVERY:
 OPEN / strongly fine-tuned.
