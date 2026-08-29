@@ -3,7 +3,7 @@
 **Projekt:** SL/BH-Kernhypothese Erdmodul  
 **Datum:** 29.08.2026  
 **Quelle dieses Stands:** Chat-Arbeitsstand „F2 quantitativ weiterrechnen“  
-**Status:** CORRECTED REDUCED SOLVER / 11/11 REGRESSION TESTS PASS / 50-POINT SWEEP PASS / PHYSICAL CLOSURES REMAIN OPEN
+**Status:** CORRECTED REDUCED SOLVER / 14/14 REGRESSION TESTS PASS / 50-POINT SWEEP PASS / PHYSICAL CLOSURES REMAIN OPEN
 
 ## Zweck
 
@@ -119,6 +119,22 @@ dotN(c_inf=1 m^-3) ~ 3.07273e-13 s^-1
 
 Die analytische Konzentrationslösung erfüllt die beiden Randbedingungen. Die Rate skaliert linear mit der gewählten Referenzkonzentration `c_inf`.
 
+Das zur Flussgleichung gehörende Profil lautet
+
+```text
+c(r) = c_inf
+       [1 - exp(-alpha(1/r_sink - 1/r))]
+       / [1 - exp(-alpha(1/r_sink - 1/R))].
+```
+
+Ein zuvor zusätzlich verwendeter Faktor
+
+```text
+exp[alpha(1/r - 1/R)]
+```
+
+erfüllte zwar ebenfalls beide Randbedingungen, aber nicht die Differentialgleichung und erzeugte im Inneren eine exponentielle Überhöhung. Er wurde entfernt. Die geschlossene Formel für `dotN` war bereits konsistent und ändert sich durch diese Korrektur nicht.
+
 ## Aussagegrenze
 
 `c_inf=1 m^-3` ist eine Normierungs-/Referenzdichte. Die ausgegebene Rate ist deshalb **keine finale reale Akkretionsrate**.
@@ -142,7 +158,7 @@ Status:
 
 ```text
 stationary reduced drift-diffusion solution: PASS
-boundary/profile regression:                PASS
+boundary/ODE residual/flux regressions:      PASS
 final multicomponent electrical Q_eq:       OPEN
 ```
 
@@ -227,7 +243,7 @@ unique PREM/H0 seismic prediction:      OPEN
 
 # 4. Regressionen
 
-`test_stage3_94_multi_gate_closure.py` enthält 11 deterministische Regressionen:
+`test_stage3_94_multi_gate_closure.py` enthält 14 deterministische Regressionen:
 
 ```text
 01 F12 Poisson delta
@@ -238,15 +254,27 @@ unique PREM/H0 seismic prediction:      OPEN
 06 A34 alpha/r_sink
 07 A34 sink/outer boundary conditions
 08 A34 linear c_inf rate scaling
-09 H0 compensation-shell density
-10 H0 zero-net-mass compensation
-11 complete 50-point F12+A34+H0 smoke sweep
+09 A34 ODE residual on 400 logarithmic radial points
+10 A34 radial flux conservation dotN(r)
+11 A34 inner-profile regression against exponential overshoot
+12 H0 compensation-shell density
+13 H0 zero-net-mass compensation
+14 complete 50-point F12+A34+H0 smoke sweep
 ```
+
+Die ODE- und Flusstests verwenden eine unabhängige zentrale numerische Ableitung. Die Akzeptanzgrenzen sind
+
+```text
+max normalized ODE residual < 1e-6
+relative spread of dotN(r)  < 1e-6.
+```
+
+Für den Defaultlauf wurden lokal etwa `1.30e-9` bzw. `2.61e-9` erreicht. Die Innenprofil-Regression prüft bei `r=2 r_sink` zusätzlich explizit, dass die frühere exponentielle Überhöhung nicht wieder eingeführt wird.
 
 Lokaler Reproduktionstest dieses Repo-Updates:
 
 ```text
-11/11 PASS
+14/14 PASS
 ```
 
 Der vollständige Sweep erzeugt je Gate 50 Punkte:

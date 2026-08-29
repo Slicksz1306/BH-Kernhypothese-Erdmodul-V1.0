@@ -122,6 +122,16 @@ J_r = -D Phi [dc/dr + (alpha/r^2)c]
 alpha = G M m/(k_B T)
 ```
 
+Für `c(r_sink)=0` und `c(R)=c_inf` lautet das korrigierte analytische Profil:
+
+```text
+c(r) = c_inf
+       [1 - exp(-alpha(1/r_sink - 1/r))]
+       / [1 - exp(-alpha(1/r_sink - 1/R))].
+```
+
+Ein früher zusätzlich enthaltener Faktor `exp[alpha(1/r - 1/R)]` war mit der Differentialgleichung nicht vereinbar und wurde entfernt. Die stationäre Rate selbst bleibt unverändert.
+
 Mit
 
 ```text
@@ -185,8 +195,18 @@ direct H0 detection = NONE
 `test_stage3_94_multi_gate_closure.py`:
 
 ```text
-11/11 regression tests PASS
+14/14 regression tests PASS
 ```
+
+Die drei ergänzten A34-Regressionen prüfen unabhängig von den Randwerten:
+
+```text
+ODE-Residual auf 400 logarithmischen Radialpunkten: max epsilon < 1e-6
+radiale Flusserhaltung dotN(r):              relative Streuung < 1e-6
+Innenprofil bei r=2 r_sink:                  keine exponentielle Überhöhung
+```
+
+Damit bedeutet der A34-PASS eine konsistente reduzierte stationäre Ein-Spezies-Lösung. Das finale multikomponentige elektrische `Q_eq` bleibt **OPEN**; daraus folgt kein experimenteller Nachweis eines Erdzentrum-BH.
 
 Zusätzlich läuft der gemeinsame Smoke-Sweep:
 
