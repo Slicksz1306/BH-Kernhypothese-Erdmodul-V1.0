@@ -1,8 +1,8 @@
 # SL/BH-Kernhypothese Erdmodul – Test- und Validierungsstand
 
 **Autor:** Daniel Marcel Schlicksupp  
-**Stand:** 29.08.2026  
-**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a; Multi-Gate Closure bis Stage 3.94; Toy-A35-Diagnostik bis Stage 3.95A
+**Stand:** 30.08.2026
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.80 / F8a; Multi-Gate Closure bis Stage 3.94; Toy-A35-Diagnostik bis Stage 3.95A; Stage 3.95B WDM-Daten-Gate abgeschlossen; Stage 3.95C Architecture Definition Gate PASS AS SPECIFICATION / Physical Closure OPEN
 
 ## Statusbegriffe
 
@@ -189,6 +189,67 @@ reales WDM-/Screening-/Sink-Q_eq:           OPEN
 experimenteller BH-Nachweis:                NONE
 ```
 
+# 5b. Stage 3.95B – A35 WDM Charge Closure Specification
+
+Stage 3.95B spezifiziert die mathematische Struktur, Randbedingungen, Datenanforderungen, Stage-3.95A-Grenzregressionen und harten Falsifikationskriterien der späteren realen Ladungsclosure. Es wurde kein realer `Q_eq`-Solver implementiert und kein numerischer Erdwert für `Q_eq` erzeugt.
+
+Die Ladungen werden ausdrücklich getrennt:
+
+```text
+Q_bullet = tatsächliche Ladung des zentralen Sinks
+Q_m      = am Matchingradius effektiv eingeschlossene Ladung
+Q_m != Q_bullet im geschirmten Fall.
+```
+
+Vor einer Implementierung fehlen vier harte Closure-Blöcke:
+
+```text
+1. multikomponentige ionische Transportmatrix
+2. elektronischer WDM-Transportoperator
+3. thermodynamisch konsistente Mischungsableitungen
+4. innere Sink-/Screening-Abbildung.
+```
+
+Status:
+
+```text
+Stage 3.95B mathematisch spezifiziert: PASS
+physikalische Datenidentifizierbarkeit: OPEN
+Implementierung reales Q_eq: BLOCKED BY MISSING CLOSURE DATA
+Stage-3.95B-Solver-/Regressionstests: NOT IMPLEMENTED
+experimenteller BH-Nachweis: NONE
+```
+
+Der bestehende reproduzierte Teststand bleibt unverändert bei `42/42 PASS`, weil die neue Stufe ausschließlich eine Spezifikation ist.
+
+# 5c. Stage 3.95C – A35 WDM Theoretical Closure Architecture
+
+Stage 3.95C definiert die vollständige mathematische Schnittstellenarchitektur, ohne die noch offenen physikalischen Operatoren als geschlossen auszugeben.
+
+Wesentliche Architekturverträge:
+
+```text
+kinetisches Boundary-Lifting B_s oder direkte Momentenclosure Ktilde_s
+reactive-ionization: S = N_reac R mit Ladungs-/Elementerhaltung
+frozen-Q_bullet-BVP nur als quasi-stationäre Fortsetzungsfamilie
+projizierte Thermodynamik: C_th^T H C_th >= 0 auf dem zulässigen Unterraum
+Onsager-Casimir am vollständigen Transportoperator
+Entropy-production PSD getrennt von restricted coercivity und PDE-Well-posedness
+fixed-u-Momentenbranch: 2 S_count + 1 unabhängige differentielle Freiheitsgrade/BCs
+```
+
+Status:
+
+```text
+Stage 3.95C Architecture Definition Gate: PASS AS SPECIFICATION
+Physical Closure Completeness:             OPEN
+Solver Release Gate:                       NOT PASSED
+Real Q_eq Implementation:                  NO-GO
+Experimental BH Evidence:                  NONE
+```
+
+Die offenen Pflichtclosures umfassen weiterhin unter anderem `B_s`, `K_s/Ktilde_s`, `M_Q`, die vollständigen Transportoperatoren, Ionisationsraten und die volle Fe-Ni-Light-Thermodynamik. `42/42 PASS` bleibt ausschließlich der Rückwärtskompatibilitätsstand der bereits ausführbaren Regressionen; Stage 3.95C enthält keinen numerischen Solver.
+
 # 6. Formation / Delivery
 
 ## F1 – Protosolar / co-moving Seed
@@ -347,7 +408,7 @@ primordial solar-bound overdense seed population: OPEN but demanding.
 
 ## F7 – Seed-Origin / Solar-Bound Phase-Space Gate
 
-Canonical-halo adiabatic inheritance using maximally generous `f_PBH=f_s=1`, `rho_h=0.3 GeV/cm^3`, `sigma_h=200 km/s` gives at 1 AU:
+Canonical-halo adiabatic inheritance using maximally generous `f_PBH=f_s=1`, `rho_h=0.3 GeV/cm^3`, `sigma_h=200 km/s` gibt at 1 AU:
 
 ```text
 rho_bd(1 AU)=1.329e-24 kg/m^3.
@@ -515,6 +576,8 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 | A34 reduced stationary ODE + residual/flux regressions | **14/14 Stage-3.94 suite PASS** |
 | A35 diagonal Toy-Monotonietheorem | **PASS in Stage 3.95A reference model** |
 | A35 diskrete Ladungsdiagnostik | **16/16 Stage-3.95A suite PASS** |
+| A35 Stage-3.95B WDM-Charge-Closure-Spezifikation | **PASS specification / data OPEN / implementation blocked** |
+| A35 Stage-3.95C Closure-Architektur | **PASS AS SPECIFICATION / physical closure OPEN / solver NO-GO** |
 | exact multicomponent Q_eq | **OPEN** |
 | final Full-WDM species-resolved Mdot_BH(t) | **OPEN** |
 | normal halo -> Earth delivery | **VERY STRONG FAIL** |
@@ -541,7 +604,7 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 # 8. Open hard problems
 
 ```text
-1. Stage 3.95B: ionischer Stofftransport + elektronischer WDM-Transport + Screening + Sink-Capture -> reales Q_eq
+1. Stage 3.95C Physical Closure: B_s/K_s/Ktilde_s + M_Q + vollständige Stoff-/Wärme-Transportoperatoren + Ionisationsraten + Fe-Ni-Light-Thermodynamik
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
@@ -561,6 +624,8 @@ The F7 origin rescue is therefore **not immediately empty in parameter space**, 
 - `STAGE3_95A_A35_DIAGNOSTIC_CHARGE_THEOREM.md`
 - `stage3_95a_a35_diagnostic_charge_theorem.py`
 - `test_stage3_95a_a35_diagnostic_charge_theorem.py`
+- `STAGE3_95B_A35_WDM_CHARGE_CLOSURE_SPEC.md`
+- `STAGE3_95C_A35_WDM_THEORETICAL_CLOSURE_ARCHITECTURE.md`
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
 - `STAGE3_74_F3_HILL_MONTE_CARLO.md`
