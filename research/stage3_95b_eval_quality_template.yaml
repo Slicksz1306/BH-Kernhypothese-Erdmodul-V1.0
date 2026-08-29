@@ -1,0 +1,63 @@
+version: stage3.95b-eval-audit-v1
+purpose: >
+  Meta-audit for scientific regression tests and agent tasks. A passing test suite
+  is not sufficient unless the test specification itself is aligned, sufficiently
+  covered, and independently checkable.
+
+task_id: null
+claim_id: null
+
+specification:
+  assumptions_explicit: false
+  variables_defined: false
+  units_defined: false
+  requested_output_defined: false
+  ambiguity_notes: []
+
+failure_mode_audit:
+  overly_strict_test:
+    present: null
+    evidence: []
+  underspecified_task:
+    present: null
+    evidence: []
+  low_coverage:
+    present: null
+    evidence: []
+  misleading_specification:
+    present: null
+    evidence: []
+
+coverage:
+  target_behavior: []
+  edge_cases: []
+  asymptotic_limits: []
+  conservation_or_invariants: []
+  negative_tests: []
+
+oracle:
+  type: null
+  reference: null
+  independent: false
+  tolerance: null
+
+harness:
+  manifest: agent/stage3_95b_harness_manifest.schema.json
+  version: null
+  rebaseline_required: false
+
+multimodal:
+  images_used: false
+  rendered_text_treated_as_untrusted: true
+  plot_values_cross_checked: false
+  conflicts: []
+
+review:
+  independent_reviewer: null
+  adversarial_review_complete: false
+  disagreements: []
+
+verdict:
+  test_suite_quality: REVIEW_REQUIRED
+  allowed_claim_promotion: NONE
+  notes: []
