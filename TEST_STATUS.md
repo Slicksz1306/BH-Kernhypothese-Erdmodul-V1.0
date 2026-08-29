@@ -2,7 +2,7 @@
 
 **Autor:** Daniel Marcel Schlicksupp  
 **Stand:** 29.08.2026  
-**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.78 / F6
+**Forschungsstand:** Reduced Stack A1–A19 abgeschlossen; A20–A31 / Stage 3.72 weitergeführt; Formation/Delivery bis Stage 3.79 / F7
 
 ## Statusbegriffe
 
@@ -20,7 +20,7 @@ keine direkte Detektion eines Erdzentrum-BH
 keine eindeutige positive H0-Signatur
 H+ FAIL in projektinterner strongest-SK-IV reinterpretation
 H0 OPEN / nicht nachgewiesen
-Formation/Delivery OPEN
+Formation/Delivery OPEN / stark origin-fine-tuned
 ```
 
 Die Projektresultate sind Modell-/Solverresultate und **keine experimentelle BH-Evidenz**.
@@ -77,8 +77,6 @@ DeltaE/E_inf ~1e-18 ... 5e-17
 
 # 4. Stage 3.72 – A20–A31 Charge / WDM Transport
 
-Aktueller konsolidierter Stand:
-
 ```text
 electron Dirac sink flux-direct: stabilized
 nonlinear Thomas-Fermi screening: calculated and recoupled
@@ -106,7 +104,7 @@ self diffusion != mutual diffusion != charge mobility.
 ## F1 – Protosolar / co-moving Seed
 
 ```text
-normal halo -> protostellar cloud: strongly negative
+normal halo -> protostellar cloud: strongly negative as generic terrestrial delivery
 protoplanetary gas drag for naked seed: insufficient / FAIL
 already solar-bound dynamically cold seed: OPEN initial condition.
 ```
@@ -141,8 +139,6 @@ small GI <=3%: FAIL in sampled outer gate
 ```
 
 ## F3b – Multi-Pass / Residence Timing
-
-Literatur-/Stressanker:
 
 ```text
 F3 first passage ~35.3 d
@@ -218,8 +214,6 @@ BROAD  3/3.
 
 Positive-energy one-pass crossings bleiben trotz großzügigem A19-Drag ungebunden.
 
-Status:
-
 ```text
 local collisionless embryo-exchange mechanism: PASS conditionally
 generic formation probability: NOT ESTABLISHED.
@@ -227,14 +221,12 @@ generic formation probability: NOT ESTABLISHED.
 
 ## F6 – Population-weighted Formation Gate
 
-Core model:
-
 ```text
 lambda = N_enc K_F5 S_post n_seed V_H
 P_delivery = 1-exp(-lambda).
 ```
 
-Reference:
+Referenz:
 
 ```text
 M1=0.03 M_E
@@ -243,26 +235,11 @@ N_enc=10
 S_post=0.5
 P_target=0.5
 r_H=465,012 km
-V_H=4.212e26 m^3.
+V_H=4.212e26 m^3
+mu_H,50=8.318 seeds per Hill volume.
 ```
 
-Required eligible Hill occupancy:
-
-```text
-mu_H,50 = 8.318 seeds per Hill volume.
-```
-
-Encounter-count sensitivity:
-
-| N_enc | mu_H,50 |
-|---:|---:|
-| `1` | `83.18` |
-| `3` | `27.73` |
-| `10` | `8.318` |
-| `30` | `2.773` |
-| `100` | `0.832` |
-
-Required local density at the reference:
+Required local density:
 
 | M_BH | rho_seed,50 [kg/m^3] | overdensity vs canonical Galactic DM |
 |---:|---:|---:|
@@ -271,22 +248,11 @@ Required local density at the reference:
 | `2e11 kg` | `3.950e-15` | `7.39e6 x` |
 | `5e11 kg` | `9.874e-15` | `1.85e7 x` |
 
-Reference geometric abundance requirements:
-
-| population proxy | N_seed,50 |
-|---|---:|
-| razor-cold co-orbital band | `1.07e4` |
-| ultra-cold annulus | `3.44e4` |
-| cold inner disk | `7.25e5` |
-| warm broad disk | `1.45e7` |
-
-At `M_BH=1e11 kg`, total mass is only about
+Reference geometric abundance:
 
 ```text
-1.07e15 ... 1.45e18 kg.
+N_seed,50 ~1.07e4 ... 1.45e7.
 ```
-
-Therefore:
 
 ```text
 raw total seed mass budget: NOT the main bottleneck
@@ -295,13 +261,121 @@ one isolated solar-bound seed: FAIL as generic solution
 primordial solar-bound overdense seed population: OPEN but demanding.
 ```
 
-A current OSIRIS-REx/Bennu distributed-DM benchmark near `1.1 AU` is approximately
+## F7 – Seed-Origin / Solar-Bound Phase-Space Gate
+
+F7 replaces the vague `solar-bound cold seed` origin assumption by an explicit phase-space test.
+
+### Canonical halo adiabatic inheritance
+
+Using the Oncins et al. low-velocity bound-DM formula with the maximally generous
 
 ```text
-rho_DM <~3.3e-15 kg/m^3.
+f_PBH=1
+f_s=1
+rho_h=0.3 GeV/cm^3
+sigma_h=200 km/s
 ```
 
-This is **not** a direct primordial exclusion. It is only a present-day retention benchmark and depends on the distribution model.
+at `1 AU`:
+
+```text
+rho_bd(1 AU)=1.329e-24 kg/m^3.
+```
+
+Resulting F6 Hill occupancy:
+
+| M_PBH | mu_H | shortfall vs 8.318 |
+|---:|---:|---:|
+| `1e10 kg` | `5.60e-8` | `1.49e8 x` |
+| `1e11 kg` | `5.60e-9` | `1.49e9 x` |
+| `2e11 kg` | `2.80e-9` | `2.97e9 x` |
+| `5e11 kg` | `1.12e-9` | `7.43e9 x` |
+
+```text
+canonical Galactic-halo adiabatic inheritance @1 AU: FAIL.
+```
+
+### Protostellar cloud upper bound
+
+Using Eroshenko-like `R_i=7500 AU`, `t_d=6e4 yr`, `v_cap=0.5 km/s`, `sigma=200 km/s`, F7 deliberately counts every low-speed cloud entrant as captured.
+
+The total wide-orbit count can then be large for low PBH masses because `n_PBH~1/M`:
+
+```text
+~6.24e5 at 1e10 kg
+~6.24e4 at 1e11 kg
+~3.12e4 at 2e11 kg
+~1.25e4 at 5e11 kg.
+```
+
+But after an additional already-overoptimistic point-Sun focusing requirement `q<1 AU`, the upper bound is only:
+
+| M_PBH | perfect inner-1-AU candidates max |
+|---:|---:|
+| `1e10 kg` | `157` |
+| `1e11 kg` | `15.7` |
+| `2e11 kg` | `7.87` |
+| `5e11 kg` | `3.15` |
+
+versus F6's most favorable global minimum
+
+```text
+N_seed,min ~1.07e4.
+```
+
+```text
+wide protostellar PBH capture: PASS existence
+terrestrial cold-seed supply: FAIL generous upper bound.
+```
+
+### Giant-planet capture from the standard halo
+
+Using the Dehnen/Hands/Schoenrich phase-space-mixed Jupiter/Saturn captive model with `sigma=200 km/s`:
+
+```text
+n_bound(1 AU)/n_halo ~4.50e-4.
+```
+
+F6 Hill occupancy:
+
+| M_PBH | mu_H | shortfall vs 8.318 |
+|---:|---:|---:|
+| `1e10 kg` | `1.01e-8` | `8.20e8 x` |
+| `1e11 kg` | `1.01e-9` | `8.20e9 x` |
+| `2e11 kg` | `5.07e-10` | `1.64e10 x` |
+| `5e11 kg` | `2.03e-10` | `4.10e10 x` |
+
+Thus a large integrated capture count over Gyr does not imply a large instantaneous cold 1-AU population.
+
+```text
+standard-halo giant-planet capture as F6 source: FAIL.
+```
+
+### Remaining origin rescue
+
+The required phase-space merit relative to the canonical halo is
+
+```text
+(rho/sigma^3)_required/(rho/sigma^3)_halo
+~1.5e8 ... 7.4e9.
+```
+
+Equivalent examples:
+
+```text
+at canonical rho:
+required sigma_DM ~378...102 m/s
+
+at sigma_DM=1 km/s:
+required rho_DM ~0.147...7.34 M_sun/pc^3
+```
+
+A normal Solar-birth stellar cluster does not automatically cool 100–200 km/s halo PBHs to the stellar cluster dispersion. Therefore:
+
+```text
+ordinary natal cluster as PBH cooler: FAIL
+pre-existing co-moving cold PBH mini-halo/stream: OPEN exotic initial condition.
+```
 
 # 6. Current end matrix
 
@@ -315,15 +389,18 @@ This is **not** a direct primordial exclusion. It is only a present-day retentio
 | exact multicomponent Q_eq | **OPEN** |
 | final Full-WDM species-resolved Mdot_BH(t) | **OPEN** |
 | normal halo -> Earth delivery | **VERY STRONG FAIL** |
-| normal halo -> protostellar cloud | **strongly negative** |
 | disk gas drag | **FAIL / insufficient** |
 | random/smooth GI pull-down | **strongly negative** |
 | F3b generic multi-pass timing rescue | **FAIL** |
 | F4 early embryo exchange | **PASS kinematic** |
 | F5 direct 4-body exchange | **PASS conditional** |
 | F6 normal Galactic seed abundance | **FAIL** |
-| F6 primordial solar-bound overdense population | **OPEN** |
-| full formation/delivery probability | **OPEN** |
+| F7 canonical-halo adiabatic inheritance @1 AU | **FAIL by ~1e8...1e10** |
+| F7 protostellar wide PBH capture | **PASS existence / insufficient terrestrially** |
+| F7 inner-1-AU cloud supply | **FAIL generous upper bound** |
+| F7 standard giant-planet halo capture @1 AU | **FAIL by ~1e9...1e10** |
+| F7 co-moving cold dark mini-halo/stream | **OPEN exotic initial condition** |
+| full formation/delivery probability | **OPEN / strongly fine-tuned** |
 | experimental BH detection | **NONE** |
 | unique positive signature | **NONE** |
 
@@ -334,7 +411,7 @@ This is **not** a direct primordial exclusion. It is only a present-day retentio
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F7 physical origin/retention of the F6-required solar-bound seed population
+5. F8 physical viability of the remaining co-moving cold dark substructure
 6. realistic long-term post-capture survival / engulfment / settling
 7. absolute formation/delivery probability.
 ```
@@ -350,6 +427,7 @@ This is **not** a direct primordial exclusion. It is only a present-day retentio
 - `STAGE3_76_F4_EARLY_EMBRYO_BOUND_SEED.md`
 - `STAGE3_77_F5_RESTRICTED_4BODY_EXCHANGE_MC.md`
 - `STAGE3_78_F6_POPULATION_WEIGHTED_FORMATION_GATE.md`
+- `STAGE3_79_F7_SEED_ORIGIN_PHASE_SPACE_GATE.md`
 
 ## Schlussstatus
 
@@ -360,14 +438,17 @@ conditional exchange capture survives through F5.
 POPULATION FOLDING:
 F6 calculated.
 
-NORMAL HALO POPULATION:
-FAIL.
+STANDARD GALACTIC ORIGIN CHANNELS:
+FAIL for the required terrestrial 1-AU phase space.
 
-PRIMORDIAL SOLAR-BOUND OVERDENSE POPULATION:
-OPEN / origin unexplained.
+WIDE SOLAR CAPTURE OF VERY LOW-MASS PBHs:
+possible but insufficient for F6.
+
+PRIMORDIAL CO-MOVING COLD DARK SUBSTRUCTURE:
+OPEN / nonstandard origin rescue.
 
 ABSOLUTE EARTH DELIVERY:
-OPEN.
+OPEN / strongly fine-tuned.
 
 DIRECT BH EVIDENCE:
 NONE.
