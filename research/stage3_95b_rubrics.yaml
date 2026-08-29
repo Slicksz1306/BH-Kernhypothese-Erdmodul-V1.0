@@ -1,0 +1,49 @@
+version: 1
+stage: 3.95B
+
+scoring:
+  fail_max: 6
+  partial_min: 7
+  conditional_pass: 9
+  solver_gate_pass: 10
+  note: "10/10 means the defined scientific/numerical gate passed; it is not experimental evidence."
+
+rubrics:
+  F12:
+    title: "Physical primordial closure"
+    items:
+      - {id: assumptions, points: 1, criterion: "All cosmological assumptions and conventions explicitly stated."}
+      - {id: sources, points: 1, criterion: "Current observational/PBH constraints have source provenance."}
+      - {id: pzeta, points: 2, criterion: "A physical P_zeta(k) model replaces the existing proxy arithmetic."}
+      - {id: non_gaussianity, points: 1, criterion: "Non-Gaussianity convention and mapping are explicit and reproducible."}
+      - {id: numerics, points: 1, criterion: "Parameter sweep/convergence are reproducible."}
+      - {id: independent_check, points: 1, criterion: "Independent CAS/numerical implementation agrees within declared tolerance."}
+      - {id: sensitivity, points: 1, criterion: "Dominant parameter sensitivities and degeneracies are quantified."}
+      - {id: formation_link, points: 1, criterion: "Output is propagated into formation/delivery rather than treated in isolation."}
+      - {id: claim_boundary, points: 1, criterion: "No proxy/solver output is presented as observational evidence."}
+
+  A35_REAL_QEQ:
+    title: "Real multicomponent charge-equilibrium closure"
+    items:
+      - {id: assumptions, points: 1, criterion: "Species, ionization state, thermodynamic assumptions and boundary conditions explicit."}
+      - {id: mobility, points: 2, criterion: "Multicomponent Onsager/Maxwell-Stefan mobility matrix is physically specified."}
+      - {id: chemical_potential, points: 1, criterion: "Required chemical-potential derivatives are included."}
+      - {id: screening, points: 1, criterion: "Dense-core screening is coupled consistently."}
+      - {id: sink_boundary, points: 1, criterion: "Sink-boundary coupling is explicitly derived rather than assumed."}
+      - {id: convergence, points: 1, criterion: "Grid/tolerance/convergence tests pass."}
+      - {id: independent_solver, points: 1, criterion: "Independent solver/CAS cross-check agrees within declared tolerance."}
+      - {id: limiting_cases, points: 1, criterion: "Relevant limiting cases and toy-model reductions are recovered."}
+      - {id: claim_boundary, points: 1, criterion: "Real Q_eq closure remains distinct from experimental BH evidence."}
+
+  H0:
+    title: "Unique H0 seismic/normal-mode prediction"
+    items:
+      - {id: prem, points: 1, criterion: "PREM reference inputs have source provenance and units."}
+      - {id: compensation, points: 1, criterion: "Mass compensation is enforced and independently checked."}
+      - {id: material_closure, points: 2, criterion: "delta rho maps to physically justified delta Vp/delta Vs or mode perturbations."}
+      - {id: forward_solver, points: 1, criterion: "Travel-time or normal-mode forward solver is reproducible."}
+      - {id: independent_solver, points: 1, criterion: "Independent implementation reproduces the observable."}
+      - {id: uncertainty, points: 1, criterion: "Measurement and model uncertainty are propagated."}
+      - {id: degeneracy, points: 1, criterion: "Competing ordinary-geophysics perturbations/degeneracies are quantified."}
+      - {id: falsifier, points: 1, criterion: "A clear observational falsification criterion is defined."}
+      - {id: claim_boundary, points: 1, criterion: "A sensitivity proxy is not called a positive detection."}
