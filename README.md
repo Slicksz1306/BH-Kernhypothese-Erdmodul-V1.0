@@ -5,7 +5,7 @@
 **Autor:** Daniel Marcel Schlicksupp  
 **Region:** Rheinland-Pfalz, Deutschland  
 **Theorie-Textstand:** Erdmodul V1.5  
-**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen im definierten Umfang; A20–A31 / Stage 3.72 weitergeführt; Formation Stage 3.73 bis F2  
+**Aktueller Forschungsstand:** Reduced Stack A1–A19 abgeschlossen im definierten Umfang; A20–A31 / Stage 3.72 weitergeführt; Formation bis Stage 3.74 / F3  
 **Stand:** 29.08.2026  
 **Erstveröffentlichung Erdmodul V1.0:** 23.08.2026
 
@@ -157,8 +157,6 @@ normal halo -> direct Earth capture: VERY STRONG FAIL.
 
 ## Stage 3.73 / F1 – Protosolar / co-moving Seed
 
-Geprüft wurden frühere Capture-Stufen.
-
 ```text
 protoplanetary gas drag: insufficient
 normal halo -> protostellar cloud: strongly negative
@@ -167,73 +165,159 @@ already solar-bound, dynamically cold seed: remains OPEN initial condition.
 
 F1 rettet keinen normalen Halo-Delivery-Kanal. Offen bleibt nur ein Seed, der **bereits solar gebunden und relativ kalt** ist.
 
-## Stage 3.73 / F2 – Hill-Sphäre / Pull-down Capture
+## Stage 3.73 / F2 – Hill-Sphäre / Pull-down Energy Gate
 
-F2 prüft einen solchen bereits solar gebundenen Seed in der Hill-Sphäre eines wachsenden terrestrischen Embryos.
+F2 prüfte einen solchen Seed in der Hill-Sphäre eines wachsenden terrestrischen Embryos.
 
-Hill-Skalen bei 1 AU:
-
-| Embryomasse | r_H | v_H |
-|---:|---:|---:|
-| `0.01 M_E` | `3.224e8 m` | `64.19 m/s` |
-| `0.10 M_E` | `6.946e8 m` | `138.30 m/s` |
-| `0.50 M_E` | `1.188e9 m` | `236.49 m/s` |
-| `1.00 M_E` | `1.497e9 m` | `297.96 m/s` |
-
-Für einen impulsiven Massensprung `delta=DeltaM/M_p` bei `r=f r_H` gilt der reduzierte Energie-Gate
+Für einen impulsiven Massensprung `delta=DeltaM/M_p` bei `r=f r_H` gilt lokal
 
 ```text
 v_inf,max = sqrt(2 G DeltaM/r)
           = sqrt(6 delta/f) v_H.
 ```
 
-Am Hill-Rand (`f=1`) ergibt sich:
-
-| M_p | delta=0.01 | delta=0.10 | delta=0.30 |
-|---:|---:|---:|---:|
-| `0.01 M_E` | `15.72 m/s` | `49.72 m/s` | `86.13 m/s` |
-| `0.10 M_E` | `33.88 m/s` | `107.13 m/s` | `185.55 m/s` |
-| `0.50 M_E` | `57.93 m/s` | `183.19 m/s` | `317.29 m/s` |
-| `1.00 M_E` | `72.99 m/s` | `230.80 m/s` | `399.76 m/s` |
-
-Die Seed-/BH-Masse kürzt sich aus der spezifischen Energiebedingung heraus; der Gate gilt daher für den Projektbereich `1e10...5e11 kg` im Testmassenlimit.
-
-F2 Status:
+Damit existiert ein kinematischer Pull-down-Bereich. F2-Status:
 
 ```text
-temporary Hill capture: PASS / dynamically allowed
-static permanent capture without dissipation or potential evolution: FAIL
+temporary Hill capture: dynamically allowed
+static permanent capture without potential evolution: FAIL
 smooth terrestrial pull-down: FAIL as generic channel
-very long-lived separatrix temporary capture: OPEN tail
-giant-impact impulsive mass jump: PASS as kinematic existence test
-real permanent-capture probability: OPEN.
+giant-impact impulsive jump: PASS as local kinematic existence test
+absolute probability: OPEN.
 ```
 
-Damit ist Formation/Delivery **nicht gelöst**, aber F2 zeigt einen bisher nicht ausgeschlossenen Spezialkanal:
+## Stage 3.74 / F3 – Adaptive Hill-Monte-Carlo + Jacobi Closure
+
+F3 härtet F2 durch explizite Solartiden im planaren Hill-Modell.
+
+Verwendet werden
 
 ```text
-already solar-bound cold seed
-+ temporary Hill residence
-+ sufficiently rapid embryo mass jump
-=> permanent capture kinematically possible.
+x'' - 2 y' - 3x = -3x/r^3
+y'' + 2 x'      = -3y/r^3
 ```
 
-Der verbleibende Engpass ist nun primär eine **Phasenraum-/Timing-Wahrscheinlichkeit**, nicht mehr nur die Bindungsenergie.
+und der Jacobi-Gate
 
-Zentrale F2-Dateien:
+```text
+C = 3x^2 + 6m/r - v^2
+C_L1/L2 = 9 m^(2/3).
+```
+
+Nach einem Massensprung `m=1+delta` gilt permanente topologische Einschließung im idealisierten post-impact Hill-System, wenn
+
+```text
+C_new > C_L1/L2,new.
+```
+
+### Numerik
+
+Ein früher fixed-step RK4-Test wurde wegen künstlichem Jacobi-Drift bei tiefen Encounters **verworfen**.
+
+Final:
+
+```text
+DOP853
+rtol=3e-10
+atol=1e-12
+median Jacobi peak-to-peak drift ~1e-8
+maximum ~2.5e-7
+```
+
+Status:
+
+```text
+adaptive Hill/Jacobi solver: PASS.
+```
+
+### Referenzensemble
+
+```text
+N=1000 pro velocity bracket
+|b| uniform 0.5...3.0 r_H
+sigma_v/v_H = 0.0, 0.1, 0.3
+first contiguous Hill passage
+conservative capture tally only for r>=0.1 r_H.
+```
+
+Die Entry-Fraktion dieses gewählten Gitters ist kein astrophysikalischer Capture-Rate-Schätzer.
+
+### Konservativer zeitgewichteter Pull-down-Anteil `r>=0.1 r_H`
+
+| DeltaM/M | sigma=0.0 | sigma=0.1 | sigma=0.3 | Status |
+|---:|---:|---:|---:|---|
+| `0.01` | `0` | `0` | `0` | **FAIL in sampled outer gate** |
+| `0.03` | `0` | `0` | `0` | **FAIL in sampled outer gate** |
+| `0.10` | `0.0352%` | `0.0725%` | `0.0722%` | **PASS existence / inefficient** |
+| `0.30` | `6.806%` | `6.302%` | `5.653%` | **PASS conditional channel** |
+
+Ein zweiter unabhängiger `sigma=0.1`-Seed-Lauf reproduzierte die Größenordnung:
+
+```text
+DeltaM/M=0.10 -> 0.0624%
+DeltaM/M=0.30 -> 6.580%.
+```
+
+Damit korrigiert F3 die Interpretation von F2:
+
+```text
+F2 local two-body energy gate = necessary/optimistic existence check
+F3 Hill + Jacobi gate          = much narrower usable phase space.
+```
+
+### Timing
+
+Mean first Hill residence im Referenzensemble:
+
+```text
+~0.60 Omega^-1
+~35 d at 1 AU.
+```
+
+Für einen einzelnen zufällig platzierten Impact in `10...100 Myr` entsteht bereits vor dem Jacobi-Capture-Faktor eine Timing-Suppression von grob
+
+```text
+~1e-9 ... 1e-10 per single passage / single impact.
+```
+
+Der absolute Wert bleibt OPEN, weil repeated encounters, co-orbitale Phasen, long-lived temporary captures und die reale Giant-Impact-Historie noch fehlen.
+
+F3 Schluss:
+
+```text
+small impact jumps <=3%:
+negative in conservative first-passage outer-Hill gate.
+
+~10% jump:
+nonzero but extremely narrow conditional phase space.
+
+~30% jump:
+finite few-percent conditional pull-down phase space.
+
+generic efficient delivery:
+NOT ESTABLISHED.
+
+absolute Earth-delivery probability:
+OPEN.
+```
+
+Zentrale Formation-Dateien:
 
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
 - `stage3_73_f2_hill_pulldown_capture.py`
+- `STAGE3_74_F3_HILL_MONTE_CARLO.md`
+- `stage3_74_f3_hill_monte_carlo.py`
 
 Nächster Formationstest:
 
 ```text
-F3 = restricted/N-body Monte-Carlo
--> solar-bound seed a,e,i distribution
--> repeated Hill encounters
--> temporary-capture residence times
--> stochastic embryo growth / giant-impact epochs
--> permanent-capture fraction.
+F3b = full multi-passage/global CR3BP or direct N-body
+-> heliocentric a,e,i
+-> repeated synodic encounters
+-> co-orbital/horseshoe/quasi-satellite residence
+-> long-lived temporary-capture tail
+-> stochastic impact times and DeltaM/M
+-> permanent-capture probability per solar-bound seed.
 ```
 
 # Aktuelle Endmatrix
@@ -253,8 +337,11 @@ F3 = restricted/N-body Monte-Carlo
 | gasdrag protoplanetary disk | **FAIL / insufficient** |
 | already solar-bound cold seed | **OPEN initial condition** |
 | smooth Hill pull-down | **FAIL as generic mechanism** |
-| giant-impact pull-down energy gate | **PASS kinematic existence** |
-| full F2 delivery probability | **OPEN** |
+| F2 giant-impact local energy gate | **PASS kinematic existence** |
+| F3 DeltaM/M<=0.03 outer-Hill gate | **FAIL in sampled gate** |
+| F3 DeltaM/M~0.10 | **PASS existence / inefficient** |
+| F3 DeltaM/M~0.30 | **PASS conditional few-percent channel** |
+| full formation/delivery probability | **OPEN** |
 | direkte experimentelle BH-Detektion | **NONE** |
 | eindeutige positive Signatur | **NONE** |
 
@@ -265,7 +352,7 @@ F3 = restricted/N-body Monte-Carlo
 2. final Fe/Ni/light-element Full-WDM species-resolved Mdot_BH(t)
 3. unique macroscopic H0 observable amplitude/profile
 4. real-data likelihood on that prediction
-5. F3 N-body/Monte-Carlo formation-delivery probability
+5. F3b multi-passage/global N-body formation-delivery probability
 6. physical origin / phase-space density of the already solar-bound cold seed.
 ```
 
@@ -274,6 +361,7 @@ F3 = restricted/N-body Monte-Carlo
 - `TEST_STATUS.md`
 - `STAGE3_72_A31_AMBIPOLAR_MOBILITY_GATE.md`
 - `STAGE3_73_F2_HILL_PULLDOWN_CAPTURE.md`
+- `STAGE3_74_F3_HILL_MONTE_CARLO.md`
 - `STAGE3_71_A19_FORMATION_RECHECK.md`
 - `STAGE3_70B_A18_REALDATA_AUDIT.md`
 
@@ -292,4 +380,4 @@ Siehe:
 
 ## Zitierform
 
-Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation Stage 3.73/F2, Rheinland-Pfalz, Deutschland.
+Daniel Marcel Schlicksupp (2026), *SL/BH-Kernhypothese Erdmodul V1.5*, theoretischer Forschungsentwurf; Reduced Stack A1–A19 plus Stage 3.72 A20–A31 und Formation bis Stage 3.74/F3, Rheinland-Pfalz, Deutschland.
