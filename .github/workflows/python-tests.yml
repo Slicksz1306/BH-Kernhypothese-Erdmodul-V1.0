@@ -43,3 +43,6 @@ jobs:
 
       - name: SCEM dataset acquisition helper regressions
         run: python -m unittest -v test_fetch_scem_2026_dataset.py
+
+      - name: Stage 3.95E A35 closure capability audit regressions
+        run: python -m unittest -v test_stage3_95e_a35_closure_capability_audit.py
