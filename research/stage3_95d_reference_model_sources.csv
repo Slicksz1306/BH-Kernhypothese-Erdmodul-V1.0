@@ -1,0 +1,5 @@
+source_id,title,year,classification,project_use,doi,url
+S395D-001,"Preliminary Reference Earth Model (PREM)",1981,REFERENCE_MODEL,"1-D radial P-wave baseline and legacy travel-time reproduction",10.17611/DP/10131390,https://ds.iris.edu/spud/earthmodel/10131390
+S395D-002,"Seismically determined elastic parameters for Earth's outer core",2018,OUTER_CORE_REFERENCE,"EPOC-Vinet outer-core path-background sensitivity; not inner-core H0 closure",10.1126/sciadv.aar2538,https://pmc.ncbi.nlm.nih.gov/articles/PMC6021139/
+S395D-003,"Self-Consistent Models of Earth's Mantle and Core From Long-Period Seismic and Tidal Constraints",2026,WHOLE_EARTH_REFERENCE_ROUTE,"Next whole-Earth reference-model uncertainty gate after numerical .bm ingestion",10.1029/2024JB030971,https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2024JB030971
+S395D-004,"SCEM/P-PEM supporting models v4",2026,DATASET_ROUTE,"MAP models; posterior subsets; Vp/Vs/density bounds; ingest required before numerical use",10.5281/zenodo.18386410,https://zenodo.org/records/18386410
