@@ -40,3 +40,6 @@ jobs:
 
       - name: Stage 3.95D seismic reference-model audit regressions
         run: python -m unittest -v test_stage3_95d_h0_seismic_reference_audit.py
+
+      - name: SCEM dataset acquisition helper regressions
+        run: python -m unittest -v test_fetch_scem_2026_dataset.py
