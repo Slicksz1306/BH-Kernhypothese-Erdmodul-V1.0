@@ -1,0 +1,40 @@
+{
+  "stage": "3.95E",
+  "date": "2026-08-30",
+  "status": "CAPABILITY AUDIT PASS AS SPECIFICATION",
+  "interface_count": 16,
+  "release_ready_interface_count": 1,
+  "blocking_interface_count": 15,
+  "blocking_interfaces": [
+    "A35-BULK",
+    "A35-ION",
+    "A35-REAC",
+    "A35-THERMO",
+    "A35-LST",
+    "A35-ELECTRON",
+    "A35-RESPONSE",
+    "A35-MQ",
+    "A35-BS",
+    "A35-K",
+    "A35-BC",
+    "A35-THERMAL",
+    "A35-IOTHER",
+    "A35-WP",
+    "A35-UNC"
+  ],
+  "solver_release_gate": "NOT PASSED",
+  "real_q_eq_implementation": "NO-GO",
+  "physical_closure": "OPEN",
+  "experimental_bh_evidence": "NONE",
+  "anti_proxy_rules": [
+    "self diffusion is not a closed multicomponent L_st",
+    "conductivity is not a free D_e or complete electron flux operator",
+    "Q_bullet is not Q_m without M_Q",
+    "capture K_s/Ktilde_s is not theory-closed"
+  ],
+  "next_external_data_priority": "species-resolved Fe-Ni-Light first-principles/AIMD trajectories at liquid-core P-T-X",
+  "parallel_theory_priorities": [
+    "inner charge matching M_Q",
+    "capture/sink K_s or Ktilde_s"
+  ]
+}
