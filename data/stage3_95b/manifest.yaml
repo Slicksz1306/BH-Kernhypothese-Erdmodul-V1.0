@@ -1,0 +1,615 @@
+schema_version: "1.1.0"
+stage: "3.95B / A35"
+purpose: "Physikalisches Daten-Gate fuer die spaetere WDM-Ladungsclosure"
+generated_at_utc: "2026-08-29T22:09:47Z"
+base_commit: "21b79ecb9d4b131331206c951447fa2952785e58"
+
+status:
+  mathematical_specification: "PASS"
+  physical_data_identifiability: "OPEN"
+  real_q_eq_implementation: "BLOCKED BY MISSING CLOSURE DATA"
+
+scope:
+  allowed:
+    - "Primaerquellen und zugehoerige Datensaetze inventarisieren"
+    - "Publizierte Werte und publizierte abgeleitete Grenzen in SI registrieren"
+    - "Methodenanker ohne erfundene Zahlen registrieren"
+    - "Geltungsbereiche, Unsicherheiten und Nutzbarkeit fuer A35 ausweisen"
+  forbidden:
+    - "realen Q_eq-Solver implementieren"
+    - "Stage-3.95A-Dateien veraendern"
+    - "fehlende WDM-Koeffizienten durch Defaults ersetzen"
+    - "Leitfaehigkeit als freien Elektronendiffusionskoeffizienten interpretieren"
+    - "Selbstdiffusion als Mutual-Diffusion, Onsager-Matrix oder Ladungsmobilitaet interpretieren"
+    - "ausserhalb publizierter Datenbereiche extrapolieren"
+    - "mathematische Modellkonsistenz als experimentellen BH-Nachweis darstellen"
+
+repository_audit:
+  branch: "main"
+  capability_graph_found: true
+  capability_graph_path: "research/stage3_95b_capability_graph.yaml"
+  capability_graph_action: "reference_existing"
+  note: "Der kanonische Capability Graph dokumentiert die Abhaengigkeiten von A35_REAL_QEQ. Er ersetzt keine fehlenden A35-WDM-Closure-Daten und aendert den NO-GO-Status des realen Q_eq-Solvers nicht."
+
+registry:
+  path: "research/stage3_95b_a35_coefficient_registry.csv"
+  encoding: "UTF-8"
+  delimiter: ","
+  decimal_separator: "."
+  null_representation: ""
+  unit_system: "SI"
+  row_semantics: "Ein Datensatzanker, ein publizierter Wert an einem diskreten Zustand oder ein expliziter Methodenanker pro Zeile."
+  additional_columns:
+    - "evidence_class"
+    - "density"
+    - "source_url"
+
+controlled_vocabularies:
+  identifiability_class:
+    - "DIRECTLY_AVAILABLE"
+    - "DERIVABLE_FROM_AVAILABLE_PRIMARY_DATA"
+    - "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+  quantity_type:
+    - "self_diffusion"
+    - "mutual_diffusion"
+    - "maxwell_stefan"
+    - "onsager"
+    - "electrical_conductivity"
+    - "thermal_conductivity"
+    - "electron_mobility"
+    - "chemical_potential"
+    - "thermodynamic_factor"
+    - "EOS"
+    - "screening"
+    - "ionization"
+    - "collision_rate"
+    - "capture"
+    - "proxy"
+    - "toy"
+  evidence_class:
+    - "literature_data"
+    - "derived"
+    - "proxy"
+    - "method_only"
+    - "toy"
+  confidence:
+    - "high"
+    - "medium"
+    - "low"
+  boolean_fields:
+    values:
+      - "true"
+      - "false"
+    fields:
+      - "extrapolation_allowed"
+      - "usable_for_A35_real_Qeq"
+
+identifiability_semantics:
+  DIRECTLY_AVAILABLE: "Der Zielwert oder der zu seiner Auswertung benoetigte Quelldatensatz ist in einer geprueften Primaerquelle oeffentlich und innerhalb einer dokumentierten Domaene vorhanden."
+  DERIVABLE_FROM_AVAILABLE_PRIMARY_DATA: "Der Zielterm ist mit publizierten Gleichungen aus oeffentlich verfuegbaren Primaerdaten ohne frei gewaehlte Koeffizienten ableitbar; die Ableitung bleibt auf die Quellendomaene beschraenkt."
+  NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE: "Im dokumentierten Primaerquellen- und Datensatz-Audit wurde keine vollstaendige oeffentliche Bestimmung gefunden. Dies ist eine Audit-Aussage und kein Beweis, dass die Groesse nirgends existiert."
+
+unit_policy:
+  pressure: "Pa"
+  temperature: "K"
+  density: "kg m^-3"
+  diffusion: "m^2 s^-1"
+  electrical_conductivity: "S m^-1"
+  collision_rate: "s^-1"
+  chemical_potential: "J mol^-1 when the source is molar; J per particle when explicitly stated"
+  rules:
+    - "Quelleneinheiten werden nur mit dimensionssicheren SI-Faktoren umgerechnet."
+    - "Eine leere value-Zelle bei dataset- oder method-only-Eintraegen ist beabsichtigt und kein Nullwert."
+    - "Bereiche werden als min..max in der jeweils durch das Feld definierten SI-Einheit notiert."
+    - "Keine Interpolation ist erlaubt, solange interpolation_rule keine quellengestuetzte Regel nennt."
+    - "extrapolation_allowed bleibt fuer alle gegenwaertigen Eintraege false."
+
+validation_rules:
+  - "coefficient_id muss eindeutig und nicht leer sein."
+  - "quantity_type, evidence_class und confidence muessen aus den kontrollierten Vokabularen stammen."
+  - "Literaturwerte muessen Quelle, Fundstelle, Einheit und Geltungsbereich besitzen."
+  - "Methodenanker duerfen keinen erfundenen numerischen value enthalten."
+  - "derived muss die Ableitung und den publizierten Ausgangswert in method oder data_location nennen."
+  - "self_diffusion darf nicht als mutual_diffusion, maxwell_stefan, onsager oder electron_mobility umetikettiert werden."
+  - "electrical_conductivity darf nicht ohne vollstaendigen Antwortoperator in D_e oder electron_mobility umgerechnet werden."
+  - "usable_for_A35_real_Qeq darf erst true sein, wenn Definition, Unsicherheit, P-T-X-Domaene, Interpolation und Provenienz fuer den tatsaechlichen Closure-Term vollstaendig sind."
+  - "Fehlende Werte bleiben leer; 0 ist nur bei einem publizierten physikalischen Nullwert zulaessig."
+
+source_verification:
+  - source_id: "liu_asimow_2025"
+    verification_status: "primary_source_and_dataset_verified"
+    evidence_class: "literature_data"
+    title: "Thermodynamic Properties of Liquid Metal Using First-Principles Molecular Dynamics: Implications for the Compositional and Thermal State of the Earth's Outer Core"
+    authors:
+      - "Weiyi Liu"
+      - "Paul D. Asimow"
+    year: 2025
+    journal: "Journal of Geophysical Research: Solid Earth 130(3), e2024JB030419"
+    doi: "10.1029/2024JB030419"
+    primary_url: "https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2024JB030419"
+    dataset:
+      title: "Raw DFT data and supporting experimental data for Thermodynamic properties of liquid metal using first-principles molecular dynamics"
+      doi: "10.22002/dxgqf-tw269"
+      url: "https://data.caltech.edu/records/dxgqf-tw269"
+      version: "v1"
+      license: "CC0-1.0"
+      published: "2024-09-25"
+      modified: "2025-01-21"
+    exact_locations:
+      - "Paper: Data Availability Statement and Supporting Tables S1-S4"
+      - "CaltechDATA: Table.S.2.xlsx, species sheets with corrected P, T, E and covariance fields"
+      - "CaltechDATA: Table.S.3.xlsx, 212 multicomponent comparison rows"
+    inspected_domain_si:
+      pressure_Pa: "5.00435332362987e10..4.47037478964679e11"
+      temperature_K: "4000..6000"
+      composition: "Fe-Ni, Fe-S, Fe-Si, Fe-C, Fe-O, Fe-H and selected Fe-C-O-Si-S-Ni-H mixtures; exact atom counts are row-resolved in the workbooks"
+      phase: "liquid metal"
+    interpretation: "EOS/thermodynamic raw-data anchor; no chemical-potential derivative or thermodynamic-factor matrix is inferred."
+
+  - source_id: "li_2022_feni_self_diffusion"
+    verification_status: "primary_source_verified"
+    evidence_class: "literature_data"
+    title: "Ab initio determination on diffusion coefficient and viscosity of FeNi fluid under Earth's core condition"
+    authors:
+      - "Wei-Jie Li"
+      - "Zi Li"
+      - "Zhe Ma"
+      - "Ping Zhang"
+      - "Yong Lu"
+      - "Cong Wang"
+      - "Qian Jia"
+      - "Xue-Bin Cheng"
+      - "Han-Dong Hu"
+    year: 2022
+    journal: "Scientific Reports 12, 21255"
+    doi: "10.1038/s41598-022-24594-8"
+    primary_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9731973/"
+    exact_locations:
+      - "Table 1: D_Fe, D_Ni and standard errors at six P-T points"
+      - "Figure 3: self-diffusion trends"
+      - "Calculation details: 128 atoms, 12 Ni and 116 Fe"
+    inspected_domain_si:
+      pressure_Pa: "1.36e11..3.30e11"
+      temperature_K: "3944..5507"
+      composition: "Fe116Ni12; x_Ni=0.09375"
+      phase: "liquid Fe-Ni"
+    interpretation: "Diskrete Fe- und Ni-Selbstdiffusionsdaten; keine Mutual-Diffusion, Onsager-Matrix oder Ladungsmobilitaet."
+
+  - source_id: "white_2019_multicomponent_wdm"
+    verification_status: "primary_source_verified"
+    evidence_class: "method_only"
+    title: "Multicomponent mutual diffusion in the warm, dense matter regime"
+    authors:
+      - "A. J. White"
+      - "C. Ticknor"
+      - "E. R. Meyer"
+      - "J. D. Kress"
+      - "L. A. Collins"
+    year: 2019
+    journal: "Physical Review E 100, 033213"
+    doi: "10.1103/PhysRevE.100.033213"
+    primary_url: "https://journals.aps.org/pre/abstract/10.1103/PhysRevE.100.033213"
+    exact_locations:
+      - "Equation (2): Maxwell-Stefan friction balance"
+      - "Equations (7)-(15): Onsager coefficients, correlation functions and constraints"
+      - "Equations (17)-(20): mapping to Maxwell-Stefan coefficients"
+      - "Tables II-III: D-Li-C examples at fixed density"
+    inspected_domain_si:
+      pressure_Pa: "not_reported_for_fixed_density_examples"
+      temperature_K: "1.160451812e5..3.481355436e6"
+      density_kg_m3: "1.0e4"
+      composition: "D:Li:C=1:1:1 for Tables II-III; additional non-Fe/Ni mixtures elsewhere"
+      phase: "warm dense plasma"
+    interpretation: "Methodischer Maxwell-Stefan-/Onsager-Anker; die publizierten Beispielkoeffizienten sind nicht auf Fe-Ni uebertragbar."
+
+  - source_id: "ohta_2025_core_conductivity"
+    verification_status: "primary_source_pdf_verified"
+    evidence_class: "derived"
+    title: "Electrical and thermal conductivities of Fe-Ni-Si alloy under core conditions: A reevaluation"
+    authors:
+      - "Kenji Ohta"
+      - "Hayato Inoue"
+      - "Sho Suehiro"
+      - "Kei Hirose"
+      - "Saori Kawaguchi-Imada"
+      - "Haruhiko Dekura"
+    year: 2025
+    journal: "Physics of the Earth and Planetary Interiors 363, 107351"
+    doi: "10.1016/j.pepi.2025.107351"
+    primary_url: "https://researchmap.jp/7000018082/published_papers/49857769/attachment_file.pdf"
+    exact_locations:
+      - "Table 2: high-P-T experimental runs"
+      - "Equation (12): resistivity-saturation model"
+      - "Section 4 and Figure 12a: sigma_e lower-bound estimate at the top of the outer core"
+    inspected_domain_si:
+      pressure_Pa: "1.40e11 for the registered bound"
+      temperature_K: "3900 for the registered bound"
+      composition: "Fe-10 at.% Ni-22.5 at.% Si; equivalently Fe-11.8 wt.% Ni-12.7 wt.% Si"
+      phase: "liquid Fe-Ni-Si top-of-outer-core estimate"
+    interpretation: "Publizierte abgeleitete Leitfaehigkeitsuntergrenze; kein vollstaendiger elektronischer WDM-Antwortoperator und keine Quelle fuer D_e."
+
+  - source_id: "rightley_baalrud_2021_wdm_kinetics"
+    verification_status: "primary_source_verified"
+    evidence_class: "method_only"
+    title: "Kinetic model for electron-ion transport in warm dense matter"
+    authors:
+      - "Shane Rightley"
+      - "Scott D. Baalrud"
+    year: 2021
+    journal: "Physical Review E 103, 063206"
+    doi: "10.1103/PhysRevE.103.063206"
+    arxiv: "2102.05115"
+    primary_url: "https://journals.aps.org/pre/abstract/10.1103/PhysRevE.103.063206"
+    exact_locations:
+      - "Equation (7) and Figure 2: potential of mean force"
+      - "Equations (31)-(34): momentum relaxation and electron-ion conductivity contribution"
+      - "Figures 4-5: solid-density aluminum examples"
+    inspected_domain_si:
+      pressure_Pa: "not_reported_for_fixed_density_examples"
+      temperature_K: "1.160451812e4..1.160451812e7"
+      density_kg_m3: "2.7e3"
+      composition: "Aluminum"
+      phase: "warm dense aluminum plasma"
+    interpretation: "Quantenkinetischer Methodenanker; keine direkt einsetzbaren Fe-Ni-Light-Kollisionsraten, Mobilitaeten oder Capture-Raten."
+
+  - source_id: "zhang_2022_feosi_free_energies"
+    verification_status: "primary_source_and_dataset_verified"
+    evidence_class: "literature_data"
+    title: "Free Energies of Fe-O-Si Ternary Liquids at High Temperatures and Pressures: Implications for the Solubility of Si and O in Liquid Iron in Equilibrium With Silicate Perovskite"
+    authors:
+      - "Zhigang Zhang"
+      - "Gabor Csanyi"
+      - "Dario Alfe"
+      - "Yigang Zhang"
+      - "Juan Li"
+      - "Jin Liu"
+    year: 2022
+    journal: "Geophysical Research Letters 49(4), e2021GL096749"
+    doi: "10.1029/2021GL096749"
+    primary_url: "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021GL096749"
+    dataset:
+      title: "Fe-O-Si free-energy and P-V-T-X dataset"
+      doi: "10.5281/zenodo.5912087"
+      url: "https://zenodo.org/records/5912087"
+      license: "CC-BY-4.0"
+    exact_locations:
+      - "Paper: thermodynamic-integration and chemical-potential regression equations"
+      - "Zenodo Fe-O-Si-Dataset.xlsx: Free Energies sheet, 117 records"
+      - "Zenodo Fe-O-Si-Dataset.xlsx: PVTX sheet, 609 records"
+      - "Zenodo Fe-O-Si-Dataset.xlsx: Regressions sheet, 62 P-T conditions with mu and interaction-parameter columns"
+    inspected_domain_si:
+      pressure_Pa: "4.0e10..3.5e11 across the discrete temperature-dependent regression grids"
+      temperature_K: "3000..6000"
+      composition: "liquid Fe-O-Si with x_O and x_Si sampled from 0 to 0.20 in the source grid"
+      phase: "liquid Fe-O-Si"
+    interpretation: "Oeffentlicher Free-Energy-/Chemical-Potential-Anker. Begrenzte Fe-O-Si-Ableitungen sind innerhalb der Quellengleichungen und -gitter identifizierbar; Ni und die volle Projektmischung fehlen."
+
+  - source_id: "li_2019_fec_chemical_potential"
+    verification_status: "primary_source_verified"
+    evidence_class: "method_only"
+    title: "Carbon Partitioning Between the Earth's Inner and Outer Core"
+    authors:
+      - "Yunguo Li"
+      - "Lidunka Vocadlo"
+      - "Dario Alfe"
+      - "John Brodholt"
+    year: 2019
+    journal: "Journal of Geophysical Research: Solid Earth"
+    doi: "10.1029/2019JB018789"
+    primary_url: "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019JB018789"
+    exact_locations:
+      - "Equations (6)-(19): thermodynamic integration and carbon chemical potential"
+      - "Table 1 and Figures 4-6: binary Fe-C application near inner-core conditions"
+    inspected_domain_si:
+      pressure_Pa: "approximately 3.60e11 for the registered method application"
+      temperature_K: "6500 for the registered method application"
+      composition: "binary Fe-C"
+      phase: "liquid and solid Fe-C partitioning model"
+    interpretation: "Belegt den zusaetzlichen Free-Energy-/Chemical-Potential-Schritt, liefert aber keine Fe-Ni-Light-Ableitungsmatrix fuer A35."
+
+  - source_id: "li_2021_feni_electronic_transport"
+    verification_status: "primary_source_metadata_verified_numeric_table_not_ingested"
+    evidence_class: "method_only"
+    title: "Constraints on the thermal evolution of the Earth's core from ab initio calculated transport properties of FeNi liquids"
+    authors:
+      - "Wei-Jie Li"
+      - "Zi Li"
+      - "Xian-Tu He"
+      - "Cong Wang"
+      - "Ping Zhang"
+    year: 2021
+    journal: "Earth and Planetary Science Letters 562, 116852"
+    doi: "10.1016/j.epsl.2021.116852"
+    primary_url: "https://www.sciencedirect.com/science/article/abs/pii/S0012821X21001114"
+    exact_locations:
+      - "Paper abstract and Table 1 description: Fe-Ni electrical and thermal transport along an outer-core adiabat"
+    inspected_domain_si:
+      pressure_Pa: "pointwise source table not ingested in this pass"
+      temperature_K: "pointwise source table not ingested in this pass"
+      composition: "liquid Fe-Ni"
+      phase: "liquid outer-core alloy"
+    interpretation: "Direkter Fe-Ni-Leitfaehigkeitskandidat, aber weiterhin nur eine makroskopische Projektion; kein Operator fuer E, grad(mu_e) und grad(T_e)."
+
+  - source_id: "de_koker_2012_electronic_onsager"
+    verification_status: "primary_source_verified"
+    evidence_class: "method_only"
+    title: "Electrical resistivity and thermal conductivity of liquid Fe alloys at high P and T, and heat flux in Earth's core"
+    authors:
+      - "Nico de Koker"
+      - "Gerd Steinle-Neumann"
+      - "Vojtech Vlcek"
+    year: 2012
+    journal: "Proceedings of the National Academy of Sciences 109(11), 4070-4073"
+    doi: "10.1073/pnas.1111841109"
+    primary_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3306690/"
+    exact_locations:
+      - "Methods: Kubo-Greenwood electronic Onsager coefficients"
+      - "Figures and Supporting Information: conductivity projections for Fe, Fe-Si and Fe-O liquids"
+    inspected_domain_si:
+      pressure_Pa: "0..3.60e11"
+      temperature_K: "2000..8000"
+      composition: "liquid Fe, Fe-Si and Fe-O source systems"
+      phase: "liquid metal"
+    interpretation: "Methodischer und projektionaler Elektronentransportanker; keine vollstaendige Fe-Ni-Light-Teilchenflussantwort unter chemischen, thermischen und elektrischen Gradienten."
+
+  - source_id: "wei_2025_feni_phase_diagram"
+    verification_status: "primary_manuscript_verified_supplement_not_ingested"
+    evidence_class: "method_only"
+    title: "Ab initio Fe-Ni phase diagram under Earth's inner-core conditions"
+    authors:
+      - "Liangrui Wei"
+      - "Zepeng Wu"
+      - "Kai-Ming Ho"
+      - "Renata M. Wentzcovitch"
+      - "Yang Sun"
+    year: 2025
+    journal: "Science Advances"
+    doi: "10.1126/sciadv.adu1998"
+    arxiv: "2503.21493"
+    primary_url: "https://www.science.org/doi/10.1126/sciadv.adu1998"
+    exact_locations:
+      - "Main manuscript: Fe-Ni free-energy/mixing model at inner-core conditions"
+      - "Supplementary parameter tables were not available for ingestion in this pass"
+    inspected_domain_si:
+      pressure_Pa: "3.23e11 for the stated phase-diagram application"
+      temperature_K: "around 6000 for the stated application"
+      composition: "binary Fe-Ni"
+      phase: "inner-core phase-diagram model"
+    interpretation: "Moeglicher begrenzter Fe-Ni-Free-Energy-Anker nach separater Supplement-Pruefung; derzeit keine registrierte numerische Ableitung und keine Fe-Ni-Light-Closure."
+
+blocker_gate:
+  - blocker_id: "multicomponent_ionic_transport_matrix"
+    blocker_type: "missing_composition_specific_transport_data"
+    state: "DIRECT VALIDATION DATA / CLOSURE TARGET NOT IDENTIFIED"
+    anchors:
+      - "Li et al.: diskrete Fe/Ni-Selbstdiffusion mit Standardfehlern"
+      - "White et al.: Maxwell-Stefan-/Onsager-Formalismus und nicht-Fe/Ni-Beispiele"
+    identified:
+      - "D_Fe,self(P,T,X) an sechs diskreten Zustaenden"
+      - "D_Ni,self(P,T,X) an sechs diskreten Zustaenden"
+      - "erforderliche Form der Maxwell-Stefan-/Onsager-Auswertung"
+    missing:
+      - "Fe-Ni-Light Maxwell-Stefan-Matrix"
+      - "vollstaendige ionische Onsager-Matrix mit Kreuzkorrelationen"
+      - "Kovarianzen und Zusammensetzungsabhaengigkeit fuer die reale Mischung"
+      - "oeffentlich zugaengliche speziesaufgeloeste Fe-Ni-Light-Trajektorien im Zielbereich"
+    acquisition_path: "Die Li-et-al.-Arbeit nennt Unterstuetzungsdaten auf begruendete Anfrage. Nur falls die vollstaendigen speziesaufgeloesten Trajektorien bereitgestellt werden, ist eine White-et-al.-konforme Onsager-Auswertung bedingt ableitbar; aus den publizierten Selbstdiffusionswerten allein ist sie es nicht."
+
+  - blocker_id: "electron_wdm_transport_operator"
+    blocker_type: "missing_composition_specific_response_operator"
+    state: "DIRECT PROJECTION DATA / FULL OPERATOR NOT IDENTIFIED"
+    anchors:
+      - "Ohta et al.: publizierte elektrische Leitfaehigkeitsuntergrenze"
+      - "Rightley und Baalrud: quantenkinetischer Elektron-Ion-Methodenrahmen"
+      - "Li et al. 2021 und de Koker et al.: Fe-Ni- bzw. Fe-Legierungs-Leitfaehigkeitsprojektionen und Kubo-Greenwood-Methodik"
+    identified:
+      - "sigma_e lower-bound projection at one published outer-core state"
+      - "methodische Beziehung zwischen Elektron-Ion-Relaxation und Leitfaehigkeit"
+    missing:
+      - "Fe-Ni-Light-Antwortoperator fuer E, grad(mu_e) und grad(T_e)"
+      - "Elektron-Elektron- und Kreuzbeitraege im relevanten Zustand"
+      - "quellengestuetzte Elektronenmobilitaet und Unsicherheitskovarianz"
+
+  - blocker_id: "thermodynamically_consistent_mixture_derivatives"
+    blocker_type: "partly_derivable_thermodynamic_data"
+    state: "STATE DATA AVAILABLE / LIMITED DERIVATION POSSIBLE / FULL CLOSURE OPEN"
+    status_split:
+      thermodynamic_state_data: "YES"
+      limited_fe_o_si_chemical_potential_model: "DERIVABLE_WITHIN_SOURCE_DOMAIN"
+      full_fe_ni_light_chemical_potential_derivatives: "NO"
+      a35_thermodynamic_closure: "OPEN"
+    anchors:
+      - "Liu und Asimow: oeffentliche Fe-Ni-Light-DFT-/EOS-Tabellen mit Fehler- und Kovarianzfeldern"
+      - "Zhang et al.: oeffentlicher Fe-O-Si-Free-Energy-/Chemical-Potential-Datensatz mit Regressionsparametern"
+      - "Li et al. 2019: thermodynamische Integration fuer einen begrenzten binaeren Fe-C-Fall"
+    identified:
+      - "tabellierte P-T-X-V-Domaene und korrigierte Druckdaten"
+      - "oeffentliche Quelldateien, Version, Lizenz und Pruefsummen"
+      - "Fe-O-Si-Chemical-Potential- und Interaktionsparameter auf dem diskreten Zhang-et-al.-Gitter"
+      - "begrenzte Fe-O-Si-Ableitbarkeit mit den publizierten Gleichungen, ohne freie A35-Koeffizienten"
+    missing:
+      - "konsistente freie Energie G oder F fuer die Projektmischung"
+      - "vollstaendige Fe-Ni-Light-Chemical-Potential-Ableitungsmatrix partial(mu_s)/partial(n_t)"
+      - "Ni- und weitere Light-Element-Kreuzterme samt Unsicherheiten und Kovarianzen"
+      - "thermodynamische Faktoren der realen Projektmischung"
+
+  - blocker_id: "inner_sink_and_screening_mapping"
+    blocker_type: "missing_theoretical_closure"
+    state: "THEORETICAL CLOSURE REQUIRED / FULLY OPEN"
+    anchors: []
+    identified:
+      - "Die gesuchte Abbildung ist nicht durch makroskopische Materialtabellen allein bestimmt."
+      - "Gefundene BH-Ladungsmodelle behandeln duenne oder kollisionslose Plasmen und sind keine WDM-Fe-Ni-Light-Sinkclosure."
+    missing:
+      - "Q_bullet -> Q_m"
+      - "kappa_e(Q_bullet,state)"
+      - "kappa_i(Q_bullet,state)"
+      - "kollektive Screening-/Capture-Kopplung und Unsicherheiten"
+    search_decision: "Nicht als blosses Datenbankloch behandeln. Vor weiterer Parametersuche muss eine konsistente innere Randwert-/Matchingtheorie definiert werden; Literaturwerte aus duennen oder kollisionslosen Plasmen duerfen nicht uebertragen werden."
+
+closure_target_audit:
+  - target_id: "fe_ni_self_diffusion_validation"
+    blocker_id: "multicomponent_ionic_transport_matrix"
+    identifiability_class: "DIRECTLY_AVAILABLE"
+    scope: "D_Fe,self und D_Ni,self an sechs diskreten Fe116Ni12-Zustaenden"
+    closure_role: "validation_only"
+    evidence: "Li et al. 2022, Table 1"
+
+  - target_id: "fe_ni_light_ionic_onsager_matrix"
+    blocker_id: "multicomponent_ionic_transport_matrix"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "vollstaendige L_st- oder Maxwell-Stefan-Matrix einschliesslich Kreuzkorrelationen und Kovarianzen"
+    closure_role: "required"
+    evidence: "White et al. liefern die Auswertungsmethode, aber nur nicht-Fe/Ni-Beispiele; Li et al. publizieren Selbstdiffusion, nicht die Matrix."
+    conditional_derivation: "DERIVABLE_FROM_AVAILABLE_PRIMARY_DATA gilt erst nach tatsaechlichem Erhalt vollstaendiger speziesaufgeloester Trajektorien; 'available on request' ist noch kein oeffentlich verfuegbarer Datensatz."
+
+  - target_id: "feni_electrical_conductivity_projection"
+    blocker_id: "electron_wdm_transport_operator"
+    identifiability_class: "DIRECTLY_AVAILABLE"
+    scope: "publizierte elektrische Leitfaehigkeitswerte oder Grenzen an einzelnen Fe-Ni-(Light)-Zustaenden"
+    closure_role: "validation_only"
+    evidence: "Ohta et al. 2025; zusaetzlicher Fe-Ni-Kandidat Li et al. 2021"
+
+  - target_id: "fe_ni_light_electron_response_operator"
+    blocker_id: "electron_wdm_transport_operator"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "Teilchenflussantwort auf E, grad(mu_e) und grad(T_e), einschliesslich e-e- und Kreuzbeitraegen"
+    closure_role: "required"
+    evidence: "Die geprueften Quellen liefern Leitfaehigkeitsprojektionen oder Methoden, keinen vollstaendigen projektspezifischen Operator."
+
+  - target_id: "fe_ni_light_eos_state_grid"
+    blocker_id: "thermodynamically_consistent_mixture_derivatives"
+    identifiability_class: "DIRECTLY_AVAILABLE"
+    scope: "Liu/Asimow-P-T-X-V-Daten und korrigierte Drucktabellen innerhalb der publizierten Domaene"
+    closure_role: "state_anchor_only"
+    evidence: "Liu und Asimow 2025 mit CaltechDATA v1"
+
+  - target_id: "fe_o_si_chemical_potential_parameters"
+    blocker_id: "thermodynamically_consistent_mixture_derivatives"
+    identifiability_class: "DIRECTLY_AVAILABLE"
+    scope: "mu_O+, mu_Si+ und Interaktionsparameter auf dem diskreten Fe-O-Si-Regressionsgitter"
+    closure_role: "limited_subsystem_anchor"
+    evidence: "Zhang et al. 2022, Zenodo-Datensatz 10.5281/zenodo.5912087"
+
+  - target_id: "fe_o_si_thermodynamic_derivatives"
+    blocker_id: "thermodynamically_consistent_mixture_derivatives"
+    identifiability_class: "DERIVABLE_FROM_AVAILABLE_PRIMARY_DATA"
+    scope: "nur der Fe-O-Si-Unterraum und nur innerhalb der publizierten P-T-X-Gitter und Quellengleichungen"
+    closure_role: "sensitivity_and_method_validation"
+    derivation_requirements:
+      - "Quellengleichungen analytisch oder mit verifizierter automatischer Differentiation auswerten"
+      - "Quelleneinheiten nach SI konvertieren"
+      - "Regressionserrors fortpflanzen"
+      - "keine P-, T- oder Kompositionsextrapolation"
+
+  - target_id: "full_fe_ni_light_thermodynamic_derivative_matrix"
+    blocker_id: "thermodynamically_consistent_mixture_derivatives"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "vollstaendige partial(mu_s)/partial(n_t)-Matrix fuer die tatsaechliche Fe-Ni-Light-Mischung"
+    closure_role: "required"
+    evidence: "Liu/Asimow liefern Zustandsdaten, Zhang einen begrenzten Fe-O-Si-Unterraum und Li 2019 einen binaeren Fe-C-Methodenfall; die volle gemeinsame Matrix folgt daraus nicht."
+
+  - target_id: "ionization_population_and_rates"
+    blocker_id: "electron_wdm_transport_operator"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "konsistente Fe-Ni-Light-Ionisationsverteilung und Raten im A35-Zustandsbereich"
+    closure_role: "required"
+
+  - target_id: "q_bullet_to_q_match_mapping"
+    blocker_id: "inner_sink_and_screening_mapping"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "Q_bullet -> Q_m fuer dichte, geschirmte, kollisionsbehaftete Fe-Ni-Light-WDM"
+    closure_role: "required_theoretical_closure"
+
+  - target_id: "charge_dependent_capture_kernels"
+    blocker_id: "inner_sink_and_screening_mapping"
+    identifiability_class: "NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE"
+    scope: "kappa_e(Q_bullet,state) und kappa_i(Q_bullet,state) am definierten Matchingradius"
+    closure_role: "required_theoretical_closure"
+
+closure_exhaustion_pass:
+  completed_at_utc: "2026-08-29T22:09:47Z"
+  conclusion: "Die geprueften Primaerquellen reichen fuer Validierungsanker und eine begrenzte Fe-O-Si-Thermodynamikableitung, aber nicht fuer eine reale A35-Q_eq-Closure."
+  implementation_authorized: false
+  implementation_decision: "NO-GO"
+  search_stop_rule:
+    - "Ein Ziel darf als NOT_IDENTIFIABLE_FROM_CURRENT_LITERATURE klassifiziert werden, wenn getrennte Suchen nach Zielgroesse, Materialsystem und Methode in Primaerquellen sowie zugeordneten Repositorien keine oeffentlichen closure-kompletten Daten liefern."
+    - "Methodenpapier, Projektion, Proxy oder 'available on request' zaehlen nicht als direkt verfuegbarer Zielkoeffizient."
+    - "Die Klassifikation gilt nur fuer den dokumentierten Audit-Stand; neue Datensaetze oder tatsaechlich erhaltene Autorendaten erfordern eine neue Pruefung."
+  remaining_actions_before_solver:
+    - "vollstaendige speziesaufgeloeste Fe-Ni-Light-Trajektorien oder eine publizierte Onsager-/Maxwell-Stefan-Matrix beschaffen"
+    - "vollstaendigen elektronischen Fe-Ni-Light-Antwortoperator identifizieren oder aus validierter Mikrophysik neu herleiten"
+    - "vollstaendige Fe-Ni-Light-Free-Energy- bzw. Chemical-Potential-Ableitungsmatrix beschaffen"
+    - "innere Q_bullet->Q_m- und Capture-Matchingtheorie definieren und unabhaengig pruefen"
+
+identifiability_summary:
+  directly_identifiable:
+    - "Fe- und Ni-Selbstdiffusion an den sechs Li-et-al.-Zustaenden"
+    - "Liu/Asimow-EOS-Drucktabellen innerhalb der registrierten P-T-X-Domaene"
+    - "Ohta-Leitfaehigkeitsuntergrenze am publizierten Fe-Ni-Si-Zustand"
+    - "Zhang-et-al.-Fe-O-Si-Free-Energy-, Chemical-Potential- und Regressionsdaten auf dem publizierten Gitter"
+    - "Definitionen und Geltungsbereiche der White- und Rightley/Baalrud-Methoden"
+  derivable_from_available_primary_data:
+    - "Fe-O-Si-Chemical-Potential-Ableitungen innerhalb der Zhang-et-al.-Quellengleichungen und des diskreten P-T-X-Gitters"
+  source_anchored_sensitivity_only:
+    - "Validierung von Ionen-Zeitskalen gegen Li-Selbstdiffusion"
+    - "Validierung einer spaeteren Elektronenclosure gegen Ohtas sigma_e-Untergrenze"
+    - "Methodenvergleich von Maxwell-Stefan-/Onsager-Auswertungen"
+    - "EOS-Sensitivitaet nur auf den diskreten Liu/Asimow-Quellpunkten"
+    - "begrenzte Fe-O-Si-Thermodynamik; keine Uebertragung auf Ni oder nicht publizierte Light-Element-Mischungen"
+  not_yet_sensitivity_ready:
+    - "Fe-Ni-Light Mutual-Diffusion und Onsager-Kreuzterme"
+    - "vollstaendiger elektronischer WDM-Antwortoperator"
+    - "vollstaendige Fe-Ni-Light-Chemical-Potential-Ableitungsmatrix und thermodynamische Faktoren"
+    - "Ionisationszustandsverteilung"
+    - "Q_bullet -> Q_m und Q-abhaengige Robin-Capture-Kerne"
+
+next_highest_value_dataset:
+  description: "Vollstaendige speziesaufgeloeste Fe-Ni-Light-AIMD-Trajektorien fuer fluessige Outer-Core-Zustaende, aus denen eine Onsager-/Maxwell-Stefan-Matrix einschliesslich Kreuzkorrelationen, Unsicherheiten und Kovarianzen reproduzierbar berechnet werden kann."
+  target_domain:
+    pressure_Pa: "1.36e11..3.30e11"
+    temperature_K: "3900..5500"
+    composition: "Fe-Ni plus mindestens eine explizit ausgewiesene leichte Komponente"
+    phase: "liquid"
+  rationale: "Dieser Datensatz wuerde den heutigen Fe/Ni-Selbstdiffusionsanker erstmals in einen kontrollierten multikomponentigen Ionenflussoperator ueberfuehren, ohne self diffusion als mutual diffusion umzudeuten. Als unmittelbar naechster Beschaffungsschritt ist die Anfrage nach den vollstaendigen Li-et-al.-Fe-Ni-Trajektorien sinnvoll; sie waeren jedoch noch kein Ersatz fuer Fe-Ni-Light-Daten."
+
+source_artifact_inventory:
+  source_id: "liu_asimow_caltechdata_v1"
+  local_repository_copy: false
+  metadata_verified: true
+  files:
+    - {name: "C_Fe11.xls", size_bytes: 22016, checksum: "md5:386e38fcdfa99d01d2d60700023b287f", cell_content_inspected_this_gate: false}
+    - {name: "Fe11.xls", size_bytes: 35840, checksum: "md5:76a2f0b308c7c0e0bb5d4c9a899a93e7", cell_content_inspected_this_gate: false}
+    - {name: "H_Fe11.xls", size_bytes: 22016, checksum: "md5:76dfc4d1f93e1d7550b3c241592a18dc", cell_content_inspected_this_gate: false}
+    - {name: "Ni_Fe11.xls", size_bytes: 17920, checksum: "md5:ed29c13aef60a5a5dc927f17cab3165f", cell_content_inspected_this_gate: false}
+    - {name: "O12_Si6_Fe11.xls", size_bytes: 17920, checksum: "md5:e2764809094eb06e60be0b935e056cd2", cell_content_inspected_this_gate: false}
+    - {name: "O32_Fe11.xls", size_bytes: 22016, checksum: "md5:7494c6f56c5240f07c29bc9ff5c53027", cell_content_inspected_this_gate: false}
+    - {name: "O6_Si12_Fe11.xls", size_bytes: 17920, checksum: "md5:4f05db75f3b647840b5be01c36dc1b92", cell_content_inspected_this_gate: false}
+    - {name: "O9_Si9_Fe11.xls", size_bytes: 17920, checksum: "md5:288a60de7ef0327ada055af299dbfdfc", cell_content_inspected_this_gate: false}
+    - {name: "O_Fe11.xls", size_bytes: 22016, checksum: "md5:0c9c29ba1ed82c9bef04abdedce22fbe", cell_content_inspected_this_gate: false}
+    - {name: "S_Fe11.xls", size_bytes: 17920, checksum: "md5:eaa8ab388fae011499cb0b457b052c44", cell_content_inspected_this_gate: false}
+    - {name: "shock_wave_data.xlsx", size_bytes: 14171, checksum: "md5:dc227e57a6a009ba8e62d2a8387de1fd", cell_content_inspected_this_gate: true}
+    - {name: "Si9_Fe11.xls", size_bytes: 13824, checksum: "md5:5419563c5a22c6c30a7ff2f716d6d479", cell_content_inspected_this_gate: false}
+    - {name: "Si_Fe11.xls", size_bytes: 17920, checksum: "md5:4bbef040dd23642314db420a963d9f95", cell_content_inspected_this_gate: false}
+    - {name: "Table.S.1.xlsx", size_bytes: 9701, checksum: "md5:b8d317c811ef0815a6f0569be53f1f43", cell_content_inspected_this_gate: true}
+    - {name: "Table.S.2.xlsx", size_bytes: 70907, checksum: "md5:ef4e5b9ecc3eac4ef4cf6747d15f7066", cell_content_inspected_this_gate: true}
+    - {name: "Table.S.3.xlsx", size_bytes: 43007, checksum: "md5:1c242e06e5eb8fef71fb2fed09d388b7", cell_content_inspected_this_gate: true}
+    - {name: "tableS4.xlsx", size_bytes: 11205, checksum: "md5:d3d6dcbdd2ad26bbd2ecdec868b8c73e", cell_content_inspected_this_gate: true}
+
+additional_source_artifact_inventory:
+  - source_id: "zhang_2022_feosi_zenodo_5912087"
+    local_repository_copy: false
+    metadata_verified: true
+    license: "CC-BY-4.0"
+    files:
+      - name: "Fe-O-Si-Dataset.xlsx"
+        size_bytes: 69165
+        checksums:
+          md5: "e5e16b3d77930009bee4b2f7b2ad97b5"
+          sha256: "2A420634A52F7EE4C068ED6C28B8D1288449FBFC96EAD54C07CBD41F573C343B"
+        cell_content_inspected_this_gate: true
+        inspected_ranges:
+          - "Free Energies!A1:J124 (117 data records plus header)"
+          - "PVTX!A1:G616 (609 data records plus header)"
+          - "Regressions!A1:L78 (62 populated P-T regression rows plus headers/separators)"
+        source_units: "Workbook chemical-potential columns are kJ mol^-1; no pointwise value was copied into the registry. A future ingestion must multiply by 1e3 for J mol^-1."
