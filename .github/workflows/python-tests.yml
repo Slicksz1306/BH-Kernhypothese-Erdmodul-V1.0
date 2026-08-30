@@ -34,3 +34,12 @@ jobs:
 
       - name: Stage 3.94 multi-gate regressions
         run: python -m unittest -v test_stage3_94_multi_gate_closure.py
+
+      - name: Stage 3.95A diagnostic charge theorem regressions
+        run: python -m unittest -v test_stage3_95a_a35_diagnostic_charge_theorem.py
+
+      - name: Stage 3.95D seismic reference-model audit regressions
+        run: python -m unittest -v test_stage3_95d_h0_seismic_reference_audit.py
+
+      - name: SCEM dataset acquisition helper regressions
+        run: python -m unittest -v test_fetch_scem_2026_dataset.py
